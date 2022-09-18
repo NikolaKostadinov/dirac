@@ -1,3 +1,7 @@
+#########################
+# DIRAC ENGINE MAKEFILE #
+#########################
+
 SRC_MAIN_FILES := $(wildcard src/*.cpp)						# all src files
 SRC_FILES := $(filter-out src/main.cpp, $(SRC_MAIN_FILES))	# all dirac src files
 DLL := bin/dirac.dll										# dynimic library file
