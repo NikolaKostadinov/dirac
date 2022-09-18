@@ -5,6 +5,7 @@ template <typename T>
 Basis<T>::Basis()
 {
     setFalse(_is1D, _is2D, _is3D);
+    _coord = std::vector<Vertex<T>>();
 }
 
 template <typename T>

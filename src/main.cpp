@@ -3,8 +3,7 @@
 
 int main()
 {
-    float x[2] = { 0, 1 };
-    Basis<float> basis(x);
+    Basis<float> basis;
 
     std::cout << sizeof(basis) << std::endl;
     std::cin.get();

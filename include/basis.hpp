@@ -4,7 +4,6 @@
 #include <stdexcept>
 #include "vertex.h"
 
-#define DIMENTIONS_MAX 3
 #define DIMENTION_ERROR std::logic_error("DIMENTION_ERROR")
 
 template <typename T>
