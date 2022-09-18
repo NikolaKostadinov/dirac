@@ -1,18 +1,41 @@
 #include "../include/basis.hpp"
+#include "../include/boolbase.h"
 
-Basis::Basis()
+template <typename T>
+Basis<T>::Basis()
 {
-    _is1D = false;
-    _is2D = false;
-    _is3D = false;
+    setFalse(_is1D, _is2D, _is3D);
 }
 
-Basis::~Basis()
+template <typename T>
+Basis<T>::~Basis()
 {
     // ... soon ...
 }
 
-int Basis::dimentions()
+template <typename T>
+Basis<T>::Basis(T base_x[])
+{
+    setX(_is1D, _is2D, _is3D);
+    // ... soon ...
+}
+
+template <typename T>
+Basis<T>::Basis(T base_x[], T base_y[])
+{
+    setY(_is1D, _is2D, _is3D);
+    // ... soon ...
+}
+
+template <typename T>
+Basis<T>::Basis(T base_x[], T base_y[], T base_z[])
+{
+    setZ(_is1D, _is2D, _is3D);
+    // ... soon ...
+}
+
+template <typename T>
+int Basis<T>::dimentions()
 {
     if (_is3D) return 3;
     else if (_is2D) return 2;

@@ -4,14 +4,20 @@
 #include <stdexcept>
 #include "vertex.h"
 
+#define DIMENTIONS_MAX 3
 #define DIMENTION_ERROR std::logic_error("DIMENTION_ERROR")
 
+template <typename T>
 class Basis
 {
     public:
 
         Basis();
         ~Basis();
+
+        Basis(T base_x[]);
+        Basis(T base_x[], T base_y[]);
+        Basis(T base_x[], T base_y[], T base_z[]);
 
         int dimentions();
 
@@ -20,5 +26,5 @@ class Basis
         bool _is1D;
         bool _is2D;
         bool _is3D;
-        std::vector<Vertex<float>> _coord;
+        std::vector<Vertex<T>> _coord;
 };
