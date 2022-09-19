@@ -12,7 +12,7 @@ class Basis
 {
     public:
 
-        Basis<T>();
+        Basis();
         ~Basis();
 
         Basis(Line<T> base_x);

@@ -3,16 +3,21 @@
 
 int main()
 {
-    Vertex<int> v0;
-    Vertex<int> v1(1);
-    Vertex<int> v2(2);
-    Vertex<int> v3(3);
+    std::vector<Vertex<int>> x = {
+        Vertex<int>(),
+        Vertex<int>(1),
+        Vertex<int>(2),
+        Vertex<int>(3),
+        Vertex<int>(4),
+        Vertex<int>(5),
+        Vertex<int>(6)
+    };
 
-    std::vector<Vertex<int>> x = { v0, v1, v2, v3 };
     Line<int> line(x);
-
-    Basis<int> basis(x);
+    Basis<int> basis(line, line);
     std::cout << basis.dimentions() << std::endl;
+
+    std::cout << sizeof(basis) << std::endl;
 
     std::cin.get();
     return 0;
