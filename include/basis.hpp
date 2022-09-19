@@ -4,6 +4,8 @@
 #include <stdexcept>
 #include "vertex.h"
 
+#define VERTEX_ARRAY std::vector<Vertex<T>>
+
 #define DIMENTION_ERROR std::logic_error("DIMENTION_ERROR")
 
 template <typename T = float>
@@ -14,9 +16,9 @@ class Basis
         Basis<T>();
         ~Basis();
 
-        Basis(T base_x[]);
-        Basis(T base_x[], T base_y[]);
-        Basis(T base_x[], T base_y[], T base_z[]);
+        Basis(VERTEX_ARRAY base_x);
+        Basis(VERTEX_ARRAY base_x, VERTEX_ARRAY base_y);
+        Basis(VERTEX_ARRAY base_x, VERTEX_ARRAY base_y, VERTEX_ARRAY base_z);
 
         int dimentions();
 
@@ -25,5 +27,8 @@ class Basis
         bool _is1D;
         bool _is2D;
         bool _is3D;
-        std::vector<Vertex<T>> _coord;
+
+        VERTEX_ARRAY _x;
+        VERTEX_ARRAY _y;
+        VERTEX_ARRAY _z;
 };

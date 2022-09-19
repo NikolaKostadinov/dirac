@@ -1,5 +1,4 @@
 #include "../include/basis.hpp"
-#include "../include/boolbase.h"
 
 template <typename T>
 Basis<T>::Basis()
@@ -7,7 +6,6 @@ Basis<T>::Basis()
     _is1D = false;
     _is2D = false;
     _is3D = false;
-    _coord = std::vector<Vertex<T>>();
 }
 
 template <typename T>
@@ -17,24 +15,36 @@ Basis<T>::~Basis()
 }
 
 template <typename T>
-Basis<T>::Basis(T base_x[])
+Basis<T>::Basis(VERTEX_ARRAY base_x)
 {
-    setX(_is1D, _is2D, _is3D);
-    // ... soon ...
+    _is1D = true;
+    _is2D = false;
+    _is3D = false;
+
+    _x = base_x;
 }
 
 template <typename T>
-Basis<T>::Basis(T base_x[], T base_y[])
+Basis<T>::Basis(VERTEX_ARRAY base_x, VERTEX_ARRAY base_y)
 {
-    setY(_is1D, _is2D, _is3D);
-    // ... soon ...
+    _is1D = false;
+    _is2D = true;
+    _is3D = false;
+
+    _x = base_x;
+    _y = base_y;
 }
 
 template <typename T>
-Basis<T>::Basis(T base_x[], T base_y[], T base_z[])
+Basis<T>::Basis(VERTEX_ARRAY base_x, VERTEX_ARRAY base_y, VERTEX_ARRAY base_z)
 {
-    setZ(_is1D, _is2D, _is3D);
-    // ... soon ...
+    _is1D = false;
+    _is2D = false;
+    _is3D = true;
+
+    _x = base_x;
+    _y = base_y;
+    _z = base_z;
 }
 
 template <typename T>
@@ -48,5 +58,6 @@ int Basis<T>::dimentions()
 }
 
 template class Basis<float>;
-template class Basis<double>;
 template class Basis<int>;
+template class Basis<long>;
+template class Basis<double>;
