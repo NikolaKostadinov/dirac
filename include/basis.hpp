@@ -12,11 +12,11 @@ class Basis
     public:
 
         Basis();
-        ~Basis();
+        /*~Basis();
 
         Basis(T base_x[]);
         Basis(T base_x[], T base_y[]);
-        Basis(T base_x[], T base_y[], T base_z[]);
+        Basis(T base_x[], T base_y[], T base_z[]);*/
 
         int dimentions();
 

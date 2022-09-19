@@ -4,11 +4,13 @@
 template <typename T>
 Basis<T>::Basis()
 {
-    setFalse(_is1D, _is2D, _is3D);
+    _is1D = false;
+    _is2D = false;
+    _is3D = false;
     _coord = std::vector<Vertex<T>>();
 }
 
-template <typename T>
+/*template <typename T>
 Basis<T>::~Basis()
 {
     // ... soon ...
@@ -33,7 +35,7 @@ Basis<T>::Basis(T base_x[], T base_y[], T base_z[])
 {
     setZ(_is1D, _is2D, _is3D);
     // ... soon ...
-}
+}*/
 
 template <typename T>
 int Basis<T>::dimentions()
