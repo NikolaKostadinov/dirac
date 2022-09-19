@@ -11,11 +11,11 @@ Basis<T>::Basis()
 template <typename T>
 Basis<T>::~Basis()
 {
-    // ... soon ...
+    // destructor logic got lost in the quantum realm
 }
 
 template <typename T>
-Basis<T>::Basis(VERTEX_ARRAY base_x)
+Basis<T>::Basis(Line<T> base_x)
 {
     _is1D = true;
     _is2D = false;
@@ -25,7 +25,7 @@ Basis<T>::Basis(VERTEX_ARRAY base_x)
 }
 
 template <typename T>
-Basis<T>::Basis(VERTEX_ARRAY base_x, VERTEX_ARRAY base_y)
+Basis<T>::Basis(Line<T> base_x, Line<T> base_y)
 {
     _is1D = false;
     _is2D = true;
@@ -36,7 +36,7 @@ Basis<T>::Basis(VERTEX_ARRAY base_x, VERTEX_ARRAY base_y)
 }
 
 template <typename T>
-Basis<T>::Basis(VERTEX_ARRAY base_x, VERTEX_ARRAY base_y, VERTEX_ARRAY base_z)
+Basis<T>::Basis(Line<T> base_x, Line<T> base_y, Line<T> base_z)
 {
     _is1D = false;
     _is2D = false;

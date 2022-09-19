@@ -3,12 +3,11 @@
 #include <vector>
 #include <stdexcept>
 #include "vertex.h"
-
-#define VERTEX_ARRAY std::vector<Vertex<T>>
+#include "line.hpp"
 
 #define DIMENTION_ERROR std::logic_error("DIMENTION_ERROR")
 
-template <typename T = float>
+template <typename T>
 class Basis
 {
     public:
@@ -16,9 +15,9 @@ class Basis
         Basis<T>();
         ~Basis();
 
-        Basis(VERTEX_ARRAY base_x);
-        Basis(VERTEX_ARRAY base_x, VERTEX_ARRAY base_y);
-        Basis(VERTEX_ARRAY base_x, VERTEX_ARRAY base_y, VERTEX_ARRAY base_z);
+        Basis(Line<T> base_x);
+        Basis(Line<T> base_x, Line<T> base_y);
+        Basis(Line<T> base_x, Line<T> base_y, Line<T> base_z);
 
         int dimentions();
 
@@ -28,7 +27,7 @@ class Basis
         bool _is2D;
         bool _is3D;
 
-        VERTEX_ARRAY _x;
-        VERTEX_ARRAY _y;
-        VERTEX_ARRAY _z;
+        Line<T> _x;
+        Line<T> _y;
+        Line<T> _z;
 };
