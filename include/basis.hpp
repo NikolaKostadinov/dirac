@@ -2,7 +2,6 @@
 
 #include <vector>
 #include <stdexcept>
-#include "vertex.h"
 #include "line.hpp"
 
 #define DIMENTION_ERROR std::logic_error("DIMENTION_ERROR")

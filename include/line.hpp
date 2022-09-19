@@ -16,6 +16,9 @@ class Line
         Line(VERTEX_ARRAY vertices);
 
         bool isCurved();
+        int size();
+        //float length();
+
         /*T operator[](int index);*/
 
     private:

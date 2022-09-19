@@ -14,10 +14,12 @@ int main()
     };
 
     Line<int> line(x);
-    Basis<int> basis(line, line);
-    std::cout << basis.dimentions() << std::endl;
+    Basis<int> basis(line);
+    Basis<int> null;
 
-    std::cout << sizeof(basis) << std::endl;
+    std::cout << "LINE :: " << sizeof(line) << std::endl;
+    std::cout << "BASIS :: " << sizeof(basis) << std::endl;
+    std::cout << "NULL :: " << sizeof(null) << std::endl;
 
     std::cin.get();
     return 0;

@@ -25,6 +25,12 @@ bool Line<T>::isCurved()
     return false;
 }
 
+template <typename T>
+int Line<T>::size()
+{
+    return _vertices.size();
+}
+
 /*template <typename T>
 T Line<T>::operator[](int index)
 {
