@@ -10,7 +10,7 @@ Basis<T>::Basis()
     _coord = std::vector<Vertex<T>>();
 }
 
-/*template <typename T>
+template <typename T>
 Basis<T>::~Basis()
 {
     // ... soon ...
@@ -35,7 +35,7 @@ Basis<T>::Basis(T base_x[], T base_y[], T base_z[])
 {
     setZ(_is1D, _is2D, _is3D);
     // ... soon ...
-}*/
+}
 
 template <typename T>
 int Basis<T>::dimentions()
@@ -46,3 +46,7 @@ int Basis<T>::dimentions()
     else if (!_is1D && !_is2D && !_is3D) return 0;
     else throw DIMENTION_ERROR;
 }
+
+template class Basis<float>;
+template class Basis<double>;
+template class Basis<int>;
