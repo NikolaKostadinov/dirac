@@ -2,7 +2,7 @@
 
 #include <vector>
 #include <stdexcept>
-#include "line.hpp"
+#include "path.hpp"
 
 #define DIMENTION_ERROR std::logic_error("DIMENTION_ERROR")
 
@@ -14,9 +14,9 @@ class Basis
         Basis();
         ~Basis();
 
-        Basis(Line<T> base_x);
-        Basis(Line<T> base_x, Line<T> base_y);
-        Basis(Line<T> base_x, Line<T> base_y, Line<T> base_z);
+        Basis(Path<T> base_x);
+        Basis(Path<T> base_x, Path<T> base_y);
+        Basis(Path<T> base_x, Path<T> base_y, Path<T> base_z);
 
         int dimentions();
 
@@ -26,7 +26,7 @@ class Basis
         bool _is2D;
         bool _is3D;
 
-        Line<T> _x;
-        Line<T> _y;
-        Line<T> _z;
+        Path<T> _x;
+        Path<T> _y;
+        Path<T> _z;
 };

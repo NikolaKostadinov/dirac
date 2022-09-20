@@ -1,5 +1,5 @@
 #pragma once
 
 #include "vertex.h"
-#include "line.hpp"
+#include "path.hpp"
 #include "basis.hpp"

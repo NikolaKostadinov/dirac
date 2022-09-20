@@ -1,27 +1,20 @@
 #pragma once
 
-#include <vector>
 #include "vertex.h"
-
-#define VERTEX_ARRAY std::vector<Vertex<T>>
 
 template <typename T>
 class Line
 {
     public:
 
+        Vertex<T>* start;
+        Vertex<T>* end;
+
         Line();
         ~Line();
 
-        Line(VERTEX_ARRAY vertices);
+        Line(Vertex<T>* input_start, Vertex<T>* input_end);
 
-        bool isCurved();
-        int size();
-        //float length();
-
-        /*T operator[](int index);*/
-
-    private:
-
-        std::vector<Vertex<T>> _vertices;
+        float lenght();
+        float dir();
 };

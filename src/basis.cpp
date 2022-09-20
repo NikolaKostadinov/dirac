@@ -15,7 +15,7 @@ Basis<T>::~Basis()
 }
 
 template <typename T>
-Basis<T>::Basis(Line<T> base_x)
+Basis<T>::Basis(Path<T> base_x)
 {
     _is1D = true;
     _is2D = false;
@@ -25,7 +25,7 @@ Basis<T>::Basis(Line<T> base_x)
 }
 
 template <typename T>
-Basis<T>::Basis(Line<T> base_x, Line<T> base_y)
+Basis<T>::Basis(Path<T> base_x, Path<T> base_y)
 {
     _is1D = false;
     _is2D = true;
@@ -36,7 +36,7 @@ Basis<T>::Basis(Line<T> base_x, Line<T> base_y)
 }
 
 template <typename T>
-Basis<T>::Basis(Line<T> base_x, Line<T> base_y, Line<T> base_z)
+Basis<T>::Basis(Path<T> base_x, Path<T> base_y, Path<T> base_z)
 {
     _is1D = false;
     _is2D = false;

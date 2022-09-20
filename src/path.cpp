@@ -1,43 +1,43 @@
-#include "../include/line.hpp"
+#include "../include/path.hpp"
 
 template <typename T>
-Line<T>::Line()
+Path<T>::Path()
 {
     _vertices = VERTEX_ARRAY();
 }
 
 template <typename T>
-Line<T>::~Line()
+Path<T>::~Path()
 {
     // goodbye line
 }
 
 template <typename T>
-Line<T>::Line(VERTEX_ARRAY vertices)
+Path<T>::Path(VERTEX_ARRAY vertices)
 {
     _vertices = vertices;
 }
 
 template <typename T>
-bool Line<T>::isCurved()
+bool Path<T>::isCurved()
 {
     // math stuff
     return false;
 }
 
 template <typename T>
-int Line<T>::size()
+int Path<T>::size()
 {
     return _vertices.size();
 }
 
 /*template <typename T>
-T Line<T>::operator[](int index)
+T Path<T>::operator[](int index)
 {
     return _vertices[index];
 }*/
 
-template class Line<float>;
-template class Line<int>;
-template class Line<long>;
-template class Line<double>;
+template class Path<float>;
+template class Path<int>;
+template class Path<long>;
+template class Path<double>;
