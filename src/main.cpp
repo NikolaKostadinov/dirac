@@ -3,23 +3,13 @@
 
 int main()
 {
-    std::vector<Vertex<int>> x = {
-        Vertex<int>(),
-        Vertex<int>(1),
-        Vertex<int>(2),
-        Vertex<int>(3),
-        Vertex<int>(4),
-        Vertex<int>(5),
-        Vertex<int>(6)
-    };
+    Vertex1<float>* x0 = new Vertex1<float>(0);
+    Vertex1<float>* x1 = new Vertex1<float>(1);
+    Vertex1<float>* x2 = new Vertex1<float>(2);
+    Vertex1<float>* x3 = new Vertex1<float>(3);
+    Vertex1<float>* x[4] = { x0, x1, x2, x3 };
 
-    Line<int> line(x);
-    Basis<int> basis(line);
-    Basis<int> null;
-
-    std::cout << "LINE :: " << sizeof(line) << std::endl;
-    std::cout << "BASIS :: " << sizeof(basis) << std::endl;
-    std::cout << "NULL :: " << sizeof(null) << std::endl;
+    Basis1<4> base(x);
 
     std::cin.get();
     return 0;
