@@ -14,6 +14,6 @@ exe:															# make an executable file
 	g++ -o bin/main src/main.cpp $(DLL)
 
 echo:
-	echo "DONE"
+	echo DONE
 
 all: dirac exe echo
