@@ -5,7 +5,7 @@ struct Vertex1
 {
     T x;
 
-    Vertex1(T input_x)
+    Vertex1(T input_x = 0)
     {
         x = input_x;
     }
@@ -17,7 +17,7 @@ struct Vertex2
     T x;
     T y;
 
-    Vertex2(T input_x, T input_y)
+    Vertex2(T input_x = 0, T input_y = 0)
     {
         x = input_x;
         y = input_y;
@@ -31,7 +31,7 @@ struct Vertex3
     T y;
     T z;
 
-    Vertex3(T input_x, T input_y, T input_z)
+    Vertex3(T input_x = 0, T input_y = 0, T input_z = 0)
     {
         x = input_x;
         y = input_y;
