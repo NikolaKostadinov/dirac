@@ -15,12 +15,12 @@ BASIS3::~Basis3()
 
 }
 
-BASIS3::Basis3(Vertex3<float> input_mesh[NX][NY][NZ])
+BASIS3::Basis3(Vertex3<float> mesh[NX][NY][NZ])
 {
     for (int i = 0; i < NX; i++)
         for (int j = 0; j < NY; j++)
             for (int k = 0; k < NZ; k++)
-                _mesh[k][j][i] = &input_mesh[k][j][i];
+                _mesh[k][j][i] = &mesh[k][j][i];
 }
 
 template class Basis3<10, 10, 10>;

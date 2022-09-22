@@ -14,11 +14,11 @@ BASIS2::~Basis2()
 
 }
 
-BASIS2::Basis2(Vertex2<float> input_mesh[NX][NY])
+BASIS2::Basis2(Vertex2<float> mesh[NX][NY])
 {
     for (int i = 0; i < NX; i++)
         for (int j = 0; j < NY; j++)
-            _mesh[j][i] = &input_mesh[j][i];
+            _mesh[j][i] = &mesh[j][i];
 }
 
 template class Basis2<10, 10>;

@@ -10,7 +10,7 @@ class Basis2
         Basis2();
         ~Basis2();
 
-        Basis2(Vertex2<float> input_mesh[NX][NY]);
+        Basis2(Vertex2<float> mesh[NX][NY]);
 
     private:
 
