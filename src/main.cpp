@@ -10,12 +10,12 @@ int main()
         values[i] = (float) i;
     
     Basis1<N>* basis = new Basis1<N>;
-    Field1<float, N> field(basis);
+    Field1<float, N>* field = new Field1<float, N>(basis);
 
-    field.setValues(values);
+    field->setValues(values);
 
     float f[N];
-    float* p_origin = field.getAddress();
+    float* p_origin = field->getAddress();
     
     for (int i = 0; i < N; i++)
     {
@@ -27,5 +27,11 @@ int main()
         std::cout << f[i] << std::endl;
 
     std::cin.get();
+
+    delete basis;
+    delete field;
+
+    std::cin.get();
+
     return 0;
 }
