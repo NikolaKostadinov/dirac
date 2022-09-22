@@ -1,19 +1,20 @@
 #include "../include/basis1.hpp"
 
-#define BASIS1 template<unsigned int N> Basis1<N>
-
-BASIS1::Basis1()
+template<unsigned int N>
+Basis1<N>::Basis1()
 {
     for (int i = 0; i < N; i++)
         _vertices[i] = new Vertex1<float>;
 }
 
-BASIS1::~Basis1()
+template<unsigned int N>
+Basis1<N>::~Basis1()
 {
 
 }
 
-BASIS1::Basis1(Vertex1<float> vertices[])
+template<unsigned int N>
+Basis1<N>::Basis1(Vertex1<float> vertices[])
 {
     for (int i = 0; i < N; i++)
         _vertices[i] = &vertices[i];

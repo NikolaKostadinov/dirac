@@ -1,8 +1,7 @@
 #include "../include/field1.hpp"
 
-#define FIELD1 template <class T, unsigned int N> Field1<T, N>
-
-FIELD1::Field1()
+template <class T, unsigned int N>
+Field1<T, N>::Field1()
 {
     _basis = new Basis1<N>;
     
@@ -10,12 +9,14 @@ FIELD1::Field1()
         _values[i] = new T;
 }
 
-FIELD1::~Field1()
+template <class T, unsigned int N>
+Field1<T, N>::~Field1()
 {
 
 }
 
-FIELD1::Field1(Basis1<N> basis)
+template <class T, unsigned int N>
+Field1<T, N>::Field1(Basis1<N> basis)
 {
     _basis = &basis;
 
@@ -23,7 +24,8 @@ FIELD1::Field1(Basis1<N> basis)
         _values[i] = new T;
 }
 
-FIELD1::Field1(Basis1<N>* basis)
+template <class T, unsigned int N>
+Field1<T, N>::Field1(Basis1<N>* basis)
 {
     _basis = basis;
 
