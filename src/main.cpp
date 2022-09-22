@@ -1,21 +1,19 @@
 #include <iostream>
 #include "../include/dirac.h"
 
-#define N 4
-
-void vprint(Vertex1<float> v)
-{
-    std::cout << v.x << std::endl;
-}
+#define N 1000
 
 int main()
 {
-    Vertex1<float>* x = new Vertex1<float>[N];
+    Vertex1<float> x[N];
 
     for (int i = 0; i < N; i++)
-        vprint(*x);
+        x[i] = Vertex1<float>(i);
 
-    Basis1<N> basis();
+    Basis1<N> basis(x);
+
+    std::cout << sizeof(x) << std::endl;
+    std::cout << sizeof(basis) << std::endl;
 
     std::cin.get();
     return 0;

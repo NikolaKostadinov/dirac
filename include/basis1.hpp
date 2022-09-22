@@ -10,9 +10,9 @@ class Basis1
         Basis1();
         ~Basis1();
 
-        Basis1(Vertex1<float>* input_vertices[]);
+        Basis1(Vertex1<float> input_vertices[]);
 
     private:
 
-        Vertex1<float>* _vertices = new Vertex1<float>[N];
+        Vertex1<float>* _vertices[N];
 };
