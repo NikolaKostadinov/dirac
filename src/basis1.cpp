@@ -10,7 +10,8 @@ Basis1<N>::Basis1()
 template<unsigned int N>
 Basis1<N>::~Basis1()
 {
-
+    for (int i = 0; i < N; i++)
+        delete _vertices[i];
 }
 
 template<unsigned int N>

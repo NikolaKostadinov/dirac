@@ -11,7 +11,9 @@ Basis2<NX, NY>::Basis2()
 template <unsigned int NX, unsigned int NY>
 Basis2<NX, NY>::~Basis2()
 {
-
+    for (int i = 0; i < NX; i++)
+        for (int j = 0; j < NY; j++)
+            delete _mesh[j][i];
 }
 
 template <unsigned int NX, unsigned int NY>

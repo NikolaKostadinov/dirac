@@ -8,7 +8,7 @@ class Field1
     public:
 
         Field1();
-        ~Field1();
+        virtual ~Field1();
 
         Field1(Basis1<N> basis);
         Field1(Basis1<N>* p_basis);
