@@ -16,6 +16,11 @@ class Field1
         void setValues(T values[N]);
         void setValues(T* p_values[N]);
 
+        void getValue(T& reference, int index = 0);
+        void getValue(T*& p_reference, int index = 0);
+
+        T* getAddress(int index = 0);
+
     private:
 
         Basis1<N>* _basis;

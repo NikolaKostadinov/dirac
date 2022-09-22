@@ -22,3 +22,4 @@ Basis1<N>::Basis1(Vertex1<float> vertices[])
 
 template class Basis1<10>;
 template class Basis1<1000>;
+template class Basis1<10000>;
