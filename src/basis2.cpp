@@ -5,7 +5,7 @@ Basis2<NX, NY>::Basis2()
 {
     for (int i = 0; i < NX; i++)
         for (int j = 0; j < NY; j++)
-            _vertices[j][i] = new Vertex2<float>;
+            _mesh[j][i] = new Vertex2<float>;
 }
 
 template <unsigned int NX, unsigned int NY>
@@ -15,11 +15,11 @@ Basis2<NX, NY>::~Basis2()
 }
 
 template <unsigned int NX, unsigned int NY>
-Basis2<NX, NY>::Basis2(Vertex2<float> input_vertices[][NY])
+Basis2<NX, NY>::Basis2(Vertex2<float> input_mesh[NX][NY])
 {
     for (int i = 0; i < NX; i++)
         for (int j = 0; j < NY; j++)
-            _vertices[j][i] = &input_vertices[j][i];
+            _mesh[j][i] = &input_mesh[j][i];
 }
 
 template class Basis2<10, 10>;

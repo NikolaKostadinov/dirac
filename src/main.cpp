@@ -1,18 +1,18 @@
 #include <iostream>
 #include "../include/dirac.h"
 
-#define NX 100
-#define NY 10
+#define N 10
 
 int main()
 {
-    Vertex2<float> mesh[NX][NY];
+    Vertex3<float> mesh[N][N][N];
 
-    for (int i = 0; i < NX; i++)
-        for (int j = 0; j < NY; j++)
-            mesh[j][i] = Vertex2<float>(i, j);
+    for (int i = 0; i < N; i++)
+        for (int j = 0; j < N; j++)
+            for (int k = 0; k < N; k++)
+                mesh[k][j][i] = Vertex3<float>(i, j, k);
 
-    Basis2<NX, NY>* basis = new Basis2<NX, NY>;
+    Basis3<N, N, N>* basis = new Basis3<N, N, N>(mesh);
 
     std::cout << sizeof(mesh) << std::endl;
     std::cout << sizeof(*basis) << std::endl;
