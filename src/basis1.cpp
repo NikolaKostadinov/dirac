@@ -20,4 +20,5 @@ Basis1<N>::Basis1(Vertex1<float> input_vertices[])
         _vertices[i] = &input_vertices[i];
 }
 
+template class Basis1<10>;
 template class Basis1<1000>;
