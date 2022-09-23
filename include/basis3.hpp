@@ -10,7 +10,8 @@ class Basis3
         Basis3();
         ~Basis3();
 
-        Basis3(Vertex3<float> mesh[NX][NY][NZ]);
+        Basis3(Vertex3<float> _mesh_[NX][NY][NZ]);
+        Basis3(Vertex3<float>* _toMesh_[NX][NY][NZ]);
 
     private:
 

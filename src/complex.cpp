@@ -11,18 +11,15 @@ Complex::~Complex()
 
 }
 
-Complex::Complex(float real, float imag)
+Complex::Complex(float _real_, float _imag_)
 {
-    _real = real;
-    _imag = imag;
+    _real = _real_;
+    _imag = _imag_;
 }
 
-Complex Complex::operator+(Complex other)
+Complex Complex::operator+()
 {
-    float real = _real + other._real;
-    float imag = _imag + other._imag;
-
-    return Complex(real, imag);
+    return *this;
 }
 
 Complex Complex::operator-()
@@ -30,37 +27,45 @@ Complex Complex::operator-()
     return Complex(-_real, -_imag);
 }
 
-Complex Complex::operator-(Complex other)
+Complex Complex::operator+(Complex _other_)
 {
-    float real = _real - other._real;
-    float imag = _imag - other._imag;
+    float real = _real + _other_._real;
+    float imag = _imag + _other_._imag;
 
     return Complex(real, imag);
 }
 
-Complex Complex::operator*(Complex other)
+Complex Complex::operator-(Complex _other_)
 {
-    float real = _real * other._real - _imag * other._imag;
-    float imag = _imag * other._real + _real * other._imag;
+    float real = _real - _other_._real;
+    float imag = _imag - _other_._imag;
 
     return Complex(real, imag);
 }
 
-Complex Complex::operator/(Complex other)
+Complex Complex::operator*(Complex _other_)
 {
-    float real = _real * other._real + _imag * other._imag;
-    float imag = _imag * other._real - _real * other._imag;
+    float real = _real * _other_._real - _imag * _other_._imag;
+    float imag = _imag * _other_._real + _real * _other_._imag;
 
-    float factor = 1 / (other._real * other._real + other._imag * other._imag);
+    return Complex(real, imag);
+}
+
+Complex Complex::operator/(Complex _other_)
+{
+    float real = _real * _other_._real + _imag * _other_._imag;
+    float imag = _imag * _other_._real - _real * _other_._imag;
+
+    float factor = 1 / (_other_._real * _other_._real +_other_._imag * _other_._imag);
     real *= factor;
     imag *= factor;
 
     return Complex(real, imag);
 }
 
-Complex Complex::operator==(Complex other)
+Complex Complex::operator==(Complex _other_)
 {
-    return (_real == other._real) && (_imag == other._imag);
+    return (_real == _other_._real) && (_imag == _other_._imag);
 }
 
 Complex Complex::sq()
@@ -101,33 +106,33 @@ float Complex::conjSq()
     return _real * _real + _imag + _imag;
 }
 
-std::string Complex::toString()
+std::string Complex::string()
 {
     return std::to_string(_real) + " + " + std::to_string(_imag) + "i";
 }
 
-Complex cis(float arg)
+Complex cis(float _arg_)
 {
-    float real = cos(arg);
-    float imag = sin(arg);
+    float real = cos(_arg_);
+    float imag = sin(_arg_);
 
     return Complex(real, imag);
 }
 
-Complex sqrt(Complex complex)
+Complex sqrt(Complex _complex_)
 {
     float real;
     float imag;
 
-    if (complex.real() >= complex.mod())
-        real = sqrt(complex.real() + complex.mod());
+    if (_complex_.real() >= _complex_.mod())
+        real = sqrt(_complex_.real() + _complex_.mod());
     else
-        real = sqrt(complex.real() - complex.mod());
+        real = sqrt(_complex_.real() - _complex_.mod());
 
-    if (-complex.real() <= complex.mod())
-        imag = sqrt(-complex.real() + complex.mod());
+    if (-_complex_.real() <= _complex_.mod())
+        imag = sqrt(-_complex_.real() + _complex_.mod());
     else
-        real = sqrt(-complex.real() - complex.mod());
+        real = sqrt(-_complex_.real() - _complex_.mod());
 
     real *= ROOTHALF;
     imag *= ROOTHALF;
@@ -135,18 +140,18 @@ Complex sqrt(Complex complex)
     return Complex(real, imag);
 }
 
-Complex exp(Complex complex)
+Complex exp(Complex _complex_)
 {
-    float expo = exp(complex.real());
-    Complex phase = cis(complex.imag());
+    float expo = exp(_complex_.real());
+    Complex phase = cis(_complex_.imag());
 
     return Complex(expo) + phase;
 }
 
-Complex ln(Complex complex)
+Complex ln(Complex _complex_)
 {
-    float real = log(complex.real());
-    float imag = complex.arg();
+    float real = log(_complex_.real());
+    float imag = _complex_.arg();
 
     return Complex(real, imag);
 }

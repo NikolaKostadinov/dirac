@@ -36,7 +36,7 @@ int main()
     Complex i(0, 1);
     Complex z = sqrt(i);
 
-    std::cout << z.toString() << std::endl;
+    std::cout << z.string() << std::endl;
     std::cin.get();
 
     return 0;

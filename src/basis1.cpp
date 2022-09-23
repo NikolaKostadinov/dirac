@@ -15,10 +15,17 @@ Basis1<N>::~Basis1()
 }
 
 template<unsigned int N>
-Basis1<N>::Basis1(Vertex1<float> vertices[])
+Basis1<N>::Basis1(Vertex1<float> _vertices_[])
 {
     for (int i = 0; i < N; i++)
-        _vertices[i] = &vertices[i];
+        _vertices[i] = &_vertices_[i];
+}
+
+template<unsigned int N>
+Basis1<N>::Basis1(Vertex1<float>* _toVertices_[])
+{
+    for (int i = 0; i < N; i++)
+        _vertices[i] = _toVertices_[i];
 }
 
 template class Basis1<10>;

@@ -17,11 +17,19 @@ Basis2<NX, NY>::~Basis2()
 }
 
 template <unsigned int NX, unsigned int NY>
-Basis2<NX, NY>::Basis2(Vertex2<float> mesh[NX][NY])
+Basis2<NX, NY>::Basis2(Vertex2<float> _mesh_[NX][NY])
 {
     for (int i = 0; i < NX; i++)
         for (int j = 0; j < NY; j++)
-            _mesh[j][i] = &mesh[j][i];
+            _mesh[j][i] = &_mesh_[j][i];
+}
+
+template <unsigned int NX, unsigned int NY>
+Basis2<NX, NY>::Basis2(Vertex2<float>* _toMesh_[NX][NY])
+{
+    for (int i = 0; i < NX; i++)
+        for (int j = 0; j < NY; j++)
+            _mesh[j][i] = _toMesh_[j][i];
 }
 
 template class Basis2<10, 10>;

@@ -10,7 +10,8 @@ class Basis1
         Basis1();
         ~Basis1();
 
-        Basis1(Vertex1<float> vertices[]);
+        Basis1(Vertex1<float> _vertices_[]);
+        Basis1(Vertex1<float>* _toVertices_[]);
 
     private:
 

@@ -12,15 +12,17 @@ class Complex
         Complex();
         ~Complex();
 
-        Complex(float real, float imag = 0);
+        Complex(float _real_, float _imag_ = 0);
 
-        Complex operator+(Complex other);
+        Complex operator+();
         Complex operator-();
-        Complex operator-(Complex other);
-        Complex operator*(Complex other);
-        Complex operator/(Complex other);
+        
+        Complex operator+(Complex _other_);
+        Complex operator-(Complex _other_);
+        Complex operator*(Complex _other_);
+        Complex operator/(Complex _other_);
 
-        Complex operator==(Complex other);
+        Complex operator==(Complex _other_);
 
         Complex sq();
 
@@ -32,7 +34,7 @@ class Complex
         Complex conj();
         float conjSq();
 
-        std::string toString();
+        std::string string();
 
     private:
 
@@ -40,7 +42,7 @@ class Complex
         float _imag;
 };
 
-Complex cis(float arg);
-Complex sqrt(Complex complex);
-Complex exp(Complex complex);
-Complex ln(Complex complex);
+Complex cis(float _arg_);
+Complex sqrt(Complex _complex_);
+Complex exp(Complex _complex_);
+Complex ln(Complex _complex_);
