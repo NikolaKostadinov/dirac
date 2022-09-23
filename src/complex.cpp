@@ -63,6 +63,14 @@ Complex Complex::operator==(Complex other)
     return (_real == other._real) && (_imag == other._imag);
 }
 
+Complex Complex::sq()
+{
+    float real = _real * _real - _imag * _imag;
+    float imag = 2.0F * _real * _imag;
+
+    return Complex(real, imag);
+}
+
 float Complex::real()
 {
     return _real;
@@ -108,7 +116,23 @@ Complex cis(float arg)
 
 Complex sqrt(Complex complex)
 {
+    float real;
+    float imag;
 
+    if (complex.real() >= complex.mod())
+        real = sqrt(complex.real() + complex.mod());
+    else
+        real = sqrt(complex.real() - complex.mod());
+
+    if (-complex.real() <= complex.mod())
+        imag = sqrt(-complex.real() + complex.mod());
+    else
+        real = sqrt(-complex.real() - complex.mod());
+
+    real *= ROOTHALF;
+    imag *= ROOTHALF;
+
+    return Complex(real, imag);
 }
 
 Complex exp(Complex complex)

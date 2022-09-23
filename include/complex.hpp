@@ -3,6 +3,8 @@
 #include <string>
 #include <cmath>
 
+#define ROOTHALF 0.70710678118F
+
 class Complex
 {
     public:
@@ -19,6 +21,8 @@ class Complex
         Complex operator/(Complex other);
 
         Complex operator==(Complex other);
+
+        Complex sq();
 
         float real();
         float imag();
