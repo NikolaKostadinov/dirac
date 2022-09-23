@@ -33,9 +33,8 @@ int main()
 
     std::cin.get();*/
 
-    Complex a(1, 0);
-    Complex b(0, 1);
-    Complex z = a / b;
+    Complex i(0, 1);
+    Complex z = sqrt(i);
 
     std::cout << z.toString() << std::endl;
     std::cin.get();
