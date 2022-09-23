@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <cmath>
 
 class Complex
 {
@@ -25,7 +26,7 @@ class Complex
         float arg();
 
         Complex conj();
-        float conjSq();    // z* z
+        float conjSq();
 
         std::string toString();
 
@@ -35,4 +36,7 @@ class Complex
         float _imag;
 };
 
+Complex cis(float arg);
 Complex sqrt(Complex complex);
+Complex exp(Complex complex);
+Complex ln(Complex complex);

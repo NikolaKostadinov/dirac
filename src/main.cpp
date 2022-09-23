@@ -5,7 +5,7 @@
 
 int main()
 {
-    float values[N];
+    /*float values[N];
     for (int i = 0; i < N; i++)
         values[i] = (float) i;
     
@@ -31,6 +31,13 @@ int main()
     delete basis;
     delete field;
 
+    std::cin.get();*/
+
+    Complex a(1, 0);
+    Complex b(0, 1);
+    Complex z = a / b;
+
+    std::cout << z.toString() << std::endl;
     std::cin.get();
 
     return 0;
