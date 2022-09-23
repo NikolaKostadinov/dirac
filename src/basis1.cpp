@@ -4,28 +4,28 @@ template<unsigned int N>
 Basis1<N>::Basis1()
 {
     for (int i = 0; i < N; i++)
-        _vertices[i] = new Vertex1<float>;
+        _toVertices[i] = new Vertex1<float>;
 }
 
 template<unsigned int N>
 Basis1<N>::~Basis1()
 {
     for (int i = 0; i < N; i++)
-        delete _vertices[i];
+        delete _toVertices[i];
 }
 
 template<unsigned int N>
 Basis1<N>::Basis1(Vertex1<float> _vertices_[])
 {
     for (int i = 0; i < N; i++)
-        _vertices[i] = &_vertices_[i];
+        _toVertices[i] = &_vertices_[i];
 }
 
 template<unsigned int N>
 Basis1<N>::Basis1(Vertex1<float>* _toVertices_[])
 {
     for (int i = 0; i < N; i++)
-        _vertices[i] = _toVertices_[i];
+        _toVertices[i] = _toVertices_[i];
 }
 
 template class Basis1<10>;

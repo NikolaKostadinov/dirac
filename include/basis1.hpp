@@ -15,5 +15,5 @@ class Basis1
 
     private:
 
-        Vertex1<float>* _vertices[N];
+        Vertex1<float>* _toVertices[N];
 };

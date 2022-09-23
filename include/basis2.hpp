@@ -15,5 +15,5 @@ class Basis2
 
     private:
 
-        Vertex2<float>* _mesh[NX][NY];
+        Vertex2<float>* _toMesh[NX][NY];
 };

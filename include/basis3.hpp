@@ -15,5 +15,5 @@ class Basis3
 
     private:
 
-        Vertex3<float>* _mesh[NX][NY][NZ];
+        Vertex3<float>* _toMesh[NX][NY][NZ];
 };
