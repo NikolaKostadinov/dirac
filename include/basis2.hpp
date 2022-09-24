@@ -1,9 +1,7 @@
 #pragma once
 
 #include "vertex.h"
-#include <stdexcept>
-
-#define BASIS2_INDEX_TOO_LARGE std::invalid_argument("index is larger than Basis2.size()")
+#include "exceptions.h"
 
 class Basis2
 {
