@@ -5,23 +5,31 @@
 
 int main()
 {
-    Vertex2<float> xVertices[N];
-    Vertex2<float> yVertices[N];
+    Vertex3<float> xAxis[N];
+    Vertex3<float> yAxis[N];
+    Vertex3<float> zAxis[N];
 
     for (int i = 0; i < N; i++)
     {
-        xVertices[i] = Vertex2<float>(i, 0);
-        yVertices[i] = Vertex2<float>(0, i);
+        xAxis[i] = Vertex3<float>(i, 0, 0);
+        yAxis[i] = Vertex3<float>(0, i, 0);
+        zAxis[i] = Vertex3<float>(0, 0, i);
     }
 
-    Basis2* toBasis = new Basis2(
-        (Vertex2<float>*) &xVertices,
-        (Vertex2<float>*) &yVertices,
+    Basis3* toBasis = new Basis3(
+        (Vertex3<float>*) &xAxis,
+        (Vertex3<float>*) &yAxis,
+        (Vertex3<float>*) &zAxis,
+        N,
         N,
         N
     );
 
-    std::cout << toBasis->xAxisAt(3).y << std::endl;
+    Vertex3<float> myPoint = toBasis->yAxisAt(3);
+
+    std::cout << myPoint.x << std::endl;
+    std::cout << myPoint.y << std::endl;
+    std::cout << myPoint.z << std::endl;
 
     return 0;
 }
