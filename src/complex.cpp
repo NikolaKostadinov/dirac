@@ -17,6 +17,12 @@ Complex::Complex(float _real_, float _imag_)
     _imag = _imag_;
 }
 
+void Complex::scale(float _factor_)
+{
+    _real *= _factor_;
+    _imag *= _factor_;
+}
+
 Complex Complex::operator+()
 {
     return *this;
@@ -120,24 +126,12 @@ Complex cis(float _arg_)
 }
 
 Complex sqrt(Complex _complex_)
-{
-    float real;
-    float imag;
+{ 
+    float factor = sqrt(_complex_.mod());
+    Complex phase = cis(0.5F * _complex_.arg());
 
-    if (_complex_.real() >= _complex_.mod())
-        real = sqrt(_complex_.real() + _complex_.mod());
-    else
-        real = sqrt(_complex_.real() - _complex_.mod());
-
-    if (-_complex_.real() <= _complex_.mod())
-        imag = sqrt(-_complex_.real() + _complex_.mod());
-    else
-        real = sqrt(-_complex_.real() - _complex_.mod());
-
-    real *= ROOTHALF;
-    imag *= ROOTHALF;
-
-    return Complex(real, imag);
+    phase.scale(factor);
+    return phase;
 }
 
 Complex exp(Complex _complex_)
