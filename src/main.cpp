@@ -1,7 +1,7 @@
 #include <iostream>
 #include "../include/dirac.h"
 
-#define N 10U
+#define N 10000U
 
 int main()
 {
@@ -25,11 +25,13 @@ int main()
         N
     );
 
-    Vertex3<float> myPoint = toBasis->yAxisAt(3);
+    Vertex3<float> myPoint = toBasis->yAxisAt(314);
 
     std::cout << myPoint.x << std::endl;
     std::cout << myPoint.y << std::endl;
     std::cout << myPoint.z << std::endl;
+
+    std::cin.get();
 
     return 0;
 }
