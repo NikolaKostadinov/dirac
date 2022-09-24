@@ -1,36 +1,33 @@
 #include "../include/basis2.hpp"
 
-template <unsigned int NX, unsigned int NY>
-Basis2<NX, NY>::Basis2()
+Basis2::Basis2()
 {
-    for (int i = 0; i < NX; i++)
-        for (int j = 0; j < NY; j++)
-            _toMesh[j][i] = new Vertex2<float>;
+    _nx = 0U;
+    _nx = 0U;
+    _toOriginX = new Vertex2<float>;
+    _toOriginY = new Vertex2<float>;
 }
 
-template <unsigned int NX, unsigned int NY>
-Basis2<NX, NY>::~Basis2()
+Basis2::~Basis2()
 {
-    for (int i = 0; i < NX; i++)
-        for (int j = 0; j < NY; j++)
-            delete _toMesh[j][i];
+    delete[] _toOriginX;
+    delete[] _toOriginY;
 }
 
-template <unsigned int NX, unsigned int NY>
-Basis2<NX, NY>::Basis2(Vertex2<float> _mesh_[NX][NY])
+Basis2::Basis2(Vertex2<float>* _toOriginX_, Vertex2<float>* _toOriginY_, unsigned int _nx_, unsigned int _ny_)
 {
-    for (int i = 0; i < NX; i++)
-        for (int j = 0; j < NY; j++)
-            _toMesh[j][i] = &_mesh_[j][i];
+    _nx = _nx_;
+    _ny = _ny_;
+    _toOriginX = _toOriginX_;
+    _toOriginY = _toOriginY_;
 }
 
-template <unsigned int NX, unsigned int NY>
-Basis2<NX, NY>::Basis2(Vertex2<float>* _toMesh_[NX][NY])
+unsigned int Basis2::xSize()
 {
-    for (int i = 0; i < NX; i++)
-        for (int j = 0; j < NY; j++)
-            _toMesh[j][i] = _toMesh_[j][i];
+    return _nx;
 }
 
-template class Basis2<10, 10>;
-template class Basis2<100, 10>;
+unsigned int Basis2::ySize()
+{
+    return _nx;
+}

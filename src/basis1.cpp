@@ -2,7 +2,7 @@
 
 Basis1::Basis1()
 {
-    _n = 0;
+    _n = 0U;
     _toOrigin = new Vertex1<float>;
 }
 
@@ -13,12 +13,8 @@ Basis1::~Basis1()
 
 Basis1::Basis1(Vertex1<float>* _toOrigin_, unsigned int _n_)
 {
-    if (_n > 0)
-    {
-        _n = _n_;
-        _toOrigin = _toOrigin_;
-    }
-    else Basis1();
+    _n = _n_;
+    _toOrigin = _toOrigin_;
 }
 
 unsigned int Basis1::size()
@@ -33,10 +29,8 @@ Vertex1<float> Basis1::origin()
 
 Vertex1<float> Basis1::end()
 {
-    if (_n == 0)
-        return *_toOrigin;
-    else
-        return *(_toOrigin + _n - 1);
+    if (_n == 0U) return *_toOrigin;
+    else return *(_toOrigin + _n - 1);
 }
 
 Vertex1<float> Basis1::vertex(unsigned int _index_)
@@ -54,10 +48,8 @@ Vertex1<float>* Basis1::toOrigin()
 
 Vertex1<float>* Basis1::toEnd()
 {
-    if (_n == 0)
-        return _toOrigin;
-    else
-        return _toOrigin + _n - 1;
+    if (_n == 0U) return _toOrigin;
+    else return _toOrigin + _n - 1;
 }
 
 Vertex1<float>* Basis1::toVertex(unsigned int _index_)

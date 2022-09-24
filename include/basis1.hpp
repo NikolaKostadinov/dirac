@@ -8,7 +8,7 @@ class Basis1
     public:
 
         Basis1();
-        ~Basis1();
+        virtual ~Basis1();
 
         Basis1(Vertex1<float>* _toOrigin_, unsigned int _n_);
 
