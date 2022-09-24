@@ -38,7 +38,7 @@ Vertex1<float> Basis1::vertex(unsigned int _index_)
     if (_index_ <= _n)
         return *(_toOrigin + _index_);
     else
-        throw INDEX_TOO_LARGE;
+        throw BASIS1_INDEX_TOO_LARGE;
 }
 
 Vertex1<float>* Basis1::toOrigin()
@@ -57,5 +57,5 @@ Vertex1<float>* Basis1::toVertex(unsigned int _index_)
     if (_index_ <= _n)
         return _toOrigin + _index_;
     else
-        throw INDEX_TOO_LARGE;
+        throw BASIS1_INDEX_TOO_LARGE;
 }

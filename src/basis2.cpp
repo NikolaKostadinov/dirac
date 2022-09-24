@@ -59,7 +59,7 @@ Vertex2<float> Basis2::xAxisAt(unsigned int _index_)
     if (_index_ <= _nx)
         return *(_toXOrigin + _index_);
     else
-        throw INDEX_TOO_LARGE;
+        throw BASIS2_INDEX_TOO_LARGE;
 }
 
 Vertex2<float> Basis2::yAxisAt(unsigned int _index_)
@@ -67,7 +67,7 @@ Vertex2<float> Basis2::yAxisAt(unsigned int _index_)
     if (_index_ <= _ny)
         return *(_toYOrigin + _index_);
     else
-        throw INDEX_TOO_LARGE;
+        throw BASIS2_INDEX_TOO_LARGE;
 }
 
 Vertex2<float>* Basis2::toXOrigin()
@@ -97,7 +97,7 @@ Vertex2<float>* Basis2::toXAxisAt(unsigned int _index_)
     if (_index_ <= _nx)
         return _toXOrigin + _index_;
     else
-        throw INDEX_TOO_LARGE;
+        throw BASIS2_INDEX_TOO_LARGE;
 }
 
 Vertex2<float>* Basis2::toYAxisAt(unsigned int _index_)
@@ -105,5 +105,5 @@ Vertex2<float>* Basis2::toYAxisAt(unsigned int _index_)
     if (_index_ <= _ny)
         return _toYOrigin + _index_;
     else
-        throw INDEX_TOO_LARGE;
+        throw BASIS2_INDEX_TOO_LARGE;
 }

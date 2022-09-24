@@ -3,7 +3,7 @@
 #include "vertex.h"
 #include <stdexcept>
 
-#define INDEX_TOO_LARGE std::invalid_argument("index is larger than Basis2.size()")
+#define BASIS2_INDEX_TOO_LARGE std::invalid_argument("index is larger than Basis2.size()")
 
 class Basis2
 {
