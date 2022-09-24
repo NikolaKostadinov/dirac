@@ -10,11 +10,11 @@ class Field1
         Field1();
         virtual ~Field1();
 
-        Field1(Basis1<N> _basis_);
-        Field1(Basis1<N>* _toBasis_);
+        Field1(Basis1 _basis_);
+        Field1(Basis1* _toBasis_);
 
-        void setValues(T _values_[N]);
-        void setValues(T* _toValues_[N]);
+        void setValues(T _values_[]);
+        void setValues(T* _toValues_[]);
 
         void getValue(T& reference, int _index_ = 0);
         void getValue(T*& toReference, int _index_ = 0);
@@ -23,6 +23,6 @@ class Field1
 
     private:
 
-        Basis1<N>* _toBasis;
+        Basis1* _toBasis;
         T _values[N];
 };

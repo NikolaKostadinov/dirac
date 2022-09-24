@@ -1,8 +1,8 @@
 #pragma once
 
 #include "vertex.h"
+#include <stdexcept>
 
-template <unsigned int N>
 class Basis1
 {
     public:
@@ -10,10 +10,20 @@ class Basis1
         Basis1();
         ~Basis1();
 
-        Basis1(Vertex1<float> _vertices_[]);
-        Basis1(Vertex1<float>* _toVertices_[]);
+        Basis1(Vertex1<float>* _toOrigin_, unsigned int _n_);
+
+        unsigned int size();
+
+        Vertex1<float> origin();
+        Vertex1<float> end();
+        Vertex1<float> vertex(unsigned int _index_);
+
+        Vertex1<float>* toOrigin();
+        Vertex1<float>* toEnd();
+        Vertex1<float>* toVertex(unsigned int _index_);
 
     private:
 
-        Vertex1<float>* _toVertices[N];
+        unsigned int _n;
+        Vertex1<float>* _toOrigin;
 };

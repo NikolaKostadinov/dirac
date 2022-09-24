@@ -1,33 +1,69 @@
 #include "../include/basis1.hpp"
 
-template<unsigned int N>
-Basis1<N>::Basis1()
+Basis1::Basis1()
 {
-    for (int i = 0; i < N; i++)
-        _toVertices[i] = new Vertex1<float>;
+    _n = 0;
+    _toOrigin = new Vertex1<float>;
 }
 
-template<unsigned int N>
-Basis1<N>::~Basis1()
+Basis1::~Basis1()
 {
-    for (int i = 0; i < N; i++)
-        delete _toVertices[i];
+    delete[] _toOrigin;
 }
 
-template<unsigned int N>
-Basis1<N>::Basis1(Vertex1<float> _vertices_[])
+Basis1::Basis1(Vertex1<float>* _toOrigin_, unsigned int _n_)
 {
-    for (int i = 0; i < N; i++)
-        _toVertices[i] = &_vertices_[i];
+    if (_n > 0)
+    {
+        _n = _n_;
+        _toOrigin = _toOrigin_;
+    }
+    else Basis1();
 }
 
-template<unsigned int N>
-Basis1<N>::Basis1(Vertex1<float>* _toVertices_[])
+unsigned int Basis1::size()
 {
-    for (int i = 0; i < N; i++)
-        _toVertices[i] = _toVertices_[i];
+    return _n;
 }
 
-template class Basis1<10>;
-template class Basis1<1000>;
-template class Basis1<10000>;
+Vertex1<float> Basis1::origin()
+{
+    return *_toOrigin;
+}
+
+Vertex1<float> Basis1::end()
+{
+    if (_n == 0)
+        return *_toOrigin;
+    else
+        return *(_toOrigin + _n - 1);
+}
+
+Vertex1<float> Basis1::vertex(unsigned int _index_)
+{
+    if (_index_ <= _n)
+        return *(_toOrigin + _index_);
+    else
+        throw std::invalid_argument("index is larger than Basis1.size()");
+}
+
+Vertex1<float>* Basis1::toOrigin()
+{
+    return _toOrigin;
+}
+
+Vertex1<float>* Basis1::toEnd()
+{
+    if (_n == 0)
+        return _toOrigin;
+    else
+        return _toOrigin + _n - 1;
+}
+
+Vertex1<float>* Basis1::toVertex(unsigned int _index_)
+{
+    if (_index_ <= _n)
+        return _toOrigin + _index_;
+    else
+        throw std::invalid_argument("index is larger than Basis1.size()");
+}
