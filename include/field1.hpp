@@ -1,5 +1,7 @@
 #pragma once
 
+#include "base.hpp"
+
 template <class T>
 class Field1
 {
@@ -8,18 +10,15 @@ class Field1
         Field1();
         virtual ~Field1();
 
-        //Field1(Basis1 _basis_);
-        //Field1(Basis1* _toBasis_);
+        Field1(Base _basis_);
+        Field1(Base* _toBasis_);
 
-        void setValues(T _values_[]);
-        void setValues(T* _toValues_[]);
-
-        void getValue(T& reference, int _index_ = 0);
-        void getValue(T*& toReference, int _index_ = 0);
-
+        unsigned int size();
         T* address(int _index_ = 0);
 
     private:
 
-        T _values[N];
+        Base* _basis;
+        unsigned int _n;
+        T* _toOriginValue;
 };
