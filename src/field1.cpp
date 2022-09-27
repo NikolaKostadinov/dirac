@@ -3,25 +3,13 @@
 template <class T, unsigned int N>
 Field1<T, N>::Field1()
 {
-    _toBasis = new Basis1;
+    
 }
 
 template <class T, unsigned int N>
 Field1<T, N>::~Field1()
 {
 
-}
-
-template <class T, unsigned int N>
-Field1<T, N>::Field1(Basis1 _basis_)
-{
-    _toBasis = &_basis_;
-}
-
-template <class T, unsigned int N>
-Field1<T, N>::Field1(Basis1* _toBasis_)
-{
-    _toBasis = _toBasis_;
 }
 
 template <class T, unsigned int N>

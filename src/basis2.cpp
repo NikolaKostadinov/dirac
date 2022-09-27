@@ -2,108 +2,102 @@
 
 Basis2::Basis2()
 {
-    _nx = 0U;
-    _nx = 0U;
-    _toXOrigin = new Vertex2<float>;
-    _toYOrigin = new Vertex2<float>;
+
 }
 
 Basis2::~Basis2()
 {
-    delete[] _toXOrigin;
-    delete[] _toYOrigin;
+    
 }
 
-Basis2::Basis2(Vertex2<float>* _toOriginX_, Vertex2<float>* _toOriginY_, unsigned int _nx_, unsigned int _ny_)
+Basis2::Basis2(Base _xBase_, Base _yBase_)
 {
-    _nx = _nx_;
-    _ny = _ny_;
-    _toXOrigin = _toOriginX_;
-    _toYOrigin = _toOriginY_;
+    _toX = &_xBase_;
+    _toY = &_yBase_;
+}
+
+Basis2::Basis2(Base* _toXBase_, Base* _toYBase_)
+{
+    _toX = _toXBase_;
+    _toY = _toYBase_;
+}
+
+unsigned int Basis2::size()
+{
+    return _toX->size() * _toY->size(); 
 }
 
 unsigned int Basis2::xSize()
 {
-    return _nx;
+    return _toX->size();
 }
 
 unsigned int Basis2::ySize()
 {
-    return _nx;
+    return _toY->size();
 }
 
-Vertex2<float> Basis2::xOrigin()
+unsigned int Basis2::zSize()
 {
-    return *_toXOrigin;
+    return 0U;
 }
 
-Vertex2<float> Basis2::yOrigin()
+float Basis2::xStart()
 {
-    return *_toYOrigin;
+    return _toX->start();
 }
 
-Vertex2<float> Basis2::xEnd()
+float Basis2::yStart()
 {
-    if (_nx == 0U) return *_toXOrigin;
-    else return *(_toXOrigin + _nx - 1);
+    return _toY->start();
 }
 
-Vertex2<float> Basis2::yEnd()
+float Basis2::zStart()
 {
-    if (_ny == 0U) return *_toYOrigin;
-    else return *(_toYOrigin + _ny - 1);
+    return 0.0F;
 }
 
-Vertex2<float> Basis2::xAxisAt(unsigned int _index_)
+float Basis2::xEnd()
 {
-    if (_index_ <= _nx)
-        return *(_toXOrigin + _index_);
-    else
-        throw BASIS2_INDEX_TOO_LARGE;
+    return _toX->end();
 }
 
-Vertex2<float> Basis2::yAxisAt(unsigned int _index_)
+float Basis2::yEnd()
 {
-    if (_index_ <= _ny)
-        return *(_toYOrigin + _index_);
-    else
-        throw BASIS2_INDEX_TOO_LARGE;
+    return _toY->end();
 }
 
-Vertex2<float>* Basis2::toXOrigin()
+float Basis2::zEnd()
 {
-    return _toXOrigin;
+    return 0.0F;
 }
 
-Vertex2<float>* Basis2::toYOrigin()
+float Basis2::dx()
 {
-    return _toYOrigin;
+    return _toX->dx();
 }
 
-Vertex2<float>* Basis2::toXEnd()
+float Basis2::dy()
 {
-    if (_nx == 0U) return _toXOrigin;
-    else return _toXOrigin + _nx - 1;
+    return _toY->dx();
 }
 
-Vertex2<float>* Basis2::toYEnd()
+float Basis2::dz()
 {
-    if (_ny == 0U) return _toYOrigin;
-    else return _toYOrigin + _ny - 1;
+    return 0.0F;
 }
 
-Vertex2<float>* Basis2::toXAxisAt(unsigned int _index_)
+float Basis2::xLength()
 {
-    if (_index_ <= _nx)
-        return _toXOrigin + _index_;
-    else
-        throw BASIS2_INDEX_TOO_LARGE;
+    return _toX->length();
 }
 
-Vertex2<float>* Basis2::toYAxisAt(unsigned int _index_)
+float Basis2::yLength()
 {
-    if (_index_ <= _ny)
-        return _toYOrigin + _index_;
-    else
-        throw BASIS2_INDEX_TOO_LARGE;
+    return _toY->length();
+}
+
+float Basis2::zLength()
+{
+    return 0.0F;
 }

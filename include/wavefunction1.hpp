@@ -1,7 +1,6 @@
 #pragma once
 
 #include "complex.hpp"
-#include "basis1.hpp"
 #include "field1.hpp"
 
 template <unsigned int N>

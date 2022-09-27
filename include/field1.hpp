@@ -1,8 +1,6 @@
 #pragma once
 
-#include "basis1.hpp"
-
-template <class T, unsigned int N>
+template <class T>
 class Field1
 {
     public:
@@ -10,8 +8,8 @@ class Field1
         Field1();
         virtual ~Field1();
 
-        Field1(Basis1 _basis_);
-        Field1(Basis1* _toBasis_);
+        //Field1(Basis1 _basis_);
+        //Field1(Basis1* _toBasis_);
 
         void setValues(T _values_[]);
         void setValues(T* _toValues_[]);
@@ -23,6 +21,5 @@ class Field1
 
     private:
 
-        Basis1* _toBasis;
         T _values[N];
 };
