@@ -1,10 +1,9 @@
 #pragma once
 
 #include "base.hpp"
-#include "basis.hpp"
 #include "exceptions.h"
 
-class Basis2 : Basis
+class Basis2
 {
     public:
 
