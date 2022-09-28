@@ -1,7 +1,5 @@
 #pragma once
 
-#include "vertex.h"
-
 #include "complex.hpp"
 
 #include "base.hpp"
