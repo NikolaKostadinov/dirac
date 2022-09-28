@@ -12,8 +12,4 @@ class WaveFunction1 : public Field1<Complex>
 
         WaveFunction1(Basis1<N> _basis_);
         WaveFunction1(Basis1<N>* _toBasis_);*/
-
-    private:
-
-
 };
