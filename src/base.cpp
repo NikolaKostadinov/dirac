@@ -52,5 +52,5 @@ float Base::length()
 
 float Base::dx()
 {
-    return _end - _start / (float) _size;
+    return (_end - _start) / (float) _size;
 }

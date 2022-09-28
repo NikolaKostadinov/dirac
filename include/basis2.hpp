@@ -33,7 +33,7 @@ class Basis2
         float yLength();
         float zLength();
 
-    private:
+    protected:
 
         Base* _toX;
         Base* _toY;
