@@ -8,7 +8,7 @@
 #include "basis2.hpp"
 #include "basis3.hpp"
 
-//#include "field1.hpp"
+#include "field1.hpp"
 //#include "field2.hpp"
 //#include "field3.hpp"
 
