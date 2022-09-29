@@ -14,10 +14,19 @@ class Field1
         Field1(Base* _toBasis_);
 
         void setValues(T* _address_);
+        void setValue(T _value_, unsigned int _index_);
+        void scale(float _factor_);
+
+        Field1<class T> operator+();
+        Field1<class T> operator-();
+        Field1<class T> operator+(Field1<class T> _other_);
+        Field1<class T> operator-(Field1<class T> _other_);
+        Field1<class T> operator*(Field1<class T> _other_);
+        Field1<class T> operator/(Field1<class T> _other_);
 
         unsigned int size();
-        T* address(int _index_ = 0);
-        T value(int _index_);
+        T* address(unsigned int _index_ = 0U);
+        T value(unsigned int _index_);
 
     protected:
 
