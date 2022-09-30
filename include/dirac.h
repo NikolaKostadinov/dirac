@@ -10,9 +10,9 @@
 //#include "field2.hpp"
 //#include "field3.hpp"
 
-//#include "wavefunction1.hpp"
-//#include "wavefunction2.hpp"
-//#include "wavefunction3.hpp"
+#include "wavefunc1.hpp"
+//#include "wavefunc2.hpp"
+//#include "wavefunc3.hpp"
 
 //#include "spinor.hpp"
 //#include "pauli.hpp"

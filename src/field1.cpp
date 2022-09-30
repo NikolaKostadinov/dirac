@@ -42,39 +42,15 @@ void Field1<T>::setValue(T _value_, unsigned int _index_)
 }
 
 template <class T>
-void Field1<T>::scale(float _factor_)
-{
-    for (unsigned int i = 0U; i < _size; i++)
-    {
-        *(_toOriginValue + i) *= _factor_;
-    }
-}
-
-template <class T>
-Field1<T> Field1<T>::operator+()
-{
-    return *this;
-}
-
-template <class T>
-Field1<T> Field1<T>::operator-()
-{
-    Field1<T> result(_toBase);
-    T* address = _toOriginValue;
-    for (unsigned int i = 0U; i < _size; i++)
-    {
-        T value = *address;
-        result.setValue(-value);
-        address++;
-    }
-}
-
-// OPERATORS
-
-template <class T>
 unsigned int Field1<T>::size()
 {
     return _size;
+}
+
+template <class T>
+Base* Field1<T>::toBase()
+{
+    return _toBase;
 }
 
 template <class T>
@@ -88,3 +64,8 @@ T Field1<T>::value(unsigned int _index_)
 {
     return *(_toOriginValue + _index_);
 }
+
+template class Field1<   float   >;
+template class Field1<   double  >;
+template class Field1<long double>;
+template class Field1<  Complex  >;

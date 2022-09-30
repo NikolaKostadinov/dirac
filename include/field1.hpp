@@ -1,6 +1,7 @@
 #pragma once
 
 #include "base.hpp"
+#include "complex.hpp"
 
 template <class T>
 class Field1
@@ -15,16 +16,9 @@ class Field1
 
         void setValues(T* _address_);
         void setValue(T _value_, unsigned int _index_);
-        void scale(float _factor_);
-
-        Field1<class T> operator+();
-        Field1<class T> operator-();
-        Field1<class T> operator+(Field1<class T> _other_);
-        Field1<class T> operator-(Field1<class T> _other_);
-        Field1<class T> operator*(Field1<class T> _other_);
-        Field1<class T> operator/(Field1<class T> _other_);
 
         unsigned int size();
+        Base* toBase();
         T* address(unsigned int _index_ = 0U);
         T value(unsigned int _index_);
 
