@@ -10,15 +10,16 @@ class Base
         virtual ~Base();
 
         Base(
-            float _start_,
-            float _end_,
-            unsigned int _size_
+            float        _start_,
+            unsigned int _size_,
+            float        _end_
         );
 
         unsigned int size();
-        float start();
-        float end();
-        float dx();
+
+        float start ();
+        float end   ();
+        float dx    ();
         float length();
 
     private:

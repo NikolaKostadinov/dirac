@@ -30,8 +30,8 @@ class Complex
 
         float real();
         float imag();
-        float mod();
-        float arg();
+        float mod ();
+        float arg ();
 
         Complex conj();
         float conjSq();
@@ -44,7 +44,7 @@ class Complex
         float _imag;
 };
 
-Complex cis(float _arg_);
+Complex cis (   float _arg_   );
 Complex sqrt(Complex _complex_);
-Complex exp(Complex _complex_);
-Complex ln(Complex _complex_);
+Complex exp (Complex _complex_);
+Complex ln  (Complex _complex_);

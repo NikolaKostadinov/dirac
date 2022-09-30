@@ -10,10 +10,10 @@ class Basis2
         Basis2();
         virtual ~Basis2();
 
-        Basis2(Base _xBase_, Base _yBase_);
+        Basis2(   Base _xBase_, Base _yBase_   );
         Basis2(Base* _toXBase_, Base* _toYBase_);
 
-        unsigned int size();
+        unsigned int  size();
         unsigned int xSize();
         unsigned int ySize();
         unsigned int zSize();
@@ -21,9 +21,9 @@ class Basis2
         float xStart();
         float yStart();
         float zStart();
-        float xEnd();
-        float yEnd();
-        float zEnd();
+        float xEnd  ();
+        float yEnd  ();
+        float zEnd  ();
 
         float dx();
         float dy();
