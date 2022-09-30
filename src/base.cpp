@@ -12,7 +12,7 @@ Base::~Base()
 
 }
 
-Base::Base(float _start_, float _end_, unsigned int _size_)
+Base::Base(float _start_, unsigned int _size_,  float _end_)
 {
     if (_size_ == 0) throw INF_DX;
     if (_start_ < _end_)
