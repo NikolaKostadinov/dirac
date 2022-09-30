@@ -6,11 +6,11 @@
 int main()
 {   
     Base* x = new Base(-1.0F, 1.0F, 4U);
-    Field1<float> f = Field1<float>(x);
-    float values[4] = { 1.0F, 2.0F, 3.0F, 4.0F };
-    f.setValues(values);
+    WaveFunc1* f = new WaveFunc1(x);
+    Complex probAmp[4] = { Complex(1), Complex(0, 1), Complex(0, 1), Complex(1) };
+    f->setValues(probAmp);
 
-    std::cout << f.value(2) << std::endl;
+    std::cout << f->value(2).mod() << std::endl;
 
     std::cin.get();
     return 0;

@@ -26,5 +26,5 @@ class Field1
 
         unsigned int _size;
         Base* _toBase;
-        T* _toOriginValue;
+        T* _originAddress;
 };

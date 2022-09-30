@@ -10,12 +10,14 @@ class WaveFunc1 : public Field1<Complex>
         WaveFunc1();
         virtual ~WaveFunc1();
 
-        WaveFunc1(Base _basis_);
+        WaveFunc1(Base  _basis_  );
         WaveFunc1(Base* _toBasis_);
+
+        void normalize();
 
         Complex probAmp(unsigned int _index_);
         float   prob   (unsigned int _index_);
         
-        float         prob();
+        float prob();
         Field1<float> probDensity();
 };

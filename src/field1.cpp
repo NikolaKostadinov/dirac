@@ -5,14 +5,14 @@ Field1<T>::Field1()
 {
     _size = 0U;
     _toBase = new Base;
-    _toOriginValue = new T;
+    _originAddress = new T;
 }
 
 template <class T>
 Field1<T>::~Field1()
 {
     delete _toBase;
-    delete[] _toOriginValue;
+    delete[] _originAddress;
 }
 
 template <class T>
@@ -32,13 +32,13 @@ Field1<T>::Field1(Base* _toBase_)
 template <class T>
 void Field1<T>::setValues(T* _address_)
 {
-    _toOriginValue = _address_;
+    _originAddress = _address_;
 }
 
 template <class T>
 void Field1<T>::setValue(T _value_, unsigned int _index_)
 {
-    *(_toOriginValue + _index_) = _value_;
+    *(_originAddress + _index_) = _value_;
 }
 
 template <class T>
@@ -56,13 +56,13 @@ Base* Field1<T>::toBase()
 template <class T>
 T* Field1<T>::address(unsigned int _index_)
 {
-    return _toOriginValue + _index_;
+    return _originAddress + _index_;
 }
 
 template <class T>
 T Field1<T>::value(unsigned int _index_)
 {
-    return *(_toOriginValue + _index_);
+    return *(_originAddress + _index_);
 }
 
 template class Field1<   float   >;
