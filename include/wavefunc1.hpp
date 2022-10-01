@@ -2,6 +2,9 @@
 
 #include "complex.hpp"
 #include "field1.hpp"
+#include <string>
+
+#define MAX_STR 8
 
 class WaveFunc1 : public Field1<Complex>
 {
@@ -20,4 +23,6 @@ class WaveFunc1 : public Field1<Complex>
         
         float prob();
         Field1<float> probDensity();
+
+        std::string string();
 };
