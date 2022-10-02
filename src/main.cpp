@@ -2,7 +2,7 @@
 #include <iostream>
 
 #define N 6U
-#define T 100
+#define T 10000
 #define DT 0.01F
 
 int main()
@@ -13,8 +13,8 @@ int main()
     Complex probAmp[N] = {
         Complex(1),
         Complex(1),
-        Complex(100),
-        Complex(100),
+        Complex(1000),
+        Complex(1000),
         Complex(1),
         Complex(1)
     };

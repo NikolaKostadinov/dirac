@@ -39,11 +39,10 @@ void WaveFunc1::evolve(float _deltaTime_)
     float dx = _toBase->dx();
     float ifactor = _deltaTime_ / (2 * dx * dx);
     Complex factor = Complex(0, ifactor);
+    Complex two = Complex(2);
 
     for (unsigned int i = 1U; i < _size - 1; i++)
-    {
-        *address(i) = factor * (value(i+1) - value(i) - value(i) + value(i-1)) + value(i);
-    }
+        *address(i) = factor * (value(i+1) - two * value(i) + value(i-1)) + value(i);
 
     normalize();
 }
