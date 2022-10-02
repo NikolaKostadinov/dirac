@@ -36,12 +36,12 @@ void WaveFunc1::normalize(float _norm_)
 
 Complex WaveFunc1::probAmp(unsigned int _index_)
 {
-    
+    return value(_index_);
 }
 
 float WaveFunc1::prob(unsigned int _index_)
 {
-    
+    return value(_index_).conjSq();
 }
 
 float WaveFunc1::totalProb()

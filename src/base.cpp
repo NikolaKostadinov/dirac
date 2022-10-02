@@ -54,3 +54,8 @@ float Base::dx()
 {
     return (_end - _start) / (float) _size;
 }
+
+float Base::x(unsigned int _index_)
+{
+    return _start + _index_ * dx();
+}

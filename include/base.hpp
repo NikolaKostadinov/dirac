@@ -22,6 +22,8 @@ class Base
         float dx    ();
         float length();
 
+        float x(unsigned int _index_);
+
     private:
 
         unsigned int _size;

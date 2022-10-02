@@ -1,5 +1,5 @@
-#include <iostream>
 #include "../include/dirac.h"
+#include <iostream>
 
 int main()
 {   
