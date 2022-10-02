@@ -109,7 +109,7 @@ Complex Complex::conj()
 
 float Complex::conjSq()
 {
-    return _real * _real + _imag + _imag;
+    return _real * _real + _imag * _imag;
 }
 
 std::string Complex::string()

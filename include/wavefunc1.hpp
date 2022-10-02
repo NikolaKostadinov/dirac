@@ -16,12 +16,12 @@ class WaveFunc1 : public Field1<Complex>
         WaveFunc1(Base  _basis_  );
         WaveFunc1(Base* _toBasis_);
 
-        void normalize();
+        void normalize(float _norm_ = 1.0F);
 
         Complex probAmp(unsigned int _index_);
         float   prob   (unsigned int _index_);
         
-        float prob();
+        float totalProb();
         Field1<float> probDensity();
 
         std::string string();

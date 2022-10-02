@@ -25,9 +25,13 @@ WaveFunc1::WaveFunc1(Base* _toBase_)
     _toBase = _toBase_;
 }
 
-void WaveFunc1::normalize()
+void WaveFunc1::normalize(float _norm_)
 {
-    
+    float prob = totalProb();
+    float factor = sqrt(_norm_ / prob);
+
+    for (unsigned int i = 0U; i < _size; i++)
+        (*address(i)).scale(factor);
 }
 
 Complex WaveFunc1::probAmp(unsigned int _index_)
@@ -40,9 +44,13 @@ float WaveFunc1::prob(unsigned int _index_)
     
 }
 
-float WaveFunc1::prob()
+float WaveFunc1::totalProb()
 {
+    float prob = 0;
+    for (unsigned int i = 0U; i < _size; i++)
+        prob += value(i).conjSq();
     
+    return prob;
 }
 
 std::string WaveFunc1::string()
