@@ -36,12 +36,16 @@ void WaveFunc1::normalize(float _norm_)
 
 void WaveFunc1::evolve(float _deltaTime_)
 {
-    Complex factor = Complex(0, 0.5F * _deltaTime_);
+    float dx = _toBase->dx();
+    float ifactor = _deltaTime_ / (2 * dx * dx);
+    Complex factor = Complex(0, ifactor);
 
     for (unsigned int i = 1U; i < _size - 1; i++)
     {
-        *address(i) += factor * (value(i+1) - value(i) - value(i) + value(i-1));
+        *address(i) = factor * (value(i+1) - value(i) - value(i) + value(i-1)) + value(i);
     }
+
+    normalize();
 }
 
 Complex WaveFunc1::probAmp(unsigned int _index_)

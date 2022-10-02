@@ -2,6 +2,8 @@
 #include <iostream>
 
 #define N 6U
+#define T 100
+#define DT 0.01F
 
 int main()
 {   
@@ -23,7 +25,8 @@ int main()
     std::cout << f->totalProb() << std::endl;
     std::cout << f->string() << std::endl;
 
-    f->evolve(0.01F);
+    for (int i = 0; i < T; i++)
+        f->evolve(DT);
 
     std::cout << f->totalProb() << std::endl;
     std::cout << f->string() << std::endl;
