@@ -38,7 +38,7 @@ void Field1<T>::setValues(T* _address_)
 template <class T>
 void Field1<T>::setValue(T _value_, unsigned int _index_)
 {
-    *(_originAddress + _index_) = _value_;
+    *address(_index_) = _value_;
 }
 
 template <class T>
@@ -56,13 +56,16 @@ Base* Field1<T>::toBase()
 template <class T>
 T* Field1<T>::address(unsigned int _index_)
 {
-    return _originAddress + _index_;
+    if (_index_ >= 0 && _index_ < _size)
+        return _originAddress + _index_;
+    else
+        throw OUT_OF_BOUNDS;
 }
 
 template <class T>
 T Field1<T>::value(unsigned int _index_)
 {
-    return *(_originAddress + _index_);
+    return *address(_index_);
 }
 
 template class Field1<   float   >;

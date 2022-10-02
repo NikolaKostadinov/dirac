@@ -17,6 +17,7 @@ class WaveFunc1 : public Field1<Complex>
         WaveFunc1(Base* _toBasis_);
 
         void normalize(float _norm_ = 1.0F);
+        void evolve   (float _deltaTime_  );
 
         Complex probAmp(unsigned int _index_);
         float   prob   (unsigned int _index_);

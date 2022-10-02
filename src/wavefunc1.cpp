@@ -34,6 +34,16 @@ void WaveFunc1::normalize(float _norm_)
         (*address(i)).scale(factor);
 }
 
+void WaveFunc1::evolve(float _deltaTime_)
+{
+    Complex factor = Complex(0, 0.5F * _deltaTime_);
+
+    for (unsigned int i = 1U; i < _size - 1; i++)
+    {
+        *address(i) += factor * (value(i+1) - value(i) - value(i) + value(i-1));
+    }
+}
+
 Complex WaveFunc1::probAmp(unsigned int _index_)
 {
     return value(_index_);

@@ -69,6 +69,11 @@ Complex Complex::operator/(Complex _other_)
     return Complex(real, imag);
 }
 
+Complex Complex::operator+=(Complex _other_)
+{
+    return *this + _other_;
+}
+
 Complex Complex::operator==(Complex _other_)
 {
     return (_real == _other_._real) && (_imag == _other_._imag);

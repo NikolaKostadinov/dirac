@@ -2,6 +2,7 @@
 
 #include "base.hpp"
 #include "complex.hpp"
+#include "exceptions.h"
 
 template <class T>
 class Field1
