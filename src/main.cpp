@@ -11,15 +11,31 @@ int main()
     Basis2* basis = new Basis2(x, x);
     WaveFunc2* psi = new WaveFunc2(basis);
 
-    Complex probAmp[N][N];
-    for (int i = 0; i < N; i++)
-        for (int j = 0; j < N; j++)
-            probAmp[j][i] = Complex(i, j);
+    Complex probAmp[N][N] = { { Complex(1), Complex(1), Complex(1) }, 
+                              { Complex(1), Complex(100), Complex(1) },
+                              { Complex(1), Complex(1), Complex(1) } };
 
     psi->setValues(&probAmp[0][0]);
+    psi->normalize();
 
-    std::cout << psi->probAmp(1, 2).real() << std::endl;
-    std::cout << psi->probAmp(1, 2).imag() << std::endl;
+    for (int i = 0; i < N; i++)
+    {   
+        for (int j = 0; j < N; j++)
+            std::cout << psi->probAmp(i, j).string() << "  ";
+        std::cout << std::endl;
+    }
+
+    std::cout << std::endl;
+
+    for (int i = 0; i < T; i++)
+        psi->evolve(DT);
+
+    for (int i = 0; i < N; i++)
+    {   
+        for (int j = 0; j < N; j++)
+            std::cout << psi->probAmp(i, j).string() << "  ";
+        std::cout << std::endl;
+    }
 
     std::cin.get();
     return 0;

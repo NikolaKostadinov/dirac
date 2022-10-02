@@ -32,11 +32,35 @@ WaveFunc2::WaveFunc2(Basis2* _toBasis_)
 
 void WaveFunc2::normalize(float _norm_)
 {
-    
+    float prob = totalProb();
+    float factor = sqrt(_norm_ / prob);
+
+    for (unsigned int i = 0U; i < _xSize; i++)
+        for (unsigned int j = 0U; j < _ySize; j++)
+            (*address(i, j)).scale(factor);
 }
 
 void WaveFunc2::evolve(float _deltaTime_)
 {
+    float dx = _toBasis->dx();
+    float dy = _toBasis->dy();
+    float ifactor = 0.5F * _deltaTime_;
+    Complex factor = Complex(0, ifactor);
+    Complex two = Complex(2);
+
+    for (unsigned int i = 1U; i < _xSize - 1; i++)
+    {
+        for (unsigned int j = 1U; j < _ySize - 1; j++)
+        {
+            Complex d2dx2 = value(i+1, j) - two * value(i, j) + value(i-1, j);
+            Complex d2dy2 = value(i, j+1) - two * value(i, j) + value(i, j+1);
+            d2dx2.scale(dx * dx);
+            d2dy2.scale(dy * dy);
+
+            *address(i, j) = factor * (d2dx2 + d2dy2) + value(i, j);
+        }
+    }
+
     normalize();
 }
 
