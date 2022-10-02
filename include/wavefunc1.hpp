@@ -20,6 +20,7 @@ class WaveFunc1 : public Field1<Complex>
 
         Complex probAmp(unsigned int _index_);
         float   prob   (unsigned int _index_);
+        float   prob   (unsigned int _start_, unsigned int _end_);
         
         float totalProb();
         Field1<float> probDensity();

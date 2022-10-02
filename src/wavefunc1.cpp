@@ -44,6 +44,15 @@ float WaveFunc1::prob(unsigned int _index_)
     return value(_index_).conjSq();
 }
 
+float WaveFunc1::prob(unsigned int _start_, unsigned int _end_)
+{
+    float prob = 0;
+    for (unsigned int i = _start_; i <= _end_; i++)
+        prob += value(i).conjSq();
+    
+    return prob;
+}
+
 float WaveFunc1::totalProb()
 {
     float prob = 0;

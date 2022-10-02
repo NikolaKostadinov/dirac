@@ -9,11 +9,10 @@ int main()
     Complex probAmp[4] = { Complex(1), Complex(0, 1), Complex(0, 1), Complex(1) };
     
     f->setValues(probAmp);
-    f->normalize(100);
+    f->normalize();
     std::cout << f->totalProb() << std::endl;
 
-    for (int i = 0; i < 4; i++)
-        std::cout << probAmp[i].string() << std::endl;
+    std::cout << f->prob(0, 2) << std::endl;
 
     std::cin.get();
     return 0;
