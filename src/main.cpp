@@ -9,20 +9,17 @@ int main()
 {   
     Base* x = new Base(-1, N, 1);
     Basis2* basis = new Basis2(x, x);
-    Field2<float>* f = new Field2<float>(basis);
+    WaveFunc2* psi = new WaveFunc2(basis);
 
-    float arr[N][N] = { { 0, 1, 2 }, { 3, 4, 5 }, { 6, 7, 8 } };
-    f->setValues(&arr[0][0]);
+    Complex probAmp[N][N];
+    for (int i = 0; i < N; i++)
+        for (int j = 0; j < N; j++)
+            probAmp[j][i] = Complex(i, j);
 
-    std::cout << *f->address(0, 0) << std::endl;
-    std::cout << *f->address(1, 0) << std::endl;
-    std::cout << *f->address(2, 0) << std::endl;
-    std::cout << *f->address(0, 1) << std::endl;
-    std::cout << *f->address(1, 1) << std::endl;
-    std::cout << *f->address(2, 1) << std::endl;
-    std::cout << *f->address(0, 2) << std::endl;
-    std::cout << *f->address(1, 2) << std::endl;
-    std::cout << *f->address(2, 2) << std::endl;
+    psi->setValues(&probAmp[0][0]);
+
+    std::cout << psi->probAmp(1, 2).real() << std::endl;
+    std::cout << psi->probAmp(1, 2).imag() << std::endl;
 
     std::cin.get();
     return 0;

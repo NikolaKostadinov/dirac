@@ -73,8 +73,22 @@ Basis2 Field2<T>::basis()
 template <class T>
 T* Field2<T>::address(unsigned int _index_, unsigned int _jndex_)
 {
-    unsigned int upperArea = _jndex_ * xSize();
-    return _originAddress + _index_ + upperArea;
+    if (_index_ >= 0U && _index_ < _xSize)
+    {
+        if (_jndex_ >= 0U && _jndex_ < _ySize)
+        {
+            unsigned int upperArea = _jndex_ * xSize();
+            return _originAddress + _index_ + upperArea;
+        }
+        else throw OUT_OF_Y_BOUNDS;
+    }
+    else throw OUT_OF_X_BOUNDS;
+}
+
+template <class T>
+T Field2<T>::value(unsigned int _index_, unsigned int _jndex_)
+{
+    return *address(_index_, _jndex_);
 }
 
 template class Field2<   float   >;

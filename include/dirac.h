@@ -16,7 +16,7 @@
 //#include "scalar3.hpp"
 
 #include "wavefunc1.hpp"
-//#include "wavefunc2.hpp"
+#include "wavefunc2.hpp"
 //#include "wavefunc3.hpp"
 
 //#include "pauli.hpp"
