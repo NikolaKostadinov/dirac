@@ -21,7 +21,7 @@ Field2<T>::Field2(Basis2* _toBasis_)
 {
     _xSize = _toBasis_->xSize();
     _ySize = _toBasis_->ySize();
-    _toBasis = &_toBasis_;
+    _toBasis = _toBasis_;
     _originAddress = new T;
 }
 
@@ -68,6 +68,13 @@ template <class T>
 Basis2 Field2<T>::basis()
 {
     return *_toBasis;
+}
+
+template <class T>
+T* Field2<T>::address(unsigned int _index_, unsigned int _jndex_)
+{
+    unsigned int upperArea = _jndex_ * xSize();
+    return _originAddress + _index_ + upperArea;
 }
 
 template class Field2<   float   >;
