@@ -1,8 +1,6 @@
 # THE DIRAC ENGINE: *A TRUBUTE TO A LEGEND*
 
-<div style="text-align:center">
-    <img src="./assets/dirac-engine.svg" width="200">
-</div>
+<img src="./assets/dirac-engine.svg" width="200">
 
 ## A Tribute to a Legend
 
@@ -16,9 +14,7 @@ This equation predicts electron spin, the periodic table, antimatter and the g f
 
 This equation is the core of the Dirac engine. This is why this name has been chosen for the project. The engine is a tribute to a legend: Paul Dirac, one of the geniuses of the 20th century.
 
-<div style="text-align:center">
-    <img src="./assets/paul-dirac-grad.png" width="200">
-</div>
+<img src="./assets/paul-dirac-grad.png" width="200">
 
 Quantum field theory is hard. It requires years of studying just for the basics. But that is not the main problem. Calculations in quantum field theory are beyond the performance limits of modern computers. So, how could we simulate the quantum realm?
 
