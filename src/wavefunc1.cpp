@@ -78,7 +78,7 @@ float WaveFunc1::totalProb()
 std::string WaveFunc1::string()
 {
     std::string result = "[ ";
-    if (_size <= MAX_STR)
+    if (_size <= MAX_STR_SIZE_WIDTH)
     {
         for (unsigned int i = 0U; i < _size - 1; i++)
         {
@@ -89,12 +89,12 @@ std::string WaveFunc1::string()
     }
     else
     {
-        for (unsigned int i = 0U; i < MAX_STR - 2; i++)
+        for (unsigned int i = 0U; i < MAX_STR_SIZE_WIDTH - 2; i++)
         {
             result += value(i).string();
             result += ", ";
         }
-        result += value(MAX_STR - 2).string();
+        result += value(MAX_STR_SIZE_WIDTH - 2).string();
         result += ", ... ";
         result += value(_size - 1).string();
     }

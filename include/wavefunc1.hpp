@@ -1,10 +1,10 @@
 #pragma once
 
+#include "engineparams.h"
 #include "complex.hpp"
+#include "base.hpp"
 #include "field1.hpp"
 #include <string>
-
-#define MAX_STR 8
 
 class WaveFunc1 : public Field1<Complex>
 {
@@ -16,7 +16,7 @@ class WaveFunc1 : public Field1<Complex>
         WaveFunc1(Base  _basis_  );
         WaveFunc1(Base* _toBasis_);
 
-        void normalize(float _norm_ = 1.0F);
+        void normalize(float _norm_ = NORM);
         void evolve   (float _deltaTime_  );
 
         Complex probAmp(unsigned int _index_);
@@ -24,7 +24,6 @@ class WaveFunc1 : public Field1<Complex>
         float   prob   (unsigned int _start_, unsigned int _end_);
         
         float totalProb();
-        Field1<float> probDensity();
 
         std::string string();
 };

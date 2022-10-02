@@ -1,3 +1,5 @@
+#pragma once
+
 #include <stdexcept>
 
 #define INF_DX          std::logic_error("DIRAC ENGINE: infinite dx"        )
