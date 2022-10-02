@@ -12,7 +12,7 @@ template <class T>
 Field1<T>::~Field1()
 {
     delete _toBase;
-    delete[] _originAddress;
+    //delete[] _originAddress;
 }
 
 template <class T>
@@ -20,6 +20,7 @@ Field1<T>::Field1(Base _base_)
 {
     _size = _base_.size();
     _toBase = &_base_;
+    _originAddress = new T;
 }
 
 template <class T>
@@ -27,6 +28,7 @@ Field1<T>::Field1(Base* _toBase_)
 {
     _size = _toBase_->size();
     _toBase = _toBase_;
+    _originAddress = new T;
 }
 
 template <class T>
@@ -51,6 +53,12 @@ template <class T>
 Base* Field1<T>::toBase()
 {
     return _toBase;
+}
+
+template <class T>
+Base Field1<T>::base()
+{
+    return *_toBase;
 }
 
 template <class T>

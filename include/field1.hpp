@@ -20,8 +20,9 @@ class Field1
 
         unsigned int size();
         Base* toBase();
+        Base  base  ();
         T* address(unsigned int _index_ = 0U);
-        T  value  (unsigned int _index_);
+        T  value  (unsigned int _index_     );
 
     protected:
 
