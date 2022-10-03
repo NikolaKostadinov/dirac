@@ -36,34 +36,34 @@ Spinor4 Spinor4::operator-()
     return Spinor4(positive, negative);
 }
 
-Spinor4 Spinor4::operator+(Spinor4& other)
+Spinor4 Spinor4::operator+(Spinor4 _other_)
 {
-    Spinor2 positive = _positive + other.positive();
-    Spinor2 negative = _negative + other.negative();
+    Spinor2 positive = _positive + _other_.positive();
+    Spinor2 negative = _negative + _other_.negative();
 
     return Spinor4(positive, negative);
 }
 
-Spinor4 Spinor4::operator-(Spinor4& other)
+Spinor4 Spinor4::operator-(Spinor4 _other_)
 {
-    Spinor2 positive = _positive - other.positive();
-    Spinor2 negative = _negative - other.negative();
+    Spinor2 positive = _positive - _other_.positive();
+    Spinor2 negative = _negative - _other_.negative();
 
     return Spinor4(positive, negative);
 }
 
-Spinor4 Spinor4::operator*(Spinor4& other)
+Spinor4 Spinor4::operator*(Spinor4 _other_)
 {
-    Spinor2 positive = _positive * other.positive();
-    Spinor2 negative = _negative * other.negative();
+    Spinor2 positive = _positive * _other_.positive();
+    Spinor2 negative = _negative * _other_.negative();
 
     return Spinor4(positive, negative);
 }
 
-Spinor4 Spinor4::operator/(Spinor4& other)
+Spinor4 Spinor4::operator/(Spinor4 _other_)
 {
-    Spinor2 positive = _positive / other.positive();
-    Spinor2 negative = _negative / other.negative();
+    Spinor2 positive = _positive / _other_.positive();
+    Spinor2 negative = _negative / _other_.negative();
 
     return Spinor4(positive, negative);
 }

@@ -20,11 +20,11 @@ class Complex
         Complex operator+();
         Complex operator-();
         
-        Complex operator+ (Complex& other);
-        Complex operator- (Complex& other);
-        Complex operator* (Complex& other);
-        Complex operator/ (Complex& other);
-        Complex operator==(Complex& other);
+        Complex operator+ (Complex _other_);
+        Complex operator- (Complex _other_);
+        Complex operator* (Complex _other_);
+        Complex operator/ (Complex _other_);
+        Complex operator==(Complex _other_);
 
         Complex sq();
 

@@ -18,10 +18,10 @@ class Spinor4
         Spinor4 operator+();
         Spinor4 operator-();
 
-        Spinor4 operator+(Spinor4& other);
-        Spinor4 operator-(Spinor4& other);
-        Spinor4 operator*(Spinor4& other);
-        Spinor4 operator/(Spinor4& other);
+        Spinor4 operator+(Spinor4 _other_);
+        Spinor4 operator-(Spinor4 _other_);
+        Spinor4 operator*(Spinor4 _other_);
+        Spinor4 operator/(Spinor4 _other_);
 
         Spinor2 positive();
         Spinor2 negative();

@@ -33,45 +33,45 @@ Complex Complex::operator-()
     return Complex(-_real, -_imag);
 }
 
-Complex Complex::operator+(Complex& other)
+Complex Complex::operator+(Complex _other_)
 {
-    float real = _real + other._real;
-    float imag = _imag + other._imag;
+    float real = _real + _other_._real;
+    float imag = _imag + _other_._imag;
 
     return Complex(real, imag);
 }
 
-Complex Complex::operator-(Complex& other)
+Complex Complex::operator-(Complex _other_)
 {
-    float real = _real - other._real;
-    float imag = _imag - other._imag;
+    float real = _real - _other_._real;
+    float imag = _imag - _other_._imag;
 
     return Complex(real, imag);
 }
 
-Complex Complex::operator*(Complex& other)
+Complex Complex::operator*(Complex _other_)
 {
-    float real = _real * other._real - _imag * other._imag;
-    float imag = _imag * other._real + _real * other._imag;
+    float real = _real * _other_._real - _imag * _other_._imag;
+    float imag = _imag * _other_._real + _real * _other_._imag;
 
     return Complex(real, imag);
 }
 
-Complex Complex::operator/(Complex& other)
+Complex Complex::operator/(Complex _other_)
 {
-    float real = _real * other._real + _imag * other._imag;
-    float imag = _imag * other._real - _real * other._imag;
+    float real = _real * _other_._real + _imag * _other_._imag;
+    float imag = _imag * _other_._real - _real * _other_._imag;
 
-    float factor = 1 / (other._real * other._real + other._imag * other._imag);
+    float factor = 1 / (_other_._real * _other_._real + _other_._imag * _other_._imag);
     real *= factor;
     imag *= factor;
 
     return Complex(real, imag);
 }
 
-Complex Complex::operator==(Complex& other)
+Complex Complex::operator==(Complex _other_)
 {
-    return (_real == other._real) && (_imag == other._imag);
+    return (_real == _other_._real) && (_imag == _other_._imag);
 }
 
 Complex Complex::sq()

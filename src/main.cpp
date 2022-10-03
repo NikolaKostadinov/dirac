@@ -11,10 +11,10 @@ int main()
     Basis2* basis = new Basis2(x, x);
     WaveFunc2* psi = new WaveFunc2(basis);
 
-    Complex probAmp[N][N] = { { Complex(1  ), Complex(1  ), Complex(1  ), Complex(1 ) }, 
-                              { Complex(1  ), Complex(100), Complex(100), Complex(1 ) },
-                              { Complex(1  ), Complex(100), Complex(100), Complex(1 ) },
-                              { Complex(1  ), Complex(1  ), Complex(1  ), Complex(1 ) } };
+    Complex probAmp[N][N] = { { Complex(001), Complex(001), Complex(001), Complex(001) },
+                              { Complex(001), Complex(100), Complex(100), Complex(001) },
+                              { Complex(001), Complex(100), Complex(100), Complex(001) },
+                              { Complex(001), Complex(001), Complex(001), Complex(001) } };
 
     psi->setValues(&probAmp[0][0]);
     psi->normalize();

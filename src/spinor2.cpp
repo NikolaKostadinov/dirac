@@ -36,34 +36,34 @@ Spinor2 Spinor2::operator-()
     return Spinor2(up, down);
 }
 
-Spinor2 Spinor2::operator+(Spinor2& other)
+Spinor2 Spinor2::operator+(Spinor2 _other_)
 {
-    Complex up   = _up   + other.up  ();
-    Complex down = _down + other.down();
+    Complex up   = _up   + _other_.up  ();
+    Complex down = _down + _other_.down();
 
     return Spinor2(up, down);
 }
 
-Spinor2 Spinor2::operator-(Spinor2& other)
+Spinor2 Spinor2::operator-(Spinor2 _other_)
 {
-    Complex up   = _up   - other.up  ();
-    Complex down = _down - other.down();
+    Complex up   = _up   - _other_.up  ();
+    Complex down = _down - _other_.down();
 
     return Spinor2(up, down);
 }
 
-Spinor2 Spinor2::operator*(Spinor2& other)
+Spinor2 Spinor2::operator*(Spinor2 _other_)
 {
-    Complex up   = _up   * other.up  ();
-    Complex down = _down * other.down();
+    Complex up   = _up   * _other_.up  ();
+    Complex down = _down * _other_.down();
 
     return Spinor2(up, down);
 }
 
-Spinor2 Spinor2::operator/(Spinor2& other)
+Spinor2 Spinor2::operator/(Spinor2 _other_)
 {
-    Complex up   = _up   / other.up  ();
-    Complex down = _down / other.down();
+    Complex up   = _up   / _other_.up  ();
+    Complex down = _down / _other_.down();
 
     return Spinor2(up, down);
 }
