@@ -44,7 +44,7 @@ void WaveFunc2::evolve(float _deltaTime_)
 {
     float dx = _toBasis->dx();
     float dy = _toBasis->dy();
-    float ifactor = 0.5F * _deltaTime_;
+    float ifactor = 0.5F * HBAR * _deltaTime_;
     Complex factor = Complex(0, ifactor);
     Complex two = Complex(2);
 

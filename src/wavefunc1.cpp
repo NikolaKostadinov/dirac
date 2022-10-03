@@ -37,7 +37,8 @@ void WaveFunc1::normalize(float _norm_)
 void WaveFunc1::evolve(float _deltaTime_)
 {
     float dx = _toBase->dx();
-    float ifactor = _deltaTime_ / (2 * dx * dx);
+    float ifactor =  0.5F * HBAR * _deltaTime_;
+    ifactor /= dx * dx;
     Complex factor = Complex(0, ifactor);
     Complex two = Complex(2);
 

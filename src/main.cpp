@@ -1,8 +1,8 @@
 #include "../include/dirac.h"
 #include <iostream>
 
-#define N 3U
-#define T 10000
+#define N 4U
+#define T 100000
 #define DT 0.01F
 
 int main()
@@ -11,9 +11,10 @@ int main()
     Basis2* basis = new Basis2(x, x);
     WaveFunc2* psi = new WaveFunc2(basis);
 
-    Complex probAmp[N][N] = { { Complex(1), Complex(1), Complex(1) }, 
-                              { Complex(1), Complex(100), Complex(1) },
-                              { Complex(1), Complex(1), Complex(1) } };
+    Complex probAmp[N][N] = { { Complex(1), Complex(1), Complex(1), Complex(1) }, 
+                              { Complex(1), Complex(100), Complex(100), Complex(1) },
+                              { Complex(1), Complex(100), Complex(100), Complex(1) },
+                              { Complex(1), Complex(1), Complex(1), Complex(1) } };
 
     psi->setValues(&probAmp[0][0]);
     psi->normalize();
