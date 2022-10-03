@@ -86,5 +86,34 @@ float WaveFunc2::totalProb()
 
 std::string WaveFunc2::string()
 {
-    
+    bool isXBig = _xSize > MAX_STR_SIZE_WIDTH;
+    bool isYBig = _ySize > MAX_STR_SIZE_HEGHT;
+
+    unsigned int xStringSize                     ;
+    unsigned int yStringSize                     ;
+    if (isXBig)  xStringSize = MAX_STR_SIZE_WIDTH;
+    else         xStringSize = _xSize            ;
+    if (isYBig)  yStringSize = MAX_STR_SIZE_HEGHT;
+    else         yStringSize = _ySize            ;
+
+    std::string result = "[";    
+    for (unsigned int j = 0U; j < yStringSize; j++)
+    {
+        if (j != 0U) result += " ";
+        result += "[ ";
+        for (unsigned int i = 0U; i < xStringSize; i++)
+        {
+            result += value(i, j).string();
+
+            if (i == _xSize - 1)           result += " ],"   ;
+            else if (i == xStringSize - 1) result += ",...],";
+            else                           result += ", "    ;
+        }
+
+        if (j == _ySize - 1)           result += " ]"  ;
+        else if (j == yStringSize - 1) result += "...]";
+        else                           result += "\n"  ;
+    }
+
+    return result;
 }

@@ -19,24 +19,11 @@ int main()
     psi->setValues(&probAmp[0][0]);
     psi->normalize();
 
-    for (int i = 0; i < N; i++)
-    {   
-        for (int j = 0; j < N; j++)
-            std::cout << psi->probAmp(i, j).string() << "  ";
-        std::cout << std::endl;
-    }
+    std::cout << psi->string() << std::endl << std::endl;
 
-    std::cout << std::endl;
+    for (int i = 0; i < T; i++) psi->evolve(DT);
 
-    for (int i = 0; i < T; i++)
-        psi->evolve(DT);
-
-    for (int i = 0; i < N; i++)
-    {   
-        for (int j = 0; j < N; j++)
-            std::cout << psi->probAmp(i, j).string() << "  ";
-        std::cout << std::endl;
-    }
+    std::cout << psi->string() << std::endl;
 
     std::cin.get();
     return 0;
