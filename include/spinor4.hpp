@@ -10,15 +10,17 @@ class Spinor4
         Spinor4();
         virtual ~Spinor4();
 
+        Spinor4(Spinor2 _positive_, Spinor2 _negative_);
+
+        void scale(float _factor_);
+
         Spinor4 operator+();
         Spinor4 operator-();
 
-        Spinor4 operator+(Spinor4 _other_);
-        Spinor4 operator-(Spinor4 _other_);
-        Spinor4 operator*(Spinor4 _other_);
-        Spinor4 operator/(Spinor4 _other_);
-
-        bool    operator==(Spinor4 _other_);
+        Spinor4 operator+(Spinor4& other);
+        Spinor4 operator-(Spinor4& other);
+        Spinor4 operator*(Spinor4& other);
+        Spinor4 operator/(Spinor4& other);
 
         Spinor2 positive();
         Spinor2 negative();
@@ -27,6 +29,8 @@ class Spinor4
         Complex negUp   ();
         Complex negDown ();
         float   prob    ();
+
+        std::string string();
 
     protected:
 

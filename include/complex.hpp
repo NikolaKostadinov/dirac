@@ -20,15 +20,12 @@ class Complex
         Complex operator+();
         Complex operator-();
         
-        Complex operator+(Complex _other_);
-        Complex operator-(Complex _other_);
-        Complex operator*(Complex _other_);
-        Complex operator/(Complex _other_);
+        Complex operator+(Complex& other);
+        Complex operator-(Complex& other);
+        Complex operator*(Complex& other);
+        Complex operator/(Complex& other);
 
-        Complex operator+=(Complex _other_);
-        Complex operator-=(Complex _other_);
-
-        Complex operator==(Complex _other_);
+        Complex operator==(Complex& other);
 
         Complex sq();
 
@@ -48,9 +45,9 @@ class Complex
         float _imag;
 };
 
-Complex cis (   float _arg_   );
-Complex sqrt(Complex _complex_);
-Complex exp (Complex _complex_);
-Complex ln  (Complex _complex_);
+Complex cis (   float _arg_    );
+Complex sqrt(Complex& complex);
+Complex exp (Complex& complex);
+Complex ln  (Complex& complex);
 
 const Complex I = Complex(0, 1);

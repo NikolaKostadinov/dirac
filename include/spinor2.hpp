@@ -1,6 +1,7 @@
 #pragma once
 
 #include "complex.hpp"
+#include <string>
 
 class Spinor2
 {
@@ -9,19 +10,23 @@ class Spinor2
         Spinor2();
         virtual ~Spinor2();
 
+        Spinor2(Complex _up_, Complex _down_);
+
+        void scale(float _factor_);
+
         Spinor2 operator+();
         Spinor2 operator-();
 
-        Spinor2 operator+(Spinor2 _other_);
-        Spinor2 operator-(Spinor2 _other_);
-        Spinor2 operator*(Spinor2 _other_);
-        Spinor2 operator/(Spinor2 _other_);
-
-        bool    operator==(Spinor2 _other_);
+        Spinor2 operator+(Spinor2& other);
+        Spinor2 operator-(Spinor2& other);
+        Spinor2 operator*(Spinor2& other);
+        Spinor2 operator/(Spinor2& other);
 
         Complex up  ();
         Complex down();
         float   prob();
+
+        std::string string();
 
     protected:
 
