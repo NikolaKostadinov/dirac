@@ -1,7 +1,8 @@
 #pragma once
 
 #include "complex.hpp"
-//#include "spinor.hpp"
+#include "spinor2.hpp"
+#include "spinor4.hpp"
 
 #include "base.hpp"
 #include "basis2.hpp"
