@@ -138,27 +138,27 @@ Complex cis(float _arg_)
     return Complex(real, imag);
 }
 
-Complex sqrt(Complex& complex)
+Complex sqrt(Complex _complex_)
 { 
-    float   factor = sqrt(complex.mod());
-    Complex phase  = cis(0.5F * complex.arg());
+    float   factor = sqrt(_complex_.mod());
+    Complex phase  = cis(0.5F * _complex_.arg());
 
     phase.scale(factor);
     return phase;
 }
 
-Complex exp(Complex& complex)
+Complex exp(Complex _complex_)
 {
-    float   expo  = exp(complex.real());
-    Complex phase = cis(complex.imag());
+    float   expo  = exp(_complex_.real());
+    Complex phase = cis(_complex_.imag());
 
     return Complex(expo) + phase;
 }
 
-Complex ln(Complex& complex)
+Complex ln(Complex _complex_)
 {
-    float real = log(complex.real());
-    float imag = complex.arg();
+    float real = log(_complex_.real());
+    float imag = _complex_.arg();
 
     return Complex(real, imag);
 }

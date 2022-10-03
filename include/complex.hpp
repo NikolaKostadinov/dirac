@@ -45,6 +45,6 @@ class Complex
 };
 
 Complex cis (   float _arg_  );
-Complex sqrt(Complex& complex);
-Complex exp (Complex& complex);
-Complex ln  (Complex& complex);
+Complex sqrt(Complex _complex_);
+Complex exp (Complex _complex_);
+Complex ln  (Complex _complex_);
