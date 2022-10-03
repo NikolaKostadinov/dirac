@@ -1,7 +1,10 @@
 #pragma once
 
-#include <string>
+#include "engineparams.h"
 #include <cmath>
+#include <string>
+#include <sstream>
+#include <iomanip>
 
 class Complex
 {

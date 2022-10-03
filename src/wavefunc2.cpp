@@ -105,14 +105,14 @@ std::string WaveFunc2::string()
         {
             result += value(i, j).string();
 
-            if (i == _xSize - 1)           result += " ],"   ;
-            else if (i == xStringSize - 1) result += ",...],";
+            if      (i == _xSize - 1)      result += " ]"    ;
+            else if (i == xStringSize - 1) result += ",...]" ;
             else                           result += ", "    ;
         }
 
-        if (j == _ySize - 1)           result += " ]"  ;
+        if      (j == _ySize - 1)      result += "]"   ;
         else if (j == yStringSize - 1) result += "...]";
-        else                           result += "\n"  ;
+        else                           result += ",\n" ;
     }
 
     return result;
