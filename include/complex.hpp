@@ -44,9 +44,7 @@ class Complex
         float _imag;
 };
 
-Complex cis (   float _arg_    );
+Complex cis (   float _arg_  );
 Complex sqrt(Complex& complex);
 Complex exp (Complex& complex);
 Complex ln  (Complex& complex);
-
-const Complex I = Complex(0, 1);
