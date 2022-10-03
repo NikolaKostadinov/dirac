@@ -13,18 +13,17 @@ class Complex
         Complex();
         ~Complex();
 
-        Complex(float _real_, float _imag_ = 0);
+        Complex(float _real_, float _imag_ = 0.0F);
 
         void scale(float _factor_);
 
         Complex operator+();
         Complex operator-();
         
-        Complex operator+(Complex& other);
-        Complex operator-(Complex& other);
-        Complex operator*(Complex& other);
-        Complex operator/(Complex& other);
-
+        Complex operator+ (Complex& other);
+        Complex operator- (Complex& other);
+        Complex operator* (Complex& other);
+        Complex operator/ (Complex& other);
         Complex operator==(Complex& other);
 
         Complex sq();

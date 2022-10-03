@@ -2,6 +2,7 @@
 
 #include "complex.hpp"
 #include "spinor2.hpp"
+#include <string>
 
 class Spinor4
 {

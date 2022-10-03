@@ -77,7 +77,7 @@ Complex Complex::operator==(Complex& other)
 Complex Complex::sq()
 {
     float real = _real * _real - _imag * _imag;
-    float imag = 2.0F * _real * _imag;
+    float imag =  2.0F * _real * _imag;
 
     return Complex(real, imag);
 }
@@ -140,8 +140,8 @@ Complex cis(float _arg_)
 
 Complex sqrt(Complex& complex)
 { 
-    float factor = sqrt(complex.mod());
-    Complex phase = cis(0.5F * complex.arg());
+    float   factor = sqrt(complex.mod());
+    Complex phase  = cis(0.5F * complex.arg());
 
     phase.scale(factor);
     return phase;
@@ -149,7 +149,7 @@ Complex sqrt(Complex& complex)
 
 Complex exp(Complex& complex)
 {
-    float expo = exp(complex.real());
+    float   expo  = exp(complex.real());
     Complex phase = cis(complex.imag());
 
     return Complex(expo) + phase;
