@@ -1,4 +1,5 @@
 #include "../include/dirac.h"
+#include <cmath>
 #include <iostream>
 
 #define N 200U
@@ -14,7 +15,7 @@ int main()
     Complex probAmp[N][N];
     for (unsigned int i = 0U; i < N; i++)
         for (unsigned int j = 0U; j < N; j++)
-            probAmp[i][j] = Complex(1);
+            probAmp[i][j] = Complex(cos(i), sin(j));
 
     psi->setValues(&probAmp[0][0]);
     psi->normalize();
