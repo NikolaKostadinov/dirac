@@ -2,38 +2,38 @@
 
 WaveFunc1::WaveFunc1()
 {
-    _size = 0U;
-    _toBase = new Base;
+    _size          = 0u         ;
+    _toBase        = new Base   ;
     _originAddress = new Complex;
 }
 
 WaveFunc1::~WaveFunc1()
 {
-    delete _toBase;
+    delete   _toBase       ;
     delete[] _originAddress;
 }
 
 WaveFunc1::WaveFunc1(Base _base_)
 {
-    _size = _base_.size();
-    _toBase = &_base_;
+    _size   =  _base_.size();
+    _toBase = &_base_       ;
 }
 
 WaveFunc1::WaveFunc1(Base* _toBase_)
 {
-    _size = _toBase_->size();
-    _toBase = _toBase_;
+    _size   = _toBase_->size();
+    _toBase = _toBase_        ;
 }
 
 void WaveFunc1::setNormValues(Complex* _address_)
 {
     setValues(_address_);
-    normalize();
+    normalize(         );
 }
 
 void WaveFunc1::normalize(float _norm_)
 {
-    float prob = totalProb();
+    float prob   = totalProb()        ;
     float factor = sqrt(_norm_ / prob);
 
     for (uint32_t i = 0U; i < _size; i++)
