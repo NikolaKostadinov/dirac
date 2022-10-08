@@ -17,11 +17,11 @@ WaveFunc2::~WaveFunc2()
 
 WaveFunc2::WaveFunc2(Basis2 _basis_)
 {
-    _xSize         = _basis_.xSize();
-    _ySize         = _basis_.ySize();
-    _toBasis       = &_basis_       ;
-    _originAddress = new Complex    ;
-    _mass          = 0.0F           ;
+    _xSize         =  _basis_.xSize();
+    _ySize         =  _basis_.ySize();
+    _toBasis       = &_basis_        ;
+    _originAddress =  new Complex    ;
+    _mass          =  0.0F           ;
 }
 
 WaveFunc2::WaveFunc2(Basis2* _toBasis_)

@@ -16,18 +16,18 @@ WaveFunc1::~WaveFunc1()
 
 WaveFunc1::WaveFunc1(Base _base_)
 {
-    _size   =  _base_.size()    ;
-    _toBase = &_base_           ;
-    _originAddress = new Complex;
-    _mass          = 0.0F       ;
+    _size          =  _base_.size();
+    _toBase        = &_base_       ;
+    _originAddress =  new Complex  ;
+    _mass          =  0.0F         ;
 }
 
 WaveFunc1::WaveFunc1(Base* _toBase_)
 {
-    _size   = _toBase_->size()  ;
-    _toBase = _toBase_          ;
-    _originAddress = new Complex;
-    _mass          = 0.0F       ;
+    _size          = _toBase_->size();
+    _toBase        = _toBase_        ;
+    _originAddress = new Complex     ;
+    _mass          = 0.0F            ;
 }
 
 void WaveFunc1::setMass(float _mass_)
