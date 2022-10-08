@@ -8,13 +8,13 @@
 
 int main()
 {   
-    Base* x = new Base(-1, N, 1);
-    Basis2* basis = new Basis2(x, x);
-    WaveFunc2* psi = new WaveFunc2(basis);
+    Base*      x     = new Base(-1, N, 1)  ;
+    Basis2*    basis = new Basis2(x, x)    ;
+    WaveFunc2* psi   = new WaveFunc2(basis);
 
     Complex probAmp[N][N];
-    for (unsigned int i = 0U; i < N; i++)
-        for (unsigned int j = 0U; j < N; j++)
+    for (uint32_t i = 0U; i < N; i++)
+        for (uint32_t j = 0U; j < N; j++)
             probAmp[i][j] = Complex(cos(i), sin(j));
 
     psi->setNormValues(&probAmp[0][0]);

@@ -74,14 +74,6 @@ Complex Complex::operator==(Complex _other_)
     return (_real == _other_._real) && (_imag == _other_._imag);
 }
 
-Complex Complex::sq()
-{
-    float real = _real * _real - _imag * _imag;
-    float imag =  2.0F * _real * _imag;
-
-    return Complex(real, imag);
-}
-
 float Complex::real()
 {
     return _real;
@@ -100,6 +92,14 @@ float Complex::mod()
 float Complex::arg()
 {
     return atan2(_imag, _real);
+}
+
+Complex Complex::sq()
+{
+    float real = _real * _real - _imag * _imag;
+    float imag =  2.0F * _real * _imag;
+
+    return Complex(real, imag);
 }
 
 Complex Complex::conj()

@@ -24,12 +24,12 @@ Basis3::Basis3(Base* _toXBase_, Base* _toYBase_, Base* _toZBase_)
     _toZ = _toZBase_;
 }
 
-unsigned int Basis3::size()
+uint32_t Basis3::size()
 {
     return _toX->size() * _toY->size() * _toZ->size();
 }
 
-unsigned int Basis3::zSize()
+uint32_t Basis3::zSize()
 {
     return _toZ->size();
 }

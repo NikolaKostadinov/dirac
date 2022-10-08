@@ -36,7 +36,7 @@ void WaveFunc1::normalize(float _norm_)
     float prob = totalProb();
     float factor = sqrt(_norm_ / prob);
 
-    for (unsigned int i = 0U; i < _size; i++)
+    for (uint32_t i = 0U; i < _size; i++)
         (*address(i)).scale(factor);
 }
 
@@ -48,26 +48,26 @@ void WaveFunc1::evolve(float _deltaTime_)
     Complex factor = Complex(0, ifactor);
     Complex two = Complex(2);
 
-    for (unsigned int i = 1U; i < _size - 1; i++)
+    for (uint32_t i = 1U; i < _size - 1; i++)
         *address(i) = factor * (value(i+1) - two * value(i) + value(i-1)) + value(i);
 
     normalize();
 }
 
-Complex WaveFunc1::probAmp(unsigned int _index_)
+Complex WaveFunc1::probAmp(uint32_t _index_)
 {
     return value(_index_);
 }
 
-float WaveFunc1::prob(unsigned int _index_)
+float WaveFunc1::prob(uint32_t _index_)
 {
     return value(_index_).conjSq();
 }
 
-float WaveFunc1::prob(unsigned int _start_, unsigned int _end_)
+float WaveFunc1::prob(uint32_t _start_, uint32_t _end_)
 {
     float prob = 0;
-    for (unsigned int i = _start_; i <= _end_; i++)
+    for (uint32_t i = _start_; i <= _end_; i++)
         prob += value(i).conjSq();
     
     return prob;
@@ -76,7 +76,7 @@ float WaveFunc1::prob(unsigned int _start_, unsigned int _end_)
 float WaveFunc1::totalProb()
 {
     float prob = 0;
-    for (unsigned int i = 0U; i < _size; i++)
+    for (uint32_t i = 0U; i < _size; i++)
         prob += value(i).conjSq();
     
     return prob;
@@ -87,7 +87,7 @@ std::string WaveFunc1::string()
     std::string result = "[ ";
     if (_size <= MAX_STR_SIZE_WIDTH)
     {
-        for (unsigned int i = 0U; i < _size - 1; i++)
+        for (uint32_t i = 0U; i < _size - 1; i++)
         {
             result += value(i).string();
             result += ", ";
@@ -96,7 +96,7 @@ std::string WaveFunc1::string()
     }
     else
     {
-        for (unsigned int i = 0U; i < MAX_STR_SIZE_WIDTH - 2; i++)
+        for (uint32_t i = 0U; i < MAX_STR_SIZE_WIDTH - 2; i++)
         {
             result += value(i).string();
             result += ", ";

@@ -41,8 +41,8 @@ void WaveFunc2::normalize(float _norm_)
     float prob = totalProb();
     float factor = sqrt(_norm_ / prob);
 
-    for (unsigned int i = 0U; i < _xSize; i++)
-        for (unsigned int j = 0U; j < _ySize; j++)
+    for (uint32_t i = 0U; i < _xSize; i++)
+        for (uint32_t j = 0U; j < _ySize; j++)
             (*address(i, j)).scale(factor);
 }
 
@@ -54,9 +54,9 @@ void WaveFunc2::evolve(float _deltaTime_)
     Complex factor = Complex(0, ifactor);
     Complex two = Complex(2);
 
-    for (unsigned int i = 1U; i < _xSize - 1; i++)
+    for (uint32_t i = 1U; i < _xSize - 1; i++)
     {
-        for (unsigned int j = 1U; j < _ySize - 1; j++)
+        for (uint32_t j = 1U; j < _ySize - 1; j++)
         {
             Complex d2dx2 = value(i+1, j) - two * value(i, j) + value(i-1, j);
             Complex d2dy2 = value(i, j+1) - two * value(i, j) + value(i, j+1);
@@ -70,12 +70,12 @@ void WaveFunc2::evolve(float _deltaTime_)
     normalize();
 }
 
-Complex WaveFunc2::probAmp(unsigned int _index_, unsigned int _jndex_)
+Complex WaveFunc2::probAmp(uint32_t _index_, uint32_t _jndex_)
 {
     return value(_index_, _jndex_);
 }
 
-float WaveFunc2::prob(unsigned int _index_, unsigned int _jndex_)
+float WaveFunc2::prob(uint32_t _index_, uint32_t _jndex_)
 {
     return value(_index_, _jndex_).conjSq();
 }
@@ -83,8 +83,8 @@ float WaveFunc2::prob(unsigned int _index_, unsigned int _jndex_)
 float WaveFunc2::totalProb()
 {
     float prob = 0;
-    for (unsigned int i = 0U; i < _xSize; i++)
-        for (unsigned int j = 0U; j < _ySize; j++)
+    for (uint32_t i = 0U; i < _xSize; i++)
+        for (uint32_t j = 0U; j < _ySize; j++)
             prob += value(i, j).conjSq();
     
     return prob;
@@ -95,19 +95,19 @@ std::string WaveFunc2::string()
     bool isXBig = _xSize > MAX_STR_SIZE_WIDTH;
     bool isYBig = _ySize > MAX_STR_SIZE_HEGHT;
 
-    unsigned int xStringSize                     ;
-    unsigned int yStringSize                     ;
+    uint32_t xStringSize                     ;
+    uint32_t yStringSize                     ;
     if (isXBig)  xStringSize = MAX_STR_SIZE_WIDTH;
     else         xStringSize = _xSize            ;
     if (isYBig)  yStringSize = MAX_STR_SIZE_HEGHT;
     else         yStringSize = _ySize            ;
 
     std::string result = "[";    
-    for (unsigned int j = 0U; j < yStringSize; j++)
+    for (uint32_t j = 0U; j < yStringSize; j++)
     {
         if (j != 0U) result += " ";
         result += "[ ";
-        for (unsigned int i = 0U; i < xStringSize; i++)
+        for (uint32_t i = 0U; i < xStringSize; i++)
         {
             result += value(i, j).string();
 

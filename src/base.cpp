@@ -12,7 +12,7 @@ Base::~Base()
 
 }
 
-Base::Base(float _start_, unsigned int _size_,  float _end_)
+Base::Base(float _start_, uint32_t _size_,  float _end_)
 {
     if (_size_ == 0) throw INF_DX;
     if (_start_ < _end_)
@@ -30,7 +30,7 @@ Base::Base(float _start_, unsigned int _size_,  float _end_)
     else throw INF_DX;
 }
 
-unsigned int Base::size()
+uint32_t Base::size()
 {
     return _size;
 }
@@ -55,7 +55,7 @@ float Base::dx()
     return (_end - _start) / (float) _size;
 }
 
-float Base::x(unsigned int _index_)
+float Base::x(uint32_t _index_)
 {
     return _start + _index_ * dx();
 }

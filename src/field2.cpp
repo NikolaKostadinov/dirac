@@ -41,19 +41,19 @@ void Field2<T>::setValues(T* _address_)
 }
 
 template <class T>
-unsigned int Field2<T>::size()
+uint32_t Field2<T>::size()
 {
     return _toBasis->size();
 }
 
 template <class T>
-unsigned int Field2<T>::xSize()
+uint32_t Field2<T>::xSize()
 {
     return _toBasis->xSize();
 }
 
 template <class T>
-unsigned int Field2<T>::ySize()
+uint32_t Field2<T>::ySize()
 {
     return _toBasis->ySize();
 }
@@ -71,13 +71,13 @@ Basis2 Field2<T>::basis()
 }
 
 template <class T>
-T* Field2<T>::address(unsigned int _index_, unsigned int _jndex_)
+T* Field2<T>::address(uint32_t _index_, uint32_t _jndex_)
 {
     if (_index_ >= 0U && _index_ < _xSize)
     {
         if (_jndex_ >= 0U && _jndex_ < _ySize)
         {
-            unsigned int upperArea = _jndex_ * xSize();
+            uint32_t upperArea = _jndex_ * xSize();
             return _originAddress + _index_ + upperArea;
         }
         else throw OUT_OF_Y_BOUNDS;
@@ -86,7 +86,7 @@ T* Field2<T>::address(unsigned int _index_, unsigned int _jndex_)
 }
 
 template <class T>
-T Field2<T>::value(unsigned int _index_, unsigned int _jndex_)
+T Field2<T>::value(uint32_t _index_, uint32_t _jndex_)
 {
     return *address(_index_, _jndex_);
 }

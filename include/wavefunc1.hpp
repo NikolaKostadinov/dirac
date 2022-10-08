@@ -21,9 +21,9 @@ class WaveFunc1 : public Field1<Complex>
         void normalize(float _norm_ = NORM);
         void evolve   (float _deltaTime_  );
 
-        Complex probAmp(unsigned int _index_);
-        float   prob   (unsigned int _index_);
-        float   prob   (unsigned int _start_, unsigned int _end_);
+        Complex probAmp(uint32_t _index_                );
+        float   prob   (uint32_t _index_                );
+        float   prob   (uint32_t _start_, uint32_t _end_);
         
         float totalProb();
 

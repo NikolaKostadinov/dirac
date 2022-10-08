@@ -10,13 +10,13 @@ class Basis2
         Basis2();
         virtual ~Basis2();
 
-        Basis2(Base  _xBase_  , Base  _yBase_  );
+        Basis2(Base    _xBase_, Base    _yBase_);
         Basis2(Base* _toXBase_, Base* _toYBase_);
 
-        unsigned int  size();
-        unsigned int xSize();
-        unsigned int ySize();
-        unsigned int zSize();
+        uint32_t  size();
+        uint32_t xSize();
+        uint32_t ySize();
+        uint32_t zSize();
         
         float xStart();
         float yStart();
@@ -32,6 +32,10 @@ class Basis2
         float xLength();
         float yLength();
         float zLength();
+
+        float x(uint32_t _index_);
+        float y(uint32_t _index_);
+        float z(uint32_t _index_);
 
     protected:
 

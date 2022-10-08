@@ -30,6 +30,6 @@ class Spinor2
 
     protected:
 
-        Complex _up;
+        Complex _up  ;
         Complex _down;
 };

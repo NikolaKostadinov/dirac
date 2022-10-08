@@ -26,15 +26,14 @@ class Complex
         Complex operator/ (Complex _other_);
         Complex operator==(Complex _other_);
 
-        Complex sq();
-
         float real();
         float imag();
         float mod ();
         float arg ();
 
-        Complex conj();
-        float conjSq();
+        Complex     sq();
+        Complex conj  ();
+        float   conjSq();
 
         std::string string();
 
@@ -44,7 +43,7 @@ class Complex
         float _imag;
 };
 
-Complex cis (   float _arg_  );
+Complex cis (float   _arg_    );
 Complex sqrt(Complex _complex_);
 Complex exp (Complex _complex_);
 Complex ln  (Complex _complex_);

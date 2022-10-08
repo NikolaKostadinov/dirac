@@ -10,23 +10,22 @@ class Base
         virtual ~Base();
 
         Base(
-            float        _start_,
-            unsigned int _size_,
-            float        _end_
+            float    _start_,
+            uint32_t _size_ ,
+            float    _end_
         );
 
-        unsigned int size();
+        uint32_t size  ();
+        float    start ();
+        float    end   ();
+        float    dx    ();
+        float    length();
 
-        float start ();
-        float end   ();
-        float dx    ();
-        float length();
-
-        float x(unsigned int _index_);
+        float x(uint32_t _index_);
 
     private:
 
-        unsigned int _size;
-        float _start;
-        float _end;
+        uint32_t _size ;
+        float    _start;
+        float    _end  ;
 };

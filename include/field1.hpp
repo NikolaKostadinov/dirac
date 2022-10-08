@@ -16,17 +16,17 @@ class Field1
         Field1(Base* _toBasis_);
 
         void setValues(T* _address_);
-        void setValue (T  _value_  , unsigned int _index_);
+        void setValue (T  _value_  , uint32_t _index_);
 
-        unsigned int size();
-        Base* toBase();
-        Base  base  ();
-        T* address(unsigned int _index_ = 0U);
-        T  value  (unsigned int _index_     );
+        uint32_t size()                        ;
+        Base*    toBase()                      ;
+        Base     base  ()                      ;
+        T*       address(uint32_t _index_ = 0u);
+        T        value  (uint32_t _index_     );
 
     protected:
 
-        unsigned int _size;
-        Base* _toBase;
-        T* _originAddress;
+        uint32_t _size         ;
+        Base*    _toBase       ;
+        T*       _originAddress;
 };

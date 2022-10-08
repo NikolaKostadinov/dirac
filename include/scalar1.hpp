@@ -8,4 +8,7 @@ class Scalar1 : public Field1<float>
 
         Scalar1();
         virtual ~Scalar1();
+
+        Scalar1(Base    _basis_);
+        Scalar1(Base* _toBasis_);
 };

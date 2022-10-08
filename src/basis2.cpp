@@ -22,22 +22,22 @@ Basis2::Basis2(Base* _toXBase_, Base* _toYBase_)
     _toY = _toYBase_;
 }
 
-unsigned int Basis2::size()
+uint32_t Basis2::size()
 {
     return _toX->size() * _toY->size(); 
 }
 
-unsigned int Basis2::xSize()
+uint32_t Basis2::xSize()
 {
     return _toX->size();
 }
 
-unsigned int Basis2::ySize()
+uint32_t Basis2::ySize()
 {
     return _toY->size();
 }
 
-unsigned int Basis2::zSize()
+uint32_t Basis2::zSize()
 {
     return 0U;
 }
