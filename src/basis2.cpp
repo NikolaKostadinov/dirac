@@ -39,7 +39,7 @@ uint32_t Basis2::ySize()
 
 uint32_t Basis2::zSize()
 {
-    return 0U;
+    return 0u;
 }
 
 float Basis2::xStart()
@@ -98,6 +98,21 @@ float Basis2::yLength()
 }
 
 float Basis2::zLength()
+{
+    return 0.0F;
+}
+
+float Basis2::x(uint32_t _index_)
+{
+    return _toX->x(_index_);
+}
+
+float Basis2::y(uint32_t _index_)
+{
+    return _toY->x(_index_);
+}
+
+float Basis2::z(uint32_t _index_)
 {
     return 0.0F;
 }

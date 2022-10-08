@@ -24,6 +24,8 @@ class Basis3 : public Basis2
 
         float zLength();
 
+        float z(uint32_t _index_);
+
     protected:
 
         Base* _toZ;

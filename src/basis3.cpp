@@ -53,3 +53,8 @@ float Basis3::zLength()
 {
     return _toZ->length();
 }
+
+float Basis3::z(uint32_t _index_)
+{
+    return _toZ->x(_index_);
+}
