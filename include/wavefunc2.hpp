@@ -16,6 +16,8 @@ class WaveFunc2 : public Field2<Complex>
         WaveFunc2(Basis2  _basis_  );
         WaveFunc2(Basis2* _toBasis_);
 
+        void setNormValues(Complex* _address_);
+
         void normalize(float _norm_ = NORM);
         void evolve   (float _deltaTime_  );
 

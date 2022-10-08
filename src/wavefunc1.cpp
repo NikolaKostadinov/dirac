@@ -25,6 +25,12 @@ WaveFunc1::WaveFunc1(Base* _toBase_)
     _toBase = _toBase_;
 }
 
+void WaveFunc1::setNormValues(Complex* _address_)
+{
+    setValues(_address_);
+    normalize();
+}
+
 void WaveFunc1::normalize(float _norm_)
 {
     float prob = totalProb();

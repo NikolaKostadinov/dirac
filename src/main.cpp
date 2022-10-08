@@ -17,8 +17,7 @@ int main()
         for (unsigned int j = 0U; j < N; j++)
             probAmp[i][j] = Complex(cos(i), sin(j));
 
-    psi->setValues(&probAmp[0][0]);
-    psi->normalize();
+    psi->setNormValues(&probAmp[0][0]);
 
     std::cout << psi->string() << std::endl << std::endl;
 

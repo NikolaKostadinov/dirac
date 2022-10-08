@@ -30,6 +30,12 @@ WaveFunc2::WaveFunc2(Basis2* _toBasis_)
     _originAddress = new Complex;
 }
 
+void WaveFunc2::setNormValues(Complex* _address_)
+{
+    setValues(_address_);
+    normalize();
+}
+
 void WaveFunc2::normalize(float _norm_)
 {
     float prob = totalProb();
