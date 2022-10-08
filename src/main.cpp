@@ -2,9 +2,9 @@
 #include <cmath>
 #include <iostream>
 
-#define N 200U
-#define T 1665
-#define DT 0.01F
+#define N   200u
+#define T   16
+#define DT  0.01F
 
 int main()
 {   
@@ -17,6 +17,7 @@ int main()
         for (uint32_t j = 0U; j < N; j++)
             probAmp[i][j] = Complex(cos(i), sin(j));
 
+    psi->setMass(1.0F);
     psi->setNormValues(&probAmp[0][0]);
 
     std::cout << psi->string() << std::endl << std::endl;

@@ -5,6 +5,7 @@ WaveFunc1::WaveFunc1()
     _size          = 0u         ;
     _toBase        = new Base   ;
     _originAddress = new Complex;
+    _mass          = 0.0F       ;
 }
 
 WaveFunc1::~WaveFunc1()
@@ -15,14 +16,23 @@ WaveFunc1::~WaveFunc1()
 
 WaveFunc1::WaveFunc1(Base _base_)
 {
-    _size   =  _base_.size();
-    _toBase = &_base_       ;
+    _size   =  _base_.size()    ;
+    _toBase = &_base_           ;
+    _originAddress = new Complex;
+    _mass          = 0.0F       ;
 }
 
 WaveFunc1::WaveFunc1(Base* _toBase_)
 {
-    _size   = _toBase_->size();
-    _toBase = _toBase_        ;
+    _size   = _toBase_->size()  ;
+    _toBase = _toBase_          ;
+    _originAddress = new Complex;
+    _mass          = 0.0F       ;
+}
+
+void WaveFunc1::setMass(float _mass_)
+{
+    _mass = _mass_;
 }
 
 void WaveFunc1::setNormValues(Complex* _address_)
@@ -40,18 +50,37 @@ void WaveFunc1::normalize(float _norm_)
         (*address(i)).scale(factor);
 }
 
-void WaveFunc1::evolve(float _deltaTime_)
+void WaveFunc1::evolveFree(float _deltaTime_)
 {
-    float dx = _toBase->dx();
-    float ifactor =  0.5F * HBAR * _deltaTime_;
-    ifactor /= dx * dx;
+    float dx      = _toBase->dx()      ;
+    float ifactor = HBAR * _deltaTime_ ;
+    ifactor      /= 2 * _mass * dx * dx;
+
     Complex factor = Complex(0, ifactor);
-    Complex two = Complex(2);
+    Complex two    = Complex(2)         ;
 
     for (uint32_t i = 1U; i < _size - 1; i++)
         *address(i) = factor * (value(i+1) - two * value(i) + value(i-1)) + value(i);
 
     normalize();
+}
+
+void WaveFunc1::evolve(float _deltaTime_, Scalar1 _potential_)
+{
+    if (_potential_.toBase() == _toBase)
+    {
+
+    }
+    else throw BASE_NOT_SAME;
+}
+
+void WaveFunc1::evolve(float _deltaTime_, Scalar1* _toPotential_)
+{
+    if (_toPotential_->toBase() == _toBase)
+    {
+
+    }
+    else throw BASE_NOT_SAME;
 }
 
 Complex WaveFunc1::probAmp(uint32_t _index_)

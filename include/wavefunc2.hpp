@@ -16,6 +16,7 @@ class WaveFunc2 : public Field2<Complex>
         WaveFunc2(Basis2  _basis_  );
         WaveFunc2(Basis2* _toBasis_);
 
+        void setMass      (float    _mass_   );
         void setNormValues(Complex* _address_);
 
         void normalize(float _norm_ = NORM);
@@ -27,4 +28,8 @@ class WaveFunc2 : public Field2<Complex>
         float totalProb();
 
         std::string string();
+    
+    protected:
+
+        float _mass;
 };
