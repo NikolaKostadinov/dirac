@@ -13,7 +13,7 @@ class Field2
         Field2();
         virtual ~Field2();
 
-        Field2(Basis2  _basis_  );
+        Field2(Basis2    _basis_);
         Field2(Basis2* _toBasis_);
 
         void setValues(T* _address_);

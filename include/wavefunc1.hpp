@@ -13,7 +13,7 @@ class WaveFunc1 : public Field1<Complex>
         WaveFunc1();
         virtual ~WaveFunc1();
 
-        WaveFunc1(Base  _basis_  );
+        WaveFunc1(Base    _basis_);
         WaveFunc1(Base* _toBasis_);
 
         void setNormValues(Complex* _address_);
