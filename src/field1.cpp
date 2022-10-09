@@ -3,32 +3,34 @@
 template <class T>
 Field1<T>::Field1()
 {
-    _size = 0U;
-    _toBase = new Base;
-    _originAddress = new T;
+    _size          = 0u      ;
+    _toBase        = new Base;
+    _originAddress = new T   ;
 }
 
 template <class T>
 Field1<T>::~Field1()
 {
     delete _toBase;
-    //delete[] _originAddress;
+
+    for (uint32_t i = 0u; i < _size; i++)
+        delete address(i);
 }
 
 template <class T>
 Field1<T>::Field1(Base _base_)
 {
-    _size = _base_.size();
-    _toBase = &_base_;
-    _originAddress = new T;
+    _size          =  _base_.size();
+    _toBase        = &_base_       ;
+    _originAddress =  new T        ;
 }
 
 template <class T>
 Field1<T>::Field1(Base* _toBase_)
 {
-    _size = _toBase_->size();
-    _toBase = _toBase_;
-    _originAddress = new T;
+    _size          = _toBase_->size();
+    _toBase        = _toBase_        ;
+    _originAddress = new T           ;
 }
 
 template <class T>
@@ -64,7 +66,7 @@ Base Field1<T>::base()
 template <class T>
 T* Field1<T>::address(uint32_t _index_)
 {
-    if (_index_ >= 0 && _index_ < _size)
+    if (_index_ >= 0u && _index_ < _size)
         return _originAddress + _index_;
     else
         throw OUT_OF_BOUNDS;

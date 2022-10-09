@@ -9,8 +9,10 @@ Scalar1::Scalar1()
 
 Scalar1::~Scalar1()
 {
-    delete   _toBase       ;
-    delete[] _originAddress;
+    delete _toBase;
+
+    for (uint32_t i = 0u; i < _size; i++)
+        delete address(i);
 }
 
 Scalar1::Scalar1(Base _base_)
@@ -30,5 +32,5 @@ Scalar1::Scalar1(Base* _toBase_)
 void Scalar1::scale(float _factor_)
 {
     for (uint32_t i = 0U; i < _size; i++)
-        (*address(i)) *= _factor_;
+        *address(i) *= _factor_;
 }
