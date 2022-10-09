@@ -22,7 +22,7 @@ int main()
 
     std::cout << psi->string() << std::endl << std::endl;
 
-    for (int i = 0; i < T; i++) psi->evolve(DT);
+    for (int i = 0; i < T; i++) psi->evolveFree(DT);
 
     std::cout << psi->string() << std::endl;
 

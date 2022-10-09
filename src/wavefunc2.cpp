@@ -57,17 +57,16 @@ void WaveFunc2::normalize(float _norm_)
             (*address(i, j)).scale(factor);
 }
 
-void WaveFunc2::evolve(float _deltaTime_)
+void WaveFunc2::evolveFree(float _deltaTime_)
 {
     float dx = _toBasis->dx();
     float dy = _toBasis->dy();
 
-    float ifactor = 0.5F * HBAR * _deltaTime_ / _mass;
-    Complex factor = Complex(0, ifactor);
-    Complex two = Complex(2);
+    float   ifactor = 0.5F * HBAR * _deltaTime_ / _mass;                            // inverted triangle factor
+    Complex  factor = Complex(0, ifactor);                                          // actually it is scaled by sqrt(-1)
+    Complex  two    = Complex(2);                                                   // god's number
 
     for (uint32_t i = 1u; i < _xSize - 1u; i++)
-    {
         for (uint32_t j = 1u; j < _ySize - 1u; j++)
         {
             Complex d2dx2 = value(i+1u, j) - two * value(i, j) + value(i-1u, j);
@@ -75,11 +74,28 @@ void WaveFunc2::evolve(float _deltaTime_)
             d2dx2.scale(dx * dx);
             d2dy2.scale(dy * dy);
 
-            *address(i, j) = factor * (d2dx2 + d2dy2) + value(i, j);
+            *address(i, j) = factor * (d2dx2 + d2dy2) + value(i, j);                // the cat equation
         }
-    }
 
-    normalize();
+    normalize();                                                                    // just in case
+}
+
+void WaveFunc2::evolve(float _deltaTime_, Scalar2 _potential_)
+{
+    if (_potential_.toBasis() == _toBasis)
+    {
+        // QUANTUM MAGIC GOES HERE
+    }
+    else throw BASE_NOT_SAME;
+}
+
+void WaveFunc2::evolve(float _deltaTime_, Scalar2* _toPotential_)
+{
+    if (_toPotential_->toBasis() == _toBasis)
+    {
+        // QUANTUM MAGIC GOES HERE
+    }
+    else throw BASE_NOT_SAME;
 }
 
 Complex WaveFunc2::probAmp(uint32_t _index_, uint32_t _jndex_)
@@ -109,7 +125,7 @@ std::string WaveFunc2::string()
 
     uint32_t     xStringSize                     ;
     uint32_t     yStringSize                     ;
-    if (isXBig)  xStringSize = MAX_STR_SIZE_WIDTH;
+    if (isXBig)  xStringSize = MAX_STR_SIZE_WIDTH;              // code from hell ⛧
     else         xStringSize = _xSize            ;
     if (isYBig)  yStringSize = MAX_STR_SIZE_HEGHT;
     else         yStringSize = _ySize            ;
@@ -123,13 +139,13 @@ std::string WaveFunc2::string()
         {
             result += value(i, j).string();
 
-            if      (i == _xSize - 1u)      result += " ]"    ;
-            else if (i == xStringSize - 1u) result += ",...]" ;
-            else                            result += ", "    ;
+            if      (i == _xSize - 1u     ) result += " ]"   ;
+            else if (i == xStringSize - 1u) result += ",...]";  // devil's language ⛧
+            else                            result += ", "   ;
         }
 
-        if      (j == _ySize - 1u)      result += "]"   ;
-        else if (j == yStringSize - 1u) result += "...]";
+        if      (j == _ySize - 1u     ) result += "]"   ;
+        else if (j == yStringSize - 1u) result += "...]";       // 666
         else                            result += ",\n" ;
     }
 
