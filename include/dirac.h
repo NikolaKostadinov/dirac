@@ -54,5 +54,5 @@
 #include "wavefunc2.hpp"
 //#include "wavefunc3.hpp"
 
-//#include "pauli.hpp"
-//#include "dirac.hpp"
+//#include "paulifunc.hpp"
+//#include "diracfunc.hpp"
