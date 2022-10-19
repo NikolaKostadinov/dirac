@@ -48,7 +48,7 @@
 
 #include "scalar1.hpp"
 #include "scalar2.hpp"
-//#include "scalar3.hpp"
+#include "scalar3.hpp"
 
 #include "wavefunc1.hpp"
 #include "wavefunc2.hpp"
