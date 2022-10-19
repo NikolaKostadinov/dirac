@@ -20,7 +20,7 @@ class Field1
 
         uint32_t size()                        ;
         Base*    toBase()                      ;
-        Base     base  ()                      ;
+        Base     base()                        ;
         T*       address(uint32_t _index_ = 0u);
         T        value  (uint32_t _index_     );
 
