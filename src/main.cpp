@@ -3,7 +3,7 @@
 #include <iostream>
 
 #define N   20u
-#define T   16
+#define T   160
 #define DT  0.01F
 
 int main()
@@ -19,8 +19,10 @@ int main()
                 probAmps[i][j][k] = Complex(i * j * k);
 
     psi->setMass(1.0F);
-    psi->setValues(&probAmps[0][0][0]);
+    psi->setNormValues(&probAmps[0][0][0]);
 
+    std::cout << psi->prob(10, 10, 10) << std::endl;
+    for (int t = 0; t < T; t++) psi->evolveFree(DT);
     std::cout << psi->prob(10, 10, 10) << std::endl;
 
     std::cin.get();
