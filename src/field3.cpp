@@ -92,8 +92,9 @@ T* Field3<T>::address(uint32_t _index_, uint32_t _jndex_, uint32_t _kindex_)
         {
             if (_kindex_ >= 0u && _kindex_ < _zSize)
             {
-                //uint32_t upperArea     = _jndex_ * xSize()  ;
-                //return  _originAddress + _index_ + upperArea;
+                uint32_t backVolume     = _kindex_ * xSize()  * ySize()   ;
+                uint32_t backArea       = _jndex_  * xSize()              ;
+                return   _originAddress + _index_  + backArea + backVolume;
             }
             else throw OUT_OF_Z_BOUNDS;
         }

@@ -2,14 +2,14 @@
 #include <cmath>
 #include <iostream>
 
-#define N   200u
+#define N   2u
 #define T   16
 #define DT  0.01F
 
 int main()
 {   
     Base*      x     = new Base(-1, N, 1)  ;
-    Basis2*    basis = new Basis2(x, x)    ;
+    /*Basis2*    basis = new Basis2(x, x)    ;
     WaveFunc2* psi   = new WaveFunc2(basis);
 
     Complex probAmp[N][N];
@@ -24,7 +24,16 @@ int main()
 
     for (int i = 0; i < T; i++) psi->evolveFree(DT);
 
-    std::cout << psi->string() << std::endl;
+    std::cout << psi->string() << std::endl;*/
+
+    int numbers[N][N][N] = { { { 1, 2 }, { 3, 4 } }, { { 5, 6 }, { 7, 8 } } };
+
+    Basis3*      basis = new Basis3(x, x, x)   ;
+    Field3<int>* field = new Field3<int>(basis);
+
+    field->setValues(&numbers[0][0][0]);
+
+    std::cout << field->value(1, 0, 1) << std::endl;
 
     std::cin.get();
     return 0;

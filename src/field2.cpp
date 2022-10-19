@@ -80,8 +80,8 @@ T* Field2<T>::address(uint32_t _index_, uint32_t _jndex_)
     {
         if (_jndex_ >= 0u && _jndex_ < _ySize)
         {
-            uint32_t upperArea     = _jndex_ * xSize()  ;
-            return  _originAddress + _index_ + upperArea;
+            uint32_t backArea      = _jndex_ * xSize() ;
+            return  _originAddress + _index_ + backArea;
         }
         else throw OUT_OF_Y_BOUNDS;
     }
