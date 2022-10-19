@@ -32,7 +32,7 @@
     ==================================================
 */
 
-#pragma once
+#pragma  once
 
 #include "complex.hpp"
 #include "spinor.hpp"
