@@ -19,11 +19,11 @@ class Field2
 
         void setValues(T* _address_);
 
-        uint32_t  size()  ;
-        uint32_t xSize()  ;
-        uint32_t ySize()  ;
+        uint32_t  size  ();
+        uint32_t xSize  ();
+        uint32_t ySize  ();
         Basis2*  toBasis();
-        Basis2   basis()  ;
+        Basis2   basis  ();
         
         T* address(uint32_t _index_ = 0u, uint32_t _jndex_ = 0u);
         T  value  (uint32_t _index_     , uint32_t _jndex_     );

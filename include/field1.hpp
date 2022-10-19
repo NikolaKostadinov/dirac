@@ -19,9 +19,9 @@ class Field1
         void setValues(T* _address_);
         void setValue (T  _value_  , uint32_t _index_);
 
-        uint32_t size()                        ;
-        Base*    toBase()                      ;
-        Base     base()                        ;
+        uint32_t size                        ();
+        Base*    toBase                      ();
+        Base     base                        ();
         T*       address(uint32_t _index_ = 0u);
         T        value  (uint32_t _index_     );
 
