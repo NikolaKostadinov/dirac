@@ -44,7 +44,7 @@
 
 #include "field1.hpp"
 #include "field2.hpp"
-//#include "field3.hpp"
+#include "field3.hpp"
 
 #include "scalar1.hpp"
 #include "scalar2.hpp"
