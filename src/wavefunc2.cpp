@@ -63,18 +63,19 @@ void WaveFunc2::evolveFree(float _deltaTime_)
     float dy = _toBasis->dy();
 
     float   ifactor = 0.5F * HBAR * _deltaTime_ / _mass;                            // inverted triangle factor
-    Complex  factor = Complex(0, ifactor);                                          // actually it is scaled by sqrt(-1)
+    Complex  factor = Complex(0, ifactor);                                          // welcome to wonderland
     Complex  two    = Complex(2);                                                   // god's number
 
     for (uint32_t i = 1u; i < _xSize - 1u; i++)
         for (uint32_t j = 1u; j < _ySize - 1u; j++)
         {
-            Complex d2dx2 = value(i+1u, j) - two * value(i, j) + value(i-1u, j);
-            Complex d2dy2 = value(i, j+1u) - two * value(i, j) + value(i, j+1u);
+            Complex thisAmp = value(i, j);                                          // inverted triangle block
+            Complex d2dx2   = value(i+1u, j) - two * thisAmp + value(i-1u, j);
+            Complex d2dy2   = value(i, j+1u) - two * thisAmp + value(i, j+1u);
             d2dx2.scale(dx * dx);
             d2dy2.scale(dy * dy);
 
-            *address(i, j) = factor * (d2dx2 + d2dy2) + value(i, j);                // the cat equation
+            *address(i, j) = factor * (d2dx2 + d2dy2) + thisAmp;                    // the cat equation
         }
 
     normalize();                                                                    // just in case

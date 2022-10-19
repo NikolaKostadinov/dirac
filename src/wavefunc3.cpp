@@ -64,27 +64,30 @@ void WaveFunc3::normalize(float _norm_)
 
 void WaveFunc3::evolveFree(float _deltaTime_)
 {
-    /*
     float dx = _toBasis->dx();
     float dy = _toBasis->dy();
+    float dz = _toBasis->dz();
 
-    float   ifactor = 0.5F * HBAR * _deltaTime_ / _mass;                            // inverted triangle factor
-    Complex  factor = Complex(0, ifactor);                                          // actually it is scaled by sqrt(-1)
-    Complex  two    = Complex(2);                                                   // god's number
+    float   ifactor = 0.5F * HBAR * _deltaTime_ / _mass;                                        // same in all dimentions
+    Complex  factor = Complex(0, ifactor);
+    Complex  two    = Complex(2);
 
     for (uint32_t i = 1u; i < _xSize - 1u; i++)
         for (uint32_t j = 1u; j < _ySize - 1u; j++)
-        {
-            Complex d2dx2 = value(i+1u, j) - two * value(i, j) + value(i-1u, j);
-            Complex d2dy2 = value(i, j+1u) - two * value(i, j) + value(i, j+1u);
-            d2dx2.scale(dx * dx);
-            d2dy2.scale(dy * dy);
+            for (uint32_t k = 1u; k < _zSize - 1u; k++)
+            {
+                Complex thisAmp = value(i, j, k);                                               // the 3D inverted triangle
+                Complex d2dx2   = value(i+1u, j, k) - two * thisAmp + value(i-1u, j, k);
+                Complex d2dy2   = value(i, j+1u, k) - two * thisAmp + value(i, j+1u, k);
+                Complex d2dz2   = value(i, j, k+1u) - two * thisAmp + value(i, j, k+1u);
+                d2dx2.scale(dx * dx);
+                d2dy2.scale(dy * dy);
+                d2dz2.scale(dz * dz);
 
-            *address(i, j) = factor * (d2dx2 + d2dy2) + value(i, j);                // the cat equation
-        }
+                *address(i, j, k) = factor * (d2dx2 + d2dy2 + d2dz2) + thisAmp;                 // is it alive and dead equation
+            }
 
-    normalize();                                                                    // just in case
-    */
+    normalize();                                                                                // again just in case
 }
 
 void WaveFunc3::evolve(float _deltaTime_, Scalar3 _potential_)
@@ -128,6 +131,7 @@ float WaveFunc3::totalProb()
 
 std::string WaveFunc3::string()
 {
+    // SOON ...
     /*
     bool isXBig = _xSize > MAX_STR_SIZE_WIDTH;
     bool isYBig = _ySize > MAX_STR_SIZE_HEGHT;
