@@ -1,64 +1,70 @@
-#include "../include/wavefunc2.hpp"
+#include "../include/wavefunc3.hpp"
 
-WaveFunc2::WaveFunc2()
+WaveFunc3::WaveFunc3()
 {
     _xSize         = 0u         ;
     _ySize         = 0u         ;
-    _toBasis       = new Basis2 ;
+    _zSize         = 0u         ;
+    _toBasis       = new Basis3 ;
     _originAddress = new Complex;
     _mass          = 0.0F       ;
 }
 
-WaveFunc2::~WaveFunc2()
+WaveFunc3::~WaveFunc3()
 {
     delete _toBasis;
     
     for (uint32_t i = 0u; i < _xSize; i++)
         for (uint32_t j = 0u; j < _ySize; j++)
-            delete address(i, j);
+            for (uint32_t k = 0u; k < _zSize; k++)
+                delete address(i, j, k);
 }
 
-WaveFunc2::WaveFunc2(Basis2 _basis_)
+WaveFunc3::WaveFunc3(Basis3 _basis_)
 {
     _xSize         =  _basis_.xSize();
     _ySize         =  _basis_.ySize();
+    _zSize         =  _basis_.zSize();
     _toBasis       = &_basis_        ;
     _originAddress =  new Complex    ;
     _mass          =  0.0F           ;
 }
 
-WaveFunc2::WaveFunc2(Basis2* _toBasis_)
+WaveFunc3::WaveFunc3(Basis3* _toBasis_)
 {
     _xSize         = _toBasis_->xSize();
     _ySize         = _toBasis_->ySize();
+    _zSize         = _toBasis_->zSize();
     _toBasis       = _toBasis_         ;
     _originAddress = new Complex       ;
     _mass          = 0.0F              ;
 }
 
-void WaveFunc2::setMass(float _mass_)
+void WaveFunc3::setMass(float _mass_)
 {
     _mass = _mass_;
 }
 
-void WaveFunc2::setNormValues(Complex* _address_)
+void WaveFunc3::setNormValues(Complex* _address_)
 {
     setValues(_address_);
     normalize(         );
 }
 
-void WaveFunc2::normalize(float _norm_)
+void WaveFunc3::normalize(float _norm_)
 {
     float prob   = totalProb()        ;
     float factor = sqrt(_norm_ / prob);
 
     for (uint32_t i = 0u; i < _xSize; i++)
         for (uint32_t j = 0u; j < _ySize; j++)
-            (*address(i, j)).scale(factor);
+            for (uint32_t k = 0u; k < _zSize; k++)
+                (*address(i, j, k)).scale(factor);
 }
 
-void WaveFunc2::evolveFree(float _deltaTime_)
+void WaveFunc3::evolveFree(float _deltaTime_)
 {
+    /*
     float dx = _toBasis->dx();
     float dy = _toBasis->dy();
 
@@ -78,9 +84,10 @@ void WaveFunc2::evolveFree(float _deltaTime_)
         }
 
     normalize();                                                                    // just in case
+    */
 }
 
-void WaveFunc2::evolve(float _deltaTime_, Scalar2 _potential_)
+void WaveFunc3::evolve(float _deltaTime_, Scalar3 _potential_)
 {
     if (_potential_.toBasis() == _toBasis)
     {
@@ -89,7 +96,7 @@ void WaveFunc2::evolve(float _deltaTime_, Scalar2 _potential_)
     else throw BASE_NOT_SAME;
 }
 
-void WaveFunc2::evolve(float _deltaTime_, Scalar2* _toPotential_)
+void WaveFunc3::evolve(float _deltaTime_, Scalar3* _toPotential_)
 {
     if (_toPotential_->toBasis() == _toBasis)
     {
@@ -98,28 +105,30 @@ void WaveFunc2::evolve(float _deltaTime_, Scalar2* _toPotential_)
     else throw BASE_NOT_SAME;
 }
 
-Complex WaveFunc2::probAmp(uint32_t _index_, uint32_t _jndex_)
+Complex WaveFunc3::probAmp(uint32_t _index_, uint32_t _jndex_, uint32_t _kindex_)
 {
-    return value(_index_, _jndex_);
+    return value(_index_, _jndex_, _kindex_);
 }
 
-float WaveFunc2::prob(uint32_t _index_, uint32_t _jndex_)
+float WaveFunc3::prob(uint32_t _index_, uint32_t _jndex_, uint32_t _kindex_)
 {
-    return value(_index_, _jndex_).conjSq();
+    return value(_index_, _jndex_, _kindex_).conjSq();
 }
 
-float WaveFunc2::totalProb()
+float WaveFunc3::totalProb()
 {
     float  prob = 0.0F;
     for (uint32_t i = 0u; i < _xSize; i++)
         for (uint32_t j = 0u; j < _ySize; j++)
-            prob += value(i, j).conjSq();
+            for (uint32_t k = 0u; k < _zSize; k++)
+                prob += value(i, j, k).conjSq();
     
     return prob;
 }
 
-std::string WaveFunc2::string()
+std::string WaveFunc3::string()
 {
+    /*
     bool isXBig = _xSize > MAX_STR_SIZE_WIDTH;
     bool isYBig = _ySize > MAX_STR_SIZE_HEGHT;
 
@@ -150,4 +159,5 @@ std::string WaveFunc2::string()
     }
 
     return result;
+    */
 }

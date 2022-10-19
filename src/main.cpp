@@ -2,7 +2,7 @@
 #include <cmath>
 #include <iostream>
 
-#define N   2u
+#define N   20u
 #define T   16
 #define DT  0.01F
 
@@ -26,14 +26,18 @@ int main()
 
     std::cout << psi->string() << std::endl;*/
 
-    int numbers[N][N][N] = { { { 1, 2 }, { 3, 4 } }, { { 5, 6 }, { 7, 8 } } };
+    Complex      probAmps             [N][N][N] ;
+    Basis3*      basis    = new Basis3(x, x, x) ;
+    WaveFunc3*   field    = new WaveFunc3(basis);
 
-    Basis3*      basis = new Basis3(x, x, x)   ;
-    Field3<int>* field = new Field3<int>(basis);
+    for (uint32_t i = 0u; i < N; i++)
+        for (uint32_t j = 0u; j < N; j++)
+            for (uint32_t k = 0u; k < N; k++)
+                probAmps[i][j][k] = Complex(i * j * k);
 
-    field->setValues(&numbers[0][0][0]);
+    field->setNormValues(&probAmps[0][0][0]);
 
-    std::cout << field->value(1, 0, 1) << std::endl;
+    std::cout << field->prob(10, 10, 10) << std::endl;
 
     std::cin.get();
     return 0;
