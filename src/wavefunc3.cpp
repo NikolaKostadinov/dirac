@@ -62,32 +62,32 @@ void WaveFunc3::normalize(float _norm_)
                 (*address(i, j, k)).scale(factor);
 }
 
-void WaveFunc3::evolveFree(float _deltaTime_)
+void WaveFunc3::evolveFree(float _deltaTime_)                                                   // similar to the 2D case
 {
     float dx = _toBasis->dx();
     float dy = _toBasis->dy();
     float dz = _toBasis->dz();
 
-    float   ifactor = 0.5F * HBAR * _deltaTime_ / _mass;                                        // same in all dimentions
-    Complex  factor = Complex(0, ifactor);
-    Complex  two    = Complex(2);
+    float   ifactor = 0.5F * HBAR * _deltaTime_ / _mass;                                        // inverted triangle factor
+    Complex  factor = Complex(0, ifactor);                                                      // welcome to wonderland
+    Complex  two    = Complex(2);                                                               // god's number
 
     for (uint32_t i = 1u; i < _xSize - 1u; i++)
         for (uint32_t j = 1u; j < _ySize - 1u; j++)
             for (uint32_t k = 1u; k < _zSize - 1u; k++)
             {
-                Complex thisAmp = value(i, j, k);                                               // the 3D inverted triangle
+                Complex thisAmp = value(i, j, k)                                       ;        // inverted triangle block
                 Complex d2dx2   = value(i+1u, j, k) - two * thisAmp + value(i-1u, j, k);
                 Complex d2dy2   = value(i, j+1u, k) - two * thisAmp + value(i, j+1u, k);
                 Complex d2dz2   = value(i, j, k+1u) - two * thisAmp + value(i, j, k+1u);
-                d2dx2.scale(dx * dx);
-                d2dy2.scale(dy * dy);
-                d2dz2.scale(dz * dz);
+                d2dx2.scale(dx  * dx)                                                  ;
+                d2dy2.scale(dy  * dy)                                                  ;
+                d2dz2.scale(dz  * dz)                                                  ;
 
-                *address(i, j, k) = factor * (d2dx2 + d2dy2 + d2dz2) + thisAmp;                 // is it alive and dead equation
+                *address(i, j, k) = factor * (d2dx2 + d2dy2 + d2dz2) + thisAmp;                 // the cat equation
             }
 
-    normalize();                                                                                // again just in case
+    normalize();                                                                                // just in case
 }
 
 void WaveFunc3::evolve(float _deltaTime_, Scalar3 _potential_)

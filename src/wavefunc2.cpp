@@ -57,7 +57,7 @@ void WaveFunc2::normalize(float _norm_)
             (*address(i, j)).scale(factor);
 }
 
-void WaveFunc2::evolveFree(float _deltaTime_)
+void WaveFunc2::evolveFree(float _deltaTime_)                                       // similar to the 3D case
 {
     float dx = _toBasis->dx();
     float dy = _toBasis->dy();
@@ -69,11 +69,11 @@ void WaveFunc2::evolveFree(float _deltaTime_)
     for (uint32_t i = 1u; i < _xSize - 1u; i++)
         for (uint32_t j = 1u; j < _ySize - 1u; j++)
         {
-            Complex thisAmp = value(i, j);                                          // inverted triangle block
+            Complex thisAmp = value(i, j)                                    ;      // inverted triangle block
             Complex d2dx2   = value(i+1u, j) - two * thisAmp + value(i-1u, j);
             Complex d2dy2   = value(i, j+1u) - two * thisAmp + value(i, j+1u);
-            d2dx2.scale(dx * dx);
-            d2dy2.scale(dy * dy);
+            d2dx2.scale(dx  * dx)                                            ;
+            d2dy2.scale(dy  * dy)                                            ;
 
             *address(i, j) = factor * (d2dx2 + d2dy2) + thisAmp;                    // the cat equation
         }
