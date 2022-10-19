@@ -28,16 +28,17 @@ int main()
 
     Complex      probAmps             [N][N][N] ;
     Basis3*      basis    = new Basis3(x, x, x) ;
-    WaveFunc3*   field    = new WaveFunc3(basis);
+    WaveFunc3*   psi      = new WaveFunc3(basis);
 
     for (uint32_t i = 0u; i < N; i++)
         for (uint32_t j = 0u; j < N; j++)
             for (uint32_t k = 0u; k < N; k++)
                 probAmps[i][j][k] = Complex(i * j * k);
 
-    field->setNormValues(&probAmps[0][0][0]);
+    psi->setMass(1.0F);
+    psi->setValues(&probAmps[0][0][0]);
 
-    std::cout << field->prob(10, 10, 10) << std::endl;
+    std::cout << psi->prob(10, 10, 10) << std::endl;
 
     std::cin.get();
     return 0;
