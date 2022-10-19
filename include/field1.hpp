@@ -1,8 +1,9 @@
 #pragma once
 
+#include "exceptions.h"
 #include "base.hpp"
 #include "complex.hpp"
-#include "exceptions.h"
+#include <vector>
 
 template <class T>
 class Field1

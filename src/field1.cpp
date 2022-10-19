@@ -78,7 +78,25 @@ T Field1<T>::value(uint32_t _index_)
     return *address(_index_);
 }
 
-template class Field1<   float   >;
-template class Field1<   double  >;
-template class Field1<long double>;
-template class Field1<  Complex  >;
+template class Field1            <  signed       char   > ;
+template class Field1            <unsigned       char   > ;
+template class Field1            <  signed short int    > ;
+template class Field1            <unsigned short int    > ;
+template class Field1            <  signed       int    > ;
+template class Field1            <unsigned       int    > ;
+template class Field1            <  signed long  int    > ;
+template class Field1            <unsigned long  int    > ;
+template class Field1            <               float  > ;
+template class Field1            <               double > ;
+template class Field1            <         long  double > ;
+template class Field1            <               Complex> ;
+template class Field1<std::vector<  signed       char   >>;
+template class Field1<std::vector<unsigned       char   >>;
+template class Field1<std::vector<  signed       int    >>;
+template class Field1<std::vector<unsigned       int    >>;
+template class Field1<std::vector<  signed long  int    >>;
+template class Field1<std::vector<unsigned long  int    >>;
+template class Field1<std::vector<               float  >>;
+template class Field1<std::vector<               double >>;
+template class Field1<std::vector<         long  double >>;
+template class Field1<std::vector<               Complex>>;

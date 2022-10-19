@@ -94,7 +94,25 @@ T Field2<T>::value(uint32_t _index_, uint32_t _jndex_)
     return *address(_index_, _jndex_);
 }
 
-template class Field2<   float   >;
-template class Field2<   double  >;
-template class Field2<long double>;
-template class Field2<  Complex  >;
+template class Field2            <  signed       char   > ;
+template class Field2            <unsigned       char   > ;
+template class Field2            <  signed short int    > ;
+template class Field2            <unsigned short int    > ;
+template class Field2            <  signed       int    > ;
+template class Field2            <unsigned       int    > ;
+template class Field2            <  signed long  int    > ;
+template class Field2            <unsigned long  int    > ;
+template class Field2            <               float  > ;
+template class Field2            <               double > ;
+template class Field2            <         long  double > ;
+template class Field2            <               Complex> ;
+template class Field2<std::vector<  signed       char   >>;
+template class Field2<std::vector<unsigned       char   >>;
+template class Field2<std::vector<  signed       int    >>;
+template class Field2<std::vector<unsigned       int    >>;
+template class Field2<std::vector<  signed long  int    >>;
+template class Field2<std::vector<unsigned long  int    >>;
+template class Field2<std::vector<               float  >>;
+template class Field2<std::vector<               double >>;
+template class Field2<std::vector<         long  double >>;
+template class Field2<std::vector<               Complex>>;
