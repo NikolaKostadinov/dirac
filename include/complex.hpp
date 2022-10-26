@@ -43,6 +43,9 @@ class Complex
         float _imag;
 };
 
+Complex Real(float _real_);
+Complex Imag(float _imag_);
+
 Complex cis (float   _arg_    );
 Complex sqrt(Complex _complex_);
 Complex exp (Complex _complex_);

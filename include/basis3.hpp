@@ -30,3 +30,6 @@ class Basis3 : public Basis2
 
         Base* _toZ;
 };
+
+Basis3 CubeBasis3(Base    _base);
+Basis3 CubeBasis3(Base* _toBase);
