@@ -2,8 +2,8 @@
 #include <cmath>
 #include <iostream>
 
-#define N   20u
-#define T   2400
+#define N   500u
+#define T   100
 #define DT  0.1F
 
 int main()

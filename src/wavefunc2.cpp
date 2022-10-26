@@ -57,82 +57,53 @@ void WaveFunc2::normalize(float _norm_)
             (*address(i, j)).scale(factor);
 }
 
-void WaveFunc2::evolveFree(float _deltaTime_)                                       // similar to the 3D case
+void WaveFunc2::evolveFree(float _deltaTime_)
 {
-    float dx = _toBasis->dx();
-    float dy = _toBasis->dy();
+    Scalar2* nullPtntl = new Scalar2(_toBasis);
 
-    float   ifactor = 0.5F * HBAR * _deltaTime_ / _mass;                            // inverted triangle factor
-    Complex  factor = Complex(0, ifactor);                                          // welcome to wonderland
-    Complex  two    = Complex(2);                                                   // god's number
+    for (uint32_t i = 0u; i < _xSize; i++)
+        for (uint32_t j = 0u; j < _ySize; j++)
+            *nullPtntl->address(i, j) = 0.0f;
 
-    for (uint32_t i = 1u; i < _xSize-1u; i++)
-        for (uint32_t j = 1u; j < _ySize-1u; j++)
-        {
-            Complex thisAmp = value(i,    j)                                 ;      // inverted triangle block
-            Complex d2dx2   = value(i+1u, j) - two * thisAmp + value(i-1u, j);
-            Complex d2dy2   = value(i, j+1u) - two * thisAmp + value(i, j-1u);
-            d2dx2.scale(dx  * dx)                                            ;
-            d2dy2.scale(dy  * dy)                                            ;
+    evolve(_deltaTime_, nullPtntl);
 
-            *address(i, j) = factor * (d2dx2 + d2dy2) + thisAmp;                    // the cat equation
-        }
-
-    for (uint32_t i = 1u; i < _xSize-1u; i++)                                       // x boundary consition
-    {
-        Complex fstBndAmp = value(i,        0u);
-        Complex lstBndAmp = value(i, _ySize-1u);
-
-        Complex fstD2dx2  = value(i+1u,        0u) - two * fstBndAmp + value(i-1u,        0u);
-        Complex lstD2dx2  = value(i+1u, _ySize-1u) - two * lstBndAmp + value(i-1u, _ySize-1u);
-        fstD2dx2.scale(dx * dx)                                                              ;
-        lstD2dx2.scale(dx * dx)                                                              ;
-
-        Complex fstD2dy2  = value(i,        1u) - two * fstBndAmp;
-        Complex lstD2dy2  = value(i, _ySize-2u) - two * lstBndAmp;
-        fstD2dy2.scale(dy * dy)                                  ;
-        lstD2dy2.scale(dy * dy)                                  ;
-
-        *address(i,        0u) = factor * (fstD2dx2 + fstD2dy2) + fstBndAmp;
-        *address(i, _ySize-1u) = factor * (lstD2dx2 + lstD2dy2) + lstBndAmp;
-    }
-
-    for (uint32_t j = 1u; j < _ySize-1u; j++)                                       // y boundary consition
-    {
-        Complex fstBndAmp = value(       0u, j);
-        Complex lstBndAmp = value(_xSize-1u, j);
-
-        Complex fstD2dx2  = value(       1u, j) - two * fstBndAmp;
-        Complex lstD2dx2  = value(_xSize-2u, j) - two * fstBndAmp;
-        fstD2dx2.scale(dx * dx)                                  ;
-        lstD2dx2.scale(dx * dx)                                  ;
-
-        Complex fstD2dy2  = value(       0u, j+1u) - two * fstBndAmp + value(       0u, j-1u);
-        Complex lstD2dy2  = value(_xSize-1u, j+1u) - two * lstBndAmp + value(_xSize-1u, j-1u);
-        fstD2dy2.scale(dy * dy)                                                              ;
-        lstD2dy2.scale(dy * dy)                                                              ;
-
-        *address(       0u, j) = factor * (fstD2dx2 + fstD2dy2) + fstBndAmp;
-        *address(_xSize-1u, j) = factor * (lstD2dx2 + lstD2dy2) + lstBndAmp;
-    }
-
-    normalize();                                                                    // just in case
+    delete nullPtntl;
 }
 
 void WaveFunc2::evolve(float _deltaTime_, Scalar2 _potential_)
 {
-    if (_potential_.toBasis() == _toBasis)
-    {
-        // QUANTUM MAGIC GOES HERE
-    }
-    else throw BASE_NOT_SAME;
+    evolve(_deltaTime_, &_potential_);
 }
 
 void WaveFunc2::evolve(float _deltaTime_, Scalar2* _toPotential_)
 {
     if (_toPotential_->toBasis() == _toBasis)
     {
-        // QUANTUM MAGIC GOES HERE
+        float dx = _toBasis->dx();
+        float dy = _toBasis->dy();
+
+        float   ifactor = 0.5f * HBAR * _deltaTime_ / _mass;                            // inverted triangle factor
+        Complex  factor = Complex(0, ifactor);                                          // welcome to wonderland
+        Complex  two    = Complex(2);                                                   // god's number
+
+        for (uint32_t i = 1u; i < _xSize-1u; i++)
+            for (uint32_t j = 1u; j < _ySize-1u; j++)
+            {
+                Complex thisAmp = value(i,    j)                                 ;      // inverted triangle block
+                Complex d2dx2   = value(i+1u, j) - two * thisAmp + value(i-1u, j);
+                Complex d2dy2   = value(i, j+1u) - two * thisAmp + value(i, j-1u);
+                d2dx2.scale(dx  * dx)                                            ;
+                d2dy2.scale(dy  * dy)                                            ;
+
+                float   ptntl     = _toPotential_->value(i, j);                         // unleash your full potential
+                float  iptntlCoef = ptntl * _deltaTime_ / HBAR;
+                Complex ptntlCoef = Complex(0,  iptntlCoef)   ;
+                ptntlCoef         = Complex(1) - ptntlCoef    ;
+                
+                *address(i, j) = factor * (d2dx2 + d2dy2) + ptntlCoef * thisAmp;        // the cat equation
+            }
+
+        normalize();                                                                    // just in case
     }
     else throw BASE_NOT_SAME;
 }

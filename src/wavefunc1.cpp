@@ -54,42 +54,46 @@ void WaveFunc1::normalize(float _norm_)
 
 void WaveFunc1::evolveFree(float _deltaTime_)
 {
-    float dx = _toBase->dx();
+    Scalar1* nullPtntl = new Scalar1(_toBase);
 
-    float   ifactor = 0.5F * HBAR * _deltaTime_ / (_mass * dx * dx);                // inverted triangle factor
-    Complex  factor = Complex(0, ifactor)                          ;                // welcome to wonderland
-    Complex  two    = Complex(2)                                   ;                // god's number
+    for (uint32_t i = 0u; i < _size; i++)
+        *nullPtntl->address(i) = 0.0f;
 
-    for (uint32_t i = 1u; i < _size - 1u; i++)
-    {
-        Complex thisAmp = value(i);
-        Complex d2dx2   = value(i+1u) - two * thisAmp + value(i-1u);                // inverse triangle
+    evolve(_deltaTime_, nullPtntl);
 
-        *address(i) = factor * d2dx2 + thisAmp;                                     // cat equation
-    }
-
-    Complex fstAmp = value(      0u);                                               // boundary conditions
-    Complex lstAmp = value(_size-1u);
-    *address(      0u) = factor * (value(      1u) - two * fstAmp) + fstAmp;
-    *address(_size-1u) = factor * (value(_size-2u) - two * lstAmp) + lstAmp;
-
-    normalize();
+    delete nullPtntl;
 }
 
 void WaveFunc1::evolve(float _deltaTime_, Scalar1 _potential_)
 {
-    if (_potential_.toBase() == _toBase)
-    {
-        // QUANTUM MAGIC GOES HERE
-    }
-    else throw BASE_NOT_SAME;
+    evolve(_deltaTime_, &_potential_);
 }
 
 void WaveFunc1::evolve(float _deltaTime_, Scalar1* _toPotential_)
 {
     if (_toPotential_->toBase() == _toBase)
     {
-        // QUANTUM MAGIC GOES HERE
+        float dx = _toBase->dx();
+
+        float   ifactor = 0.5f * HBAR * _deltaTime_ / _mass;                                // inverted triangle factor
+        Complex  factor = Complex(0, ifactor)              ;                                // welcome to wonderland
+        Complex  two    = Complex(2)                       ;                                // god's number
+
+        for (uint32_t i = 1u; i < _size - 1u; i++)
+        {
+            Complex thisAmp = value(i)                                 ;
+            Complex d2dx2   = value(i+1u) - two * thisAmp + value(i-1u);                    // inverse triangle
+            d2dx2.scale(dx  * dx)                                      ;
+
+            *address(i) = factor * d2dx2 + thisAmp;                                         // cat equation
+        }
+
+        Complex fstAmp = value(      0u);                                                   // easy boundary conditions
+        Complex lstAmp = value(_size-1u);
+        *address(      0u) = factor * (value(      1u) - two * fstAmp)/(dx * dx) + fstAmp;
+        *address(_size-1u) = factor * (value(_size-2u) - two * lstAmp)/(dx * dx) + lstAmp;
+
+        normalize();                                                                        // just in case
     }
     else throw BASE_NOT_SAME;
 }
