@@ -68,10 +68,10 @@ void WaveFunc1::evolveFree(float _deltaTime_)
         *address(i) = factor * d2dx2 + thisAmp;                                     // cat equation
     }
 
-    Complex frstAmp = value(0u   );                                                 // boundary conditions
-    Complex lastAmp = value(_size);
-    *address(0u   ) = factor * (value(      1u) - two * frstAmp) + frstAmp;
-    *address(_size) = factor * (value(_size-1u) - two * lastAmp) + lastAmp;
+    Complex fstAmp = value(      0u);                                               // boundary conditions
+    Complex lstAmp = value(_size-1u);
+    *address(      0u) = factor * (value(      1u) - two * fstAmp) + fstAmp;
+    *address(_size-1u) = factor * (value(_size-2u) - two * lstAmp) + lstAmp;
 
     normalize();
 }

@@ -66,17 +66,55 @@ void WaveFunc2::evolveFree(float _deltaTime_)                                   
     Complex  factor = Complex(0, ifactor);                                          // welcome to wonderland
     Complex  two    = Complex(2);                                                   // god's number
 
-    for (uint32_t i = 1u; i < _xSize - 1u; i++)
-        for (uint32_t j = 1u; j < _ySize - 1u; j++)
+    for (uint32_t i = 1u; i < _xSize-1u; i++)
+        for (uint32_t j = 1u; j < _ySize-1u; j++)
         {
-            Complex thisAmp = value(i, j)                                    ;      // inverted triangle block
+            Complex thisAmp = value(i,    j)                                 ;      // inverted triangle block
             Complex d2dx2   = value(i+1u, j) - two * thisAmp + value(i-1u, j);
-            Complex d2dy2   = value(i, j+1u) - two * thisAmp + value(i, j+1u);
+            Complex d2dy2   = value(i, j+1u) - two * thisAmp + value(i, j-1u);
             d2dx2.scale(dx  * dx)                                            ;
             d2dy2.scale(dy  * dy)                                            ;
 
             *address(i, j) = factor * (d2dx2 + d2dy2) + thisAmp;                    // the cat equation
         }
+
+    for (uint32_t i = 1u; i < _xSize-1u; i++)                                       // x boundary consition
+    {
+        Complex fstBndAmp = value(i,        0u);
+        Complex lstBndAmp = value(i, _ySize-1u);
+
+        Complex fstD2dx2  = value(i+1u,        0u) - two * fstBndAmp + value(i-1u,        0u);
+        Complex lstD2dx2  = value(i+1u, _ySize-1u) - two * lstBndAmp + value(i-1u, _ySize-1u);
+        fstD2dx2.scale(dx * dx)                                                              ;
+        lstD2dx2.scale(dx * dx)                                                              ;
+
+        Complex fstD2dy2  = value(i,        1u) - two * fstBndAmp;
+        Complex lstD2dy2  = value(i, _ySize-2u) - two * lstBndAmp;
+        fstD2dy2.scale(dy * dy)                                  ;
+        lstD2dy2.scale(dy * dy)                                  ;
+
+        *address(i,        0u) = factor * (fstD2dx2 + fstD2dy2) + fstBndAmp;
+        *address(i, _ySize-1u) = factor * (lstD2dx2 + lstD2dy2) + lstBndAmp;
+    }
+
+    for (uint32_t j = 1u; j < _ySize-1u; j++)                                       // y boundary consition
+    {
+        Complex fstBndAmp = value(       0u, j);
+        Complex lstBndAmp = value(_xSize-1u, j);
+
+        Complex fstD2dx2  = value(       1u, j) - two * fstBndAmp;
+        Complex lstD2dx2  = value(_xSize-2u, j) - two * fstBndAmp;
+        fstD2dx2.scale(dx * dx)                                  ;
+        lstD2dx2.scale(dx * dx)                                  ;
+
+        Complex fstD2dy2  = value(       0u, j+1u) - two * fstBndAmp + value(       0u, j-1u);
+        Complex lstD2dy2  = value(_xSize-1u, j+1u) - two * lstBndAmp + value(_xSize-1u, j-1u);
+        fstD2dy2.scale(dy * dy)                                                              ;
+        lstD2dy2.scale(dy * dy)                                                              ;
+
+        *address(       0u, j) = factor * (fstD2dx2 + fstD2dy2) + fstBndAmp;
+        *address(_xSize-1u, j) = factor * (lstD2dx2 + lstD2dy2) + lstBndAmp;
+    }
 
     normalize();                                                                    // just in case
 }
@@ -121,8 +159,8 @@ float WaveFunc2::totalProb()
 
 std::string WaveFunc2::string()
 {
-    bool isXBig = _xSize > MAX_STR_SIZE_WIDTH;
-    bool isYBig = _ySize > MAX_STR_SIZE_HEGHT;
+    bool isXBig  = _xSize    > MAX_STR_SIZE_WIDTH;
+    bool isYBig  = _ySize    > MAX_STR_SIZE_HEGHT;
 
     uint32_t     xStringSize                     ;
     uint32_t     yStringSize                     ;

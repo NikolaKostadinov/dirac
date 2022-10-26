@@ -78,8 +78,8 @@ void WaveFunc3::evolveFree(float _deltaTime_)                                   
             {
                 Complex thisAmp = value(i, j, k)                                       ;        // inverted triangle block
                 Complex d2dx2   = value(i+1u, j, k) - two * thisAmp + value(i-1u, j, k);
-                Complex d2dy2   = value(i, j+1u, k) - two * thisAmp + value(i, j+1u, k);
-                Complex d2dz2   = value(i, j, k+1u) - two * thisAmp + value(i, j, k+1u);
+                Complex d2dy2   = value(i, j+1u, k) - two * thisAmp + value(i, j-1u, k);
+                Complex d2dz2   = value(i, j, k+1u) - two * thisAmp + value(i, j, k-1u);
                 d2dx2.scale(dx  * dx)                                                  ;
                 d2dy2.scale(dy  * dy)                                                  ;
                 d2dz2.scale(dz  * dz)                                                  ;
