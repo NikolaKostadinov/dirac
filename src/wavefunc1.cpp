@@ -54,14 +54,14 @@ void WaveFunc1::normalize(float _norm_)
 
 void WaveFunc1::evolveFree(float _deltaTime_)
 {
-    Scalar1* nullPtntl = new Scalar1(_toBase);
+    /*Scalar1* nullPtntl = new Scalar1(_toBase);
 
     for (uint32_t i = 0u; i < _size; i++)
         *nullPtntl->address(i) = 0.0f;
 
     evolve(_deltaTime_, nullPtntl);
 
-    delete nullPtntl;
+    delete nullPtntl;*/
 }
 
 void WaveFunc1::evolve(float _deltaTime_, Scalar1 _potential_)

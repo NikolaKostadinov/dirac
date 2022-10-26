@@ -59,7 +59,7 @@ void WaveFunc2::normalize(float _norm_)
 
 void WaveFunc2::evolveFree(float _deltaTime_)
 {
-    Scalar2* nullPtntl = new Scalar2(_toBasis);
+    /*Scalar2* nullPtntl = new Scalar2(_toBasis);
 
     for (uint32_t i = 0u; i < _xSize; i++)
         for (uint32_t j = 0u; j < _ySize; j++)
@@ -67,7 +67,7 @@ void WaveFunc2::evolveFree(float _deltaTime_)
 
     evolve(_deltaTime_, nullPtntl);
 
-    delete nullPtntl;
+    delete nullPtntl;*/
 }
 
 void WaveFunc2::evolve(float _deltaTime_, Scalar2 _potential_)

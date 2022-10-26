@@ -2,8 +2,8 @@
 #include <cmath>
 #include <iostream>
 
-#define N   500u
-#define T   100
+#define N   4u
+#define T   10
 #define DT  0.1F
 
 int main()
@@ -20,9 +20,15 @@ int main()
     psi->setMass(1.0F);
     psi->setNormValues(&probAmps[0][0]);
 
-    std::cout << psi->prob(10, 10) << std::endl;
-    for (int t = 0; t < T; t++) psi->evolveFree(DT);
-    std::cout << psi->prob(10, 10) << std::endl;
+    Scalar2* nullPtntl = new Scalar2(basis);
+
+    for (uint32_t i = 0u; i < N; i++)
+        for (uint32_t j = 0u; j < N; j++)
+            *nullPtntl->address(i, j) = 0.0f;
+
+    std::cout << psi->prob(0, 1) << std::endl;
+    for (int t = 0; t < T; t++) psi->evolve(DT, nullPtntl);
+    std::cout << psi->prob(0, 1) << std::endl;
 
     std::cin.get();
     return 0;
