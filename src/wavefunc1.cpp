@@ -54,15 +54,24 @@ void WaveFunc1::normalize(float _norm_)
 
 void WaveFunc1::evolveFree(float _deltaTime_)
 {
-    float dx      = _toBase->dx()      ;
-    float ifactor = HBAR * _deltaTime_ ;
-    ifactor      /= 2 * _mass * dx * dx;
+    float dx = _toBase->dx();
 
-    Complex factor = Complex(0, ifactor);
-    Complex two    = Complex(2)         ;
+    float   ifactor = 0.5F * HBAR * _deltaTime_ / (_mass * dx * dx);                // inverted triangle factor
+    Complex  factor = Complex(0, ifactor)                          ;                // welcome to wonderland
+    Complex  two    = Complex(2)                                   ;                // god's number
 
     for (uint32_t i = 1u; i < _size - 1u; i++)
-        *address(i) = factor * (value(i+1u) - two * value(i) + value(i-1u)) + value(i);
+    {
+        Complex thisAmp = value(i);
+        Complex d2dx2   = value(i+1u) - two * thisAmp + value(i-1u);                // inverse triangle
+
+        *address(i) = factor * d2dx2 + thisAmp;                                     // cat equation
+    }
+
+    Complex frstAmp = value(0u   );                                                 // boundary conditions
+    Complex lastAmp = value(_size);
+    *address(0u   ) = factor * (value(      1u) - two * frstAmp) + frstAmp;
+    *address(_size) = factor * (value(_size-1u) - two * lastAmp) + lastAmp;
 
     normalize();
 }
