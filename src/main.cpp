@@ -3,7 +3,7 @@
 #include <iostream>
 
 #define N   4u
-#define T   10
+#define T   100
 #define DT  0.1F
 
 int main()
@@ -18,7 +18,7 @@ int main()
     for (uint32_t i = 0u; i < N; i++)
         for (uint32_t j = 0u; j < N; j++)
         {
-            potnVals[i][j] = 1.0f              ;
+            potnVals[i][j] = 2.0f              ;
             probAmps[i][j] = Complex(i*i + j*j);
         }
 

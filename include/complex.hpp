@@ -15,7 +15,8 @@ class Complex
 
         Complex(float _real_, float _imag_ = 0.0F);
 
-        void scale(float _factor_);
+        void scale( float _factor_);
+        void shrink(float _factor_);
 
         Complex operator+();
         Complex operator-();

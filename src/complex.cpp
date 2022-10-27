@@ -23,6 +23,12 @@ void Complex::scale(float _factor_)
     _imag *= _factor_;
 }
 
+void Complex::shrink(float _factor_)
+{
+    _real /= _factor_;
+    _imag /= _factor_;
+}
+
 Complex Complex::operator+()
 {
     return *this;

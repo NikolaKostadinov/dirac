@@ -75,16 +75,16 @@ void WaveFunc2::evolve(float _deltaTime_, Scalar2& _potential_)
     evolve(_deltaTime_, &_potential_);
 }
 
-void WaveFunc2::evolve(float _deltaTime_, Scalar2* _toPotential_)
+void WaveFunc2::evolve(float _dt_, Scalar2* _toPotential_)
 {
     if (_toPotential_->toBasis() == _toBasis)
     {
         float dx = _toBasis->dx();
         float dy = _toBasis->dy();
 
-        float   ilaplCoef = 0.5f * HBAR * _deltaTime_ / _mass;                          // inverted triangle factor
-        Complex  laplCoef = Complex(0, ilaplCoef)            ;                          // welcome to wonderland
-        Complex  two      = Complex(2)                       ;                          // god's number
+        float   ilaplCoef = 0.5f * HBAR / _mass * _dt_;                                 // inverted triangle factor
+        Complex  laplCoef = Imag(ilaplCoef)           ;                                 // welcome to wonderland
+        Complex  two      = Complex(2)                ;                                 // god's number
 
         for (uint32_t i = 0u; i < _xSize; i++)
             for (uint32_t j = 0u; j < _ySize; j++)
@@ -101,13 +101,12 @@ void WaveFunc2::evolve(float _deltaTime_, Scalar2* _toPotential_)
                 else if (j == _ySize-1u) d2dy2 = value(i, _ySize-2u) - two * thisAmp;
                 else                     d2dy2 = value(i,      j+1u) - two * thisAmp + value(i, j-1u);
 
-                d2dx2.scale(dx * dx);
-                d2dy2.scale(dy * dy);
+                d2dx2.shrink(dx * dx);
+                d2dy2.shrink(dy * dy);
 
-                float   potential = _toPotential_->value(i, j)    ;                     // unleash your full potential
-                float  icoreCoef  = potential * _deltaTime_ / HBAR;
-                Complex coreCoef  = Complex(0,  icoreCoef)        ;
-                coreCoef          = Complex(1) - coreCoef         ;
+                float   potential = _toPotential_->value(i, j);                         // unleash your full potential
+                float  icoreCoef  = - potential * _dt_ / HBAR ;
+                Complex coreCoef  = Complex(1, icoreCoef)     ;
                 
                 *address(i, j) = laplCoef * (d2dx2 + d2dy2) + coreCoef * thisAmp;       // the cat equation
             }
@@ -129,7 +128,7 @@ float WaveFunc2::prob(uint32_t _index_, uint32_t _jndex_)
 
 float WaveFunc2::totalProb()
 {
-    float  prob = 0.0F;
+    float  prob = 0.0f;
     for (uint32_t i = 0u; i < _xSize; i++)
         for (uint32_t j = 0u; j < _ySize; j++)
             prob += value(i, j).conjSq();
