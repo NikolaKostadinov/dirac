@@ -130,6 +130,16 @@ std::string Complex::string()
     return realString + " + " + imagString;
 }
 
+Complex Real(float _real_)
+{
+    return Complex(_real_, 0.0f);
+}
+
+Complex Imag(float _imag_)
+{
+    return Complex(0.0f, _imag_);
+}
+
 Complex cis(float _arg_)
 {
     float real = cos(_arg_);

@@ -22,7 +22,7 @@ class WaveFunc2 : public Field2<Complex>
 
         void normalize (float _norm_ = NORM)                      ;
         void evolveFree(float _deltaTime_  )                      ;
-        void evolve    (float _deltaTime_, Scalar2    _potential_);
+        void evolve    (float _deltaTime_, Scalar2&    _potential_);
         void evolve    (float _deltaTime_, Scalar2* _toPotential_);
 
         Complex probAmp(uint32_t _index_, uint32_t _jndex_);

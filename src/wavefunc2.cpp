@@ -70,7 +70,7 @@ void WaveFunc2::evolveFree(float _deltaTime_)
     delete nullPtntl;*/
 }
 
-void WaveFunc2::evolve(float _deltaTime_, Scalar2 _potential_)
+void WaveFunc2::evolve(float _deltaTime_, Scalar2& _potential_)
 {
     evolve(_deltaTime_, &_potential_);
 }
@@ -82,28 +82,37 @@ void WaveFunc2::evolve(float _deltaTime_, Scalar2* _toPotential_)
         float dx = _toBasis->dx();
         float dy = _toBasis->dy();
 
-        float   ifactor = 0.5f * HBAR * _deltaTime_ / _mass;                            // inverted triangle factor
-        Complex  factor = Complex(0, ifactor);                                          // welcome to wonderland
-        Complex  two    = Complex(2);                                                   // god's number
+        float   ilaplCoef = 0.5f * HBAR * _deltaTime_ / _mass;                          // inverted triangle factor
+        Complex  laplCoef = Complex(0, ilaplCoef)            ;                          // welcome to wonderland
+        Complex  two      = Complex(2)                       ;                          // god's number
 
-        for (uint32_t i = 1u; i < _xSize-1u; i++)
-            for (uint32_t j = 1u; j < _ySize-1u; j++)
+        for (uint32_t i = 0u; i < _xSize; i++)
+            for (uint32_t j = 0u; j < _ySize; j++)
             {
-                Complex thisAmp = value(i,    j)                                 ;      // inverted triangle block
-                Complex d2dx2   = value(i+1u, j) - two * thisAmp + value(i-1u, j);
-                Complex d2dy2   = value(i, j+1u) - two * thisAmp + value(i, j-1u);
-                d2dx2.scale(dx  * dx)                                            ;
-                d2dy2.scale(dy  * dy)                                            ;
-
-                float   ptntl     = _toPotential_->value(i, j);                         // unleash your full potential
-                float  iptntlCoef = ptntl * _deltaTime_ / HBAR;
-                Complex ptntlCoef = Complex(0,  iptntlCoef)   ;
-                ptntlCoef         = Complex(1) - ptntlCoef    ;
+                Complex thisAmp = value(i, j);
                 
-                *address(i, j) = factor * (d2dx2 + d2dy2) + ptntlCoef * thisAmp;        // the cat equation
+                Complex d2dx2;
+                if      (i ==        0u) d2dx2 = value(       1u, j) - two * thisAmp;
+                else if (i == _xSize-1u) d2dx2 = value(_xSize-2u, j) - two * thisAmp;
+                else                     d2dx2 = value(     i+1u, j) - two * thisAmp + value(i-1u, j);
+
+                Complex d2dy2;
+                if      (j ==        0u) d2dy2 = value(i,        1u) - two * thisAmp;
+                else if (j == _ySize-1u) d2dy2 = value(i, _ySize-2u) - two * thisAmp;
+                else                     d2dy2 = value(i,      j+1u) - two * thisAmp + value(i, j-1u);
+
+                d2dx2.scale(dx * dx);
+                d2dy2.scale(dy * dy);
+
+                float   potential = _toPotential_->value(i, j)    ;                     // unleash your full potential
+                float  icoreCoef  = potential * _deltaTime_ / HBAR;
+                Complex coreCoef  = Complex(0,  icoreCoef)        ;
+                coreCoef          = Complex(1) - coreCoef         ;
+                
+                *address(i, j) = laplCoef * (d2dx2 + d2dy2) + coreCoef * thisAmp;       // the cat equation
             }
 
-        normalize();                                                                    // just in case
+        //normalize();                                                                    // just in case
     }
     else throw BASE_NOT_SAME;
 }
