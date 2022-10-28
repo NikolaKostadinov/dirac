@@ -1,6 +1,6 @@
-#							#########################
-#							# DIRAC ENGINE MAKEFILE #
-#							#########################
+#                       #########################
+#                       # DIRAC ENGINE MAKEFILE #
+#                       #########################
 
 CC        := g++                                                        # c compiler
 SRC_MAIN  := src/*.cpp                                                  # all dirac src files + main.cpp
