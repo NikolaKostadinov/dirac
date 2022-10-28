@@ -5,6 +5,7 @@
 #include "basis3.hpp"
 #include "field3.hpp"
 #include "scalar3.hpp"
+
 #include <string>
 
 class WaveFunc3 : public Field3<Complex>
@@ -35,4 +36,5 @@ class WaveFunc3 : public Field3<Complex>
     protected:
 
         float _mass;
+        float _norm;
 };

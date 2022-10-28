@@ -8,5 +8,7 @@
 #define OUT_OF_X_BOUNDS     std::logic_error("DIRAC ENGINE: index out of x bounds")
 #define OUT_OF_Y_BOUNDS     std::logic_error("DIRAC ENGINE: index out of y bounds")
 #define OUT_OF_Z_BOUNDS     std::logic_error("DIRAC ENGINE: index out of z bounds")
+#define ZERO_NORM           std::logic_error("DIRAC ENGINE: zero norm"            )
+#define NEGATIVE_NORM       std::logic_error("DIRAC ENGINE: negative norm"        )
 #define ZERO_MASS           std::logic_error("DIRAC ENGINE: zero mass"            )
 #define NEGATIVE_MASS       std::logic_error("DIRAC ENGINE: negative mass"        )

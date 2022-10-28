@@ -52,4 +52,5 @@ class WaveFunc2 : public Field2<Complex>
     protected:
 
         float _mass;
+        float _norm;
 };

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "engineparams.h"
+
 #include <cmath>
 #include <string>
 #include <sstream>
@@ -13,9 +14,9 @@ class Complex
         Complex();
         ~Complex();
 
-        Complex(float _real_, float _imag_ = 0.0F);
+        Complex(float _real_, float _imag_ = 0.0f);
 
-        void scale( float _factor_);
+        void scale (float _factor_);
         void shrink(float _factor_);
 
         Complex operator+();
@@ -44,8 +45,8 @@ class Complex
         float _imag;
 };
 
-Complex Real(float _real_);
-Complex Imag(float _imag_);
+Complex Real(float   _real_   );
+Complex Imag(float   _imag_   );
 
 Complex cis (float   _arg_    );
 Complex sqrt(Complex _complex_);

@@ -21,7 +21,7 @@ WaveFunc1::WaveFunc1(Base _base_)
     _size          =  _base_.size();
     _toBase        = &_base_       ;
     _originAddress =  new Complex  ;
-    _mass          =  0.0F         ;
+    _mass          =  0.0f         ;
 }
 
 WaveFunc1::WaveFunc1(Base* _toBase_)
@@ -29,7 +29,13 @@ WaveFunc1::WaveFunc1(Base* _toBase_)
     _size          = _toBase_->size();
     _toBase        = _toBase_        ;
     _originAddress = new Complex     ;
-    _mass          = 0.0F            ;
+    _mass          = 0.0f            ;
+}
+
+void WaveFunc1::setNorm(float _norm_)
+{
+    _norm =  _norm_;
+    checkNorm(    );
 }
 
 void WaveFunc1::setMass(float _mass_)
@@ -38,25 +44,16 @@ void WaveFunc1::setMass(float _mass_)
     checkMass(    );
 }
 
-void WaveFunc1::setNormValues(Complex* _address_)
+void WaveFunc1::checkNorm()
 {
-    setValues(_address_);
-    normalize(         );
+    if      (_norm == 0.0f) throw     ZERO_NORM;
+    else if (_norm <  0.0f) throw NEGATIVE_NORM;
 }
 
 void WaveFunc1::checkMass()
 {
     if      (_mass == 0.0f) throw     ZERO_MASS;
     else if (_mass <  0.0f) throw NEGATIVE_MASS;
-}
-
-void WaveFunc1::normalize(float _norm_)
-{
-    float total  = prob()              ;
-    float factor = sqrt(_norm_ / total);
-
-    for (uint32_t i = 0U; i < _size; i++)
-        (*address(i)).scale(factor);
 }
 
 void WaveFunc1::evolve(float _dt_)
@@ -68,7 +65,7 @@ void WaveFunc1::evolve(float _dt_)
         nullArray[i] = 0.0f;
 
     nullField->setValues(nullArray);
-    evolve(    _dt_,     nullField);
+    evolve(   _dt_,      nullField);
 }
 
 void WaveFunc1::evolve(float _dt_, Scalar1 _potential_)
@@ -101,10 +98,14 @@ void WaveFunc1::evolve(float _dt_, Scalar1* _toPotential_)
         Complex lstAmp = value(_size-1u);
         *address(      0u) = factor * (value(      1u) - two * fstAmp)/(dx * dx) + fstAmp;
         *address(_size-1u) = factor * (value(_size-2u) - two * lstAmp)/(dx * dx) + lstAmp;
-
-        normalize();                                                                        // just in case
     }
     else throw BASE_NOT_SAME;
+}
+
+bool WaveFunc1::isNormValid()
+{
+    if   (_norm <= 0.0f) return false;
+    else                 return true ;
 }
 
 bool WaveFunc1::isMassValid()
@@ -115,30 +116,40 @@ bool WaveFunc1::isMassValid()
 
 Complex WaveFunc1::probAmp(uint32_t _index_)
 {
-    return value(_index_);
+    float  sumsqr = sumSqr()            ;
+    float  factor = _norm / sqrt(sumsqr);
+    return Real(factor) * value(_index_);
 }
 
 float WaveFunc1::prob(uint32_t _index_)
 {
-    return value(_index_).conjSq();
+    float  sumsqr = sumSqr()               ;
+    float  sqrlen = prob()                 ;
+    float  factor = sqrlen / sumsqr        ;
+    return factor * value(_index_).conjSq();
 }
 
 float WaveFunc1::prob()
 {
-    float prob = 0.0F;
-    for (uint32_t i = 0u; i < _size; i++)
-        prob += value(i).conjSq();
-    
-    return prob;
+    return _norm * _norm;
 }
 
 float WaveFunc1::prob(uint32_t _start_, uint32_t _end_)
 {
-    float prob = 0.0F;
+    float sum = 0.0f;
     for (uint32_t i = _start_; i <= _end_; i++)
-        prob += value(i).conjSq();
+        sum += prob(i);
     
-    return prob;
+    return sum;
+}
+
+float WaveFunc1::sumSqr()
+{
+    float sum = 0.0f;
+    for (uint32_t i = 0u; i < _size; i++)
+        sum += value(i).conjSq();
+    
+    return sum;
 }
 
 std::string WaveFunc1::string()
