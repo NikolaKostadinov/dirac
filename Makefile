@@ -2,11 +2,11 @@
 #							# DIRAC ENGINE MAKEFILE #
 #							#########################
 
-CC        := g++														# c compiler
-SRC_MAIN  := src/*.cpp													# all src files + main.cpp
-SRC_DIRAC := $(filter-out src/main.cpp, $(SRC_MAIN))					# all dirac src files
-DLL       := bin/dirac.dll												# dynimic link library file
-MAIN      := bin/main													# executable file
+CC        := g++                                                        # c compiler
+SRC_MAIN  := src/*.cpp                                                  # all dirac src files + main.cpp
+SRC_DIRAC := $(filter-out src/main.cpp, $(SRC_MAIN))                    # all dirac src files
+DLL       := bin/dirac.dll                                              # dynimic link library file
+MAIN      := bin/main                                                   # executable file
 DONE      := DONE
 
 dirac:

@@ -15,10 +15,11 @@ int main()
 
     float        potnVals[N][N];
     Complex      probAmps[N][N];
+
     for (uint32_t i = 0u; i < N; i++)
         for (uint32_t j = 0u; j < N; j++)
         {
-            potnVals[i][j] = 0.0f              ;
+            potnVals[i][j] = 1.0f              ;
             probAmps[i][j] = Complex(i*i + j*j);
         }
 
@@ -26,10 +27,9 @@ int main()
     psi->setNormValues(&probAmps[0][0]);
     u  ->    setValues(&potnVals[0][0]);
 
-    std::cout << psi->string()    << std::endl ;
-    for (int t = 0; t < T; t++) psi->evolve(DT);
-    std::cout << psi->string()    << std::endl ;
-    std::cout << psi->prob()      << std::endl ;
+    std::cout << psi->string()    << std::endl << std::endl;
+    for (int t = 0; t < T; t++) psi->evolve(DT)            ;
+    std::cout << psi->string()    << std::endl             ;
 
     std::cin.get();
     return 0;
