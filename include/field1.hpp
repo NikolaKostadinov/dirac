@@ -17,7 +17,6 @@ class Field1
         Field1(Base* _toBasis_);
 
         void setValues(T* _address_);
-        void setValue (T  _value_  , uint32_t _index_);
 
         uint32_t size                        ();
         Base*    toBase                      ();

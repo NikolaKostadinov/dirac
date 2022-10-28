@@ -14,7 +14,7 @@ class Complex
         Complex();
         ~Complex();
 
-        Complex(float _real_, float _imag_ = 0.0f);
+        Complex(float _real_, float _imag_ = DEFAULT_IMAG);
 
         void scale (float _factor_);
         void shrink(float _factor_);

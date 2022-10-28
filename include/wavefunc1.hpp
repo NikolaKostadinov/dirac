@@ -19,13 +19,13 @@ class WaveFunc1 : public Field1<Complex>
         WaveFunc1(Base    _basis_);
         WaveFunc1(Base* _toBasis_);
 
-        void      setNorm(float _norm_ = NORM               );
-        void      setMass(float _mass_ = 1.0f               );
-        void    checkNorm(                                  );
-        void    checkMass(                                  );
-        void    evolve   (float _dt_                        );
-        void    evolve   (float _dt_, Scalar1    _potential_);
-        void    evolve   (float _dt_, Scalar1* _toPotential_);
+        void      setNorm(float _norm_ = DEFAULT_NORM          );
+        void      setMass(float _mass_ = DEFAULT_MASS          );
+        void    checkNorm(                                     );
+        void    checkMass(                                     );
+        void    evolve   (float _dt_   = DEFAULT_DT            );
+        void    evolve   (float _dt_   , Scalar1    _potential_);
+        void    evolve   (float _dt_   , Scalar1* _toPotential_);
 
         bool    isNormValid();
         bool    isMassValid();

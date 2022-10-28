@@ -19,21 +19,23 @@ class WaveFunc2 : public Field2<Complex>
         WaveFunc2(Basis2  _basis_  );
         WaveFunc2(Basis2* _toBasis_);
 
-        void    setMass      (float    _mass_   );
-        void    setNormValues(Complex* _address_);
-        void    checkMass    (                  );
+        void      setNorm(float _norm_ = DEFAULT_NORM          );
+        void      setMass(float _mass_ = DEFAULT_MASS          );
+        void    checkNorm(                                     );
+        void    checkMass(                                     );
+        void    evolve   (float _dt_   = DEFAULT_DT            );
+        void    evolve   (float _dt_   , Scalar2    _potential_);
+        void    evolve   (float _dt_   , Scalar2* _toPotential_);
 
-        void    normalize(float _norm_ = NORM               );
-        void    evolve   (float _dt_                        );
-        void    evolve   (float _dt_, Scalar2    _potential_);
-        void    evolve   (float _dt_, Scalar2* _toPotential_);
-
+        bool    isNormValid();
         bool    isMassValid();
 
+        float   norm   (                                  );
         float   mass   (                                  );
         Complex probAmp(uint32_t _index_, uint32_t _jndex_);
         float   prob   (uint32_t _index_, uint32_t _jndex_);
         float   prob   (                                  );
+        float   sumSqr (                                  );
 
         Complex ddx    (uint32_t _index_, uint32_t _jndex_);
         Complex ddy    (uint32_t _index_, uint32_t _jndex_);
@@ -51,6 +53,6 @@ class WaveFunc2 : public Field2<Complex>
     
     protected:
 
-        float _mass;
         float _norm;
+        float _mass;
 };

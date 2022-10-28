@@ -40,12 +40,6 @@ void Field1<T>::setValues(T* _address_)
 }
 
 template <class T>
-void Field1<T>::setValue(T _value_, uint32_t _index_)
-{
-    *address(_index_) = _value_;
-}
-
-template <class T>
 uint32_t Field1<T>::size()
 {
     return _size;
@@ -67,7 +61,7 @@ template <class T>
 T* Field1<T>::address(uint32_t _index_)
 {
     if (_index_ >= 0u && _index_ < _size)
-        return _originAddress + _index_;
+        return _originAddress  + _index_;
     else
         throw OUT_OF_BOUNDS;
 }

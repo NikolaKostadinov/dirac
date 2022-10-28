@@ -21,7 +21,7 @@ class WaveFunc3 : public Field3<Complex>
         void setMass      (float    _mass_   );
         void setNormValues(Complex* _address_);
 
-        void normalize (float _norm_ = NORM)                      ;
+        void normalize (float _norm_)                      ;
         void evolveFree(float _deltaTime_  )                      ;
         void evolve    (float _deltaTime_, Scalar3    _potential_);
         void evolve    (float _deltaTime_, Scalar3* _toPotential_);
