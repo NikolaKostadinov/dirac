@@ -48,7 +48,7 @@ void WaveFunc3::setMass(float _mass_)
 void WaveFunc3::setNormValues(Complex* _address_)
 {
     setValues(_address_);
-    normalize(         );
+    normalize(1.0f);
 }
 
 void WaveFunc3::normalize(float _norm_)
@@ -86,8 +86,6 @@ void WaveFunc3::evolveFree(float _deltaTime_)                                   
 
                 *address(i, j, k) = factor * (d2dx2 + d2dy2 + d2dz2) + thisAmp;                 // the cat equation
             }
-
-    normalize();                                                                                // just in case
 }
 
 void WaveFunc3::evolve(float _deltaTime_, Scalar3 _potential_)

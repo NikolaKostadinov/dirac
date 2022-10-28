@@ -36,32 +36,28 @@ WaveFunc2::WaveFunc2(Basis2* _toBasis_)
     _mass          = 0.0f              ;
 }
 
+void WaveFunc2::setNorm(float _norm_)
+{
+    _norm =  _norm_;
+    checkNorm(    );
+}
+
 void WaveFunc2::setMass(float _mass_)
 {
     _mass =  _mass_;
     checkMass(    );
 }
 
-void WaveFunc2::setNormValues(Complex* _address_)
+void WaveFunc2::checkNorm()
 {
-    setValues(_address_);
-    normalize(         );
+    if      (_norm == 0.0f) throw     ZERO_NORM;
+    else if (_norm <  0.0f) throw NEGATIVE_NORM;
 }
 
 void WaveFunc2::checkMass()
 {
     if      (_mass == 0.0f) throw     ZERO_MASS;
     else if (_mass <  0.0f) throw NEGATIVE_MASS;
-}
-
-void WaveFunc2::normalize(float _norm_)
-{
-    float total  = prob()              ;
-    float factor = sqrt(_norm_ / total);
-
-    for (uint32_t i = 0u; i < _xSize; i++)
-        for (uint32_t j = 0u; j < _ySize; j++)
-            (*address(i, j)).scale(factor);
 }
 
 void WaveFunc2::evolve(float _dt_)
@@ -119,16 +115,25 @@ void WaveFunc2::evolve(float _dt_, Scalar2* _toPotential_)
                 
                 *address(i, j) = laplCoef * (d2dx2 + d2dy2) + coreCoef * thisAmp;                       // the cat equation
             }
-
-        normalize();                                                                                    // just in case
     }
     else throw BASE_NOT_SAME;
+}
+
+bool WaveFunc2::isNormValid()
+{
+    if   (_norm <= 0.0f) return false;
+    else                 return true ;
 }
 
 bool WaveFunc2::isMassValid()
 {
     if   (_mass <= 0.0f) return false;
     else                 return true ;
+}
+
+float WaveFunc2::norm()
+{
+    return _norm;
 }
 
 float WaveFunc2::mass()
@@ -138,22 +143,30 @@ float WaveFunc2::mass()
 
 Complex WaveFunc2::probAmp(uint32_t _index_, uint32_t _jndex_)
 {
-    return value(_index_, _jndex_);
+    float  sumsqr = sumSqr()                        ;
+    float  sqrlen = prob()                          ;
+    float  factor = sqrlen / sumsqr                 ;
+    return factor * value(_index_, _jndex_).conjSq();
 }
 
 float WaveFunc2::prob()
 {
-    float   prob  = 0.0f;
-    for (uint32_t i = 0u; i < _xSize; i++)
-        for (uint32_t j = 0u; j < _ySize; j++)
-            prob += value(i, j).conjSq();
-    
-    return prob;
+    return _norm * _norm;
 }
 
 float WaveFunc2::prob(uint32_t _index_, uint32_t _jndex_)
 {
     return value(_index_, _jndex_).conjSq();
+}
+
+float WaveFunc2::sumSqr()
+{
+    float sum = 0.0f;
+    for (uint32_t i = 0u; i < _xSize; i++)
+        for (uint32_t j = 0u; j < _ySize; j++)
+            sum += value(i, j).conjSq();
+
+    return  sum;
 }
 
 std::string WaveFunc2::string()
