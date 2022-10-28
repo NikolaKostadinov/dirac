@@ -1,14 +1,13 @@
 #pragma once
 
 #include "engineparams.h"
+#include "exceptions.h"
 #include "complex.hpp"
 #include "basis2.hpp"
 #include "field2.hpp"
 #include "scalar2.hpp"
 
 #include <string>
-
-#include <iostream>
 
 class WaveFunc2 : public Field2<Complex>
 {
@@ -20,14 +19,14 @@ class WaveFunc2 : public Field2<Complex>
         WaveFunc2(Basis2  _basis_  );
         WaveFunc2(Basis2* _toBasis_);
 
-        void setMass      (float    _mass_   );
-        void setNormValues(Complex* _address_);
-        void checkMass    (                  );
+        void    setMass      (float    _mass_   );
+        void    setNormValues(Complex* _address_);
+        void    checkMass    (                  );
 
-        void normalize(float _norm_ = NORM               );
-        void evolve   (float _dt_                        );
-        void evolve   (float _dt_, Scalar2    _potential_);
-        void evolve   (float _dt_, Scalar2* _toPotential_);
+        void    normalize(float _norm_ = NORM               );
+        void    evolve   (float _dt_                        );
+        void    evolve   (float _dt_, Scalar2    _potential_);
+        void    evolve   (float _dt_, Scalar2* _toPotential_);
 
         bool    isMassValid();
 
@@ -43,8 +42,10 @@ class WaveFunc2 : public Field2<Complex>
         Complex d2dy2  (uint32_t _index_, uint32_t _jndex_);
         Complex laplace(uint32_t _index_, uint32_t _jndex_);
 
-        float expcIndex(); 
-        float expcJndex(); 
+        float   expcIndex();
+        float   expcJndex();
+        float   excpX    ();
+        float   excpY    ();
 
         std::string string();
     

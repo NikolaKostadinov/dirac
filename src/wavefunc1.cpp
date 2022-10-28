@@ -34,7 +34,8 @@ WaveFunc1::WaveFunc1(Base* _toBase_)
 
 void WaveFunc1::setMass(float _mass_)
 {
-    _mass = _mass_;
+    _mass =  _mass_;
+    checkMass(    );
 }
 
 void WaveFunc1::setNormValues(Complex* _address_)
@@ -43,41 +44,49 @@ void WaveFunc1::setNormValues(Complex* _address_)
     normalize(         );
 }
 
+void WaveFunc1::checkMass()
+{
+    if      (_mass == 0.0f) throw     ZERO_MASS;
+    else if (_mass <  0.0f) throw NEGATIVE_MASS;
+}
+
 void WaveFunc1::normalize(float _norm_)
 {
-    float prob   = totalProb()        ;
-    float factor = sqrt(_norm_ / prob);
+    float total  = prob()              ;
+    float factor = sqrt(_norm_ / total);
 
     for (uint32_t i = 0U; i < _size; i++)
         (*address(i)).scale(factor);
 }
 
-void WaveFunc1::evolveFree(float _deltaTime_)
+void WaveFunc1::evolve(float _dt_)
 {
-    /*Scalar1* nullPtntl = new Scalar1(_toBase);
+    float*   nullArray = new float  [_size  ];
+    Scalar1* nullField = new Scalar1(_toBase);
 
-    for (uint32_t i = 0u; i < _size; i++)
-        *nullPtntl->address(i) = 0.0f;
+    for (uint32_t i  = 0u  ; i < _size; i++)
+        nullArray[i] = 0.0f;
 
-    evolve(_deltaTime_, nullPtntl);
-
-    delete nullPtntl;*/
+    nullField->setValues(nullArray);
+    evolve(    _dt_,     nullField);
 }
 
-void WaveFunc1::evolve(float _deltaTime_, Scalar1 _potential_)
+void WaveFunc1::evolve(float _dt_, Scalar1 _potential_)
 {
-    evolve(_deltaTime_, &_potential_);
+    evolve(_dt_, &_potential_);
 }
 
-void WaveFunc1::evolve(float _deltaTime_, Scalar1* _toPotential_)
+void WaveFunc1::evolve(float _dt_, Scalar1* _toPotential_)
 {
     if (_toPotential_->toBase() == _toBase)
     {
+        checkMass();
+
         float dx = _toBase->dx();
 
-        float   ifactor = 0.5f * HBAR * _deltaTime_ / _mass;                                // inverted triangle factor
-        Complex  factor = Complex(0, ifactor)              ;                                // welcome to wonderland
-        Complex  two    = Complex(2)                       ;                                // god's number
+        float   ifactor = 0.5f * HBAR * _dt_ / _mass;                                       // inverted triangle factor
+        Complex  factor = Complex(0, ifactor)       ;                                       // welcome to wonderland
+        Complex  two    = Complex(2)                ;                                       // god's number
 
         for (uint32_t i = 1u; i < _size - 1u; i++)
         {
@@ -98,6 +107,12 @@ void WaveFunc1::evolve(float _deltaTime_, Scalar1* _toPotential_)
     else throw BASE_NOT_SAME;
 }
 
+bool WaveFunc1::isMassValid()
+{
+    if   (_mass <= 0.0f) return false;
+    else                 return true ;
+}
+
 Complex WaveFunc1::probAmp(uint32_t _index_)
 {
     return value(_index_);
@@ -108,19 +123,19 @@ float WaveFunc1::prob(uint32_t _index_)
     return value(_index_).conjSq();
 }
 
-float WaveFunc1::prob(uint32_t _start_, uint32_t _end_)
+float WaveFunc1::prob()
 {
     float prob = 0.0F;
-    for (uint32_t i = _start_; i <= _end_; i++)
+    for (uint32_t i = 0u; i < _size; i++)
         prob += value(i).conjSq();
     
     return prob;
 }
 
-float WaveFunc1::totalProb()
+float WaveFunc1::prob(uint32_t _start_, uint32_t _end_)
 {
     float prob = 0.0F;
-    for (uint32_t i = 0u; i < _size; i++)
+    for (uint32_t i = _start_; i <= _end_; i++)
         prob += value(i).conjSq();
     
     return prob;

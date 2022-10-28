@@ -6,6 +6,7 @@
 #include "base.hpp"
 #include "field1.hpp"
 #include "scalar1.hpp"
+
 #include <string>
 
 class WaveFunc1 : public Field1<Complex>
@@ -18,19 +19,29 @@ class WaveFunc1 : public Field1<Complex>
         WaveFunc1(Base    _basis_);
         WaveFunc1(Base* _toBasis_);
 
-        void setMass      (float    _mass_   );
-        void setNormValues(Complex* _address_);
+        void    setMass      (float    _mass_   );
+        void    setNormValues(Complex* _address_);
+        void    checkMass    (                  );
 
-        void normalize (float _norm_ = NORM)                      ;
-        void evolveFree(float _deltaTime_  )                      ;
-        void evolve    (float _deltaTime_, Scalar1    _potential_);
-        void evolve    (float _deltaTime_, Scalar1* _toPotential_);
+        void    normalize(float _norm_ = NORM)               ;
+        void    evolve   (float _dt_         )               ;
+        void    evolve   (float _dt_, Scalar1    _potential_);
+        void    evolve   (float _dt_, Scalar1* _toPotential_);
+
+        bool    isMassValid();
 
         float   mass   (                );
         Complex probAmp(uint32_t _index_);
         float   prob   (uint32_t _index_);
         float   prob   (                );
+
+        Complex ddx    (uint32_t _index_);
+        Complex d2dx2  (uint32_t _index_);
+
         float   prob   (uint32_t _start_, uint32_t _end_);
+
+        float expcIndex();
+        float excpX    ();
 
         std::string string();
 

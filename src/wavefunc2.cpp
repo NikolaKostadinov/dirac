@@ -38,8 +38,8 @@ WaveFunc2::WaveFunc2(Basis2* _toBasis_)
 
 void WaveFunc2::setMass(float _mass_)
 {
-    _mass = _mass_;
-    checkMass()   ;
+    _mass =  _mass_;
+    checkMass(    );
 }
 
 void WaveFunc2::setNormValues(Complex* _address_)
@@ -50,7 +50,7 @@ void WaveFunc2::setNormValues(Complex* _address_)
 
 void WaveFunc2::checkMass()
 {
-    if      (_mass == 0.0f) throw ZERO_MASS    ;
+    if      (_mass == 0.0f) throw     ZERO_MASS;
     else if (_mass <  0.0f) throw NEGATIVE_MASS;
 }
 
