@@ -57,20 +57,21 @@ void WaveFunc2::normalize(float _norm_)
             (*address(i, j)).scale(factor);
 }
 
-void WaveFunc2::evolveFree(float _deltaTime_)
+void WaveFunc2::evolve(float _deltaTime_)
 {
-    /*Scalar2* nullPtntl = new Scalar2(_toBasis);
+    uint32_t fullSize  = size()               ;
+    float*   nullArray = new float[fullSize]  ;
+    Scalar2* nullField = new Scalar2(_toBasis);
 
-    for (uint32_t i = 0u; i < _xSize; i++)
-        for (uint32_t j = 0u; j < _ySize; j++)
-            *nullPtntl->address(i, j) = 0.0f;
+    for (uint32_t i  = 0u  ; i < fullSize; i++)
+        nullArray[i] = 0.0f;
 
-    evolve(_deltaTime_, nullPtntl);
+    nullField->setValues(nullArray);
 
-    delete nullPtntl;*/
+    evolve(_deltaTime_,  nullField);
 }
 
-void WaveFunc2::evolve(float _deltaTime_, Scalar2& _potential_)
+void WaveFunc2::evolve(float _deltaTime_, Scalar2 _potential_)
 {
     evolve(_deltaTime_, &_potential_);
 }
