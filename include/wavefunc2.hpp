@@ -22,16 +22,29 @@ class WaveFunc2 : public Field2<Complex>
 
         void setMass      (float    _mass_   );
         void setNormValues(Complex* _address_);
+        void checkMass    (                  );
 
-        void normalize(float _norm_ = NORM)                      ;
-        void evolve   (float _deltaTime_  )                      ;
-        void evolve   (float _deltaTime_, Scalar2    _potential_);
-        void evolve   (float _deltaTime_, Scalar2* _toPotential_);
+        void normalize(float _norm_ = NORM               );
+        void evolve   (float _dt_                        );
+        void evolve   (float _dt_, Scalar2    _potential_);
+        void evolve   (float _dt_, Scalar2* _toPotential_);
 
+        bool    isMassValid();
+
+        float   mass   (                                  );
         Complex probAmp(uint32_t _index_, uint32_t _jndex_);
         float   prob   (uint32_t _index_, uint32_t _jndex_);
-        
-        float totalProb();
+        float   prob   (                                  );
+
+        Complex ddx    (uint32_t _index_, uint32_t _jndex_);
+        Complex ddy    (uint32_t _index_, uint32_t _jndex_);
+        Complex grad   (uint32_t _index_, uint32_t _jndex_);
+        Complex d2dx2  (uint32_t _index_, uint32_t _jndex_);
+        Complex d2dy2  (uint32_t _index_, uint32_t _jndex_);
+        Complex laplace(uint32_t _index_, uint32_t _jndex_);
+
+        float expcIndex(); 
+        float expcJndex(); 
 
         std::string string();
     

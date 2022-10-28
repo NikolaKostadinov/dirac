@@ -29,7 +29,7 @@ int main()
     std::cout << psi->string()    << std::endl ;
     for (int t = 0; t < T; t++) psi->evolve(DT);
     std::cout << psi->string()    << std::endl ;
-    std::cout << psi->totalProb() << std::endl ;
+    std::cout << psi->prob()      << std::endl ;
 
     std::cin.get();
     return 0;
