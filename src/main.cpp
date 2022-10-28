@@ -3,7 +3,7 @@
 #include <iostream>
 
 #define B   100.0f
-#define N   40u
+#define N   4u
 #define T   100
 #define DT  10.0f
 
@@ -20,9 +20,8 @@ int main()
     psi->setNorm(1.0f);
     psi->setMass(1.0f);
 
-    std::cout << psi->prob() << std::endl;
-    std::cout << psi->value(3).string() << std::endl;
-    std::cout << psi->probAmp(3).string() << std::endl;
+    std::cout << psi->prob()   << std::endl;
+    std::cout << psi->string() << std::endl;
 
     std::cin.get();
     return 0;

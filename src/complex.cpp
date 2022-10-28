@@ -123,17 +123,20 @@ std::string Complex::string()
     std::stringstream realStream;
     std::stringstream imagStream;
 
-    if (_real >= 0) realStream << std::fixed << std::setprecision(COMPLEX_ROUND    );
-    else            realStream << std::fixed << std::setprecision(COMPLEX_ROUND - 1);
-    if (_imag >= 0) imagStream << std::fixed << std::setprecision(COMPLEX_ROUND    );
-    else            imagStream << std::fixed << std::setprecision(COMPLEX_ROUND - 1);
+    if (_real >= 0) realStream << std::fixed << std::setprecision(COMPLEX_ROUND  );
+    else            realStream << std::fixed << std::setprecision(COMPLEX_ROUND-1);
+    if (_imag >= 0) imagStream << std::fixed << std::setprecision(COMPLEX_ROUND  );
+    else            imagStream << std::fixed << std::setprecision(COMPLEX_ROUND-1);
+    
     realStream << _real;
-    imagStream << _imag;
+    if (_imag >= 0) imagStream <<  _imag;
+    else            imagStream << -_imag;
     
     std::string realString = realStream.str();
     std::string imagString = imagStream.str();
 
-    return realString + " + " + imagString;
+    if (_imag >= 0) return realString + "+" + imagString;
+    else            return realString + "-" + imagString;
 }
 
 Complex Real(float _real_)

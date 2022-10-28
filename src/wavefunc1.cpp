@@ -159,21 +159,21 @@ std::string WaveFunc1::string()
     {
         for (uint32_t i = 0u; i < _size - 1u; i++)
         {
-            result += value(i).string();
+            result += probAmp(i).string();
             result += ", ";
         }
-        result += value(_size - 1u).string();
+        result += probAmp(_size - 1u).string();
     }
     else
     {
         for (uint32_t i = 0u; i < MAX_STR_SIZE_WIDTH - 2u; i++)
         {
-            result += value(i).string();
+            result += probAmp(i).string();
             result += ", ";
         }
-        result += value(MAX_STR_SIZE_WIDTH - 2u).string();
+        result += probAmp(MAX_STR_SIZE_WIDTH - 2u).string();
         result += ", ... ";
-        result += value(_size - 1u).string();
+        result += probAmp(_size - 1u).string();
     }
     
     result += " ]";
