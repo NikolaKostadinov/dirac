@@ -105,13 +105,13 @@ void WaveFunc2::evolve(float _dt_, Scalar2* _toPotential_)
                 d2dy2.shrink(dy * dy);
 
                 float   potential = _toPotential_->value(i, j);                         // unleash your full potential
-                float  icoreCoef  = - potential * _dt_ / HBAR ;
+                float  icoreCoef  = -  potential * _dt_ / HBAR;
                 Complex coreCoef  = Complex(1, icoreCoef)     ;
                 
                 *address(i, j) = laplCoef * (d2dx2 + d2dy2) + coreCoef * thisAmp;       // the cat equation
             }
 
-        //normalize();                                                                    // just in case
+        normalize();                                                                    // just in case
     }
     else throw BASE_NOT_SAME;
 }
