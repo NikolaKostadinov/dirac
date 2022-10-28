@@ -26,13 +26,11 @@ class WaveFunc1 : public Field1<Complex>
         void evolve    (float _deltaTime_, Scalar1    _potential_);
         void evolve    (float _deltaTime_, Scalar1* _toPotential_);
 
-        Complex probAmp(uint32_t _index_)                ;
-        float   prob   (uint32_t _index_)                ;
+        float   mass   (                );
+        Complex probAmp(uint32_t _index_);
+        float   prob   (uint32_t _index_);
+        float   prob   (                );
         float   prob   (uint32_t _start_, uint32_t _end_);
-
-        float   mass();
-        
-        float totalProb();
 
         std::string string();
 

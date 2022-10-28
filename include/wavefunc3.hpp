@@ -25,8 +25,8 @@ class WaveFunc3 : public Field3<Complex>
         void evolve    (float _deltaTime_, Scalar3    _potential_);
         void evolve    (float _deltaTime_, Scalar3* _toPotential_);
 
-        Complex probAmp(uint32_t _index_, uint32_t _jndex_, uint32_t _kindex_);
-        float   prob   (uint32_t _index_, uint32_t _jndex_, uint32_t _kindex_);
+        Complex probAmp(uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_);
+        float   prob   (uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_);
         
         float totalProb();
 
