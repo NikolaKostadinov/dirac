@@ -2,34 +2,35 @@
 #include <cmath>
 #include <iostream>
 
-#define N   4u
+#define B   100.0f
+#define N   40u
 #define T   100
-#define DT  0.1F
+#define DT  10.0f
 
 int main()
 {   
-    Base*        x     = new Base(-1, N, 1)  ;
+    Base*        x     = new Base(-B, N, B)  ;
     Basis2*      basis = new Basis2(x, x)    ;
     Scalar2*     u     = new Scalar2(basis)  ;
     WaveFunc2*   psi   = new WaveFunc2(basis);
 
-    float        potnVals[N][N];
+    //float        potnVals[N][N];
     Complex      probAmps[N][N];
 
     for (uint32_t i = 0u; i < N; i++)
         for (uint32_t j = 0u; j < N; j++)
         {
-            potnVals[i][j] = 1.0f              ;
+            //potnVals[i][j] = 0.0f              ;
             probAmps[i][j] = Complex(i*i + j*j);
         }
 
     psi->      setMass(1.0F)           ;
     psi->setNormValues(&probAmps[0][0]);
-    u  ->    setValues(&potnVals[0][0]);
+    //u  ->    setValues(&potnVals[0][0]);
 
-    std::cout << psi->string()    << std::endl << std::endl;
-    for (int t = 0; t < T; t++) psi->evolve(DT)            ;
-    std::cout << psi->string()    << std::endl             ;
+    std::cout << psi->string() << std::endl << std::endl;
+    for (int t = 0; t < T; t++) psi->evolve(DT)         ;
+    std::cout << psi->string() << std::endl << std::endl;
 
     std::cin.get();
     return 0;
