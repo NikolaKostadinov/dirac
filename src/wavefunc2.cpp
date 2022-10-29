@@ -230,9 +230,9 @@ Complex WaveFunc2::d2dy2(uint32_t _index_, uint32_t _jndex_)
     Complex two     = Real(2)                ;
     Complex dAmp                             ;
 
-    if      (_jndex_ ==        0u) dAmp = value(_index_,        1u) - two * thisAmp                             ;
-    else if (_jndex_ == _ySize-1u) dAmp = value(_index_, _ySize-2u) - two * thisAmp                             ;
-    else                           dAmp = value(_index_,_jndex_+1u) - two * thisAmp + value(_index_, _jndex_-1u);
+    if      (_jndex_ ==        0u) dAmp = value(_index_,         1u) - two * thisAmp                             ;
+    else if (_jndex_ == _ySize-1u) dAmp = value(_index_,  _ySize-2u) - two * thisAmp                             ;
+    else                           dAmp = value(_index_, _jndex_+1u) - two * thisAmp + value(_index_, _jndex_-1u);
 
     dAmp.shrink(dy * dy);
 

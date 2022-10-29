@@ -5,7 +5,8 @@ WaveFunc1::WaveFunc1()
     _size          = 0u         ;
     _toBase        = new Base   ;
     _originAddress = new Complex;
-    _mass          = 0.0F       ;
+    _norm          = 0.0f       ;
+    _mass          = 0.0f       ;
 }
 
 WaveFunc1::~WaveFunc1()
@@ -21,6 +22,7 @@ WaveFunc1::WaveFunc1(Base _base_)
     _size          =  _base_.size();
     _toBase        = &_base_       ;
     _originAddress =  new Complex  ;
+    _norm          =  0.0f         ;
     _mass          =  0.0f         ;
 }
 
@@ -29,6 +31,7 @@ WaveFunc1::WaveFunc1(Base* _toBase_)
     _size          = _toBase_->size();
     _toBase        = _toBase_        ;
     _originAddress = new Complex     ;
+    _norm          = 0.0f            ;
     _mass          = 0.0f            ;
 }
 
@@ -114,33 +117,39 @@ bool WaveFunc1::isMassValid()
     else                 return true ;
 }
 
+float WaveFunc1::norm()
+{
+    return _norm;
+}
+
+float WaveFunc1::mass()
+{
+    return _mass;
+}
+
+float WaveFunc1::ampFactor()
+{
+    return _norm / sqrt( sumSqr() );
+}
+
+float WaveFunc1::sqrFactor()
+{
+    return prob() / sumSqr();
+}
+
 Complex WaveFunc1::probAmp(uint32_t _index_)
 {
-    float  sumsqr = sumSqr()            ;
-    float  factor = _norm / sqrt(sumsqr);
-    return Real(factor) * value(_index_);
+    return Real(ampFactor()) * value(_index_);
 }
 
 float WaveFunc1::prob(uint32_t _index_)
 {
-    float  sumsqr = sumSqr()               ;
-    float  sqrlen = prob()                 ;
-    float  factor = sqrlen / sumsqr        ;
-    return factor * value(_index_).conjSq();
+    return sqrFactor() * value(_index_).conjSq();
 }
 
 float WaveFunc1::prob()
 {
     return _norm * _norm;
-}
-
-float WaveFunc1::prob(uint32_t _start_, uint32_t _end_)
-{
-    float sum = 0.0f;
-    for (uint32_t i = _start_; i <= _end_; i++)
-        sum += prob(i);
-    
-    return sum;
 }
 
 float WaveFunc1::sumSqr()
@@ -150,6 +159,47 @@ float WaveFunc1::sumSqr()
         sum += value(i).conjSq();
     
     return sum;
+}
+
+Complex WaveFunc1::ddx(uint32_t _index_)
+{
+    float   dx   = _toBase->dx();
+    Complex dAmp                ;
+
+    if      (_index_ ==       0u) dAmp = value(_index_+1u)   /*     NULL    */;
+    else if (_index_ == _size-1u) dAmp = /*     NULL    */ - value(_index_-1u);
+    else                          dAmp = value(_index_+1u) - value(_index_-1u);
+
+    dAmp.shrink(2.0f * dx );
+    dAmp.scale(ampFactor());
+
+    return dAmp;
+}
+
+Complex WaveFunc1::d2dx2(uint32_t _index_)
+{
+    float   dx      = _toBase->dx() ;
+    Complex thisAmp = value(_index_);
+    Complex two     = Real(2.0f)    ;
+    Complex d2Amp                   ;
+
+    if      (_index_ ==       0u) d2Amp = value(_index_+1u) - two * thisAmp   /*     NULL    */;
+    else if (_index_ == _size-1u) d2Amp = /*     NULL    */ - two * thisAmp + value(_index_-1u);
+    else                          d2Amp = value(_index_+1u) - two * thisAmp + value(_index_-1u);
+
+    d2Amp.shrink(dx * dx);
+    d2Amp.scale(ampFactor());
+
+    return d2Amp;
+}
+
+float WaveFunc1::prob(uint32_t _start_, uint32_t _end_)
+{
+    float sum = 0.0f;
+    for (uint32_t i = _start_; i <= _end_; i++)
+        sum += value(i).conjSq();
+    
+    return sqrFactor() * sum;
 }
 
 std::string WaveFunc1::string()
