@@ -174,6 +174,76 @@ float WaveFunc2::sumSqr()
     return  sum;
 }
 
+Complex WaveFunc2::ddx(uint32_t _index_, uint32_t _jndex_)
+{
+    float   dx   = _toBasis->dx();
+    Complex dAmp                 ;
+
+    if      (_index_ ==        0u) dAmp =  value(        1u, _jndex_)                             ;
+    else if (_index_ == _xSize-1u) dAmp = -value(_index_-1u, _jndex_)                             ;
+    else                           dAmp =  value(_index_+1u, _jndex_) - value(_index_-1u, _jndex_);
+
+    dAmp.shrink(2 * dx);
+
+    return dAmp;
+}
+
+Complex WaveFunc2::ddy(uint32_t _index_, uint32_t _jndex_)
+{
+    float   dy   = _toBasis->dy();
+    Complex dAmp                 ;
+
+    if      (_jndex_ ==        0u) dAmp =  value(_index_,         1u)                             ;
+    else if (_jndex_ == _ySize-1u) dAmp = -value(_index_, _jndex_-1u)                             ;
+    else                           dAmp =  value(_index_, _jndex_+1u) - value(_index_, _jndex_-1u);
+
+    dAmp.shrink(2 * dy);
+
+    return dAmp;
+}
+
+Complex WaveFunc2::grad(uint32_t _index_, uint32_t _jndex_)
+{
+    return ddx(_index_, _jndex_) + ddy(_index_, _jndex_);
+}
+
+Complex WaveFunc2::d2dx2(uint32_t _index_, uint32_t _jndex_)
+{
+    float   dx      = _toBasis->dx()         ;
+    Complex thisAmp = value(_index_, _jndex_);
+    Complex two     = Real(2)                ;
+    Complex d2Amp                            ;
+
+    if      (_index_ ==        0u) d2Amp = value(        1u, _jndex_) - two * thisAmp                             ;
+    else if (_index_ == _xSize-1u) d2Amp = value( _xSize-2u, _jndex_) - two * thisAmp                             ;
+    else                           d2Amp = value(_index_+1u, _jndex_) - two * thisAmp + value(_index_-1u, _jndex_);
+
+    d2Amp.shrink(dx * dx);
+
+    return d2Amp;
+}
+
+Complex WaveFunc2::d2dy2(uint32_t _index_, uint32_t _jndex_)
+{
+    float   dy      = _toBasis->dy()         ;
+    Complex thisAmp = value(_index_, _jndex_);
+    Complex two     = Real(2)                ;
+    Complex dAmp                             ;
+
+    if      (_jndex_ ==        0u) dAmp = value(_index_,        1u) - two * thisAmp                             ;
+    else if (_jndex_ == _ySize-1u) dAmp = value(_index_, _ySize-2u) - two * thisAmp                             ;
+    else                           dAmp = value(_index_,_jndex_+1u) - two * thisAmp + value(_index_, _jndex_-1u);
+
+    dAmp.shrink(dy * dy);
+
+    return dAmp;
+}
+
+Complex WaveFunc2::laplace(uint32_t _index_, uint32_t _jndex_)
+{
+    return d2dx2(_index_, _jndex_) + d2dy2(_index_, _jndex_);
+}
+
 std::string WaveFunc2::string()
 {
     bool isXBig  =    _xSize > MAX_STR_SIZE_WIDTH;
