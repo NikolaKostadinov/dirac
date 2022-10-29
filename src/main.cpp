@@ -24,8 +24,8 @@ int main()
 
     std::cout << psi->prob()                 << std::endl;
     std::cout << psi->string()               << std::endl;
-    std::cout << psi->grad(2, 2).string()     << std::endl;
-    std::cout << psi->laplace(2, 2).string()   << std::endl;
+    std::cout << psi->grad(2, 2).string()    << std::endl;
+    std::cout << psi->laplace(2, 2).string() << std::endl;
 
     std::cin.get();
     return 0;

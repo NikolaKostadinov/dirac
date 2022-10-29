@@ -16,7 +16,7 @@ class Field1
         Field1(Base  _basis_  );
         Field1(Base* _toBasis_);
 
-        void setValues(T* _address_);
+        void     setValues(T* _address_);
 
         uint32_t size  ();
         Base*    toBase();
@@ -24,8 +24,6 @@ class Field1
 
         T*       address(uint32_t _index_ = 0u);
         T        value  (uint32_t _index_     );
-        T        ddx    (uint32_t _index_     );
-        T        d2dx2  (uint32_t _index_     );
 
     protected:
 
