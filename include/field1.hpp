@@ -18,11 +18,14 @@ class Field1
 
         void setValues(T* _address_);
 
-        uint32_t size                        ();
-        Base*    toBase                      ();
-        Base     base                        ();
+        uint32_t size  ();
+        Base*    toBase();
+        Base     base  ();
+
         T*       address(uint32_t _index_ = 0u);
         T        value  (uint32_t _index_     );
+        T        ddx    (uint32_t _index_     );
+        T        d2dx2  (uint32_t _index_     );
 
     protected:
 

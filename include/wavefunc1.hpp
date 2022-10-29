@@ -37,9 +37,6 @@ class WaveFunc1 : public Field1<Complex>
         float   prob   (                );
         float   sumSqr (                );
 
-        Complex ddx    (uint32_t _index_);
-        Complex d2dx2  (uint32_t _index_);
-
         float   prob   (uint32_t _start_, uint32_t _end_);
 
         float expcIndex();
