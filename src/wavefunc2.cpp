@@ -6,6 +6,7 @@ WaveFunc2::WaveFunc2()
     _ySize         = 0u         ;
     _toBasis       = new Basis2 ;
     _originAddress = new Complex;
+    _norm          = 0.0f       ;
     _mass          = 0.0f       ;
 }
 
@@ -24,6 +25,7 @@ WaveFunc2::WaveFunc2(Basis2 _basis_)
     _ySize         =  _basis_.ySize();
     _toBasis       = &_basis_        ;
     _originAddress =  new Complex    ;
+    _norm          =  0.0f           ;
     _mass          =  0.0f           ;
 }
 
@@ -33,6 +35,7 @@ WaveFunc2::WaveFunc2(Basis2* _toBasis_)
     _ySize         = _toBasis_->ySize();
     _toBasis       = _toBasis_         ;
     _originAddress = new Complex       ;
+    _norm          = 0.0f              ;
     _mass          = 0.0f              ;
 }
 
@@ -143,10 +146,9 @@ float WaveFunc2::mass()
 
 Complex WaveFunc2::probAmp(uint32_t _index_, uint32_t _jndex_)
 {
-    float  sumsqr = sumSqr()                        ;
-    float  sqrlen = prob()                          ;
-    float  factor = sqrlen / sumsqr                 ;
-    return factor * value(_index_, _jndex_).conjSq();
+    float  sumsqr = sumSqr()                       ;
+    float  factor = _norm / sqrt(sumsqr)           ;
+    return Real(factor)   * value(_index_, _jndex_);
 }
 
 float WaveFunc2::prob()
@@ -156,7 +158,10 @@ float WaveFunc2::prob()
 
 float WaveFunc2::prob(uint32_t _index_, uint32_t _jndex_)
 {
-    return value(_index_, _jndex_).conjSq();
+    float  sumsqr = sumSqr()                        ;
+    float  sqrlen = prob()                          ;
+    float  factor = sqrlen / sumsqr                 ;
+    return factor * value(_index_, _jndex_).conjSq();
 }
 
 float WaveFunc2::sumSqr()
@@ -188,7 +193,7 @@ std::string WaveFunc2::string()
         result += "[ ";
         for (uint32_t i = 0u; i < xStringSize; i++)
         {
-            result += value(i, j).string();
+            result += probAmp(i, j).string();
 
             if      (i == _xSize - 1u     ) result += " ]"   ;
             else if (i == xStringSize - 1u) result += ",...]";                                          // devil's language ⛧

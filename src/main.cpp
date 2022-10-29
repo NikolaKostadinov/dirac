@@ -22,9 +22,10 @@ int main()
     psi->setNorm(1.0f);
     psi->setMass(1.0f);
 
-    std::cout << psi->prob()     << std::endl;
-    std::cout << psi->string()   << std::endl;
-    std::cout << psi->prob(3, 3) << std::endl;
+    std::cout << psi->prob()                 << std::endl;
+    std::cout << psi->string()               << std::endl;
+    std::cout << psi->probAmp(3, 3).string() << std::endl;
+    std::cout << psi->prob(3, 3)             << std::endl;
 
     std::cin.get();
     return 0;
