@@ -68,7 +68,7 @@ void WaveFunc1::evolve(float _dt_)
         nullArray[i] = 0.0f;
 
     nullField->setValues(nullArray);
-    evolve(   _dt_,      nullField);
+    evolve(        _dt_, nullField);
 }
 
 void WaveFunc1::evolve(float _dt_, Scalar1 _potential_)
@@ -80,27 +80,21 @@ void WaveFunc1::evolve(float _dt_, Scalar1* _toPotential_)
 {
     if (_toPotential_->toBase() == _toBase)
     {
+        checkNorm();
         checkMass();
 
-        float dx = _toBase->dx();
+        float   ifactor  = 0.5f * HBAR * _dt_ / _mass;              // inverted triangle factor
+        Complex  factor  = Imag(ifactor)             ;              // welcome to wonderland
+        Complex  thisAmp                             ;
+        Complex    d2Amp                             ;
 
-        float   ifactor = 0.5f * HBAR * _dt_ / _mass;                                       // inverted triangle factor
-        Complex  factor = Complex(0, ifactor)       ;                                       // welcome to wonderland
-        Complex  two    = Complex(2)                ;                                       // god's number
-
-        for (uint32_t i = 1u; i < _size - 1u; i++)
+        for (uint32_t i = 0u; i < _size; i++)
         {
-            Complex thisAmp = value(i)                                 ;
-            Complex d2dx2   = value(i+1u) - two * thisAmp + value(i-1u);                    // inverse triangle
-            d2dx2.scale(dx  * dx)                                      ;
+            thisAmp = value(i       );
+            d2Amp   = d2dx2(i, false);
 
-            *address(i) = factor * d2dx2 + thisAmp;                                         // cat equation
+            *address(i) = factor * d2Amp + thisAmp;                 // cat equation (NO POTENTIAL)
         }
-
-        Complex fstAmp = value(      0u);                                                   // easy boundary conditions
-        Complex lstAmp = value(_size-1u);
-        *address(      0u) = factor * (value(      1u) - two * fstAmp)/(dx * dx) + fstAmp;
-        *address(_size-1u) = factor * (value(_size-2u) - two * lstAmp)/(dx * dx) + lstAmp;
     }
     else throw BASE_NOT_SAME;
 }
@@ -129,39 +123,46 @@ float WaveFunc1::mass()
 
 float WaveFunc1::ampFactor()
 {
-    return _norm / sqrt( sumSqr() );
+    return _norm / sqrt( prob(false) );                             // 0x5f3759df
 }
 
-float WaveFunc1::sqrFactor()
+Complex WaveFunc1::cmpFactor()
 {
-    return prob() / sumSqr();
+    return Real(ampFactor());
 }
 
-Complex WaveFunc1::probAmp(uint32_t _index_)
+float WaveFunc1::prbFactor()
 {
-    return Real(ampFactor()) * value(_index_);
+    return prob() / prob(false);
 }
 
-float WaveFunc1::prob(uint32_t _index_)
+Complex WaveFunc1::probAmp(uint32_t _index_, bool _isNormed_)
 {
-    return sqrFactor() * value(_index_).conjSq();
+    if   (_isNormed_) return cmpFactor() * value(_index_);
+    else              return               value(_index_);
 }
 
-float WaveFunc1::prob()
+float WaveFunc1::prob(uint32_t _index_, bool _isNormed_)
 {
-    return _norm * _norm;
-}
-
-float WaveFunc1::sumSqr()
-{
-    float sum = 0.0f;
-    for (uint32_t i = 0u; i < _size; i++)
-        sum += value(i).conjSq();
+    if   (_isNormed_) return prbFactor() * value(_index_).conjSq();
+    else              return               value(_index_).conjSq();
     
-    return sum;
 }
 
-Complex WaveFunc1::ddx(uint32_t _index_)
+float WaveFunc1::prob(bool _isNormed_)
+{
+    if   (_isNormed_) return _norm * _norm;
+    else
+    {
+        float sum = 0.0f;
+        for (uint32_t i = 0u; i < _size; i++)
+            sum += value(i).conjSq();
+    
+        return sum;
+    }
+}
+
+Complex WaveFunc1::ddx(uint32_t _index_, bool _isNormed_)
 {
     float   dx   = _toBase->dx();
     Complex dAmp                ;
@@ -170,15 +171,16 @@ Complex WaveFunc1::ddx(uint32_t _index_)
     else if (_index_ == _size-1u) dAmp = /*     NULL    */ - value(_index_-1u);
     else                          dAmp = value(_index_+1u) - value(_index_-1u);
 
-    dAmp.shrink(2.0f * dx );
-    dAmp.scale(ampFactor());
+    dAmp.shrink(2.0f * dx);
+
+    if (_isNormed_) dAmp.scale(ampFactor());
 
     return dAmp;
 }
 
-Complex WaveFunc1::d2dx2(uint32_t _index_)
+Complex WaveFunc1::d2dx2(uint32_t _index_, bool _isNormed_)
 {
-    float   dx      = _toBase->dx() ;
+    float   dx      = _toBase->dx( );
     Complex thisAmp = value(_index_);
     Complex two     = Real(2.0f)    ;
     Complex d2Amp                   ;
@@ -188,18 +190,20 @@ Complex WaveFunc1::d2dx2(uint32_t _index_)
     else                          d2Amp = value(_index_+1u) - two * thisAmp + value(_index_-1u);
 
     d2Amp.shrink(dx * dx);
-    d2Amp.scale(ampFactor());
+
+    if (_isNormed_) d2Amp.scale(ampFactor());
 
     return d2Amp;
 }
 
-float WaveFunc1::prob(uint32_t _start_, uint32_t _end_)
+float WaveFunc1::prob(uint32_t _start_, uint32_t _end_, bool _isNormed_)
 {
     float sum = 0.0f;
     for (uint32_t i = _start_; i <= _end_; i++)
         sum += value(i).conjSq();
     
-    return sqrFactor() * sum;
+    if   (_isNormed_) return prbFactor() * sum;
+    else              return               sum;
 }
 
 std::string WaveFunc1::string()

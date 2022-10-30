@@ -30,19 +30,20 @@ class WaveFunc1 : public Field1<Complex>
         bool    isNormValid();
         bool    isMassValid();
 
-        float   norm     (                );
-        float   mass     (                );
-        float   ampFactor(                );
-        float   sqrFactor(                );
-        Complex probAmp  (uint32_t _index_);
-        float   prob     (uint32_t _index_);
-        float   prob     (                );
-        float   sumSqr   (                );
+        float   norm     (                                                     );
+        float   mass     (                                                     );
+        float   ampFactor(                                                     );
+        Complex cmpFactor(                                                     );
+        float   prbFactor(                                                     );
+        Complex probAmp  (uint32_t _index_, bool _isNormed_ = DEFAULT_IS_NORMED);
+        float   prob     (uint32_t _index_, bool _isNormed_ = DEFAULT_IS_NORMED);
+        float   prob     (                  bool _isNormed_ = DEFAULT_IS_NORMED);
 
-        Complex ddx    (uint32_t _index_);
-        Complex d2dx2  (uint32_t _index_);
+        Complex ddx      (uint32_t _index_, bool _isNormed_ = DEFAULT_IS_NORMED);
+        Complex d2dx2    (uint32_t _index_, bool _isNormed_ = DEFAULT_IS_NORMED);
 
-        float   prob   (uint32_t _start_, uint32_t _end_);
+        float   prob     (uint32_t _start_,
+                          uint32_t _end_  , bool _isNormed_ = DEFAULT_IS_NORMED);
 
         float expcIndex();
         float excpX    ();
