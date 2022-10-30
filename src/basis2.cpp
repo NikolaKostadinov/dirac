@@ -2,7 +2,8 @@
 
 Basis2::Basis2()
 {
-
+    _toX = new Base();
+    _toY = new Base();
 }
 
 Basis2::~Basis2()
@@ -54,7 +55,7 @@ float Basis2::yStart()
 
 float Basis2::zStart()
 {
-    return 0.0F;
+    return 0.0f;
 }
 
 float Basis2::xEnd()
@@ -69,7 +70,7 @@ float Basis2::yEnd()
 
 float Basis2::zEnd()
 {
-    return 0.0F;
+    return 0.0f;
 }
 
 float Basis2::dx()
@@ -84,7 +85,7 @@ float Basis2::dy()
 
 float Basis2::dz()
 {
-    return 0.0F;
+    return 0.0f;
 }
 
 float Basis2::xLength()
@@ -99,7 +100,7 @@ float Basis2::yLength()
 
 float Basis2::zLength()
 {
-    return 0.0F;
+    return 0.0f;
 }
 
 float Basis2::x(uint32_t _index_)
@@ -107,12 +108,12 @@ float Basis2::x(uint32_t _index_)
     return _toX->x(_index_);
 }
 
-float Basis2::y(uint32_t _index_)
+float Basis2::y(uint32_t _jndex_)
 {
-    return _toY->x(_index_);
+    return _toY->x(_jndex_);
 }
 
-float Basis2::z(uint32_t _index_)
+float Basis2::z(uint32_t _kndex_)
 {
-    return 0.0F;
+    return 0.0f;
 }

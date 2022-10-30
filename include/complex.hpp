@@ -16,8 +16,8 @@ class Complex
 
         Complex(float _real_, float _imag_ = DEFAULT_IMAG);
 
-        void scale (float _factor_);
-        void shrink(float _factor_);
+        void    scale (float _factor_);
+        void    shrink(float _factor_);
 
         Complex operator+();
         Complex operator-();
@@ -28,10 +28,10 @@ class Complex
         Complex operator/ (Complex _other_);
         Complex operator==(Complex _other_);
 
-        float real();
-        float imag();
-        float mod ();
-        float arg ();
+        float   real();
+        float   imag();
+        float   mod ();
+        float   arg ();
 
         Complex     sq();
         Complex conj  ();

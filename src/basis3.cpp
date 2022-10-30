@@ -2,7 +2,7 @@
 
 Basis3::Basis3()
 {
-
+    _toZ = new Base();
 }
 
 Basis3::~Basis3()
@@ -10,17 +10,13 @@ Basis3::~Basis3()
     
 }
 
-Basis3::Basis3(Base _xBase_, Base _yBase_, Base _zBase_)
+Basis3::Basis3(Base _xBase_, Base _yBase_, Base _zBase_) : Basis2(_xBase_, _yBase_)
 {
-    _toX = &_xBase_;
-    _toY = &_yBase_;
     _toZ = &_zBase_;
 }
 
-Basis3::Basis3(Base* _toXBase_, Base* _toYBase_, Base* _toZBase_)
+Basis3::Basis3(Base* _toXBase_, Base* _toYBase_, Base* _toZBase_) : Basis2(_toXBase_, _toYBase_)
 {
-    _toX = _toXBase_;
-    _toY = _toYBase_;
     _toZ = _toZBase_;
 }
 
@@ -54,7 +50,7 @@ float Basis3::zLength()
     return _toZ->length();
 }
 
-float Basis3::z(uint32_t _index_)
+float Basis3::z(uint32_t _kndex_)
 {
-    return _toZ->x(_index_);
+    return _toZ->x(_kndex_);
 }

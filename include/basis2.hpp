@@ -34,8 +34,8 @@ class Basis2
         float zLength();
 
         float x(uint32_t _index_);
-        float y(uint32_t _index_);
-        float z(uint32_t _index_);
+        float y(uint32_t _jndex_);
+        float z(uint32_t _kndex_);
 
     protected:
 

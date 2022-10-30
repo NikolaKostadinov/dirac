@@ -2,8 +2,8 @@
 
 Complex::Complex()
 {
-    _real = 0;
-    _imag = 0;
+    _real = 0.0f;
+    _imag = 0.0f;
 }
 
 Complex::~Complex()
@@ -103,7 +103,7 @@ float Complex::arg()
 Complex Complex::sq()
 {
     float real = _real * _real - _imag * _imag;
-    float imag =  2.0F * _real * _imag;
+    float imag =  2.0f * _real * _imag;
 
     return Complex(real, imag);
 }
@@ -123,20 +123,20 @@ std::string Complex::string()
     std::stringstream realStream;
     std::stringstream imagStream;
 
-    if (_real >= 0) realStream << std::fixed << std::setprecision(COMPLEX_ROUND  );
-    else            realStream << std::fixed << std::setprecision(COMPLEX_ROUND-1);
-    if (_imag >= 0) imagStream << std::fixed << std::setprecision(COMPLEX_ROUND  );
-    else            imagStream << std::fixed << std::setprecision(COMPLEX_ROUND-1);
+    if (_real >= 0.0f) realStream << std::fixed << std::setprecision(COMPLEX_ROUND  );
+    else               realStream << std::fixed << std::setprecision(COMPLEX_ROUND-1);
+    if (_imag >= 0.0f) imagStream << std::fixed << std::setprecision(COMPLEX_ROUND  );
+    else               imagStream << std::fixed << std::setprecision(COMPLEX_ROUND-1);
     
     realStream << _real;
-    if (_imag >= 0) imagStream <<  _imag;
-    else            imagStream << -_imag;
+    if (_imag >= 0.0f) imagStream <<  _imag;
+    else               imagStream << -_imag;
     
     std::string realString = realStream.str();
     std::string imagString = imagStream.str();
 
-    if (_imag >= 0) return realString + "+" + imagString;
-    else            return realString + "-" + imagString;
+    if (_imag >= 0.0f) return realString + "+" + imagString;
+    else               return realString + "-" + imagString;
 }
 
 Complex Real(float _real_)
@@ -160,7 +160,7 @@ Complex cis(float _arg_)
 Complex sqrt(Complex _complex_)
 { 
     float   factor = sqrt(_complex_.mod());
-    Complex phase  = cis(0.5F * _complex_.arg());
+    Complex phase  = cis(0.5f * _complex_.arg());
 
     phase.scale(factor);
     return phase;

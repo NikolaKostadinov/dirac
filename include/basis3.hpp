@@ -24,7 +24,7 @@ class Basis3 : public Basis2
 
         float zLength();
 
-        float z(uint32_t _index_);
+        float z(uint32_t _kndex_);
 
     protected:
 
