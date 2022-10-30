@@ -2,7 +2,6 @@
 
 #include "engineparams.h"
 #include "exceptions.h"
-#include "quick.h"
 #include "complex.hpp"
 
 class WaveFunc

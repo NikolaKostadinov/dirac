@@ -10,7 +10,7 @@
 
 int main()
 {   
-   /*Base*      x     = new Base(-B, N, B)  ;
+    Base*      x     = new Base(-B, N, B)  ;
     Basis2*    basis = new Basis2(x, x)    ;
     WaveFunc2* psi   = new WaveFunc2(basis);
     Complex    probAmps[N][N]              ;
@@ -26,7 +26,9 @@ int main()
     for (int t = 0; t < T; t++)
     {
         psi->evolve();
-    }*/
+        std::cout << psi->prob(0, 0, true ) <<      "\t";
+        std::cout << psi->prob(0, 0, false) << std::endl;
+    }
 
     std::cin.get();
     return 0;

@@ -1,4 +1,5 @@
 #include "../include/wavefunc.hpp"
+#include "../include/quick.h"
 
 WaveFunc::WaveFunc()
 {

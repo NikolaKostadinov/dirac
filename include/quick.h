@@ -8,8 +8,8 @@ float invSqrt(float _x_)
     float  y;
     long   i;
 
-    x2 = 0.5 * _x_;
-    y  =       _x_;
+    x2 = 0.5f * _x_;
+    y  =        _x_;
 
     i = * ( long  * ) &y;           // evil floating point bit level hacking
     i = MAGIC - (i >> 1);           // what the fuck ?
