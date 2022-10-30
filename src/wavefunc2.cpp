@@ -46,7 +46,6 @@ void WaveFunc2::evolve(float _dt_, Scalar2* _toPotential_)
 {
     if (_toPotential_->toBasis() == _toBasis)
     {
-        checkNorm();
         checkMass();
         
         float dx = _toBasis->dx();

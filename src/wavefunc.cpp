@@ -59,6 +59,7 @@ float WaveFunc::mass()
 
 float WaveFunc::ampFactor()
 {
+    checkNorm();
     return _norm / sqrt( prob(false) );                             // 0x5f3759df
 }
 
@@ -69,6 +70,7 @@ Complex WaveFunc::cmpFactor()
 
 float WaveFunc::prbFactor()
 {
+    checkNorm();
     return prob(true) / prob(false);
 }
 

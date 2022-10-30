@@ -44,7 +44,6 @@ void WaveFunc1::evolve(float _dt_, Scalar1* _toPotential_)
 {
     if (_toPotential_->toBase() == _toBase)
     {
-        checkNorm();
         checkMass();
 
         float   iwingCoef = 0.5f * HBAR * _dt_ / _mass;             // inverted triangle factor
