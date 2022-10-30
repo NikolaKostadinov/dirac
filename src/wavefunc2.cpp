@@ -46,6 +46,7 @@ void WaveFunc2::evolve(float _dt_, Scalar2* _toPotential_)
 {
     if (_toPotential_->toBasis() == _toBasis)
     {
+        checkNorm();
         checkMass();
         
         float dx = _toBasis->dx();
@@ -103,8 +104,8 @@ Complex WaveFunc2::ddx(uint32_t _index_, uint32_t _jndex_, bool _isNormed_)
     float   dx   = _toBasis->dx();
     Complex dAmp                 ;
 
-    if      (_index_ ==        0u) dAmp =  value(_index_+1u,_jndex_)   /*         NULL        */;
-    else if (_index_ == _xSize-1u) dAmp =  /*         NULL        */ - value(_index_-1u,_jndex_);
+    if      (_index_ <=        0u) dAmp =  value(_index_+1u,_jndex_)   /*         NULL        */;
+    else if (_index_ >= _xSize-1u) dAmp =  /*         NULL        */ - value(_index_-1u,_jndex_);
     else                           dAmp =  value(_index_+1u,_jndex_) - value(_index_-1u,_jndex_);
 
     dAmp.shrink(2.0f * dx);
@@ -119,8 +120,8 @@ Complex WaveFunc2::ddy(uint32_t _index_, uint32_t _jndex_, bool _isNormed_)
     float   dy   = _toBasis->dy();
     Complex dAmp                 ;
 
-    if      (_jndex_ ==        0u) dAmp =  value(_index_,_jndex_+1u)   /*         NULL        */;
-    else if (_jndex_ == _ySize-1u) dAmp =  /*         NULL        */ - value(_index_,_jndex_-1u);
+    if      (_jndex_ <=        0u) dAmp =  value(_index_,_jndex_+1u)   /*         NULL        */;
+    else if (_jndex_ >= _ySize-1u) dAmp =  /*         NULL        */ - value(_index_,_jndex_-1u);
     else                           dAmp =  value(_index_,_jndex_+1u) - value(_index_,_jndex_-1u);
 
     dAmp.shrink(2.0f * dy);
