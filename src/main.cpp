@@ -22,10 +22,11 @@ int main()
     psi->setNorm(1.0f)             ;
     psi->setMass(1.0f)             ;
 
-    std::cout << psi->prob()                 << std::endl;
-    std::cout << psi->string()               << std::endl;
-    std::cout << psi->probAmp(2, 2).string() << std::endl;
-    std::cout << psi->prob(2, 2)             << std::endl;
+    for (int t = 0; t < T; t++)
+    {
+        std::cout << psi->prob(0, 0, false) << std::endl;
+        psi->evolve();
+    }
 
     std::cin.get();
     return 0;

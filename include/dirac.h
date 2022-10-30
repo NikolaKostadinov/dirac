@@ -2,7 +2,7 @@
     =================== DIRAC ENGINE ===================
 
     version:    v0.00.05-prealpha
-    released:   29.10.2022
+    released:   30.10.2022          (dd.mm.yyyy)
 
     WARNING:
 
