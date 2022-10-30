@@ -83,17 +83,21 @@ void WaveFunc1::evolve(float _dt_, Scalar1* _toPotential_)
         checkNorm();
         checkMass();
 
-        float   ifactor  = 0.5f * HBAR * _dt_ / _mass;              // inverted triangle factor
-        Complex  factor  = Imag(ifactor)             ;              // welcome to wonderland
-        Complex  thisAmp                             ;
-        Complex    d2Amp                             ;
+        float   iwingCoef = 0.5f * HBAR * _dt_ / _mass;             // inverted triangle factor
+        Complex  wingCoef = Imag(iwingCoef)           ;             // welcome to wonderland
+        Complex  thisAmp                              ;
+        Complex    d2Amp                              ;
 
         for (uint32_t i = 0u; i < _size; i++)
         {
             thisAmp = value(i       );
             d2Amp   = d2dx2(i, false);
 
-            *address(i) = factor * d2Amp + thisAmp;                 // cat equation (NO POTENTIAL)
+            float   potential = _toPotential_->value(i)   ;         // unleash your full potential
+            float  icoreCoef  = -  potential * _dt_ / HBAR;
+            Complex coreCoef  = Complex(1, icoreCoef)     ;
+
+            *address(i) = wingCoef * d2Amp + coreCoef * thisAmp;    // cat equation
         }
     }
     else throw BASE_NOT_SAME;
@@ -167,8 +171,8 @@ Complex WaveFunc1::ddx(uint32_t _index_, bool _isNormed_)
     float   dx   = _toBase->dx();
     Complex dAmp                ;
 
-    if      (_index_ ==       0u) dAmp = value(_index_+1u)   /*     NULL    */;
-    else if (_index_ == _size-1u) dAmp = /*     NULL    */ - value(_index_-1u);
+    if      (_index_ <=       0u) dAmp = value(_index_+1u)   /*     NULL    */;
+    else if (_index_ >= _size-1u) dAmp = /*     NULL    */ - value(_index_-1u);
     else                          dAmp = value(_index_+1u) - value(_index_-1u);
 
     dAmp.shrink(2.0f * dx);
@@ -185,8 +189,8 @@ Complex WaveFunc1::d2dx2(uint32_t _index_, bool _isNormed_)
     Complex two     = Real(2.0f)    ;
     Complex d2Amp                   ;
 
-    if      (_index_ ==       0u) d2Amp = value(_index_+1u) - two * thisAmp   /*     NULL    */;
-    else if (_index_ == _size-1u) d2Amp = /*     NULL    */ - two * thisAmp + value(_index_-1u);
+    if      (_index_ <=       0u) d2Amp = value(_index_+1u) - two * thisAmp   /*     NULL    */;
+    else if (_index_ >= _size-1u) d2Amp = /*     NULL    */ - two * thisAmp + value(_index_-1u);
     else                          d2Amp = value(_index_+1u) - two * thisAmp + value(_index_-1u);
 
     d2Amp.shrink(dx * dx);

@@ -30,19 +30,21 @@ class WaveFunc2 : public Field2<Complex>
         bool    isNormValid();
         bool    isMassValid();
 
-        float   norm   (                                  );
-        float   mass   (                                  );
-        Complex probAmp(uint32_t _index_, uint32_t _jndex_);
-        float   prob   (uint32_t _index_, uint32_t _jndex_);
-        float   prob   (                                  );
-        float   sumSqr (                                  );
+        float   norm     (                                                                       );
+        float   mass     (                                                                       );
+        float   ampFactor(                                                                       );
+        Complex cmpFactor(                                                                       );
+        float   prbFactor(                                                                       );
+        Complex probAmp  (uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED);
+        float   prob     (uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED);
+        float   prob     (                                    bool _isNormed_ = DEFAULT_IS_NORMED);
 
-        Complex ddx    (uint32_t _index_, uint32_t _jndex_);
-        Complex ddy    (uint32_t _index_, uint32_t _jndex_);
-        Complex grad   (uint32_t _index_, uint32_t _jndex_);
-        Complex d2dx2  (uint32_t _index_, uint32_t _jndex_);
-        Complex d2dy2  (uint32_t _index_, uint32_t _jndex_);
-        Complex laplace(uint32_t _index_, uint32_t _jndex_);
+        Complex ddx      (uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED);
+        Complex ddy      (uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED);
+        Complex grad     (uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED);
+        Complex d2dx2    (uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED);
+        Complex d2dy2    (uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED);
+        Complex laplace  (uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED);
 
         float   expcIndex();
         float   expcJndex();
