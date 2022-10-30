@@ -1,13 +1,8 @@
 #include "../include/wavefunc2.hpp"
 
-WaveFunc2::WaveFunc2()
+WaveFunc2::WaveFunc2() : Field2<Complex>(), WaveFunc()
 {
-    _xSize         = 0u         ;
-    _ySize         = 0u         ;
-    _toBasis       = new Basis2 ;
-    _originAddress = new Complex;
-    _norm          = 0.0f       ;
-    _mass          = 0.0f       ;
+
 }
 
 WaveFunc2::~WaveFunc2()
@@ -19,48 +14,14 @@ WaveFunc2::~WaveFunc2()
             delete address(i, j);
 }
 
-WaveFunc2::WaveFunc2(Basis2 _basis_)
+WaveFunc2::WaveFunc2(Basis2 _basis_) : Field2<Complex>(_basis_), WaveFunc()
 {
-    _xSize         =  _basis_.xSize();
-    _ySize         =  _basis_.ySize();
-    _toBasis       = &_basis_        ;
-    _originAddress =  new Complex    ;
-    _norm          =  0.0f           ;
-    _mass          =  0.0f           ;
+
 }
 
-WaveFunc2::WaveFunc2(Basis2* _toBasis_)
+WaveFunc2::WaveFunc2(Basis2* _toBasis_) : Field2<Complex>(_toBasis_), WaveFunc()
 {
-    _xSize         = _toBasis_->xSize();
-    _ySize         = _toBasis_->ySize();
-    _toBasis       = _toBasis_         ;
-    _originAddress = new Complex       ;
-    _norm          = 0.0f              ;
-    _mass          = 0.0f              ;
-}
 
-void WaveFunc2::setNorm(float _norm_)
-{
-    _norm =  _norm_;
-    checkNorm(    );
-}
-
-void WaveFunc2::setMass(float _mass_)
-{
-    _mass =  _mass_;
-    checkMass(    );
-}
-
-void WaveFunc2::checkNorm()
-{
-    if      (_norm == 0.0f) throw     ZERO_NORM;
-    else if (_norm <  0.0f) throw NEGATIVE_NORM;
-}
-
-void WaveFunc2::checkMass()
-{
-    if      (_mass == 0.0f) throw     ZERO_MASS;
-    else if (_mass <  0.0f) throw NEGATIVE_MASS;
 }
 
 void WaveFunc2::evolve(float _dt_)
@@ -109,43 +70,6 @@ void WaveFunc2::evolve(float _dt_, Scalar2* _toPotential_)
             }
     }
     else throw BASE_NOT_SAME;
-}
-
-bool WaveFunc2::isNormValid()
-{
-    if   (_norm <= 0.0f) return false;
-    else                 return true ;
-}
-
-bool WaveFunc2::isMassValid()
-{
-    if   (_mass <= 0.0f) return false;
-    else                 return true ;
-}
-
-float WaveFunc2::norm()
-{
-    return _norm;
-}
-
-float WaveFunc2::mass()
-{
-    return _mass;
-}
-
-float WaveFunc2::ampFactor()
-{
-    return _norm / sqrt( prob(false) );
-}
-
-Complex WaveFunc2::cmpFactor()
-{
-    return Real(ampFactor());
-}
-
-float WaveFunc2::prbFactor()
-{
-    return prob() / prob(false);
 }
 
 Complex WaveFunc2::probAmp(uint32_t _index_, uint32_t _jndex_, bool _isNormed_)
