@@ -10,8 +10,8 @@
 
 int main()
 {   
-    Base*      x     = new Base(-B, N, B)  ;
-    Basis2*    basis = new Basis2(x, x)    ;
+    Base*      x     = new Base(-B,  N,  B);
+    Basis2*    basis = new Basis2( x,   x );
     WaveFunc2* psi   = new WaveFunc2(basis);
     Complex    probAmps[N][N]              ;
     

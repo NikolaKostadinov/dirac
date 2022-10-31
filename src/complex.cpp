@@ -1,20 +1,14 @@
 #include "../include/complex.hpp"
 
-Complex::Complex()
+Complex::Complex(float _real_, float _imag_)
 {
-    _real = 0.0f;
-    _imag = 0.0f;
+    _real = _real_;
+    _imag = _imag_;
 }
 
 Complex::~Complex()
 {
 
-}
-
-Complex::Complex(float _real_, float _imag_)
-{
-    _real = _real_;
-    _imag = _imag_;
 }
 
 void Complex::scale(float _factor_)

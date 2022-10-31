@@ -1,7 +1,5 @@
 #include "../include/wavefunc2.hpp"
 
-#include <iostream>
-
 WaveFunc2::WaveFunc2() : Field2<Complex>(), WaveFunc()
 {
 

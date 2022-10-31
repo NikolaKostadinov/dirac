@@ -1,7 +1,7 @@
 #pragma once
 
-#include "engineparams.h"
-#include "exceptions.h"
+#include "engine_params.h"
+#include "engine_exceptions.h"
 #include "complex.hpp"
 #include "basis2.hpp"
 #include "field2.hpp"

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "engineparams.h"
+#include "engine_params.h"
 
 #include <cmath>
 #include <string>
@@ -11,10 +11,11 @@ class Complex
 {
     public:
 
-        Complex();
-        ~Complex();
-
-        Complex(float _real_, float _imag_ = DEFAULT_IMAG);
+        Complex(
+            float _real_ = DEFAULT_REAL,
+            float _imag_ = DEFAULT_IMAG
+        );
+        virtual ~Complex();
 
         void    scale (float _factor_);
         void    shrink(float _factor_);

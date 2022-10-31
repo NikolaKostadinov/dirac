@@ -1,8 +1,9 @@
 #pragma once
 
-#include "exceptions.h"
+#include "engine_exceptions.h"
 #include "base.hpp"
 #include "complex.hpp"
+
 #include <vector>
 
 template <class T>
