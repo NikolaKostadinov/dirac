@@ -23,11 +23,12 @@ int main()
     psi->setNorm(1.0f)             ;
     psi->setMass(1.0f)             ;
 
-    std::cout << "\nnormed\t\tnot normed\ttotal not normed prob\n";
+    std::cout << "\nindex\tnormed\t\tnot normed\ttotal not normed prob\n";
 
     for (int t = 0; t < T; t++)
     {
         psi->evolve(DT);
+        std::cout << t                      << "\t";
         std::cout << psi->prob(0, 0, true ) << "\t";
         std::cout << psi->prob(0, 0, false) << "\t";
         std::cout << psi->prob(      false) << "\n";
