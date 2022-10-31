@@ -1,5 +1,7 @@
 #include "../include/wavefunc2.hpp"
 
+#include <iostream>
+
 WaveFunc2::WaveFunc2() : Field2<Complex>(), WaveFunc()
 {
 
@@ -65,7 +67,7 @@ void WaveFunc2::evolve(float _dt_, Scalar2* _toPotential_)
                 float   potential = _toPotential_->value(i, j);                 // unleash your full potential
                 float  icoreCoef  = -  potential * _dt_ / HBAR;
                 Complex coreCoef  = Complex(1, icoreCoef)     ;
-                
+
                 *address(i, j) = laplCoef * d2Amp + coreCoef * thisAmp;         // the cat equation
             }
     }

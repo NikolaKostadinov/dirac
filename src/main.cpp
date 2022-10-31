@@ -3,8 +3,8 @@
 #include <cmath>
 #include <iostream>
 
-#define B   1.0f
-#define N   20u
+#define B   100.0f
+#define N   100u
 #define T   10
 #define DT  10.0f
 
