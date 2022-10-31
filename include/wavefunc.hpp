@@ -25,7 +25,10 @@ class WaveFunc
         Complex cmpFactor  ();
         float   prbFactor  ();
 
-        virtual float prob(bool _isNormed_ = DEFAULT_IS_NORMED);
+        virtual float       prob (bool _isNormed_ = DEFAULT_IS_NORMED);
+        virtual Complex    maxAmp(bool _isNormed_ = DEFAULT_IS_NORMED);
+        virtual Complex* toMaxAmp(                                   );
+        virtual float    maxProb (bool _isNormed_ = DEFAULT_IS_NORMED);
 
     protected:
 

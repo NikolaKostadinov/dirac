@@ -2,3 +2,4 @@
 bin/main*
 bin/*.exe
 bin/*.o
+*.py

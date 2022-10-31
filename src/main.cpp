@@ -4,8 +4,8 @@
 #include <iostream>
 
 #define B   1.0f
-#define N   4u
-#define T   100
+#define N   20u
+#define T   10
 #define DT  10.0f
 
 int main()
@@ -17,7 +17,7 @@ int main()
     
     for (uint32_t i = 0u; i < N; i++)
         for (uint32_t j = 0u; j < N; j++)
-            probAmps[i][j] = Imag(sqrt(i*i + j*j));
+            probAmps[i][j] = Imag( sqrt(i*i + j*j) );
 
     psi->setValues(&probAmps[0][0]);
     psi->setNorm(1.0f)             ;
@@ -26,10 +26,10 @@ int main()
     for (int t = 0; t < T; t++)
     {
         psi->evolve();
-        std::cout << psi->prob(0, 0, true ) <<      "\t";
-        std::cout << psi->prob(0, 0, false) << std::endl;
+        std::cout << psi->prob(0, 0, true ) << "\t";
+        std::cout << psi->prob(0, 0, false) << "\n";
     }
 
-    std::cin.get();
+    //std::cin.get();
     return 0;
 }

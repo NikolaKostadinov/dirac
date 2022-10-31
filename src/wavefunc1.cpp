@@ -136,6 +136,63 @@ float WaveFunc1::prob(uint32_t _start_, uint32_t _end_, bool _isNormed_)
     else              return               sum;
 }
 
+Complex WaveFunc1::maxAmp(bool _isNormed_)
+{
+    float    max    = 0.0f;
+    uint32_t index  = 0u  ;
+
+    for (uint32_t i = 0u; i <= _size; i++)
+    {
+        float thisProb = value(i).conjSq();
+
+        if (max < thisProb)
+        {
+            max   = thisProb;
+            index = i       ; 
+        }
+    }
+
+    return probAmp(index,_isNormed_);
+}
+
+Complex* WaveFunc1::toMaxAmp()
+{
+    float    max    = 0.0f;
+    uint32_t index  = 0u  ;
+
+    for (uint32_t i = 0u; i <= _size; i++)
+    {
+        float thisProb = value(i).conjSq();
+
+        if (max < thisProb)
+        {
+            max   = thisProb;
+            index = i       ;
+        }
+    }
+    
+    return address(index);
+}
+
+float WaveFunc1::maxProb(bool _isNormed_)
+{
+    float    max    = 0.0f;
+    uint32_t index  = 0u  ;
+
+    for (uint32_t i = 0u; i <= _size; i++)
+    {
+        float thisProb = value(i).conjSq();
+
+        if (max < thisProb)
+        {
+            max   = thisProb;
+            index = i       ;
+        }
+    }
+
+    return prob(index,_isNormed_);
+}
+
 std::string WaveFunc1::string()
 {
     std::string result = "[ ";

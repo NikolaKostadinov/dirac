@@ -77,6 +77,22 @@ float WaveFunc::prbFactor()
 
 float WaveFunc::prob(bool _isNormed_)
 {
-    if (_isNormed_) return _norm * _norm;
-    else            return  DEFAULT_NORM;
+    if (_isNormed_) return         _norm *        _norm;
+    else            return  DEFAULT_NORM * DEFAULT_NORM;
+}
+
+Complex WaveFunc::maxAmp(bool _isNormed_)
+{
+    if (_isNormed_) return Real(       _norm);
+    else            return Real(DEFAULT_NORM);
+}
+
+Complex* WaveFunc::toMaxAmp()
+{
+    return new Complex();
+}
+
+float WaveFunc::maxProb(bool _isNormed_)
+{
+    return prob(_isNormed_);
 }
