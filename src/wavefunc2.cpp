@@ -37,6 +37,9 @@ void WaveFunc2::evolve(float _dt_)
 
     nullField->setValues(nullArray);
     evolve(    _dt_,     nullField);
+
+    free(nullArray);
+    free(nullField);
 }
 
 void WaveFunc2::evolve(float _dt_, Scalar2 _potential_)
@@ -50,13 +53,14 @@ void WaveFunc2::evolve(float _dt_, Scalar2* _toPotential_)
     {
         checkMass();
         
-        float dx = _toBasis->dx();
-        float dy = _toBasis->dy();
+        Complex  thisAmp  ;
+        Complex    d2Amp  ;
+        float    potential;
+        float   icoreCoef ;
+        Complex  coreCoef ;
 
         float   ilaplCoef = 0.5f * HBAR / _mass * _dt_;                         // inverted triangle factor
         Complex  laplCoef = Imag(ilaplCoef)           ;                         // welcome to wonderland
-        Complex  thisAmp                              ;
-        Complex    d2Amp                              ;
 
         for (uint32_t i = 0u; i < _xSize; i++)
             for (uint32_t j = 0u; j < _ySize; j++)
@@ -64,9 +68,9 @@ void WaveFunc2::evolve(float _dt_, Scalar2* _toPotential_)
                 thisAmp =   value(i, j       );
                 d2Amp   = laplace(i, j, false);
 
-                float   potential = _toPotential_->value(i, j);                 // unleash your full potential
-                float  icoreCoef  = -  potential * _dt_ / HBAR;
-                Complex coreCoef  = Complex(1, icoreCoef)     ;
+                potential = _toPotential_->value(i, j);                         // unleash your full potential
+                icoreCoef = -  potential * _dt_ / HBAR;
+                coreCoef  = Complex(1, icoreCoef)     ;
 
                 *address(i, j) = laplCoef * d2Amp + coreCoef * thisAmp;         // the cat equation
             }

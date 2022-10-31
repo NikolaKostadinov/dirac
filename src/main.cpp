@@ -3,10 +3,10 @@
 #include <cmath>
 #include <iostream>
 
-#define B   1000.0f
+#define B   500.0f
 #define N   500u
-#define T   1000
-#define DT  10.0f
+#define T   1600
+#define DT  0.1f
 
 int main()
 {   
@@ -27,10 +27,10 @@ int main()
 
     for (int t = 0; t < T; t++)
     {
-        psi->evolve();
-        //std::cout << psi->prob(0, 0, true ) << "\t";
-        //std::cout << psi->prob(0, 0, false) << "\t";
-        //std::cout << psi->prob(      false) << "\n";
+        psi->evolve(DT);
+        std::cout << psi->prob(0, 0, true ) << "\t";
+        std::cout << psi->prob(0, 0, false) << "\t";
+        std::cout << psi->prob(      false) << "\n";
     }
 
     std::cin.get();
