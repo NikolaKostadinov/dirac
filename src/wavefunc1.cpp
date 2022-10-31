@@ -33,6 +33,9 @@ void WaveFunc1::evolve(float _dt_)
 
     nullField->setValues(nullArray);
     evolve(        _dt_, nullField);
+
+    free(nullArray);
+    free(nullField);
 }
 
 void WaveFunc1::evolve(float _dt_, Scalar1 _potential_)
