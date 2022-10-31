@@ -3,9 +3,9 @@
 #include <cmath>
 #include <iostream>
 
-#define B   100.0f
-#define N   100u
-#define T   10
+#define B   1000.0f
+#define N   500u
+#define T   1000
 #define DT  10.0f
 
 int main()
@@ -23,13 +23,16 @@ int main()
     psi->setNorm(1.0f)             ;
     psi->setMass(1.0f)             ;
 
+    std::cout << "\nnormed\t\tnot normed\ttotal not normed prob\n";
+
     for (int t = 0; t < T; t++)
     {
         psi->evolve();
-        std::cout << psi->prob(0, 0, true ) << "\t";
-        std::cout << psi->prob(0, 0, false) << "\n";
+        //std::cout << psi->prob(0, 0, true ) << "\t";
+        //std::cout << psi->prob(0, 0, false) << "\t";
+        //std::cout << psi->prob(      false) << "\n";
     }
 
-    //std::cin.get();
+    std::cin.get();
     return 0;
 }
