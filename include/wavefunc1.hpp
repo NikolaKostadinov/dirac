@@ -35,12 +35,11 @@ class WaveFunc1 : public Field1<Complex>, public WaveFunc
         float    prob     (uint32_t _start_,
                            uint32_t _end_  , bool _isNormed_ = DEFAULT_IS_NORMED);
 
-        Complex    maxAmp(                   bool _isNormed_ = DEFAULT_IS_NORMED);
-        Complex* toMaxAmp(                                                      );
-        float    maxProb (                   bool _isNormed_ = DEFAULT_IS_NORMED);
+        float eIndex    ();
+        float eX        ();
+        float eXMomentum();
 
-        float expcIndex();
-        float excpX    ();
+        float devX      ();
 
         std::string string();
 };

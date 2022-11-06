@@ -51,9 +51,6 @@ void WaveFunc3::evolve(float _dt_, Scalar3* _toPotential_)
     if (_toPotential_->toBasis() == _toBasis)
     {
         checkMass();
-        
-        float dx = _toBasis->dx();
-        float dy = _toBasis->dy();
 
         float   ilaplCoef = 0.5f * HBAR / _mass * _dt_;                                 // inverted triangle factor
         Complex  laplCoef = Imag(ilaplCoef)           ;                                 // welcome to wonderland

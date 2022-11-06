@@ -139,61 +139,48 @@ float WaveFunc1::prob(uint32_t _start_, uint32_t _end_, bool _isNormed_)
     else              return               sum;
 }
 
-Complex WaveFunc1::maxAmp(bool _isNormed_)
+float WaveFunc1::eIndex()
 {
-    float    max    = 0.0f;
-    uint32_t index  = 0u  ;
+    // why is this broken ?
+    float expected  = 0.0f;
+    for (uint32_t i = 0u; i < _size; i++)
+        expected += i * value(i).conjSq();
 
-    for (uint32_t i = 0u; i <= _size; i++)
-    {
-        float thisProb = value(i).conjSq();
-
-        if (max < thisProb)
-        {
-            max   = thisProb;
-            index = i       ; 
-        }
-    }
-
-    return probAmp(index,_isNormed_);
+    return prbFactor() * expected;
 }
 
-Complex* WaveFunc1::toMaxAmp()
+float WaveFunc1::eX()
 {
-    float    max    = 0.0f;
-    uint32_t index  = 0u  ;
+    float expected  = 0.0f;
+    for (uint32_t i = 0u; i < _size; i++)
+        expected += _toBase->x(i) * value(i).conjSq();
 
-    for (uint32_t i = 0u; i <= _size; i++)
-    {
-        float thisProb = value(i).conjSq();
-
-        if (max < thisProb)
-        {
-            max   = thisProb;
-            index = i       ;
-        }
-    }
-    
-    return address(index);
+    return prbFactor() * expected;
 }
 
-float WaveFunc1::maxProb(bool _isNormed_)
+float WaveFunc1::eXMomentum()
 {
-    float    max    = 0.0f;
-    uint32_t index  = 0u  ;
-
-    for (uint32_t i = 0u; i <= _size; i++)
+    float expected  = 0.0f;
+    for (uint32_t i = 0u; i < _size; i++)
     {
-        float thisProb = value(i).conjSq();
-
-        if (max < thisProb)
-        {
-            max   = thisProb;
-            index = i       ;
-        }
+        Complex eDAmp = value(i).conj() * ddx(i, false);
+        expected     += -HBAR * eDAmp.real();
     }
 
-    return prob(index,_isNormed_);
+    return prbFactor() * expected;
+}
+
+float WaveFunc1::devX()
+{
+    float expX  = 0.0f;
+    float expX2 = 0.0f;
+    for (uint32_t i = 0u; i < _size; i++)
+    {
+        expX  +=     i * value(i).conjSq();
+        expX2 += i * i * value(i).conjSq();
+    }
+
+    return sqrt(expX2 - expX * expX);
 }
 
 std::string WaveFunc1::string()
