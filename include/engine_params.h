@@ -2,6 +2,8 @@
 
 /* ============ DIRAC ENGINE PARAMETERS ============ */
 
+#define DEFAULT_VECTOR_NORM     1.0f
+
 #define DEFAULT_REAL            0.0f
 #define DEFAULT_IMAG            0.0f
 #define COMPLEX_ROUND           4
@@ -16,8 +18,8 @@
 #define E_CHARGE               -1.0f
 #define E_MASS                  1.0f
 
-#define DEFAULT_NORM            1.0f
 #define DEFAULT_IS_NORMED       true
+#define DEFAULT_NORM            1.0f
 #define DEFAULT_MASS            1.0f
 #define DEFAULT_DT              0.1f
 

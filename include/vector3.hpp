@@ -1,5 +1,7 @@
 #pragma once
 
+#include "engine_params.h"
+
 class Vector3
 {
     public:
@@ -9,8 +11,9 @@ class Vector3
 
         Vector3(float _x_, float _y_, float _z_);
 
-        void     scale (float _factor_);
-        void     shrink(float _factor_);
+        void     scale     (float _factor_                    );
+        void     shrink    (float _factor_                    );
+        void     normalize (float _norm_ = DEFAULT_VECTOR_NORM);
 
         Vector3  operator+ (const Vector3 _other_);
         Vector3  operator- (const Vector3 _other_);
@@ -30,6 +33,7 @@ class Vector3
 
         float    inner     (const Vector3 _other_) const;
         Vector3  outer     (const Vector3 _other_) const;
+        void     outerWith (const Vector3 _other_)      ;
 
     protected:
 

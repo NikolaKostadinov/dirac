@@ -1,5 +1,7 @@
 #pragma once
 
+#include "engine_params.h"
+
 class Vector2
 {
     public:
@@ -9,8 +11,9 @@ class Vector2
 
         Vector2(float _x_, float _y_);
 
-        void     scale (float _factor_);
-        void     shrink(float _factor_);
+        void     scale     (float _factor_                    );
+        void     shrink    (float _factor_                    );
+        void     normalize (float _norm_ = DEFAULT_VECTOR_NORM);
 
         Vector2  operator+ (const Vector2 _other_);
         Vector2  operator- (const Vector2 _other_);
