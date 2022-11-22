@@ -30,7 +30,7 @@ void Vector2::shrink(float _factor_)
 
 void Vector2::normalize(float _norm_)
 {
-    // need length
+    scale(_norm_ / length() );
 }
 
 Vector2 Vector2::operator+()
@@ -161,10 +161,10 @@ std::string Vector2::string()
 
 float dot(const Vector2 _left_, const Vector2 _right_)
 {
-    return _left_.x() * _right_.x() + _left_.y() * _right_.y();
+    return _left_.dot(_right_);
 }
 
 float cross(const Vector2 _left_, const Vector2 _right_)
 {
-    return _left_.x() * _right_.y() - _left_.y() * _right_.x();
+    return _left_.cross(_right_);
 }

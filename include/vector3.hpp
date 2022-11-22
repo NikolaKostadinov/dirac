@@ -2,6 +2,9 @@
 
 #include "engine_params.h"
 
+#include <cmath>
+#include <sstream>
+
 class Vector3
 {
     public:
@@ -15,6 +18,8 @@ class Vector3
         void     shrink    (float _factor_                    );
         void     normalize (float _norm_ = DEFAULT_VECTOR_NORM);
 
+        Vector3  operator+ (                     );
+        Vector3  operator- (                     );
         Vector3  operator+ (const Vector3 _other_);
         Vector3  operator- (const Vector3 _other_);
         Vector3  operator* (const Vector3 _other_);
@@ -42,5 +47,5 @@ class Vector3
         float _z;
 };
 
-float dot  (const Vector3 _left_, const Vector3 _right_);
-float cross(const Vector3 _left_, const Vector3 _right_);
+float   dot  (const Vector3 _left_, const Vector3 _right_);
+Vector3 cross(const Vector3 _left_, const Vector3 _right_);
