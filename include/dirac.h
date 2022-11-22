@@ -34,8 +34,8 @@
 
 #pragma  once
 
-//#include "vector2.hpp"
-//#include "vector3.hpp"
+#include "vector2.hpp"
+#include "vector3.hpp"
 #include "complex.hpp"
 #include "spinor.hpp"
 #include "bispinor.hpp"

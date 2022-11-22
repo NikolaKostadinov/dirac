@@ -2,6 +2,10 @@
 
 #include "engine_params.h"
 
+#include <cmath>
+#include <string>
+#include <sstream>
+
 class Vector2
 {
     public:
@@ -15,6 +19,8 @@ class Vector2
         void     shrink    (float _factor_                    );
         void     normalize (float _norm_ = DEFAULT_VECTOR_NORM);
 
+        Vector2  operator+ (                     );
+        Vector2  operator- (                     );
         Vector2  operator+ (const Vector2 _other_);
         Vector2  operator- (const Vector2 _other_);
         Vector2  operator* (const Vector2 _other_);
@@ -33,6 +39,8 @@ class Vector2
 
         float    inner     (const Vector2 _other_) const;
         float    outer     (const Vector2 _other_) const;
+
+        std::string string();
 
     protected:
 

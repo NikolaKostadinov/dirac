@@ -10,10 +10,6 @@
 
 int main()
 {   
-    Complex x = Complex(1, 2);
-    Complex y = Complex(4, 5);
-    Complex z = x + y;
-
     std::cin.get();
     return 0;
 }
