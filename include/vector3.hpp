@@ -3,6 +3,7 @@
 #include "engine_params.h"
 
 #include <cmath>
+#include <string>
 #include <sstream>
 
 class Vector3
@@ -39,6 +40,8 @@ class Vector3
         float    dot       (const Vector3 _other_) const;
         Vector3  cross     (const Vector3 _other_) const;
         void     crossWith (const Vector3 _other_)      ;
+
+        std::string string();
 
     protected:
 

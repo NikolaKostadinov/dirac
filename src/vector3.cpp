@@ -167,6 +167,20 @@ void Vector3::crossWith(const Vector3 _other_)
     *this = this->cross(_other_);
 }
 
+std::string Vector3::string()
+{
+    std::ostringstream stream;
+    stream << "[ ";
+    stream << _x  ;
+    stream << ", ";
+    stream << _y  ;
+    stream << ", ";
+    stream << _z  ;
+    stream << " ]";
+
+    return stream.str();
+}
+
 float dot(const Vector3 _left_, const Vector3 _right_)
 {
     return _left_.dot(_right_);
