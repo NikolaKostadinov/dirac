@@ -81,18 +81,32 @@ float WaveFunc::prob(bool _isNormed_) const
     else            return  DEFAULT_NORM * DEFAULT_NORM;
 }
 
-Complex WaveFunc::maxAmp(bool _isNormed_) const
-{
-    if (_isNormed_) return Real(       _norm);
-    else            return Real(DEFAULT_NORM);
-}
-
 Complex* WaveFunc::toMaxAmp() const
 {
-    return new Complex();
+
 }
 
-float WaveFunc::maxProb(bool _isNormed_) const
+Complex* WaveFunc::toMinAmp() const
 {
-    return prob(_isNormed_);
+
+}
+
+Complex  WaveFunc::maxAmp(bool _isNormed_) const
+{
+
+}
+
+Complex  WaveFunc::minAmp(bool _isNormed_) const
+{
+
+}
+
+float    WaveFunc::maxProb(bool _isNormed_) const
+{
+
+}
+
+float    WaveFunc::minProb(bool _isNormed_) const
+{
+
 }

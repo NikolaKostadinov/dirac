@@ -22,8 +22,11 @@ class Spinor
         Spinor  operator- ( const Spinor _other_);
         Spinor  operator* ( const Spinor _other_);
         Spinor  operator/ ( const Spinor _other_);
-        Spinor  operator==( const Spinor _other_);
         Spinor& operator+=( const Spinor _other_);
+        Spinor& operator-=( const Spinor _other_);
+        Spinor& operator*=( const Spinor _other_);
+        Spinor& operator/=( const Spinor _other_);
+        bool    operator==( const Spinor _other_);
 
         Complex up  ()      const;
         Complex down()      const;

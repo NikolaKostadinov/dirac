@@ -69,7 +69,7 @@ Complex Complex::operator/(const Complex _other_)
     return Complex(real, imag);
 }
 
-Complex Complex::operator==(const Complex _other_)
+bool Complex::operator==(const Complex _other_)
 {
     return (_real == _other_._real) && (_imag == _other_._imag);
 }

@@ -23,8 +23,11 @@ class Bispinor
         Bispinor  operator- ( const Bispinor _other_);
         Bispinor  operator* ( const Bispinor _other_);
         Bispinor  operator/ ( const Bispinor _other_);
-        Bispinor  operator==( const Bispinor _other_);
         Bispinor& operator+=( const Bispinor _other_);
+        Bispinor& operator-=( const Bispinor _other_);
+        Bispinor& operator*=( const Bispinor _other_);
+        Bispinor& operator/=( const Bispinor _other_);
+        bool      operator==( const Bispinor _other_);
 
         Spinor    positive()  const;
         Spinor    negative()  const;

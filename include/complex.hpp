@@ -27,8 +27,15 @@ class Complex
         Complex  operator- (const Complex _other_);
         Complex  operator* (const Complex _other_);
         Complex  operator/ (const Complex _other_);
-        Complex  operator==(const Complex _other_);
         Complex& operator+=(const Complex _other_);
+        Complex& operator-=(const Complex _other_);
+        Complex& operator*=(const Complex _other_);
+        Complex& operator/=(const Complex _other_);
+        bool     operator==(const Complex _other_);
+        bool     operator> (const Complex _other_);
+        bool     operator< (const Complex _other_);
+        bool     operator>=(const Complex _other_);
+        bool     operator<=(const Complex _other_);
 
         float   real()      const;
         float   imag()      const;
