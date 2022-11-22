@@ -37,8 +37,8 @@ class Vector2
         float    dir       (                     ) const;
         float    sq        (                     ) const;
 
-        float    inner     (const Vector2 _other_) const;
-        float    outer     (const Vector2 _other_) const;
+        float    dot       (const Vector2 _other_) const;
+        float    cross     (const Vector2 _other_) const;
 
         std::string string();
 
@@ -48,5 +48,5 @@ class Vector2
         float _y;
 };
 
-float inner(const Vector2 _left_, const Vector2 _right_);
-float outer(const Vector2 _left_, const Vector2 _right_);
+float dot  (const Vector2 _left_, const Vector2 _right_);
+float cross(const Vector2 _left_, const Vector2 _right_);

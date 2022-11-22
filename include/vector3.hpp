@@ -31,9 +31,9 @@ class Vector3
         float    length    (                     ) const;
         float    sq        (                     ) const;
 
-        float    inner     (const Vector3 _other_) const;
-        Vector3  outer     (const Vector3 _other_) const;
-        void     outerWith (const Vector3 _other_)      ;
+        float    dot       (const Vector3 _other_) const;
+        Vector3  cross     (const Vector3 _other_) const;
+        void     crossWith (const Vector3 _other_)      ;
 
     protected:
 
@@ -42,5 +42,5 @@ class Vector3
         float _z;
 };
 
-float inner(const Vector3 _left_, const Vector3 _right_);
-float outer(const Vector3 _left_, const Vector3 _right_);
+float dot  (const Vector3 _left_, const Vector3 _right_);
+float cross(const Vector3 _left_, const Vector3 _right_);

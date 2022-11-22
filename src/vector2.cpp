@@ -137,12 +137,12 @@ float Vector2::sq() const
     return _x * _x + _y * _y;
 }
 
-float Vector2::inner(const Vector2 _other_) const
+float Vector2::dot(const Vector2 _other_) const
 {
     return _x * _other_._x + _y * _other_._y;
 }
 
-float Vector2::outer(const Vector2 _other_) const
+float Vector2::cross(const Vector2 _other_) const
 {
     return _x * _other_._y - _y * _other_._x;
 }
@@ -159,12 +159,12 @@ std::string Vector2::string()
     return stream.str();
 }
 
-float inner(const Vector2 _left_, const Vector2 _right_)
+float dot(const Vector2 _left_, const Vector2 _right_)
 {
     return _left_.x() * _right_.x() + _left_.y() * _right_.y();
 }
 
-float outer(const Vector2 _left_, const Vector2 _right_)
+float cross(const Vector2 _left_, const Vector2 _right_)
 {
     return _left_.x() * _right_.y() - _left_.y() * _right_.x();
 }
