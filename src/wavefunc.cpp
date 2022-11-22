@@ -24,75 +24,75 @@ void WaveFunc::setMass(float _mass_)
     checkMass(    );
 }
 
-void WaveFunc::checkNorm()
+void WaveFunc::checkNorm() const
 {
     if      (_norm == 0.0f) throw     ZERO_NORM;
     else if (_norm <  0.0f) throw NEGATIVE_NORM;
 }
 
-void WaveFunc::checkMass()
+void WaveFunc::checkMass() const
 {
     if      (_mass == 0.0f) throw     ZERO_MASS;
     else if (_mass <  0.0f) throw NEGATIVE_MASS;
 }
 
-bool WaveFunc::isNormValid()
+bool WaveFunc::isNormValid() const
 {
     if   (_norm <= 0.0f) return false;
     else                 return true ;
 }
 
-bool WaveFunc::isMassValid()
+bool WaveFunc::isMassValid() const
 {
-    if   (_mass <= 0.0f) return false;
-    else                 return true ;
+    if   (_mass < 0.0f) return false;
+    else                return true ;
 }
 
-float WaveFunc::norm()
+float WaveFunc::norm() const
 {
     return _norm;
 }
 
-float WaveFunc::mass()
+float WaveFunc::mass() const
 {
     return _mass;
 }
 
-float WaveFunc::ampFactor()
+float WaveFunc::ampFactor() const
 {
     checkNorm();
     return _norm * invSqrt( prob(false) );                          // 0x5f3759df
 }
 
-Complex WaveFunc::cmpFactor()
+Complex WaveFunc::cmpFactor() const
 {
     return Real(ampFactor());
 }
 
-float WaveFunc::prbFactor()
+float WaveFunc::prbFactor() const
 {
     checkNorm();
     return prob(true) / prob(false);
 }
 
-float WaveFunc::prob(bool _isNormed_)
+float WaveFunc::prob(bool _isNormed_) const
 {
     if (_isNormed_) return         _norm *        _norm;
     else            return  DEFAULT_NORM * DEFAULT_NORM;
 }
 
-Complex WaveFunc::maxAmp(bool _isNormed_)
+Complex WaveFunc::maxAmp(bool _isNormed_) const
 {
     if (_isNormed_) return Real(       _norm);
     else            return Real(DEFAULT_NORM);
 }
 
-Complex* WaveFunc::toMaxAmp()
+Complex* WaveFunc::toMaxAmp() const
 {
     return new Complex();
 }
 
-float WaveFunc::maxProb(bool _isNormed_)
+float WaveFunc::maxProb(bool _isNormed_) const
 {
     return prob(_isNormed_);
 }

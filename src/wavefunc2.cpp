@@ -76,19 +76,19 @@ void WaveFunc2::evolve(float _dt_, Scalar2* _toPotential_)
     else throw BASE_NOT_SAME;
 }
 
-Complex WaveFunc2::probAmp(uint32_t _index_, uint32_t _jndex_, bool _isNormed_)
+Complex WaveFunc2::probAmp(uint32_t _index_, uint32_t _jndex_, bool _isNormed_) const
 {
     if   (_isNormed_) return cmpFactor() * value(_index_,_jndex_);
     else              return               value(_index_,_jndex_);
 }
 
-float WaveFunc2::prob(uint32_t _index_, uint32_t _jndex_, bool _isNormed_)
+float WaveFunc2::prob(uint32_t _index_, uint32_t _jndex_, bool _isNormed_) const
 {
     if   (_isNormed_) return prbFactor() * value(_index_,_jndex_).conjSq();
     else              return               value(_index_,_jndex_).conjSq();
 }
 
-float WaveFunc2::prob(bool _isNormed_)
+float WaveFunc2::prob(bool _isNormed_) const
 {
     if   (_isNormed_) return _norm * _norm;
     else
@@ -102,7 +102,7 @@ float WaveFunc2::prob(bool _isNormed_)
     }
 }
 
-Complex WaveFunc2::ddx(uint32_t _index_, uint32_t _jndex_, bool _isNormed_)
+Complex WaveFunc2::ddx(uint32_t _index_, uint32_t _jndex_, bool _isNormed_) const
 {
     float   dx   = _toBasis->dx();
     Complex dAmp                 ;
@@ -118,7 +118,7 @@ Complex WaveFunc2::ddx(uint32_t _index_, uint32_t _jndex_, bool _isNormed_)
     return dAmp;
 }
 
-Complex WaveFunc2::ddy(uint32_t _index_, uint32_t _jndex_, bool _isNormed_)
+Complex WaveFunc2::ddy(uint32_t _index_, uint32_t _jndex_, bool _isNormed_) const
 {
     float   dy   = _toBasis->dy();
     Complex dAmp                 ;
@@ -134,12 +134,12 @@ Complex WaveFunc2::ddy(uint32_t _index_, uint32_t _jndex_, bool _isNormed_)
     return dAmp;
 }
 
-Complex WaveFunc2::grad(uint32_t _index_, uint32_t _jndex_, bool _isNormed_)
+Complex WaveFunc2::grad(uint32_t _index_, uint32_t _jndex_, bool _isNormed_) const
 {
     return ddx(_index_,_jndex_,_isNormed_) + ddy(_index_,_jndex_,_isNormed_);
 }
 
-Complex WaveFunc2::d2dx2(uint32_t _index_, uint32_t _jndex_, bool _isNormed_)
+Complex WaveFunc2::d2dx2(uint32_t _index_, uint32_t _jndex_, bool _isNormed_) const
 {
     float   dx      = _toBasis->dx()        ;
     Complex thisAmp = value(_index_,_jndex_);
@@ -157,7 +157,7 @@ Complex WaveFunc2::d2dx2(uint32_t _index_, uint32_t _jndex_, bool _isNormed_)
     return d2Amp;
 }
 
-Complex WaveFunc2::d2dy2(uint32_t _index_, uint32_t _jndex_, bool _isNormed_)
+Complex WaveFunc2::d2dy2(uint32_t _index_, uint32_t _jndex_, bool _isNormed_) const
 {
     float   dy      = _toBasis->dy()        ;
     Complex thisAmp = value(_index_,_jndex_);
@@ -175,7 +175,7 @@ Complex WaveFunc2::d2dy2(uint32_t _index_, uint32_t _jndex_, bool _isNormed_)
     return d2Amp;
 }
 
-Complex WaveFunc2::laplace(uint32_t _index_, uint32_t _jndex_, bool _isNormed_)
+Complex WaveFunc2::laplace(uint32_t _index_, uint32_t _jndex_, bool _isNormed_) const
 {
     return d2dx2(_index_,_jndex_,_isNormed_) + d2dy2(_index_,_jndex_,_isNormed_);
 }

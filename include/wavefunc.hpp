@@ -13,8 +13,8 @@ class WaveFunc
 
         void      setNorm(float _norm_ = DEFAULT_NORM);
         void      setMass(float _mass_ = DEFAULT_MASS);
-        void    checkNorm(                           );
-        void    checkMass(                           );
+        void    checkNorm(                           )                 const;
+        void    checkMass(                           )                 const;
 
         bool    isNormValid()                                          const;
         bool    isMassValid()                                          const;

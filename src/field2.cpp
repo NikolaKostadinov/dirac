@@ -44,37 +44,37 @@ void Field2<T>::setValues(T* _address_)
 }
 
 template <class T>
-uint32_t Field2<T>::size()
+uint32_t Field2<T>::size() const
 {
     return _toBasis->size();
 }
 
 template <class T>
-uint32_t Field2<T>::xSize()
+uint32_t Field2<T>::xSize() const
 {
     return _toBasis->xSize();
 }
 
 template <class T>
-uint32_t Field2<T>::ySize()
+uint32_t Field2<T>::ySize() const
 {
     return _toBasis->ySize();
 }
 
 template <class T>
-Basis2* Field2<T>::toBasis()
+Basis2* Field2<T>::toBasis() const
 {
     return _toBasis;
 }
 
 template <class T>
-Basis2 Field2<T>::basis()
+Basis2 Field2<T>::basis() const
 {
     return *_toBasis;
 }
 
 template <class T>
-T* Field2<T>::address(uint32_t _index_, uint32_t _jndex_)
+T* Field2<T>::address(uint32_t _index_, uint32_t _jndex_) const
 {
     if (_index_ >= 0u && _index_ < _xSize)
     {
@@ -89,7 +89,7 @@ T* Field2<T>::address(uint32_t _index_, uint32_t _jndex_)
 }
 
 template <class T>
-T Field2<T>::value(uint32_t _index_, uint32_t _jndex_)
+T Field2<T>::value(uint32_t _index_, uint32_t _jndex_) const
 {
     return *address(_index_, _jndex_);
 }

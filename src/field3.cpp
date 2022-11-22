@@ -48,43 +48,43 @@ void Field3<T>::setValues(T* _address_)
 }
 
 template <class T>
-uint32_t Field3<T>::size()
+uint32_t Field3<T>::size() const
 {
     return _toBasis->size();
 }
 
 template <class T>
-uint32_t Field3<T>::xSize()
+uint32_t Field3<T>::xSize() const
 {
     return _toBasis->xSize();
 }
 
 template <class T>
-uint32_t Field3<T>::ySize()
+uint32_t Field3<T>::ySize() const
 {
     return _toBasis->ySize();
 }
 
 template <class T>
-uint32_t Field3<T>::zSize()
+uint32_t Field3<T>::zSize() const
 {
     return _toBasis->zSize();
 }
 
 template <class T>
-Basis3* Field3<T>::toBasis()
+Basis3* Field3<T>::toBasis() const
 {
     return _toBasis;
 }
 
 template <class T>
-Basis3 Field3<T>::basis()
+Basis3 Field3<T>::basis() const
 {
     return *_toBasis;
 }
 
 template <class T>
-T* Field3<T>::address(uint32_t _index_, uint32_t _jndex_, uint32_t _kindex_)
+T* Field3<T>::address(uint32_t _index_, uint32_t _jndex_, uint32_t _kindex_) const
 {
     if (_index_ >= 0u && _index_ < _xSize)
     {
@@ -104,7 +104,7 @@ T* Field3<T>::address(uint32_t _index_, uint32_t _jndex_, uint32_t _kindex_)
 }
 
 template <class T>
-T Field3<T>::value(uint32_t _index_, uint32_t _jndex_, uint32_t _kindex_)
+T Field3<T>::value(uint32_t _index_, uint32_t _jndex_, uint32_t _kindex_) const
 {
     return *address(_index_, _jndex_, _kindex_);
 }

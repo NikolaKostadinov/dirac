@@ -69,20 +69,20 @@ void WaveFunc1::evolve(float _dt_, Scalar1* _toPotential_)
     else throw BASE_NOT_SAME;
 }
 
-Complex WaveFunc1::probAmp(uint32_t _index_, bool _isNormed_)
+Complex WaveFunc1::probAmp(uint32_t _index_, bool _isNormed_) const
 {
     if   (_isNormed_) return cmpFactor() * value(_index_);
     else              return               value(_index_);
 }
 
-float WaveFunc1::prob(uint32_t _index_, bool _isNormed_)
+float WaveFunc1::prob(uint32_t _index_, bool _isNormed_) const
 {
     if   (_isNormed_) return prbFactor() * value(_index_).conjSq();
     else              return               value(_index_).conjSq();
     
 }
 
-float WaveFunc1::prob(bool _isNormed_)
+float WaveFunc1::prob(bool _isNormed_) const
 {
     if   (_isNormed_) return _norm * _norm;
     else
@@ -95,7 +95,7 @@ float WaveFunc1::prob(bool _isNormed_)
     }
 }
 
-Complex WaveFunc1::ddx(uint32_t _index_, bool _isNormed_)
+Complex WaveFunc1::ddx(uint32_t _index_, bool _isNormed_) const
 {
     float   dx   = _toBase->dx();
     Complex dAmp                ;
@@ -111,7 +111,7 @@ Complex WaveFunc1::ddx(uint32_t _index_, bool _isNormed_)
     return dAmp;
 }
 
-Complex WaveFunc1::d2dx2(uint32_t _index_, bool _isNormed_)
+Complex WaveFunc1::d2dx2(uint32_t _index_, bool _isNormed_) const
 {
     float   dx      = _toBase->dx( );
     Complex thisAmp = value(_index_);
@@ -129,7 +129,7 @@ Complex WaveFunc1::d2dx2(uint32_t _index_, bool _isNormed_)
     return d2Amp;
 }
 
-float WaveFunc1::prob(uint32_t _start_, uint32_t _end_, bool _isNormed_)
+float WaveFunc1::prob(uint32_t _start_, uint32_t _end_, bool _isNormed_) const
 {
     float sum = 0.0f;
     for (uint32_t i = _start_; i <= _end_; i++)

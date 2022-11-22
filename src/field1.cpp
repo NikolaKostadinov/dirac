@@ -40,32 +40,32 @@ void Field1<T>::setValues(T* _address_)
 }
 
 template <class T>
-uint32_t Field1<T>::size()
+uint32_t Field1<T>::size() const
 {
     return _size;
 }
 
 template <class T>
-Base* Field1<T>::toBase()
+Base* Field1<T>::toBase() const
 {
     return _toBase;
 }
 
 template <class T>
-Base Field1<T>::base()
+Base Field1<T>::base() const
 {
     return *_toBase;
 }
 
 template <class T>
-T* Field1<T>::address(uint32_t _index_)
+T* Field1<T>::address(uint32_t _index_) const
 {
     if (_index_ < _size) return _originAddress + _index_;
     else                 throw  OUT_OF_BOUNDS           ;
 }
 
 template <class T>
-T Field1<T>::value(uint32_t _index_)
+T Field1<T>::value(uint32_t _index_) const
 {
     return *address(_index_);
 }

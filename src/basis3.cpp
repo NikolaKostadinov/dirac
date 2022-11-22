@@ -20,37 +20,37 @@ Basis3::Basis3(Base* _toXBase_, Base* _toYBase_, Base* _toZBase_) : Basis2(_toXB
     _toZ = _toZBase_;
 }
 
-uint32_t Basis3::size()
+uint32_t Basis3::size() const
 {
     return _toX->size() * _toY->size() * _toZ->size();
 }
 
-uint32_t Basis3::zSize()
+uint32_t Basis3::zSize() const
 {
     return _toZ->size();
 }
 
-float Basis3::zStart()
+float Basis3::zStart() const
 {
     return _toZ->start();
 }
 
-float Basis3::zEnd()
+float Basis3::zEnd() const
 {
     return _toZ->end();
 }
 
-float Basis3::dz()
+float Basis3::dz() const
 {
     return _toZ->dx();
 }
 
-float Basis3::zLength()
+float Basis3::zLength() const
 {
     return _toZ->length();
 }
 
-float Basis3::z(uint32_t _kndex_)
+float Basis3::z(uint32_t _kndex_) const
 {
     return _toZ->x(_kndex_);
 }
