@@ -14,17 +14,17 @@ class Basis3 : public Basis2
         Basis3(Base    _xBase_, Base    _yBase_, Base    _zBase_);
         Basis3(Base* _toXBase_, Base* _toYBase_, Base* _toZBase_);
 
-        uint32_t  size();
-        uint32_t zSize();
+        uint32_t  size()          const;
+        uint32_t zSize()          const;
 
-        float zStart();
-        float zEnd  ();
+        float zStart()            const;
+        float zEnd  ()            const;
 
-        float dz();
+        float dz()                const;
 
-        float zLength();
+        float zLength()           const;
 
-        float z(uint32_t _kndex_);
+        float z(uint32_t _kndex_) const;
 
     protected:
 

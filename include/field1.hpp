@@ -14,17 +14,19 @@ class Field1
         Field1();
         virtual ~Field1();
 
-        Field1(Base  _basis_  );
-        Field1(Base* _toBasis_);
+        Field1(Base  _base_  );
+        Field1(Base* _toBase_);
 
-        void     setValues(T* _address_);
+        void     setValues(T*    _address_);
+        void     setBase  (Base* _toBase_ );
+        void     setSize  (uint32_t _size_);
 
-        uint32_t size  ();
-        Base*    toBase();
-        Base     base  ();
+        uint32_t size  ()                       const;
+        Base*    toBase()                       const;
+        Base     base  ()                       const;
 
-        T*       address(uint32_t _index_ = 0u);
-        T        value  (uint32_t _index_     );
+        T*       address(uint32_t _index_ = 0u) const;
+        T        value  (uint32_t _index_     ) const;
 
     protected:
 

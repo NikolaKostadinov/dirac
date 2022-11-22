@@ -30,32 +30,32 @@ Base::Base(float _start_, uint32_t _size_,  float _end_)
     else throw INF_DX;
 }
 
-uint32_t Base::size()
+uint32_t Base::size() const
 {
     return _size;
 }
 
-float Base::start()
+float Base::start() const
 {
     return _start;
 }
 
-float Base::end()
+float Base::end() const
 {
     return _end;
 }
 
-float Base::length()
+float Base::length() const
 {
     return _end - _start;
 }
 
-float Base::dx()
+float Base::dx() const
 {
     return (_end - _start) / (float) _size;
 }
 
-float Base::x(uint32_t _index_)
+float Base::x(uint32_t _index_) const
 {
     return _start + _index_ * dx();
 }

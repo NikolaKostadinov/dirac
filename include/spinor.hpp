@@ -15,17 +15,19 @@ class Spinor
 
         void    scale(float _factor_);
 
-        Spinor  operator+();
-        Spinor  operator-();
+        Spinor  operator+() const;
+        Spinor  operator-() const;
 
-        Spinor  operator+(Spinor _other_);
-        Spinor  operator-(Spinor _other_);
-        Spinor  operator*(Spinor _other_);
-        Spinor  operator/(Spinor _other_);
+        Spinor  operator+ ( const Spinor _other_);
+        Spinor  operator- ( const Spinor _other_);
+        Spinor  operator* ( const Spinor _other_);
+        Spinor  operator/ ( const Spinor _other_);
+        Spinor  operator==( const Spinor _other_);
+        Spinor& operator+=( const Spinor _other_);
 
-        Complex up  ();
-        Complex down();
-        float   prob();
+        Complex up  ()      const;
+        Complex down()      const;
+        float   prob()      const;
 
         std::string string();
 

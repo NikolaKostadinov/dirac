@@ -20,23 +20,24 @@ class Complex
         void    scale (float _factor_);
         void    shrink(float _factor_);
 
-        Complex operator+();
-        Complex operator-();
+        Complex operator+() const;
+        Complex operator-() const;
         
-        Complex operator+ (Complex _other_);
-        Complex operator- (Complex _other_);
-        Complex operator* (Complex _other_);
-        Complex operator/ (Complex _other_);
-        Complex operator==(Complex _other_);
+        Complex  operator+ (const Complex _other_);
+        Complex  operator- (const Complex _other_);
+        Complex  operator* (const Complex _other_);
+        Complex  operator/ (const Complex _other_);
+        Complex  operator==(const Complex _other_);
+        Complex& operator+=(const Complex _other_);
 
-        float   real();
-        float   imag();
-        float   mod ();
-        float   arg ();
+        float   real()      const;
+        float   imag()      const;
+        float   mod ()      const;
+        float   arg ()      const;
 
-        Complex     sq();
-        Complex conj  ();
-        float   conjSq();
+        Complex     sq()    const;
+        Complex conj  ()    const;
+        float   conjSq()    const;
 
         std::string string();
 

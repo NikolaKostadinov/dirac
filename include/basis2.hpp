@@ -13,29 +13,29 @@ class Basis2
         Basis2(Base    _xBase_, Base    _yBase_);
         Basis2(Base* _toXBase_, Base* _toYBase_);
 
-        uint32_t  size();
-        uint32_t xSize();
-        uint32_t ySize();
-        uint32_t zSize();
-        
-        float xStart();
-        float yStart();
-        float zStart();
-        float xEnd  ();
-        float yEnd  ();
-        float zEnd  ();
+        uint32_t  size()          const;
+        uint32_t xSize()          const;
+        uint32_t ySize()          const;
+        uint32_t zSize()          const;
 
-        float dx();
-        float dy();
-        float dz();
+        float xStart()            const;
+        float yStart()            const;
+        float zStart()            const;
+        float xEnd  ()            const;
+        float yEnd  ()            const;
+        float zEnd  ()            const;
 
-        float xLength();
-        float yLength();
-        float zLength();
+        float dx()                const;
+        float dy()                const;
+        float dz()                const;
 
-        float x(uint32_t _index_);
-        float y(uint32_t _jndex_);
-        float z(uint32_t _kndex_);
+        float xLength()           const;
+        float yLength()           const;
+        float zLength()           const;
+
+        float x(uint32_t _index_) const;
+        float y(uint32_t _jndex_) const;
+        float z(uint32_t _kndex_) const;
 
     protected:
 

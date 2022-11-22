@@ -16,19 +16,22 @@ class WaveFunc
         void    checkNorm(                           );
         void    checkMass(                           );
 
-        bool    isNormValid();
-        bool    isMassValid();
+        bool    isNormValid()                                          const;
+        bool    isMassValid()                                          const;
         
-        float   norm       ();
-        float   mass       ();
-        float   ampFactor  ();
-        Complex cmpFactor  ();
-        float   prbFactor  ();
+        float   norm       ()                                          const;
+        float   mass       ()                                          const;
+        float   ampFactor  ()                                          const;
+        Complex cmpFactor  ()                                          const;
+        float   prbFactor  ()                                          const;
 
-        virtual float       prob (bool _isNormed_ = DEFAULT_IS_NORMED);
-        virtual Complex    maxAmp(bool _isNormed_ = DEFAULT_IS_NORMED);
-        virtual Complex* toMaxAmp(                                   );
-        virtual float    maxProb (bool _isNormed_ = DEFAULT_IS_NORMED);
+        virtual float       prob (bool _isNormed_ = DEFAULT_IS_NORMED) const;
+        virtual Complex* toMaxAmp(                                   ) const;
+        virtual Complex* toMinAmp(                                   ) const;
+        virtual Complex    maxAmp(bool _isNormed_ = DEFAULT_IS_NORMED) const;
+        virtual Complex    minAmp(bool _isNormed_ = DEFAULT_IS_NORMED) const;
+        virtual float    maxProb (bool _isNormed_ = DEFAULT_IS_NORMED) const;
+        virtual float    minProb (bool _isNormed_ = DEFAULT_IS_NORMED) const;
 
     protected:
 

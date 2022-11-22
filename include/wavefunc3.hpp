@@ -24,18 +24,18 @@ class WaveFunc3 : public Field3<Complex>, public WaveFunc
         void    evolve (float _dt_   , Scalar3    _potential_);
         void    evolve (float _dt_   , Scalar3* _toPotential_);
 
-        Complex probAmp(uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_, bool _isNormed_ = DEFAULT_IS_NORMED);
-        float   prob   (uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_, bool _isNormed_ = DEFAULT_IS_NORMED);
-        float   prob   (                                                      bool _isNormed_ = DEFAULT_IS_NORMED);
+        Complex probAmp(uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_, bool _isNormed_ = DEFAULT_IS_NORMED) const;
+        float   prob   (uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_, bool _isNormed_ = DEFAULT_IS_NORMED) const;
+        float   prob   (                                                      bool _isNormed_ = DEFAULT_IS_NORMED) const;
 
-        Complex ddx    (uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_, bool _isNormed_ = DEFAULT_IS_NORMED);
-        Complex ddy    (uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_, bool _isNormed_ = DEFAULT_IS_NORMED);
-        Complex ddz    (uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_, bool _isNormed_ = DEFAULT_IS_NORMED);
-        Complex grad   (uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_, bool _isNormed_ = DEFAULT_IS_NORMED);
-        Complex d2dx2  (uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_, bool _isNormed_ = DEFAULT_IS_NORMED);
-        Complex d2dy2  (uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_, bool _isNormed_ = DEFAULT_IS_NORMED);
-        Complex d2dz2  (uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_, bool _isNormed_ = DEFAULT_IS_NORMED);
-        Complex laplace(uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_, bool _isNormed_ = DEFAULT_IS_NORMED);
+        Complex ddx    (uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_, bool _isNormed_ = DEFAULT_IS_NORMED) const;
+        Complex ddy    (uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_, bool _isNormed_ = DEFAULT_IS_NORMED) const;
+        Complex ddz    (uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_, bool _isNormed_ = DEFAULT_IS_NORMED) const;
+        Complex grad   (uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_, bool _isNormed_ = DEFAULT_IS_NORMED) const;
+        Complex d2dx2  (uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_, bool _isNormed_ = DEFAULT_IS_NORMED) const;
+        Complex d2dy2  (uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_, bool _isNormed_ = DEFAULT_IS_NORMED) const;
+        Complex d2dz2  (uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_, bool _isNormed_ = DEFAULT_IS_NORMED) const;
+        Complex laplace(uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_, bool _isNormed_ = DEFAULT_IS_NORMED) const;
 
         std::string string();
 };

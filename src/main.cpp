@@ -1,5 +1,4 @@
-//#include "../include/dirac.h"
-#include "../include/dmath.h"
+#include "../include/dirac.h"
 
 #include <cmath>
 #include <iostream>
@@ -11,7 +10,9 @@
 
 int main()
 {   
-    for (int i = 0; i < 10; i++) std::cout << expn((float) i) << std::endl;
+    Complex x = Complex(1, 2);
+    Complex y = Complex(4, 5);
+    Complex z = x + y;
 
     std::cin.get();
     return 0;

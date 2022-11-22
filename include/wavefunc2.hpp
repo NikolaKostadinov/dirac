@@ -24,16 +24,16 @@ class WaveFunc2 : public Field2<Complex>, public WaveFunc
         void    evolve (float _dt_   , Scalar2    _potential_);
         void    evolve (float _dt_   , Scalar2* _toPotential_);
 
-        Complex probAmp(uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED);
-        float   prob   (uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED);
-        float   prob   (                                    bool _isNormed_ = DEFAULT_IS_NORMED);
+        Complex probAmp(uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED) const;
+        float   prob   (uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED) const;
+        float   prob   (                                    bool _isNormed_ = DEFAULT_IS_NORMED) const;
 
-        Complex ddx    (uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED);
-        Complex ddy    (uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED);
-        Complex grad   (uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED);
-        Complex d2dx2  (uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED);
-        Complex d2dy2  (uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED);
-        Complex laplace(uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED);
+        Complex ddx    (uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED) const;
+        Complex ddy    (uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED) const;
+        Complex grad   (uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED) const;
+        Complex d2dx2  (uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED) const;
+        Complex d2dy2  (uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED) const;
+        Complex laplace(uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED) const;
 
         float   expcIndex();
         float   expcJndex();

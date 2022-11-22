@@ -23,12 +23,12 @@ void Spinor::scale(float _factor_)
     _down.scale(_factor_);
 }
 
-Spinor Spinor::operator+()
+Spinor Spinor::operator+() const
 {
     return *this;
 }
 
-Spinor Spinor::operator-()
+Spinor Spinor::operator-() const
 {
     Complex up   = -_up  ;
     Complex down = -_down;
@@ -36,7 +36,7 @@ Spinor Spinor::operator-()
     return Spinor(up, down);
 }
 
-Spinor Spinor::operator+(Spinor _other_)
+Spinor Spinor::operator+(const Spinor _other_)
 {
     Complex up   = _up   + _other_.up  ();
     Complex down = _down + _other_.down();
@@ -44,7 +44,7 @@ Spinor Spinor::operator+(Spinor _other_)
     return Spinor(up, down);
 }
 
-Spinor Spinor::operator-(Spinor _other_)
+Spinor Spinor::operator-(const Spinor _other_)
 {
     Complex up   = _up   - _other_.up  ();
     Complex down = _down - _other_.down();
@@ -52,7 +52,7 @@ Spinor Spinor::operator-(Spinor _other_)
     return Spinor(up, down);
 }
 
-Spinor Spinor::operator*(Spinor _other_)
+Spinor Spinor::operator*(const Spinor _other_)
 {
     Complex up   = _up   * _other_.up  ();
     Complex down = _down * _other_.down();
@@ -60,7 +60,7 @@ Spinor Spinor::operator*(Spinor _other_)
     return Spinor(up, down);
 }
 
-Spinor Spinor::operator/(Spinor _other_)
+Spinor Spinor::operator/(const Spinor _other_)
 {
     Complex up   = _up   / _other_.up  ();
     Complex down = _down / _other_.down();
@@ -68,17 +68,17 @@ Spinor Spinor::operator/(Spinor _other_)
     return Spinor(up, down);
 }
 
-Complex Spinor::up()
+Complex Spinor::up() const
 {
     return _up;
 }
 
-Complex Spinor::down()
+Complex Spinor::down() const
 {
     return _down;
 }
 
-float Spinor::prob()
+float Spinor::prob() const
 {
     return _up.conjSq() + _down.conjSq();
 }

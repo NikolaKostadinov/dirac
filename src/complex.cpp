@@ -23,17 +23,17 @@ void Complex::shrink(float _factor_)
     _imag /= _factor_;
 }
 
-Complex Complex::operator+()
+Complex Complex::operator+() const
 {
     return *this;
 }
 
-Complex Complex::operator-()
+Complex Complex::operator-() const
 {
     return Complex(-_real, -_imag);
 }
 
-Complex Complex::operator+(Complex _other_)
+Complex Complex::operator+(const Complex _other_)
 {
     float real = _real + _other_._real;
     float imag = _imag + _other_._imag;
@@ -41,7 +41,7 @@ Complex Complex::operator+(Complex _other_)
     return Complex(real, imag);
 }
 
-Complex Complex::operator-(Complex _other_)
+Complex Complex::operator-(const Complex _other_)
 {
     float real = _real - _other_._real;
     float imag = _imag - _other_._imag;
@@ -49,7 +49,7 @@ Complex Complex::operator-(Complex _other_)
     return Complex(real, imag);
 }
 
-Complex Complex::operator*(Complex _other_)
+Complex Complex::operator*(const Complex _other_)
 {
     float real = _real * _other_._real - _imag * _other_._imag;
     float imag = _imag * _other_._real + _real * _other_._imag;
@@ -57,7 +57,7 @@ Complex Complex::operator*(Complex _other_)
     return Complex(real, imag);
 }
 
-Complex Complex::operator/(Complex _other_)
+Complex Complex::operator/(const Complex _other_)
 {
     float real = _real * _other_._real + _imag * _other_._imag;
     float imag = _imag * _other_._real - _real * _other_._imag;
@@ -69,32 +69,32 @@ Complex Complex::operator/(Complex _other_)
     return Complex(real, imag);
 }
 
-Complex Complex::operator==(Complex _other_)
+Complex Complex::operator==(const Complex _other_)
 {
     return (_real == _other_._real) && (_imag == _other_._imag);
 }
 
-float Complex::real()
+float Complex::real() const
 {
     return _real;
 }
 
-float Complex::imag()
+float Complex::imag() const
 {
     return _imag;
 }
 
-float Complex::mod()
+float Complex::mod() const
 {
     return sqrt(_real * _real + _imag + _imag);
 }
 
-float Complex::arg()
+float Complex::arg() const
 {
     return atan2(_imag, _real);
 }
 
-Complex Complex::sq()
+Complex Complex::sq() const
 {
     float real = _real * _real - _imag * _imag;
     float imag =  2.0f * _real * _imag;
@@ -102,12 +102,12 @@ Complex Complex::sq()
     return Complex(real, imag);
 }
 
-Complex Complex::conj()
+Complex Complex::conj() const
 {
     return Complex(_real, -_imag);
 }
 
-float Complex::conjSq()
+float Complex::conjSq() const
 {
     return _real * _real + _imag * _imag;
 }

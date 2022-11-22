@@ -16,21 +16,23 @@ class Bispinor
 
         void scale(float _factor_);
 
-        Bispinor operator+();
-        Bispinor operator-();
+        Bispinor  operator+() const;
+        Bispinor  operator-() const;
 
-        Bispinor operator+(Bispinor _other_);
-        Bispinor operator-(Bispinor _other_);
-        Bispinor operator*(Bispinor _other_);
-        Bispinor operator/(Bispinor _other_);
+        Bispinor  operator+ ( const Bispinor _other_);
+        Bispinor  operator- ( const Bispinor _other_);
+        Bispinor  operator* ( const Bispinor _other_);
+        Bispinor  operator/ ( const Bispinor _other_);
+        Bispinor  operator==( const Bispinor _other_);
+        Bispinor& operator+=( const Bispinor _other_);
 
-        Spinor   positive();
-        Spinor   negative();
-        Complex  posUp   ();
-        Complex  posDown ();
-        Complex  negUp   ();
-        Complex  negDown ();
-        float    prob    ();
+        Spinor    positive()  const;
+        Spinor    negative()  const;
+        Complex   posUp   ()  const;
+        Complex   posDown ()  const;
+        Complex   negUp   ()  const;
+        Complex   negDown ()  const;
+        float     prob    ()  const;
 
         std::string string();
 

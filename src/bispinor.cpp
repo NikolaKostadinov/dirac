@@ -23,12 +23,12 @@ void Bispinor::scale(float _factor_)
     _negative.scale(_factor_);
 }
 
-Bispinor Bispinor::operator+()
+Bispinor Bispinor::operator+() const
 {
     return *this;
 }
 
-Bispinor Bispinor::operator-()
+Bispinor Bispinor::operator-() const
 {
     Spinor positive = -_positive;
     Spinor negative = -_negative;
@@ -36,7 +36,7 @@ Bispinor Bispinor::operator-()
     return Bispinor(positive, negative);
 }
 
-Bispinor Bispinor::operator+(Bispinor _other_)
+Bispinor Bispinor::operator+(const Bispinor _other_)
 {
     Spinor positive = _positive + _other_.positive();
     Spinor negative = _negative + _other_.negative();
@@ -44,7 +44,7 @@ Bispinor Bispinor::operator+(Bispinor _other_)
     return Bispinor(positive, negative);
 }
 
-Bispinor Bispinor::operator-(Bispinor _other_)
+Bispinor Bispinor::operator-(const Bispinor _other_)
 {
     Spinor positive = _positive - _other_.positive();
     Spinor negative = _negative - _other_.negative();
@@ -52,7 +52,7 @@ Bispinor Bispinor::operator-(Bispinor _other_)
     return Bispinor(positive, negative);
 }
 
-Bispinor Bispinor::operator*(Bispinor _other_)
+Bispinor Bispinor::operator*(const Bispinor _other_)
 {
     Spinor positive = _positive * _other_.positive();
     Spinor negative = _negative * _other_.negative();
@@ -60,7 +60,7 @@ Bispinor Bispinor::operator*(Bispinor _other_)
     return Bispinor(positive, negative);
 }
 
-Bispinor Bispinor::operator/(Bispinor _other_)
+Bispinor Bispinor::operator/(const Bispinor _other_)
 {
     Spinor positive = _positive / _other_.positive();
     Spinor negative = _negative / _other_.negative();
@@ -68,37 +68,37 @@ Bispinor Bispinor::operator/(Bispinor _other_)
     return Bispinor(positive, negative);
 }
 
-Spinor Bispinor::positive()
+Spinor Bispinor::positive() const
 {
     return _positive;
 }
 
-Spinor Bispinor::negative()
+Spinor Bispinor::negative() const
 {
     return _negative;
 }
 
-Complex Bispinor::posUp()
+Complex Bispinor::posUp() const
 {
     return _positive.up();
 }
 
-Complex Bispinor::posDown()
+Complex Bispinor::posDown() const
 {
     return _positive.down();
 }
 
-Complex Bispinor::negUp()
+Complex Bispinor::negUp() const
 {
     return _negative.up();
 }
 
-Complex Bispinor::negDown()
+Complex Bispinor::negDown() const
 {
     return _negative.down();
 }
 
-float Bispinor::prob()
+float Bispinor::prob() const
 {
     return _positive.prob() + _negative.prob();
 }
