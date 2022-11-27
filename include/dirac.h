@@ -34,6 +34,9 @@
 
 #pragma  once
 
+#include "engine_params.h"
+#include "engine_macros.h"
+
 #include "vector2.hpp"
 #include "vector3.hpp"
 #include "complex.hpp"

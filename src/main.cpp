@@ -10,10 +10,13 @@
 
 int main()
 {
-    Base x = Base(-B, N, B);
+    Base   x = Base(-B, N, B);
+    Basis2 b = Basis2(x, x);
 
-    std::cout << x(    0u) << std::endl;
-    std::cout << x(N - 1u) << std::endl;
+    std::cout << b(  0u,   0u).X << std::endl;
+    std::cout << b(  0u,   0u).Y << std::endl;
+    std::cout << b(N-1u, N-1u).X << std::endl;
+    std::cout << b(N-1u, N-1u).Y << std::endl;
 
     std::cin.get();
     return 0;

@@ -4,6 +4,8 @@
 #include "base.hpp"
 #include "basis3.hpp"
 #include "complex.hpp"
+#include "vector2.hpp"
+#include "vector3.hpp"
 
 #include <vector>
 
@@ -20,10 +22,6 @@ class Field3
 
         void     setValues(T*      _address_);
         void     setBasis (Basis2* _toBasis_);
-        void     setXSize (uint32_t  _xSize_);
-        void     setYSize (uint32_t  _ySize_);
-        void     setZSize (uint32_t  _zSize_);
-        void     setSize  (uint32_t  _xSize_, uint32_t  _ySize_, uint32_t  _zSize_);
 
         uint32_t  size  ()                                                                     const;
         uint32_t xSize  ()                                                                     const;
@@ -37,9 +35,6 @@ class Field3
 
     protected:
 
-        uint32_t _xSize        ;
-        uint32_t _ySize        ;
-        uint32_t _zSize        ;
         Basis3*  _toBasis      ;
         T*       _originAddress;
 };

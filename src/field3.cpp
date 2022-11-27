@@ -3,9 +3,6 @@
 template <class T>
 Field3<T>::Field3()
 {
-    _xSize         = 0u        ;
-    _ySize         = 0u        ;
-    _zSize         = 0u        ;
     _toBasis       = new Basis3;
     _originAddress = new T     ;
 }
@@ -13,32 +10,29 @@ Field3<T>::Field3()
 template <class T>
 Field3<T>::~Field3()
 {
-    delete _toBasis;
+    uint32_t  rempXSize = xSize();
+    uint32_t  rempYSize = ySize();
+    uint32_t  rempZSize = zSize();
+    delete   _toBasis;
 
-    for (uint32_t i = 0u; i < _xSize; i++)
-        for (uint32_t j = 0u; j < _ySize; j++)
-            for (uint32_t k = 0u; k < _zSize; k++)
+    for (uint32_t i = 0u; i < rempXSize; i++)
+        for (uint32_t j = 0u; j < rempYSize; j++)
+            for (uint32_t k = 0u; k < rempZSize; k++)
                 delete address(i, j, k);
 }
 
 template <class T>
 Field3<T>::Field3(Basis3* _toBasis_)
 {
-    _xSize         = _toBasis_->xSize();
-    _ySize         = _toBasis_->ySize();
-    _zSize         = _toBasis_->zSize();
-    _toBasis       = _toBasis_         ;
-    _originAddress = new T             ;
+    _toBasis       = _toBasis_;
+    _originAddress = new T    ;
 }
 
 template <class T>
 Field3<T>::Field3(Basis3 _basis_)
 {
-    _xSize         =  _basis_.xSize();
-    _ySize         =  _basis_.ySize();
-    _zSize         =  _basis_.zSize();
-    _toBasis       = &_basis_        ;
-    _originAddress =  new T          ;
+    _toBasis       = &_basis_;
+    _originAddress =  new T  ;
 }
 
 template <class T>
@@ -86,15 +80,19 @@ Basis3 Field3<T>::basis() const
 template <class T>
 T* Field3<T>::address(uint32_t _index_, uint32_t _jndex_, uint32_t _kindex_) const
 {
-    if (_index_ >= 0u && _index_ < _xSize)
+    uint32_t  rempXSize = xSize();
+    uint32_t  rempYSize = ySize();
+    uint32_t  rempZSize = zSize();
+
+    if (_index_ >= 0u && _index_ < rempXSize)
     {
-        if (_jndex_ >= 0u && _jndex_ < _ySize)
+        if (_jndex_ >= 0u && _jndex_ < rempYSize)
         {
-            if (_kindex_ >= 0u && _kindex_ < _zSize)
+            if (_kindex_ >= 0u && _kindex_ < rempZSize)
             {
-                uint32_t backVolume     = _kindex_ * xSize()  * ySize()   ;
-                uint32_t backArea       = _jndex_  * xSize()              ;
-                return   _originAddress + _index_  + backArea + backVolume;
+                uint32_t backVolume     = _kindex_ * rempXSize * rempYSize ;
+                uint32_t backArea       = _jndex_  * rempXSize             ;
+                return   _originAddress + _index_  + backArea  + backVolume;
             }
             else throw OUT_OF_Z_BOUNDS;
         }
@@ -121,6 +119,8 @@ template class Field3            <               float  > ;
 template class Field3            <               double > ;
 template class Field3            <         long  double > ;
 template class Field3            <               Complex> ;
+template class Field3            <               Vector2> ;
+template class Field3            <               Vector3> ;
 template class Field3<std::vector<  signed       char   >>;
 template class Field3<std::vector<unsigned       char   >>;
 template class Field3<std::vector<  signed       int    >>;

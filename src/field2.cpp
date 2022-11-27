@@ -3,8 +3,6 @@
 template <class T>
 Field2<T>::Field2()
 {
-    _xSize         = 0u        ;
-    _ySize         = 0u        ;
     _toBasis       = new Basis2;
     _originAddress = new T     ;
 }
@@ -12,29 +10,27 @@ Field2<T>::Field2()
 template <class T>
 Field2<T>::~Field2()
 {
-    delete _toBasis;
+    uint32_t  rempXSize = xSize();
+    uint32_t  rempYSize = ySize();
+    delete   _toBasis;
 
-    for (uint32_t i = 0u; i < _xSize; i++)
-        for (uint32_t j = 0u; j < _ySize; j++)
+    for (uint32_t i = 0u; i < rempXSize; i++)
+        for (uint32_t j = 0u; j < rempYSize; j++)
             delete address(i, j);
 }
 
 template <class T>
 Field2<T>::Field2(Basis2* _toBasis_)
 {
-    _xSize         = _toBasis_->xSize();
-    _ySize         = _toBasis_->ySize();
-    _toBasis       = _toBasis_         ;
-    _originAddress = new T             ;
+    _toBasis       = _toBasis_;
+    _originAddress = new T    ;
 }
 
 template <class T>
 Field2<T>::Field2(Basis2 _basis_)
 {
-    _xSize         =  _basis_.xSize();
-    _ySize         =  _basis_.ySize();
-    _toBasis       = &_basis_        ;
-    _originAddress =  new T          ;
+    _toBasis       = &_basis_;
+    _originAddress =  new T  ;
 }
 
 template <class T>
@@ -76,12 +72,15 @@ Basis2 Field2<T>::basis() const
 template <class T>
 T* Field2<T>::address(uint32_t _index_, uint32_t _jndex_) const
 {
-    if (_index_ >= 0u && _index_ < _xSize)
+    uint32_t  rempXSize = xSize();
+    uint32_t  rempYSize = ySize();
+
+    if (_index_ >= 0u && _index_ < rempXSize)
     {
-        if (_jndex_ >= 0u && _jndex_ < _ySize)
+        if (_jndex_ >= 0u && _jndex_ < rempYSize)
         {
-            uint32_t backArea      = _jndex_ * xSize() ;
-            return  _originAddress + _index_ + backArea;
+            uint32_t backArea      = _jndex_ * rempXSize;
+            return  _originAddress + _index_ + backArea ;
         }
         else throw OUT_OF_Y_BOUNDS;
     }
@@ -106,6 +105,8 @@ template class Field2            <               float  > ;
 template class Field2            <               double > ;
 template class Field2            <         long  double > ;
 template class Field2            <               Complex> ;
+template class Field2            <               Vector2> ;
+template class Field2            <               Vector3> ;
 template class Field2<std::vector<  signed       char   >>;
 template class Field2<std::vector<unsigned       char   >>;
 template class Field2<std::vector<  signed       int    >>;

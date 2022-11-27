@@ -3,6 +3,8 @@
 #include "engine_exceptions.h"
 #include "base.hpp"
 #include "complex.hpp"
+#include "vector2.hpp"
+#include "vector3.hpp"
 
 #include <vector>
 
@@ -18,8 +20,8 @@ class Field1
         Field1(Base* _toBase_);
 
         void     setValues(T*    _address_);
-        void     setBase  (Base* _toBase_ );
-        void     setSize  (uint32_t _size_);
+        void     setBase  (Base     _base_);
+        void     setBase  (Base*  _toBase_);
 
         uint32_t size  ()                       const;
         Base*    toBase()                       const;
@@ -30,7 +32,6 @@ class Field1
 
     protected:
 
-        uint32_t _size         ;
         Base*    _toBase       ;
         T*       _originAddress;
 };
