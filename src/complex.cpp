@@ -69,9 +69,65 @@ Complex Complex::operator/(const Complex _other_)
     return Complex(real, imag);
 }
 
+Complex& Complex::operator+=(const Complex _other_)
+{
+    _real += _other_._real;
+    _imag += _other_._imag;
+
+    return *this;
+}
+
+Complex& Complex::operator-=(const Complex _other_)
+{
+    _real -= _other_._real;
+    _imag -= _other_._imag;
+
+    return *this;
+}
+
+Complex& Complex::operator*=(const Complex _other_)
+{
+    Complex* product = new Complex();
+    *product = *this * _other_;
+    *this = *product;
+    delete   product;
+
+    return *this;
+}
+
+Complex& Complex::operator/=(const Complex _other_)
+{
+    Complex* quotient = new Complex();
+    *quotient = *this * _other_;
+    *this = *quotient;
+    delete   quotient;
+
+    return *this;
+}
+
 bool Complex::operator==(const Complex _other_)
 {
-    return (_real == _other_._real) && (_imag == _other_._imag);
+    return conjSq() == _other_.conjSq();
+}
+
+bool Complex::operator>(const Complex _other_)
+{
+    return conjSq() > _other_.conjSq();
+}
+
+bool Complex::operator<(const Complex _other_)
+{
+    return conjSq() < _other_.conjSq();
+}
+
+bool Complex::operator>=(const Complex _other_)
+{
+    return conjSq() >= _other_.conjSq();
+}
+
+bool Complex::operator<=(const Complex _other_)
+{
+    return conjSq() <= _other_.conjSq();
 }
 
 float Complex::real() const
@@ -174,4 +230,9 @@ Complex ln(Complex _complex_)
     float imag = _complex_.arg();
 
     return Complex(real, imag);
+}
+
+bool areEqual(Complex _left_, Complex _right_)
+{
+    return (_left_.real() == _right_.real()) && (_left_.imag() == _right_.imag());
 }

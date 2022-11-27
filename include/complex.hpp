@@ -61,3 +61,5 @@ Complex cis (float   _arg_    );
 Complex sqrt(Complex _complex_);
 Complex exp (Complex _complex_);
 Complex ln  (Complex _complex_);
+
+bool    areEqual(Complex _left_, Complex _right_);
