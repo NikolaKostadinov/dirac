@@ -30,10 +30,10 @@ void WaveFunc::checkNorm() const
     else if (_norm <  0.0f) throw NEGATIVE_NORM;
 }
 
-void WaveFunc::checkMass() const
+void WaveFunc::checkMass(bool _isMassless_) const
 {
-    if      (_mass == 0.0f) throw     ZERO_MASS;
-    else if (_mass <  0.0f) throw NEGATIVE_MASS;
+    if      (_mass == 0.0f && !_isMassless_) throw     ZERO_MASS;
+    else if (_mass <  0.0f                 ) throw NEGATIVE_MASS;
 }
 
 bool WaveFunc::isNormValid() const
@@ -42,10 +42,11 @@ bool WaveFunc::isNormValid() const
     else                 return true ;
 }
 
-bool WaveFunc::isMassValid() const
+bool WaveFunc::isMassValid(bool _isMassless_) const
 {
-    if   (_mass < 0.0f) return false;
-    else                return true ;
+    if      (_mass == 0.0f && !_isMassless_) return false;
+    else if (_mass <  0.0f)                  return false;
+    else                                     return true ;
 }
 
 float WaveFunc::norm() const

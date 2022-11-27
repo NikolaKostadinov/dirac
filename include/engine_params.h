@@ -18,6 +18,7 @@
 #define E_CHARGE               -1.0f
 #define E_MASS                  1.0f
 
+#define DEFAULT_IS_MASSLESS     false
 #define DEFAULT_IS_NORMED       true
 #define DEFAULT_NORM            1.0f
 #define DEFAULT_MASS            1.0f
