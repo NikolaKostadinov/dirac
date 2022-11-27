@@ -20,6 +20,11 @@ Basis3::Basis3(Base* _toXBase_, Base* _toYBase_, Base* _toZBase_) : Basis2(_toXB
     _toZ = _toZBase_;
 }
 
+Vector3 Basis3::operator()(uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_) const
+{
+    return Vector3(_toX->x(_index_), _toY->x(_jndex_), _toZ->x(_kndex_));
+}
+
 uint32_t Basis3::size() const
 {
     return _toX->size() * _toY->size() * _toZ->size();
