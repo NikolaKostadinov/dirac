@@ -13,7 +13,7 @@ Field1<T>::~Field1()
     uint32_t  tempSize = size();
     delete   _toBase;
 
-    for (uint32_t i = 0u; i < size; i++)
+    for (uint32_t i = 0u; i < tempSize; i++)
         delete address(i);
 }
 
@@ -38,13 +38,13 @@ void Field1<T>::setValues(T* _address_)
 }
 
 template <class T>
-void setBase(Base _base_)
+void Field1<T>::setBase(Base _base_)
 {
     _toBase = &_base_;
 }
 
 template <class T>
-void setBase(Base* _toBase_)
+void Field1<T>::setBase(Base* _toBase_)
 {
     _toBase = _toBase_;
 }
@@ -70,10 +70,10 @@ Base Field1<T>::base() const
 template <class T>
 T* Field1<T>::address(uint32_t _index_) const
 {
-    uint32_t size = _toBase->size();
+    uint32_t tempSize = size();
 
-    if (_index_ < size) return _originAddress + _index_;
-    else                throw  OUT_OF_BOUNDS           ;
+    if (_index_ < tempSize) return _originAddress + _index_;
+    else                    throw  OUT_OF_BOUNDS           ;
 }
 
 template <class T>
