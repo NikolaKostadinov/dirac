@@ -62,11 +62,10 @@ Complex Complex::operator/(const Complex _other_)
     float real = _real * _other_._real + _imag * _other_._imag;
     float imag = _imag * _other_._real - _real * _other_._imag;
 
-    float factor = 1 / (_other_._real * _other_._real + _other_._imag * _other_._imag);
-    real *= factor;
-    imag *= factor;
-
-    return Complex(real, imag);
+    float   norm     = conjSq();
+    Complex quotient = Complex(real, imag);
+    quotient.shrink(norm);
+    return  quotient;
 }
 
 Complex& Complex::operator+=(const Complex _other_)
@@ -168,6 +167,14 @@ float Complex::conjSq() const
     return _real * _real + _imag * _imag;
 }
 
+Complex Complex::recip() const
+{
+    float   norm   = conjSq();
+    Complex result = conj  ();
+    result.shrink(norm);
+    return  result;
+}
+
 std::string Complex::string()
 {
     std::stringstream realStream;
@@ -207,13 +214,14 @@ Complex cis(float _arg_)
     return Complex(real, imag);
 }
 
-Complex sqrt(Complex _complex_)
+Complex sqrt(Complex _complex_, bool _isPositive_)
 { 
     float   factor = sqrt(_complex_.mod());
-    Complex phase  = cis(0.5f * _complex_.arg());
+    Complex root   = cis(0.5f * _complex_.arg());
 
-    phase.scale(factor);
-    return phase;
+    root.scale(factor);
+    if (_isPositive_) return  root;
+    else              return -root;
 }
 
 Complex exp(Complex _complex_)
@@ -224,10 +232,10 @@ Complex exp(Complex _complex_)
     return Complex(expo) + phase;
 }
 
-Complex ln(Complex _complex_)
+Complex ln(Complex _complex_, int _rotNumber_)
 {
     float real = log(_complex_.real());
-    float imag = _complex_.arg();
+    float imag = _complex_.arg() + 2.0f * PI * (float) _rotNumber_;
 
     return Complex(real, imag);
 }

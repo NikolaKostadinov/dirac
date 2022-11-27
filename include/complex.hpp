@@ -45,6 +45,8 @@ class Complex
         Complex     sq()    const;
         Complex conj  ()    const;
         float   conjSq()    const;
+        
+        Complex recip ()    const;
 
         std::string string();
 
@@ -58,8 +60,8 @@ Complex Real(float   _real_   );
 Complex Imag(float   _imag_   );
 
 Complex cis (float   _arg_    );
-Complex sqrt(Complex _complex_);
+Complex sqrt(Complex _complex_, bool _isPositive_ = true);
 Complex exp (Complex _complex_);
-Complex ln  (Complex _complex_);
+Complex ln  (Complex _complex_, int _rotNumber_ = 0);
 
 bool    areEqual(Complex _left_, Complex _right_);
