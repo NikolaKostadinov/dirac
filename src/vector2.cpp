@@ -33,17 +33,17 @@ void Vector2::normalize(float _norm_)
     scale(_norm_ / length() );
 }
 
-Vector2 Vector2::operator+()
+Vector2 Vector2::operator+() const
 {
     return *this;
 }
 
-Vector2 Vector2::operator-()
+Vector2 Vector2::operator-() const
 {
     return Vector2(-_x, -_y);
 }
 
-Vector2 Vector2::operator+(const Vector2 _other_)
+Vector2 Vector2::operator+(const Vector2 _other_) const
 {
     float x = _x + _other_._x;
     float y = _y + _other_._y;
@@ -51,7 +51,7 @@ Vector2 Vector2::operator+(const Vector2 _other_)
     return Vector2(x, y);
 }
 
-Vector2 Vector2::operator-(const Vector2 _other_)
+Vector2 Vector2::operator-(const Vector2 _other_) const
 {
     float x = _x - _other_._x;
     float y = _y - _other_._y;
@@ -59,7 +59,7 @@ Vector2 Vector2::operator-(const Vector2 _other_)
     return Vector2(x, y);
 }
 
-Vector2 Vector2::operator*(const Vector2 _other_)
+Vector2 Vector2::operator*(const Vector2 _other_) const
 {
     float x = _x * _other_._x;
     float y = _y * _other_._y;
@@ -67,7 +67,7 @@ Vector2 Vector2::operator*(const Vector2 _other_)
     return Vector2(x, y);
 }
 
-Vector2 Vector2::operator/(const Vector2 _other_)
+Vector2 Vector2::operator/(const Vector2 _other_) const
 {
     float x = _x / _other_._x;
     float y = _y / _other_._y;
@@ -107,7 +107,7 @@ Vector2& Vector2::operator/=(const Vector2 _other_)
     return *this;
 }
 
-bool Vector2::operator==(const Vector2 _other_)
+bool Vector2::operator==(const Vector2 _other_) const
 {
     return (_x == _other_._x) && (_y == _other_._y);
 }

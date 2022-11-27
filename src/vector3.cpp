@@ -36,17 +36,17 @@ void Vector3::normalize(float _norm_)
     scale(1.0f);
 }
 
-Vector3 Vector3::operator+()
+Vector3 Vector3::operator+() const
 {
     return *this;
 }
 
-Vector3 Vector3::operator-()
+Vector3 Vector3::operator-() const
 {
     return Vector3(-_x, -_y, -_z);
 }
 
-Vector3 Vector3::operator+(const Vector3 _other_)
+Vector3 Vector3::operator+(const Vector3 _other_) const
 {
     float x = _x + _other_._x;
     float y = _y + _other_._y;
@@ -55,7 +55,7 @@ Vector3 Vector3::operator+(const Vector3 _other_)
     return Vector3(x, y, z);
 }
 
-Vector3 Vector3::operator-(const Vector3 _other_)
+Vector3 Vector3::operator-(const Vector3 _other_) const
 {
     float x = _x - _other_._x;
     float y = _y - _other_._y;
@@ -64,7 +64,7 @@ Vector3 Vector3::operator-(const Vector3 _other_)
     return Vector3(x, y, z);
 }
 
-Vector3 Vector3::operator*(const Vector3 _other_)
+Vector3 Vector3::operator*(const Vector3 _other_) const
 {
     float x = _x * _other_._x;
     float y = _y * _other_._y;
@@ -73,7 +73,7 @@ Vector3 Vector3::operator*(const Vector3 _other_)
     return Vector3(x, y, z);
 }
 
-Vector3 Vector3::operator/(const Vector3 _other_)
+Vector3 Vector3::operator/(const Vector3 _other_) const
 {
     float x = _x / _other_._x;
     float y = _y / _other_._y;
@@ -118,7 +118,7 @@ Vector3& Vector3::operator/=(const Vector3 _other_)
     return *this;
 }
 
-bool Vector3::operator==(const Vector3 _other_)
+bool Vector3::operator==(const Vector3 _other_) const
 {
     return (_x == _other_._x) && (_y == _other_._y) && (_z == _other_._z);
 }

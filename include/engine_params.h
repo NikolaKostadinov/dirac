@@ -8,8 +8,10 @@
 #define DEFAULT_IMAG            0.0f
 #define COMPLEX_ROUND           4
 
-#define MAGIC                   0x5f3759df
+#define DEFAULT_SPINOR_NORM     1.0f
+#define DEFAULT_BISPINOR_NORM   1.0f
 
+#define MAGIC                   0x5f3759df
 #define PI                      3.141592653589793f
 #define E                       2.718281828459045f
 #define HBAR                    1.0f

@@ -23,6 +23,17 @@ void Bispinor::scale(float _factor_)
     _negative.scale(_factor_);
 }
 
+void Bispinor::shrink(float _factor_)
+{
+    _positive.shrink(_factor_);
+    _negative.shrink(_factor_);
+}
+
+void Bispinor::normalize(float _norm_)
+{
+    
+}
+
 Bispinor Bispinor::operator+() const
 {
     return *this;
@@ -30,13 +41,10 @@ Bispinor Bispinor::operator+() const
 
 Bispinor Bispinor::operator-() const
 {
-    Spinor positive = -_positive;
-    Spinor negative = -_negative;
-
-    return Bispinor(positive, negative);
+    return Bispinor(-_positive, -_negative);
 }
 
-Bispinor Bispinor::operator+(const Bispinor _other_)
+Bispinor Bispinor::operator+(const Bispinor _other_) const
 {
     Spinor positive = _positive + _other_.positive();
     Spinor negative = _negative + _other_.negative();
@@ -44,7 +52,7 @@ Bispinor Bispinor::operator+(const Bispinor _other_)
     return Bispinor(positive, negative);
 }
 
-Bispinor Bispinor::operator-(const Bispinor _other_)
+Bispinor Bispinor::operator-(const Bispinor _other_) const
 {
     Spinor positive = _positive - _other_.positive();
     Spinor negative = _negative - _other_.negative();
@@ -52,7 +60,7 @@ Bispinor Bispinor::operator-(const Bispinor _other_)
     return Bispinor(positive, negative);
 }
 
-Bispinor Bispinor::operator*(const Bispinor _other_)
+Bispinor Bispinor::operator*(const Bispinor _other_) const
 {
     Spinor positive = _positive * _other_.positive();
     Spinor negative = _negative * _other_.negative();
@@ -60,7 +68,7 @@ Bispinor Bispinor::operator*(const Bispinor _other_)
     return Bispinor(positive, negative);
 }
 
-Bispinor Bispinor::operator/(const Bispinor _other_)
+Bispinor Bispinor::operator/(const Bispinor _other_) const
 {
     Spinor positive = _positive / _other_.positive();
     Spinor negative = _negative / _other_.negative();

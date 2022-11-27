@@ -20,22 +20,21 @@ class Complex
         void    scale (float _factor_);
         void    shrink(float _factor_);
 
-        Complex operator+() const;
-        Complex operator-() const;
-        
-        Complex  operator+ (const Complex _other_);
-        Complex  operator- (const Complex _other_);
-        Complex  operator* (const Complex _other_);
-        Complex  operator/ (const Complex _other_);
-        Complex& operator+=(const Complex _other_);
-        Complex& operator-=(const Complex _other_);
-        Complex& operator*=(const Complex _other_);
-        Complex& operator/=(const Complex _other_);
-        bool     operator==(const Complex _other_);
-        bool     operator> (const Complex _other_);
-        bool     operator< (const Complex _other_);
-        bool     operator>=(const Complex _other_);
-        bool     operator<=(const Complex _other_);
+        Complex  operator+ (                     ) const;
+        Complex  operator- (                     ) const;
+        Complex  operator+ (const Complex _other_) const;
+        Complex  operator- (const Complex _other_) const;
+        Complex  operator* (const Complex _other_) const;
+        Complex  operator/ (const Complex _other_) const;
+        Complex& operator+=(const Complex _other_)      ;
+        Complex& operator-=(const Complex _other_)      ;
+        Complex& operator*=(const Complex _other_)      ;
+        Complex& operator/=(const Complex _other_)      ;
+        bool     operator==(const Complex _other_) const;
+        bool     operator> (const Complex _other_) const;
+        bool     operator< (const Complex _other_) const;
+        bool     operator>=(const Complex _other_) const;
+        bool     operator<=(const Complex _other_) const;
 
         float   real()      const;
         float   imag()      const;

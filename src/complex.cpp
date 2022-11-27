@@ -33,7 +33,7 @@ Complex Complex::operator-() const
     return Complex(-_real, -_imag);
 }
 
-Complex Complex::operator+(const Complex _other_)
+Complex Complex::operator+(const Complex _other_) const
 {
     float real = _real + _other_._real;
     float imag = _imag + _other_._imag;
@@ -41,7 +41,7 @@ Complex Complex::operator+(const Complex _other_)
     return Complex(real, imag);
 }
 
-Complex Complex::operator-(const Complex _other_)
+Complex Complex::operator-(const Complex _other_) const
 {
     float real = _real - _other_._real;
     float imag = _imag - _other_._imag;
@@ -49,7 +49,7 @@ Complex Complex::operator-(const Complex _other_)
     return Complex(real, imag);
 }
 
-Complex Complex::operator*(const Complex _other_)
+Complex Complex::operator*(const Complex _other_) const
 {
     float real = _real * _other_._real - _imag * _other_._imag;
     float imag = _imag * _other_._real + _real * _other_._imag;
@@ -57,7 +57,7 @@ Complex Complex::operator*(const Complex _other_)
     return Complex(real, imag);
 }
 
-Complex Complex::operator/(const Complex _other_)
+Complex Complex::operator/(const Complex _other_) const
 {
     float real = _real * _other_._real + _imag * _other_._imag;
     float imag = _imag * _other_._real - _real * _other_._imag;
@@ -104,27 +104,27 @@ Complex& Complex::operator/=(const Complex _other_)
     return *this;
 }
 
-bool Complex::operator==(const Complex _other_)
+bool Complex::operator==(const Complex _other_) const
 {
     return conjSq() == _other_.conjSq();
 }
 
-bool Complex::operator>(const Complex _other_)
+bool Complex::operator>(const Complex _other_) const
 {
     return conjSq() > _other_.conjSq();
 }
 
-bool Complex::operator<(const Complex _other_)
+bool Complex::operator<(const Complex _other_) const
 {
     return conjSq() < _other_.conjSq();
 }
 
-bool Complex::operator>=(const Complex _other_)
+bool Complex::operator>=(const Complex _other_) const
 {
     return conjSq() >= _other_.conjSq();
 }
 
-bool Complex::operator<=(const Complex _other_)
+bool Complex::operator<=(const Complex _other_) const
 {
     return conjSq() <= _other_.conjSq();
 }

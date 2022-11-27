@@ -19,17 +19,21 @@ class Vector2
         void     shrink    (float _factor_                    );
         void     normalize (float _norm_ = DEFAULT_VECTOR_NORM);
 
-        Vector2  operator+ (                     );
-        Vector2  operator- (                     );
-        Vector2  operator+ (const Vector2 _other_);
-        Vector2  operator- (const Vector2 _other_);
-        Vector2  operator* (const Vector2 _other_);
-        Vector2  operator/ (const Vector2 _other_);
-        Vector2& operator+=(const Vector2 _other_);
-        Vector2& operator-=(const Vector2 _other_);
-        Vector2& operator*=(const Vector2 _other_);
-        Vector2& operator/=(const Vector2 _other_);
-        bool     operator==(const Vector2 _other_);
+        Vector2  operator+ (                     ) const;
+        Vector2  operator- (                     ) const;
+        Vector2  operator+ (const Vector2 _other_) const;
+        Vector2  operator- (const Vector2 _other_) const;
+        Vector2  operator* (const Vector2 _other_) const;
+        Vector2  operator/ (const Vector2 _other_) const;
+        Vector2& operator+=(const Vector2 _other_)      ;
+        Vector2& operator-=(const Vector2 _other_)      ;
+        Vector2& operator*=(const Vector2 _other_)      ;
+        Vector2& operator/=(const Vector2 _other_)      ;
+        bool     operator==(const Vector2 _other_) const;
+        bool     operator> (const Vector2 _other_) const;
+        bool     operator< (const Vector2 _other_) const;
+        bool     operator>=(const Vector2 _other_) const;
+        bool     operator<=(const Vector2 _other_) const;
 
         float    x         (                     ) const;
         float    y         (                     ) const;

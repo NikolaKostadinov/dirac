@@ -19,17 +19,21 @@ class Vector3
         void     shrink    (float _factor_                    );
         void     normalize (float _norm_ = DEFAULT_VECTOR_NORM);
 
-        Vector3  operator+ (                     );
-        Vector3  operator- (                     );
-        Vector3  operator+ (const Vector3 _other_);
-        Vector3  operator- (const Vector3 _other_);
-        Vector3  operator* (const Vector3 _other_);
-        Vector3  operator/ (const Vector3 _other_);
-        Vector3& operator+=(const Vector3 _other_);
-        Vector3& operator-=(const Vector3 _other_);
-        Vector3& operator*=(const Vector3 _other_);
-        Vector3& operator/=(const Vector3 _other_);
-        bool     operator==(const Vector3 _other_);
+        Vector3  operator+ (                     ) const;
+        Vector3  operator- (                     ) const;
+        Vector3  operator+ (const Vector3 _other_) const;
+        Vector3  operator- (const Vector3 _other_) const;
+        Vector3  operator* (const Vector3 _other_) const;
+        Vector3  operator/ (const Vector3 _other_) const;
+        Vector3& operator+=(const Vector3 _other_)      ;
+        Vector3& operator-=(const Vector3 _other_)      ;
+        Vector3& operator*=(const Vector3 _other_)      ;
+        Vector3& operator/=(const Vector3 _other_)      ;
+        bool     operator==(const Vector3 _other_) const;
+        bool     operator> (const Vector3 _other_) const;
+        bool     operator< (const Vector3 _other_) const;
+        bool     operator>=(const Vector3 _other_) const;
+        bool     operator<=(const Vector3 _other_) const;
 
         float    x         (                     ) const;
         float    y         (                     ) const;

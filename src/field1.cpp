@@ -10,7 +10,7 @@ Field1<T>::Field1()
 template <class T>
 Field1<T>::~Field1()
 {
-    uint32_t  size = _toBase->size();
+    uint32_t  tempSize = size();
     delete   _toBase;
 
     for (uint32_t i = 0u; i < size; i++)

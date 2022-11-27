@@ -10,12 +10,12 @@ Field2<T>::Field2()
 template <class T>
 Field2<T>::~Field2()
 {
-    uint32_t  rempXSize = xSize();
-    uint32_t  rempYSize = ySize();
+    uint32_t  tempXSize = xSize();
+    uint32_t  tempYSize = ySize();
     delete   _toBasis;
 
-    for (uint32_t i = 0u; i < rempXSize; i++)
-        for (uint32_t j = 0u; j < rempYSize; j++)
+    for (uint32_t i = 0u; i < tempXSize; i++)
+        for (uint32_t j = 0u; j < tempYSize; j++)
             delete address(i, j);
 }
 
@@ -72,14 +72,14 @@ Basis2 Field2<T>::basis() const
 template <class T>
 T* Field2<T>::address(uint32_t _index_, uint32_t _jndex_) const
 {
-    uint32_t  rempXSize = xSize();
-    uint32_t  rempYSize = ySize();
+    uint32_t  tempXSize = xSize();
+    uint32_t  tempYSize = ySize();
 
-    if (_index_ >= 0u && _index_ < rempXSize)
+    if (_index_ >= 0u && _index_ < tempXSize)
     {
-        if (_jndex_ >= 0u && _jndex_ < rempYSize)
+        if (_jndex_ >= 0u && _jndex_ < tempYSize)
         {
-            uint32_t backArea      = _jndex_ * rempXSize;
+            uint32_t backArea      = _jndex_ * tempXSize;
             return  _originAddress + _index_ + backArea ;
         }
         else throw OUT_OF_Y_BOUNDS;

@@ -10,14 +10,14 @@ Field3<T>::Field3()
 template <class T>
 Field3<T>::~Field3()
 {
-    uint32_t  rempXSize = xSize();
-    uint32_t  rempYSize = ySize();
-    uint32_t  rempZSize = zSize();
+    uint32_t  tempXSize = xSize();
+    uint32_t  tempYSize = ySize();
+    uint32_t  tempZSize = zSize();
     delete   _toBasis;
 
-    for (uint32_t i = 0u; i < rempXSize; i++)
-        for (uint32_t j = 0u; j < rempYSize; j++)
-            for (uint32_t k = 0u; k < rempZSize; k++)
+    for (uint32_t i = 0u; i < tempXSize; i++)
+        for (uint32_t j = 0u; j < tempYSize; j++)
+            for (uint32_t k = 0u; k < tempZSize; k++)
                 delete address(i, j, k);
 }
 
@@ -80,18 +80,18 @@ Basis3 Field3<T>::basis() const
 template <class T>
 T* Field3<T>::address(uint32_t _index_, uint32_t _jndex_, uint32_t _kindex_) const
 {
-    uint32_t  rempXSize = xSize();
-    uint32_t  rempYSize = ySize();
-    uint32_t  rempZSize = zSize();
+    uint32_t  tempXSize = xSize();
+    uint32_t  tempYSize = ySize();
+    uint32_t  tempZSize = zSize();
 
-    if (_index_ >= 0u && _index_ < rempXSize)
+    if (_index_ >= 0u && _index_ < tempXSize)
     {
-        if (_jndex_ >= 0u && _jndex_ < rempYSize)
+        if (_jndex_ >= 0u && _jndex_ < tempYSize)
         {
-            if (_kindex_ >= 0u && _kindex_ < rempZSize)
+            if (_kindex_ >= 0u && _kindex_ < tempZSize)
             {
-                uint32_t backVolume     = _kindex_ * rempXSize * rempYSize ;
-                uint32_t backArea       = _jndex_  * rempXSize             ;
+                uint32_t backVolume     = _kindex_ * tempXSize * tempYSize ;
+                uint32_t backArea       = _jndex_  * tempXSize             ;
                 return   _originAddress + _index_  + backArea  + backVolume;
             }
             else throw OUT_OF_Z_BOUNDS;
