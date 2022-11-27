@@ -9,7 +9,12 @@
 #define DT  0.1f
 
 int main()
-{   
+{
+    Base x = Base(-B, N, B);
+
+    std::cout << x(    0u) << std::endl;
+    std::cout << x(N - 1u) << std::endl;
+
     std::cin.get();
     return 0;
 }

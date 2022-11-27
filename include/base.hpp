@@ -15,13 +15,14 @@ class Base
             float    _end_
         );
 
-        uint32_t size  ()            const;
-        float    start ()            const;
-        float    end   ()            const;
-        float    dx    ()            const;
-        float    length()            const;
+        float    operator()(uint32_t _index_) const;
 
-        float    x(uint32_t _index_) const;
+        uint32_t size      (                ) const;
+        float    start     (                ) const;
+        float    end       (                ) const;
+        float    dx        (                ) const;
+        float    length    (                ) const;
+        float    x         (uint32_t _index_) const;
 
     private:
 

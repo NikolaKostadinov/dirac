@@ -23,6 +23,11 @@ Basis2::Basis2(Base* _toXBase_, Base* _toYBase_)
     _toY = _toYBase_;
 }
 
+Vector2 Basis2::operator()(uint32_t _index_, uint32_t _jndex_) const
+{
+    return Vector2(_toX->x(_index_), _toY->x(_jndex_));
+}
+
 uint32_t Basis2::size() const
 {
     return _toX->size() * _toY->size(); 

@@ -30,6 +30,11 @@ Base::Base(float _start_, uint32_t _size_,  float _end_)
     else throw INF_DX;
 }
 
+float Base::operator()(uint32_t _index_) const
+{
+    return x(_index_);
+}
+
 uint32_t Base::size() const
 {
     return _size;
@@ -52,10 +57,11 @@ float Base::length() const
 
 float Base::dx() const
 {
-    return (_end - _start) / (float) _size;
+    return (_end - _start) / (float) (_size - 1u);
 }
 
 float Base::x(uint32_t _index_) const
 {
-    return _start + _index_ * dx();
+    if   (_index_ < _size) return _start + _index_ * dx();
+    else                   throw OUT_OF_BOUNDS           ;
 }
