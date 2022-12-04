@@ -7,11 +7,14 @@ WaveFunc3::WaveFunc3() : Field3<Complex>(), WaveFunc()
 
 WaveFunc3::~WaveFunc3()
 {
-    delete _toBasis;
+    uint32_t  tempXSize = xSize();
+    uint32_t  tempYSize = ySize();
+    uint32_t  tempZSize = zSize();
+    delete   _toBasis;
     
-    for (uint32_t i = 0u; i < _xSize; i++)
-        for (uint32_t j = 0u; j < _ySize; j++)
-            for (uint32_t k = 0u; k < _zSize; k++)
+    for (uint32_t i = 0u; i < tempXSize; i++)
+        for (uint32_t j = 0u; j < tempYSize; j++)
+            for (uint32_t k = 0u; k < tempZSize; k++)
                 delete address(i, j, k);
 }
 
@@ -52,7 +55,7 @@ void WaveFunc3::evolve(float _dt_, Scalar3* _toPotential_)
     {
         checkMass();
 
-        float   ilaplCoef = 0.5f * HBAR / _mass * _dt_;                                 // inverted triangle factor
+        /*float   ilaplCoef = 0.5f * HBAR / _mass * _dt_;                                 // inverted triangle factor
         Complex  laplCoef = Imag(ilaplCoef)           ;                                 // welcome to wonderland
         Complex  thisAmp                              ;
         Complex    d2Amp                              ;
@@ -69,7 +72,7 @@ void WaveFunc3::evolve(float _dt_, Scalar3* _toPotential_)
                     Complex coreCoef  = Complex(1, icoreCoef)        ;
 
                     *address(i, j, k) = laplCoef * d2Amp + coreCoef * thisAmp;         // the cat equation
-                }
+                }*/
     }
     else throw BASE_NOT_SAME;
 }
@@ -91,10 +94,13 @@ float WaveFunc3::prob(bool _isNormed_) const
    if   (_isNormed_) return _norm * _norm;
     else
     {
-        float sum = 0.0f;
-        for (uint32_t i = 0u; i < _xSize; i++)
-            for (uint32_t j = 0u; j < _ySize; j++)
-                for (uint32_t k = 0u; j < _zSize; k++)
+        uint32_t tempXSize = xSize();
+        uint32_t tempYSize = ySize();
+        uint32_t tempZSize = zSize();
+        float    sum       =    0.0f;
+        for (uint32_t i = 0u; i < tempXSize; i++)
+            for (uint32_t j = 0u; j < tempYSize; j++)
+                for (uint32_t k = 0u; j < tempZSize; k++)
                     sum += value(i, j, k).conjSq();
 
         return  sum;
@@ -103,12 +109,13 @@ float WaveFunc3::prob(bool _isNormed_) const
 
 Complex WaveFunc3::ddx(uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_, bool _isNormed_) const
 {
-    float   dx   = _toBasis->dx();
-    Complex dAmp                 ;
+    uint32_t tempXSize =        xSize();
+    float    dx        = _toBasis->dx();
+    Complex  dAmp                      ;
 
-    if      (_index_ <=        0u) dAmp =  value(_index_+1u,_jndex_,_kndex_)   /*             NULL            */;
-    else if (_index_ >= _xSize-1u) dAmp =  /*             NULL            */ - value(_index_-1u,_jndex_,_kndex_);
-    else                           dAmp =  value(_index_+1u,_jndex_,_kndex_) - value(_index_-1u,_jndex_,_kndex_);
+    if      (_index_ <=           0u) dAmp =  value(_index_+1u,_jndex_,_kndex_)   /*             NULL            */;
+    else if (_index_ >= tempXSize-1u) dAmp =  /*             NULL            */ - value(_index_-1u,_jndex_,_kndex_);
+    else                              dAmp =  value(_index_+1u,_jndex_,_kndex_) - value(_index_-1u,_jndex_,_kndex_);
 
     dAmp.shrink(2.0f * dx);
 
@@ -119,12 +126,13 @@ Complex WaveFunc3::ddx(uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_, boo
 
 Complex WaveFunc3::ddy(uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_, bool _isNormed_) const
 {
-    float   dy   = _toBasis->dy();
-    Complex dAmp                 ;
+    uint32_t tempYSize =        ySize();
+    float    dy        = _toBasis->dy();
+    Complex  dAmp                      ;
 
-    if      (_jndex_ <=        0u) dAmp =  value(_index_,_jndex_+1u,_kndex_)   /*             NULL            */;
-    else if (_jndex_ >= _ySize-1u) dAmp =  /*             NULL            */ - value(_index_,_jndex_-1u,_kndex_);
-    else                           dAmp =  value(_index_,_jndex_+1u,_kndex_) - value(_index_,_jndex_-1u,_kndex_);
+    if      (_jndex_ <=           0u) dAmp =  value(_index_,_jndex_+1u,_kndex_)   /*             NULL            */;
+    else if (_jndex_ >= tempYSize-1u) dAmp =  /*             NULL            */ - value(_index_,_jndex_-1u,_kndex_);
+    else                              dAmp =  value(_index_,_jndex_+1u,_kndex_) - value(_index_,_jndex_-1u,_kndex_);
 
     dAmp.shrink(2.0f * dy);
 
@@ -135,12 +143,13 @@ Complex WaveFunc3::ddy(uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_, boo
 
 Complex WaveFunc3::ddz(uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_, bool _isNormed_) const
 {
-    float   dz   = _toBasis->dz();
-    Complex dAmp                 ;
+    uint32_t tempZSize =        zSize();
+    float    dz        = _toBasis->dz();
+    Complex  dAmp                      ;
 
-    if      (_kndex_ <=        0u) dAmp =  value(_index_,_jndex_,_kndex_+1u)   /*             NULL            */;
-    else if (_kndex_ >= _zSize-1u) dAmp =  /*             NULL            */ - value(_index_,_jndex_,_kndex_-1u);
-    else                           dAmp =  value(_index_,_jndex_,_kndex_+1u) - value(_index_,_jndex_,_kndex_-1u);
+    if      (_kndex_ <=           0u) dAmp =  value(_index_,_jndex_,_kndex_+1u)   /*             NULL            */;
+    else if (_kndex_ >= tempZSize-1u) dAmp =  /*             NULL            */ - value(_index_,_jndex_,_kndex_-1u);
+    else                              dAmp =  value(_index_,_jndex_,_kndex_+1u) - value(_index_,_jndex_,_kndex_-1u);
 
     dAmp.shrink(2.0f * dz);
 
@@ -158,14 +167,15 @@ Complex WaveFunc3::grad(uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_, bo
 
 Complex WaveFunc3::d2dx2(uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_, bool _isNormed_) const
 {
-    float   dx      = _toBasis->dx()                ;
-    Complex thisAmp = value(_index_,_jndex_,_kndex_);
-    Complex two     = Real(2)                       ;
-    Complex d2Amp                                   ;
+    uint32_t tempXSize =                        xSize();
+    float    dx        =                 _toBasis->dx();
+    Complex  thisAmp   = value(_index_,_jndex_,_kndex_);
+    Complex  two       =                        Real(2);
+    Complex  d2Amp                                     ;
 
-    if      (_index_ <=        0u) d2Amp = value(_index_+1u,_jndex_,_kndex_) - two * thisAmp   /*             NULL            */;
-    else if (_index_ >= _xSize-1u) d2Amp = /*             NULL            */ - two * thisAmp + value(_index_-1u,_jndex_,_kndex_);
-    else                           d2Amp = value(_index_+1u,_jndex_,_kndex_) - two * thisAmp + value(_index_-1u,_jndex_,_kndex_);
+    if      (_index_ <=           0u) d2Amp = value(_index_+1u,_jndex_,_kndex_) - two * thisAmp   /*             NULL            */;
+    else if (_index_ >= tempXSize-1u) d2Amp = /*             NULL            */ - two * thisAmp + value(_index_-1u,_jndex_,_kndex_);
+    else                              d2Amp = value(_index_+1u,_jndex_,_kndex_) - two * thisAmp + value(_index_-1u,_jndex_,_kndex_);
 
     d2Amp.shrink(dx * dx);
 
@@ -176,14 +186,15 @@ Complex WaveFunc3::d2dx2(uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_, b
 
 Complex WaveFunc3::d2dy2(uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_, bool _isNormed_) const
 {
-    float   dy      = _toBasis->dy()                ;
-    Complex thisAmp = value(_index_,_jndex_,_kndex_);
-    Complex two     = Real(2)                       ;
-    Complex d2Amp                                   ;
+    uint32_t tempYSize =                        ySize();
+    float    dy        =                 _toBasis->dy();
+    Complex  thisAmp   = value(_index_,_jndex_,_kndex_);
+    Complex  two       =                        Real(2);
+    Complex  d2Amp                                     ;
 
-    if      (_jndex_ <=        0u) d2Amp = value(_index_,_jndex_+1u,_kndex_) - two * thisAmp   /*             NULL            */;
-    else if (_jndex_ >= _ySize-1u) d2Amp = /*             NULL            */ - two * thisAmp + value(_index_,_jndex_-1u,_kndex_);
-    else                           d2Amp = value(_index_,_jndex_+1u,_kndex_) - two * thisAmp + value(_index_,_jndex_-1u,_kndex_);
+    if      (_jndex_ <=           0u) d2Amp = value(_index_,_jndex_+1u,_kndex_) - two * thisAmp   /*             NULL            */;
+    else if (_jndex_ >= tempYSize-1u) d2Amp = /*             NULL            */ - two * thisAmp + value(_index_,_jndex_-1u,_kndex_);
+    else                              d2Amp = value(_index_,_jndex_+1u,_kndex_) - two * thisAmp + value(_index_,_jndex_-1u,_kndex_);
 
     d2Amp.shrink(dy * dy);
 
@@ -194,14 +205,15 @@ Complex WaveFunc3::d2dy2(uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_, b
 
 Complex WaveFunc3::d2dz2(uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_, bool _isNormed_) const
 {
-    float   dz      = _toBasis->dz()                ;
-    Complex thisAmp = value(_index_,_jndex_,_kndex_);
-    Complex two     = Real(2)                       ;
-    Complex d2Amp                                   ;
+    uint32_t tempZSize =                        zSize();
+    float    dz        =                 _toBasis->dz();
+    Complex  thisAmp   = value(_index_,_jndex_,_kndex_);
+    Complex  two       =                        Real(2);
+    Complex  d2Amp                                     ;
 
-    if      (_kndex_ <=        0u) d2Amp = value(_index_,_jndex_,_kndex_+1u) - two * thisAmp   /*             NULL            */;
-    else if (_kndex_ >= _zSize-1u) d2Amp = /*             NULL            */ - two * thisAmp + value(_index_,_jndex_,_kndex_-1u);
-    else                           d2Amp = value(_index_,_jndex_,_kndex_+1u) - two * thisAmp + value(_index_,_jndex_,_kndex_-1u);
+    if      (_kndex_ <=           0u) d2Amp = value(_index_,_jndex_,_kndex_+1u) - two * thisAmp   /*             NULL            */;
+    else if (_kndex_ >= tempZSize-1u) d2Amp = /*             NULL            */ - two * thisAmp + value(_index_,_jndex_,_kndex_-1u);
+    else                              d2Amp = value(_index_,_jndex_,_kndex_+1u) - two * thisAmp + value(_index_,_jndex_,_kndex_-1u);
 
     d2Amp.shrink(dz * dz);
 
@@ -251,5 +263,5 @@ std::string WaveFunc3::string()
     }
 
     return result;
-*/
+    */
 }
