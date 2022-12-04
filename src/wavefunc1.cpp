@@ -49,14 +49,16 @@ void WaveFunc1::evolve(float _dt_, Scalar1* _toPotential_)
 {
     if (_toPotential_->toBase() == _toBase)
     {
-        checkMass();
+        checkMass(false);
 
-        /*float   iwingCoef = 0.5f * HBAR * _dt_ / _mass;             // inverted triangle factor
-        Complex  wingCoef = Imag(iwingCoef)           ;             // welcome to wonderland
-        Complex  thisAmp                              ;
-        Complex    d2Amp                              ;
+        float    iwingCoef = 0.5f * HBAR * _dt_ / _mass;             // inverted triangle factor
+        Complex   wingCoef = Imag(iwingCoef)           ;             // welcome to wonderland
+         uint32_t tempSize = size()                    ;
+        Complex   lastAmp  = Real(0.0f)                ;
+        Complex   thisAmp                              ;
+        Complex     d2Amp                              ;
 
-        for (uint32_t i = 0u; i < _size; i++)
+        for (uint32_t i = 0u; i < tempSize; i++)
         {
             thisAmp = value(i       );
             d2Amp   = d2dx2(i, false);
@@ -66,7 +68,7 @@ void WaveFunc1::evolve(float _dt_, Scalar1* _toPotential_)
             Complex coreCoef  = Complex(1, icoreCoef)     ;
 
             *address(i) = wingCoef * d2Amp + coreCoef * thisAmp;    // cat equation
-        }*/
+        }
     }
     else throw BASE_NOT_SAME;
 }

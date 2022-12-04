@@ -17,6 +17,7 @@
 #define HBAR                    1.0f
 #define C                       1.0f
 #define ELECTRIC                1.0f
+#define ELEMENTARY_CHARGE       1.0f
 #define E_CHARGE               -1.0f
 #define E_MASS                  1.0f
 

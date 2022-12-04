@@ -6,6 +6,7 @@
 #include "basis2.hpp"
 #include "field2.hpp"
 #include "wavefunc.hpp"
+#include "vector2.hpp"
 #include "scalar2.hpp"
 
 #include <string>
@@ -35,10 +36,10 @@ class WaveFunc2 : public Field2<Complex>, public WaveFunc
         Complex d2dy2  (uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED) const;
         Complex laplace(uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED) const;
 
-        float   expcIndex();
-        float   expcJndex();
-        float   excpX    ();
-        float   excpY    ();
+        float   eIndex ();
+        float   eJndex ();
+        float   eX     ();
+        float   eY     ();
 
         std::string string();
 };
