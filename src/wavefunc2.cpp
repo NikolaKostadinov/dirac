@@ -7,10 +7,12 @@ WaveFunc2::WaveFunc2() : Field2<Complex>(), WaveFunc()
 
 WaveFunc2::~WaveFunc2()
 {
-    delete _toBasis;
+    uint32_t  tempXSize = xSize();
+    uint32_t  tempYSize = ySize();
+    delete   _toBasis;
     
-    for (uint32_t i = 0u; i < _xSize; i++)
-        for (uint32_t j = 0u; j < _ySize; j++)
+    for (uint32_t i = 0u; i < tempXSize; i++)
+        for (uint32_t j = 0u; j < tempYSize; j++)
             delete address(i, j);
 }
 
@@ -34,7 +36,7 @@ void WaveFunc2::evolve(float _dt_)
         nullArray[i] = 0.0f;
 
     nullField->setValues(nullArray);
-    evolve(    _dt_,     nullField);
+    evolve(_dt_,         nullField);
 
     free(nullArray);
     free(nullField);
@@ -51,7 +53,7 @@ void WaveFunc2::evolve(float _dt_, Scalar2* _toPotential_)
     {
         checkMass();
         
-        Complex  thisAmp  ;
+        /*Complex  thisAmp  ;
         Complex    d2Amp  ;
         float    potential;
         float   icoreCoef ;
@@ -71,7 +73,7 @@ void WaveFunc2::evolve(float _dt_, Scalar2* _toPotential_)
                 coreCoef  = Complex(1, icoreCoef)     ;
 
                 *address(i, j) = laplCoef * d2Amp + coreCoef * thisAmp;         // the cat equation
-            }
+            }*/
     }
     else throw BASE_NOT_SAME;
 }
@@ -93,9 +95,11 @@ float WaveFunc2::prob(bool _isNormed_) const
     if   (_isNormed_) return _norm * _norm;
     else
     {
-        float sum = 0.0f;
-        for (uint32_t i = 0u; i < _xSize; i++)
-            for (uint32_t j = 0u; j < _ySize; j++)
+        uint32_t tempXSize = xSize();
+        uint32_t tempYSize = ySize();
+        float    sum       =    0.0f;
+        for (uint32_t i = 0u; i < tempXSize; i++)
+            for (uint32_t j = 0u; j < tempYSize; j++)
                 sum += value(i, j).conjSq();
 
         return  sum;
@@ -104,12 +108,13 @@ float WaveFunc2::prob(bool _isNormed_) const
 
 Complex WaveFunc2::ddx(uint32_t _index_, uint32_t _jndex_, bool _isNormed_) const
 {
-    float   dx   = _toBasis->dx();
-    Complex dAmp                 ;
+    uint32_t tempXSize =        xSize();
+    float    dx        = _toBasis->dx();
+    Complex  dAmp                      ;
 
-    if      (_index_ <=        0u) dAmp =  value(_index_+1u,_jndex_)   /*         NULL        */;
-    else if (_index_ >= _xSize-1u) dAmp =  /*         NULL        */ - value(_index_-1u,_jndex_);
-    else                           dAmp =  value(_index_+1u,_jndex_) - value(_index_-1u,_jndex_);
+    if      (_index_ <=           0u) dAmp =  value(_index_+1u,_jndex_)   /*         NULL        */;
+    else if (_index_ >= tempXSize-1u) dAmp =  /*         NULL        */ - value(_index_-1u,_jndex_);
+    else                              dAmp =  value(_index_+1u,_jndex_) - value(_index_-1u,_jndex_);
 
     dAmp.shrink(2.0f * dx);
 
@@ -120,12 +125,13 @@ Complex WaveFunc2::ddx(uint32_t _index_, uint32_t _jndex_, bool _isNormed_) cons
 
 Complex WaveFunc2::ddy(uint32_t _index_, uint32_t _jndex_, bool _isNormed_) const
 {
-    float   dy   = _toBasis->dy();
-    Complex dAmp                 ;
+    uint32_t tempYSize =        ySize();
+    float    dy        = _toBasis->dy();
+    Complex  dAmp                      ;
 
-    if      (_jndex_ <=        0u) dAmp =  value(_index_,_jndex_+1u)   /*         NULL        */;
-    else if (_jndex_ >= _ySize-1u) dAmp =  /*         NULL        */ - value(_index_,_jndex_-1u);
-    else                           dAmp =  value(_index_,_jndex_+1u) - value(_index_,_jndex_-1u);
+    if      (_jndex_ <=           0u) dAmp =  value(_index_,_jndex_+1u)   /*         NULL        */;
+    else if (_jndex_ >= tempYSize-1u) dAmp =  /*         NULL        */ - value(_index_,_jndex_-1u);
+    else                              dAmp =  value(_index_,_jndex_+1u) - value(_index_,_jndex_-1u);
 
     dAmp.shrink(2.0f * dy);
 
@@ -141,14 +147,15 @@ Complex WaveFunc2::grad(uint32_t _index_, uint32_t _jndex_, bool _isNormed_) con
 
 Complex WaveFunc2::d2dx2(uint32_t _index_, uint32_t _jndex_, bool _isNormed_) const
 {
-    float   dx      = _toBasis->dx()        ;
-    Complex thisAmp = value(_index_,_jndex_);
-    Complex two     = Real(2)               ;
-    Complex d2Amp                           ;
+    uint32_t tempXSize =                xSize();
+    float    dx        =         _toBasis->dx();
+    Complex  thisAmp   = value(_index_,_jndex_);
+    Complex  two       =                Real(2);
+    Complex  d2Amp                             ;
 
-    if      (_index_ <=        0u) d2Amp = value(_index_+1u,_jndex_) - two * thisAmp   /*         NULL        */;
-    else if (_index_ >= _xSize-1u) d2Amp = /*         NULL        */ - two * thisAmp + value(_index_-1u,_jndex_);
-    else                           d2Amp = value(_index_+1u,_jndex_) - two * thisAmp + value(_index_-1u,_jndex_);
+    if      (_index_ <=           0u) d2Amp = value(_index_+1u,_jndex_) - two * thisAmp   /*         NULL        */;
+    else if (_index_ >= tempXSize-1u) d2Amp = /*         NULL        */ - two * thisAmp + value(_index_-1u,_jndex_);
+    else                              d2Amp = value(_index_+1u,_jndex_) - two * thisAmp + value(_index_-1u,_jndex_);
 
     d2Amp.shrink(dx * dx);
 
@@ -159,14 +166,15 @@ Complex WaveFunc2::d2dx2(uint32_t _index_, uint32_t _jndex_, bool _isNormed_) co
 
 Complex WaveFunc2::d2dy2(uint32_t _index_, uint32_t _jndex_, bool _isNormed_) const
 {
-    float   dy      = _toBasis->dy()        ;
-    Complex thisAmp = value(_index_,_jndex_);
-    Complex two     = Real(2)               ;
-    Complex d2Amp                           ;
+    uint32_t tempYSize =                xSize();
+    float    dy        =         _toBasis->dy();
+    Complex  thisAmp   = value(_index_,_jndex_);
+    Complex  two       =                Real(2);
+    Complex  d2Amp                             ;
 
-    if      (_jndex_ <=        0u) d2Amp = value(_index_,_jndex_+1u) - two * thisAmp   /*         NULL        */;
-    else if (_jndex_ >= _ySize-1u) d2Amp = /*         NULL        */ - two * thisAmp + value(_index_,_jndex_-1u);
-    else                           d2Amp = value(_index_,_jndex_+1u) - two * thisAmp + value(_index_,_jndex_-1u);
+    if      (_jndex_ <=           0u) d2Amp = value(_index_,_jndex_+1u) - two * thisAmp   /*         NULL        */;
+    else if (_jndex_ >= tempYSize-1u) d2Amp = /*         NULL        */ - two * thisAmp + value(_index_,_jndex_-1u);
+    else                              d2Amp = value(_index_,_jndex_+1u) - two * thisAmp + value(_index_,_jndex_-1u);
 
     d2Amp.shrink(dy * dy);
 
@@ -182,15 +190,18 @@ Complex WaveFunc2::laplace(uint32_t _index_, uint32_t _jndex_, bool _isNormed_) 
 
 std::string WaveFunc2::string()
 {
-    bool isXBig  =    _xSize > MAX_STR_SIZE_WIDTH;
-    bool isYBig  =    _ySize > MAX_STR_SIZE_HEGHT;
+    uint32_t tempXSize = xSize();
+    uint32_t tempYSize = ySize();
+
+    bool isXBig  = tempXSize > MAX_STR_SIZE_WIDTH;
+    bool isYBig  = tempYSize > MAX_STR_SIZE_HEGHT;
 
     uint32_t     xStringSize                     ;
     uint32_t     yStringSize                     ;
     if (isXBig)  xStringSize = MAX_STR_SIZE_WIDTH;                              // code from hell ⛧
-    else         xStringSize = _xSize            ;
+    else         xStringSize = tempXSize         ;
     if (isYBig)  yStringSize = MAX_STR_SIZE_HEGHT;
-    else         yStringSize = _ySize            ;
+    else         yStringSize = tempYSize         ;
 
     std::string result = "[";    
     for (uint32_t j = 0u; j < yStringSize; j++)
@@ -201,12 +212,12 @@ std::string WaveFunc2::string()
         {
             result += probAmp(i, j).string();
 
-            if      (i == _xSize - 1u     ) result += " ]"   ;
+            if      (i ==   tempXSize - 1u) result += " ]"   ;
             else if (i == xStringSize - 1u) result += ",...]";                  // devil's language ⛧
             else                            result += ", "   ;
         }
 
-        if      (j == _ySize - 1u     ) result += "]"   ;
+        if      (j ==   tempYSize - 1u) result += "]"   ;
         else if (j == yStringSize - 1u) result += "...]";                       // 666
         else                            result += ",\n" ;
     }
