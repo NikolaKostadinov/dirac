@@ -22,7 +22,7 @@ Basis3::Basis3(Base* _toXBase_, Base* _toYBase_, Base* _toZBase_) : Basis2(_toXB
 
 Vector3 Basis3::operator()(uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_) const
 {
-    return Vector3(_toX->x(_index_), _toY->x(_jndex_), _toZ->x(_kndex_));
+    return coord(_index_,_jndex_,_kndex_);
 }
 
 uint32_t Basis3::size() const
@@ -45,9 +45,14 @@ float Basis3::zEnd() const
     return _toZ->end();
 }
 
-float Basis3::dz() const
+float Basis3::zDelta() const
 {
-    return _toZ->dx();
+    return _toZ->delta();
+}
+
+float Basis3::zDelta2() const
+{
+    return _toZ->delta2();
 }
 
 float Basis3::zLength() const
@@ -55,7 +60,14 @@ float Basis3::zLength() const
     return _toZ->length();
 }
 
-float Basis3::z(uint32_t _kndex_) const
+float Basis3::zCoord(uint32_t _kndex_) const
 {
-    return _toZ->x(_kndex_);
+    return _toZ->coord(_kndex_);
+}
+
+Vector3 Basis3::coord(uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_) const
+{
+    return Vector3(xCoord(_index_),
+                   yCoord(_jndex_),
+                   zCoord(_kndex_));
 }

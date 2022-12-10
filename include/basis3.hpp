@@ -22,19 +22,18 @@ class Basis3 : public Basis2
         uint32_t  size()                      const;
         uint32_t zSize()                      const;
 
-        float    zStart()                     const;
-        float    zEnd  ()                     const;
-
-        float    dz()                         const;
-
+        float    zStart ()                    const;
+        float    zEnd   ()                    const;
+        float    zDelta ()                    const;
+        float    zDelta2()                    const;
         float    zLength()                    const;
+        float    zCoord(uint32_t _kndex_)     const;
 
-        float    z(uint32_t _kndex_)          const;
+        Vector3   coord(uint32_t _index_,
+                        uint32_t _jndex_,
+                        uint32_t _kndex_)     const;
 
     protected:
 
         Base* _toZ;
 };
-
-Basis3 CubeBasis3(Base    _base);
-Basis3 CubeBasis3(Base* _toBase);

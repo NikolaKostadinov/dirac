@@ -21,9 +21,9 @@ class WaveFunc2 : public Field2<Complex>, public WaveFunc
         WaveFunc2(Basis2    _basis_);
         WaveFunc2(Basis2* _toBasis_);
 
-        void    evolve (float _dt_   = DEFAULT_DT            );
-        void    evolve (float _dt_   , Scalar2    _potential_);
-        void    evolve (float _dt_   , Scalar2* _toPotential_);
+        void    evolve (float _dt_ = DEFAULT_DT            );
+        void    evolve (float _dt_,  Scalar2    _potential_);
+        void    evolve (float _dt_,  Scalar2* _toPotential_);
 
         Complex probAmp(uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED) const;
         float   prob   (uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED) const;
@@ -35,11 +35,6 @@ class WaveFunc2 : public Field2<Complex>, public WaveFunc
         Complex d2dx2  (uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED) const;
         Complex d2dy2  (uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED) const;
         Complex laplace(uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED) const;
-
-        float   eIndex ();
-        float   eJndex ();
-        float   eX     ();
-        float   eY     ();
 
         std::string string();
 };

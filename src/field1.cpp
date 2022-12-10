@@ -77,9 +77,23 @@ T* Field1<T>::address(uint32_t _index_) const
 }
 
 template <class T>
-T Field1<T>::value(uint32_t _index_) const
+T Field1<T>::value(uint32_t _index_, bool _is_null_) const
 {
-    return *address(_index_);
+    if (_is_null_)
+    {
+        T result;
+        try
+        {
+            result = *address(_index_);
+        }
+        catch(...)
+        {
+            result = T();
+        }
+
+        return result;
+    }
+    else return *address(_index_);
 }
 
 template class Field1            <  signed       char   > ;

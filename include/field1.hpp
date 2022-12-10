@@ -1,5 +1,6 @@
 #pragma once
 
+#include "engine_params.h"
 #include "engine_exceptions.h"
 #include "base.hpp"
 #include "complex.hpp"
@@ -23,12 +24,12 @@ class Field1
         void     setBase  (Base     _base_);
         void     setBase  (Base*  _toBase_);
 
-        uint32_t size  ()                       const;
-        Base*    toBase()                       const;
-        Base     base  ()                       const;
+        uint32_t size  ()                                                    const;
+        Base*    toBase()                                                    const;
+        Base     base  ()                                                    const;
 
-        T*       address(uint32_t _index_ = 0u) const;
-        T        value  (uint32_t _index_     ) const;
+        T*       address(uint32_t _index_ = 0u)                              const;
+        T        value  (uint32_t _index_, bool _is_null_ = DEFAULT_IS_NULL) const;
 
     protected:
 

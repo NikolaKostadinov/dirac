@@ -20,9 +20,9 @@ class WaveFunc3 : public Field3<Complex>, public WaveFunc
         WaveFunc3(Basis3  _basis_  );
         WaveFunc3(Basis3* _toBasis_);
 
-        void    evolve (float _dt_   = DEFAULT_DT            );
-        void    evolve (float _dt_   , Scalar3    _potential_);
-        void    evolve (float _dt_   , Scalar3* _toPotential_);
+        void    evolve (float _dt_ = DEFAULT_DT            );
+        void    evolve (float _dt_,  Scalar3    _potential_);
+        void    evolve (float _dt_,  Scalar3* _toPotential_);
 
         Complex probAmp(uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_, bool _isNormed_ = DEFAULT_IS_NORMED) const;
         float   prob   (uint32_t _index_, uint32_t _jndex_, uint32_t _kndex_, bool _isNormed_ = DEFAULT_IS_NORMED) const;

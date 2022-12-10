@@ -25,12 +25,12 @@ Basis2::Basis2(Base* _toXBase_, Base* _toYBase_)
 
 Vector2 Basis2::operator()(uint32_t _index_, uint32_t _jndex_) const
 {
-    return Vector2(_toX->x(_index_), _toY->x(_jndex_));
+    return coord(_index_,_jndex_);
 }
 
 uint32_t Basis2::size() const
 {
-    return _toX->size() * _toY->size(); 
+    return _toX->size() * _toY->size();
 }
 
 uint32_t Basis2::xSize() const
@@ -78,17 +78,32 @@ float Basis2::zEnd() const
     return 0.0f;
 }
 
-float Basis2::dx() const
+float Basis2::xDelta() const
 {
-    return _toX->dx();
+    return _toX->delta();
 }
 
-float Basis2::dy() const
+float Basis2::yDelta() const
 {
-    return _toY->dx();
+    return _toY->delta();
 }
 
-float Basis2::dz() const
+float Basis2::zDelta() const
+{
+    return 0.0f;
+}
+
+float Basis2::xDelta2() const
+{
+    return _toX->delta2();
+}
+
+float Basis2::yDelta2() const
+{
+    return _toY->delta2();
+}
+
+float Basis2::zDelta2() const
 {
     return 0.0f;
 }
@@ -108,17 +123,23 @@ float Basis2::zLength() const
     return 0.0f;
 }
 
-float Basis2::x(uint32_t _index_) const
+float Basis2::xCoord(uint32_t _index_) const
 {
-    return _toX->x(_index_);
+    return _toX->coord(_index_);
 }
 
-float Basis2::y(uint32_t _jndex_) const
+float Basis2::yCoord(uint32_t _jndex_) const
 {
-    return _toY->x(_jndex_);
+    return _toY->coord(_jndex_);
 }
 
-float Basis2::z(uint32_t _kndex_) const
+float Basis2::zCoord(uint32_t _kndex_) const
 {
     return 0.0f;
+}
+
+Vector2 Basis2::coord(uint32_t _index_, uint32_t _jndex_) const
+{
+    return Vector2(xCoord(_index_),
+                   yCoord(_jndex_));
 }

@@ -51,23 +51,29 @@ void WaveFunc1::evolve(float _dt_, Scalar1* _toPotential_)
     {
         checkMass(false);
 
-        float    iwingCoef = 0.5f * HBAR * _dt_ / _mass;             // inverted triangle factor
-        Complex   wingCoef = Imag(iwingCoef)           ;             // welcome to wonderland
-         uint32_t tempSize = size()                    ;
-        Complex   lastAmp  = Real(0.0f)                ;
-        Complex   thisAmp                              ;
-        Complex     d2Amp                              ;
+        uint32_t  tempSize =            size();
+        float     dx2      = _toBase->delta2();
+        
+        Complex   lastAmp;
+        Complex   thisAmp;
+        Complex   laplAmp;
+
+        float    iwingCoef = 0.5f * HBAR * _dt_ / _mass;                // inverted triangle factor
+        Complex   wingCoef = Imag(iwingCoef)           ;                // welcome to wonderland
+        Complex   two      = Real(2.0f)                ;                // god's number
 
         for (uint32_t i = 0u; i < tempSize; i++)
         {
-            thisAmp = value(i       );
-            d2Amp   = d2dx2(i, false);
+            thisAmp = value(i   );
+            laplAmp = value(i+1u) + lastAmp - two * thisAmp;
+            laplAmp.shrink(dx2);
 
-            float   potential = _toPotential_->value(i)   ;         // unleash your full potential
+            float   potential = _toPotential_->value(i)   ;             // unleash your full potential
             float  icoreCoef  = -  potential * _dt_ / HBAR;
             Complex coreCoef  = Complex(1, icoreCoef)     ;
 
-            *address(i) = wingCoef * d2Amp + coreCoef * thisAmp;    // cat equation
+            lastAmp     = wingCoef * laplAmp + coreCoef * thisAmp;      // cat equation
+            *address(i) = lastAmp;
         }
     }
     else throw BASE_NOT_SAME;
@@ -103,12 +109,12 @@ float WaveFunc1::prob(bool _isNormed_) const
 
 Complex WaveFunc1::ddx(uint32_t _index_, bool _isNormed_) const
 {
-    uint32_t tempSize =        size();
-    float    dx       = _toBase->dx();
-    Complex  dAmp                    ;
+    uint32_t tempSize =           size();
+    float    dx       = _toBase->delta();
+    Complex  dAmp                       ;
 
-    if      (_index_ <=          0u) dAmp = value(_index_+1u)   /*     NULL    */;
-    else if (_index_ >= tempSize-1u) dAmp = /*     NULL    */ - value(_index_-1u);
+    if      (_index_ ==         -1u) dAmp = value(_index_+1u)   /*     NULL    */;
+    else if (_index_ == tempSize-1u) dAmp = /*     NULL    */ - value(_index_-1u);
     else                             dAmp = value(_index_+1u) - value(_index_-1u);
 
     dAmp.shrink(2.0f * dx);
@@ -120,17 +126,17 @@ Complex WaveFunc1::ddx(uint32_t _index_, bool _isNormed_) const
 
 Complex WaveFunc1::d2dx2(uint32_t _index_, bool _isNormed_) const
 {
-    uint32_t tempSize =         size();
-    float    dx       =  _toBase->dx();
-    Complex  thisAmp  = value(_index_);
-    Complex  two      =     Real(2.0f);
-    Complex  d2Amp                    ;
+    uint32_t tempSize =             size();
+    float    dx2      =  _toBase->delta2();
+    Complex  thisAmp  =     value(_index_);
+    Complex  two      =         Real(2.0f);
+    Complex  d2Amp                        ;
 
-    if      (_index_ <=          0u) d2Amp = value(_index_+1u) - two * thisAmp   /*     NULL    */;
-    else if (_index_ >= tempSize-1u) d2Amp = /*     NULL    */ - two * thisAmp + value(_index_-1u);
+    if      (_index_ ==         -1u) d2Amp = value(_index_+1u) - two * thisAmp   /*     NULL    */;
+    else if (_index_ == tempSize-1u) d2Amp = /*     NULL    */ - two * thisAmp + value(_index_-1u);
     else                             d2Amp = value(_index_+1u) - two * thisAmp + value(_index_-1u);
 
-    d2Amp.shrink(dx * dx);
+    d2Amp.shrink(dx2);
 
     if (_isNormed_) d2Amp.scale(ampFactor());
 
@@ -145,54 +151,6 @@ float WaveFunc1::prob(uint32_t _start_, uint32_t _end_, bool _isNormed_) const
     
     if   (_isNormed_) return prbFactor() * sum;
     else              return               sum;
-}
-
-float WaveFunc1::eIndex()
-{
-    // why is this broken ?
-    uint32_t tempSize = size();
-    float    expected =   0.0f;
-    for (uint32_t i = 0u; i < tempSize; i++)
-        expected += i * value(i).conjSq();
-
-    return prbFactor() * expected;
-}
-
-float WaveFunc1::eX()
-{
-    uint32_t tempSize = size();
-    float    expected =   0.0f;
-    for (uint32_t i = 0u; i < tempSize; i++)
-        expected += _toBase->x(i) * value(i).conjSq();
-
-    return prbFactor() * expected;
-}
-
-float WaveFunc1::eXMomentum()
-{
-    uint32_t tempSize = size();
-    float    expected =   0.0f;
-    for (uint32_t i = 0u; i < tempSize; i++)
-    {
-        Complex eDAmp = value(i).conj() * ddx(i, false);
-        expected     += -HBAR * eDAmp.real();
-    }
-
-    return prbFactor() * expected;
-}
-
-float WaveFunc1::devX()
-{
-    uint32_t tempSize = size();
-    float    expX     =   0.0f;
-    float    expX2    =   0.0f;
-    for (uint32_t i = 0u; i < tempSize; i++)
-    {
-        expX  +=     i * value(i).conjSq();
-        expX2 += i * i * value(i).conjSq();
-    }
-
-    return sqrt(expX2 - expX * expX);
 }
 
 std::string WaveFunc1::string()
