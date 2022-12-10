@@ -54,8 +54,8 @@ void WaveFunc1::evolve(float _dt_, Scalar1* _toPotential_)
         uint32_t  tempSize =            size();
         float     dx2      = _toBase->delta2();
         
-        Complex   lastAmp;
         Complex   thisAmp;
+        Complex   lastAmp;
         Complex   laplAmp;
 
         float    iwingCoef = 0.5f * HBAR * _dt_ / _mass;                // inverted triangle factor
@@ -64,13 +64,13 @@ void WaveFunc1::evolve(float _dt_, Scalar1* _toPotential_)
 
         for (uint32_t i = 0u; i < tempSize; i++)
         {
-            thisAmp = value(i   );
-            laplAmp = value(i+1u) + lastAmp - two * thisAmp;
+            thisAmp = value(i   , true);
+            laplAmp = value(i+1u, true) + lastAmp - two * thisAmp;
             laplAmp.shrink(dx2);
 
-            float   potential = _toPotential_->value(i)   ;             // unleash your full potential
-            float  icoreCoef  = -  potential * _dt_ / HBAR;
-            Complex coreCoef  = Complex(1, icoreCoef)     ;
+            float   potential = _toPotential_->value(i, true);          // unleash your full potential
+            float  icoreCoef  = -  potential * _dt_ / HBAR   ;
+            Complex coreCoef  = Complex(1, icoreCoef)        ;
 
             lastAmp     = wingCoef * laplAmp + coreCoef * thisAmp;      // cat equation
             *address(i) = lastAmp;
