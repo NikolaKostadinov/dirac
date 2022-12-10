@@ -127,7 +127,7 @@ Complex WaveFunc1::d2dx2(uint32_t _index_, bool _isNormed_) const
     Complex  thisAmp  =     value(_index_);
     Complex  two      =         Real(2.0f);
 
-   Complex d2Amp = value(_index_+1u) - two * thisAmp + value(_index_-1u);
+   Complex d2Amp = value(_index_+1u, true) - two * thisAmp + value(_index_-1u, true);
 
     d2Amp.shrink(dx2);
     if (_isNormed_) d2Amp.scale(ampFactor());
