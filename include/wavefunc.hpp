@@ -26,12 +26,12 @@ class WaveFunc
         float   prbFactor  ()                                          const;   // probability           normalization factor
 
         virtual float       prob (bool _isNormed_ = DEFAULT_IS_NORMED) const;
-        virtual Complex* toMaxAmp(                                   ) const;
-        virtual Complex* toMinAmp(                                   ) const;
-        virtual Complex    maxAmp(bool _isNormed_ = DEFAULT_IS_NORMED) const;
-        virtual Complex    minAmp(bool _isNormed_ = DEFAULT_IS_NORMED) const;
-        virtual float    maxProb (bool _isNormed_ = DEFAULT_IS_NORMED) const;
-        virtual float    minProb (bool _isNormed_ = DEFAULT_IS_NORMED) const;
+    //  virtual Complex* toMaxAmp(                                   ) const;
+    //  virtual Complex* toMinAmp(                                   ) const;
+    //  virtual Complex    maxAmp(bool _isNormed_ = DEFAULT_IS_NORMED) const;
+    //  virtual Complex    minAmp(bool _isNormed_ = DEFAULT_IS_NORMED) const;
+    //  virtual float    maxProb (bool _isNormed_ = DEFAULT_IS_NORMED) const;
+    //  virtual float    minProb (bool _isNormed_ = DEFAULT_IS_NORMED) const;
 
     protected:
 

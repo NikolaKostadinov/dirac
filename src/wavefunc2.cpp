@@ -59,11 +59,13 @@ void WaveFunc2::evolve(float _dt_, Scalar2* _toPotential_)
         float     dy2       = _toBasis->yDelta2();
         
         Complex   thisAmp;
+        Complex   upprAmp;
+        Complex   lastAmp;
         Complex   laplAmp;
         Complex   d2dxAmp;
         Complex   d2dyAmp;
 
-        Complex*  toLastAmps = new Complex[tempXSize];
+        Complex*  cache = new Complex[tempXSize];
 
         float    iwingCoef = 0.5f * HBAR * _dt_ / _mass;
         Complex   wingCoef = Imag(iwingCoef)           ;
@@ -72,18 +74,34 @@ void WaveFunc2::evolve(float _dt_, Scalar2* _toPotential_)
         for (uint32_t i = 0u; i < tempXSize; i++)
             for (uint32_t j = 0u; j < tempYSize; j++)
             {
-                /*thisAmp = value(i, j, true);
+                if (i == 0u)
+                {
+                    upprAmp = cache[          0u];
+                    lastAmp = cache[tempXSize-1u];
+                }
+                else
+                {
+                    lastAmp = cache[i-1u];
+                    upprAmp = cache[i   ];
+                }
 
-                d2dxAmp = 
-                laplAmp.shrink(dx2);
+                thisAmp = value(i   ,j   );
+                d2dxAmp = value(i+1u,j   ) + lastAmp - two * thisAmp;
+                d2dyAmp = value(i   ,j+1u) + upprAmp - two * thisAmp;
+                d2dxAmp.shrink(dx2);
+                d2dyAmp.shrink(dy2);
+                laplAmp = d2dxAmp + d2dyAmp;
 
                 float   potential = _toPotential_->value(i, j);
                 float  icoreCoef  = -  potential * _dt_ / HBAR;
                 Complex coreCoef  = Complex(1, icoreCoef)     ;
 
-                lastAmp        = wingCoef * laplAmp + coreCoef * thisAmp;
-                *address(i, j) = lastAmp;*/
+                *address(i, j) = wingCoef * laplAmp + coreCoef * thisAmp;
+
+                cache[i] = thisAmp;
             }
+
+        delete[] cache;
     }
     else throw BASE_NOT_SAME;
 }
@@ -222,14 +240,14 @@ std::string WaveFunc2::string()
         {
             result += probAmp(i, j).string();
 
-            if      (i ==   tempXSize - 1u) result += " ]"   ;
-            else if (i == xStringSize - 1u) result += ",...]";                  // devil's language ⛧
-            else                            result += ", "   ;
+            if      (i ==   tempXSize-1u) result += " ]"   ;
+            else if (i == xStringSize-1u) result += ",...]";                  // devil's language ⛧
+            else                          result += ", "   ;
         }
 
-        if      (j ==   tempYSize - 1u) result += "]"   ;
-        else if (j == yStringSize - 1u) result += "...]";                       // 666
-        else                            result += ",\n" ;
+        if      (j ==   tempYSize-1u) result += "]"   ;
+        else if (j == yStringSize-1u) result += "...]";                       // 666
+        else                          result += ",\n" ;
     }
 
     return result;
