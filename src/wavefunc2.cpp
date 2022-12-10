@@ -51,18 +51,19 @@ void WaveFunc2::evolve(float _dt_, Scalar2* _toPotential_)
 {
     if (_toPotential_->toBasis() == _toBasis)
     {
-        checkMass();
+        checkMass(false);
         
         uint32_t  tempXSize =             xSize();
         uint32_t  tempYSize =             ySize();
         float     dx2       = _toBasis->xDelta2();
         float     dy2       = _toBasis->yDelta2();
         
-        Complex   lastAmp;
         Complex   thisAmp;
         Complex   laplAmp;
         Complex   d2dxAmp;
         Complex   d2dyAmp;
+
+        Complex*  toLastAmps = new Complex[tempXSize];
 
         float    iwingCoef = 0.5f * HBAR * _dt_ / _mass;
         Complex   wingCoef = Imag(iwingCoef)           ;
@@ -71,8 +72,9 @@ void WaveFunc2::evolve(float _dt_, Scalar2* _toPotential_)
         for (uint32_t i = 0u; i < tempXSize; i++)
             for (uint32_t j = 0u; j < tempYSize; j++)
             {
-                thisAmp = value(i   , j);
-                d2dxAmp = value(i+1u, j) + lastAmp - two * thisAmp;
+                /*thisAmp = value(i, j, true);
+
+                d2dxAmp = 
                 laplAmp.shrink(dx2);
 
                 float   potential = _toPotential_->value(i, j);
@@ -80,7 +82,7 @@ void WaveFunc2::evolve(float _dt_, Scalar2* _toPotential_)
                 Complex coreCoef  = Complex(1, icoreCoef)     ;
 
                 lastAmp        = wingCoef * laplAmp + coreCoef * thisAmp;
-                *address(i, j) = lastAmp;
+                *address(i, j) = lastAmp;*/
             }
     }
     else throw BASE_NOT_SAME;

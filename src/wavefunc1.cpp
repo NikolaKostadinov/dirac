@@ -111,14 +111,10 @@ Complex WaveFunc1::ddx(uint32_t _index_, bool _isNormed_) const
 {
     uint32_t tempSize =           size();
     float    dx       = _toBase->delta();
-    Complex  dAmp                       ;
 
-    if      (_index_ ==         -1u) dAmp = value(_index_+1u)   /*     NULL    */;
-    else if (_index_ == tempSize-1u) dAmp = /*     NULL    */ - value(_index_-1u);
-    else                             dAmp = value(_index_+1u) - value(_index_-1u);
-
+    Complex dAmp = value(_index_+1u, true) - value(_index_-1u, true);
+    
     dAmp.shrink(2.0f * dx);
-
     if (_isNormed_) dAmp.scale(ampFactor());
 
     return dAmp;
@@ -130,14 +126,10 @@ Complex WaveFunc1::d2dx2(uint32_t _index_, bool _isNormed_) const
     float    dx2      =  _toBase->delta2();
     Complex  thisAmp  =     value(_index_);
     Complex  two      =         Real(2.0f);
-    Complex  d2Amp                        ;
 
-    if      (_index_ ==         -1u) d2Amp = value(_index_+1u) - two * thisAmp   /*     NULL    */;
-    else if (_index_ == tempSize-1u) d2Amp = /*     NULL    */ - two * thisAmp + value(_index_-1u);
-    else                             d2Amp = value(_index_+1u) - two * thisAmp + value(_index_-1u);
+   Complex d2Amp = value(_index_+1u) - two * thisAmp + value(_index_-1u);
 
     d2Amp.shrink(dx2);
-
     if (_isNormed_) d2Amp.scale(ampFactor());
 
     return d2Amp;
