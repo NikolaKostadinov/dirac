@@ -73,8 +73,6 @@ Complex WaveFunc::cmpFactor() const
 float WaveFunc::prbFactor() const
 {
     checkNorm();
-    std::cout << "prob(true): " << prob(true) << std::endl;
-    std::cout << "prob(false): " << prob(false) << std::endl;
     return prob(true) / prob(false);
 }
 

@@ -11,8 +11,6 @@
 
 #include <string>
 
-#include <iostream> // DELETE AFTER DEBUG
-
 class WaveFunc2 : public Field2<Complex>, public WaveFunc
 {
     public:

@@ -4,8 +4,6 @@
 #include "engine_exceptions.h"
 #include "complex.hpp"
 
-#include <iostream> // DELETE AFTER DEBUG
-
 class WaveFunc
 {
     public:
