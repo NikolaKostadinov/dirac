@@ -120,11 +120,21 @@ float WaveFunc2::prob(uint32_t _index_, uint32_t _jndex_, bool _isNormed_) const
 
 float WaveFunc2::prob(bool _isNormed_) const
 {
+    std::cout << "WaveFunc2::prob is CALLED" << std::endl;
     if   (_isNormed_) return _norm * _norm;
     else
     {
         uint32_t tempXSize = xSize();
         uint32_t tempYSize = ySize();
+
+        std::cout << "x start: " << _toBasis->xStart() << std::endl;
+        std::cout << "x end: " << _toBasis->xEnd() << std::endl;
+        std::cout << "x size: " << _toBasis->xSize() << std::endl << std::endl;
+
+        std::cout << "y start: " << _toBasis->yStart() << std::endl;
+        std::cout << "y end: " << _toBasis->yEnd() << std::endl;
+        std::cout << "y size: " << _toBasis->ySize() << std::endl << std::endl;
+
         float    sum       =    0.0f;
         for (uint32_t i = 0u; i < tempXSize; i++)
             for (uint32_t j = 0u; j < tempYSize; j++)

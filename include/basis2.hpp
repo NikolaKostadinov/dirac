@@ -54,6 +54,3 @@ class Basis2
         Base* _toX;
         Base* _toY;
 };
-
-Basis2 SqBasis2(Base    _base_);
-Basis2 SqBasis2(Base* _toBase_);

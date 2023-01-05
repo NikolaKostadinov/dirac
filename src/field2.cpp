@@ -20,17 +20,17 @@ Field2<T>::~Field2()
 }
 
 template <class T>
-Field2<T>::Field2(Basis2* _toBasis_)
-{
-    _toBasis       = _toBasis_;
-    _originAddress = new T    ;
-}
-
-template <class T>
 Field2<T>::Field2(Basis2 _basis_)
 {
     _toBasis       = &_basis_;
     _originAddress =  new T  ;
+}
+
+template <class T>
+Field2<T>::Field2(Basis2* _toBasis_)
+{
+    _toBasis       = _toBasis_;
+    _originAddress = new T    ;
 }
 
 template <class T>
