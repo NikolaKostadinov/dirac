@@ -64,8 +64,8 @@ void WaveFunc1::evolve(float _dt_, Scalar1* _toPotential_)
 
         for (uint32_t i = 0u; i < tempSize; i++)
         {
-            thisAmp = value(i   , true);
-            laplAmp = value(i+1u, true) + lastAmp - two * thisAmp;
+            thisAmp = value(i   , false);
+            laplAmp = value(i+1u, true ) + lastAmp - two * thisAmp;
             laplAmp.shrink(dx2);
 
             float   potential = _toPotential_->value(i, true);          // unleash your full potential
@@ -109,10 +109,9 @@ float WaveFunc1::prob(bool _isNormed_) const
 
 Complex WaveFunc1::ddx(uint32_t _index_, bool _isNormed_) const
 {
-    uint32_t tempSize =           size();
-    float    dx       = _toBase->delta();
+    float dx = _toBase->delta();
 
-    Complex dAmp = value(_index_+1u, true) - value(_index_-1u, true);
+    Complex dAmp = value(_index_+1u, false) - value(_index_-1u, false);
     
     dAmp.shrink(2.0f * dx);
     if (_isNormed_) dAmp.scale(ampFactor());
@@ -122,12 +121,11 @@ Complex WaveFunc1::ddx(uint32_t _index_, bool _isNormed_) const
 
 Complex WaveFunc1::d2dx2(uint32_t _index_, bool _isNormed_) const
 {
-    uint32_t tempSize =             size();
-    float    dx2      =  _toBase->delta2();
-    Complex  thisAmp  =     value(_index_);
-    Complex  two      =         Real(2.0f);
+    float   dx2     = _toBase->delta2();
+    Complex thisAmp =    value(_index_);
+    Complex two     =        Real(2.0f);
 
-   Complex d2Amp = value(_index_+1u, true) - two * thisAmp + value(_index_-1u, true);
+   Complex d2Amp = value(_index_+1u, false) - two * thisAmp + value(_index_-1u, false);
 
     d2Amp.shrink(dx2);
     if (_isNormed_) d2Amp.scale(ampFactor());

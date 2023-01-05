@@ -85,9 +85,9 @@ void WaveFunc2::evolve(float _dt_, Scalar2* _toPotential_)
                     upprAmp = cache[i   ];
                 }
 
-                thisAmp = value(i   ,j   );
-                d2dxAmp = value(i+1u,j   ) + lastAmp - two * thisAmp;
-                d2dyAmp = value(i   ,j+1u) + upprAmp - two * thisAmp;
+                thisAmp = value(i   ,j   , true )                          ;
+                d2dxAmp = value(i+1u,j   , false) + lastAmp - two * thisAmp;
+                d2dyAmp = value(i   ,j+1u, false) + upprAmp - two * thisAmp;
                 d2dxAmp.shrink(dx2);
                 d2dyAmp.shrink(dy2);
                 laplAmp = d2dxAmp + d2dyAmp;
@@ -136,16 +136,11 @@ float WaveFunc2::prob(bool _isNormed_) const
 
 Complex WaveFunc2::ddx(uint32_t _index_, uint32_t _jndex_, bool _isNormed_) const
 {
-    uint32_t tempXSize =            xSize();
-    float    dx        = _toBasis->xDelta();
-    Complex  dAmp                          ;
+    float dx = _toBasis->xDelta();
 
-    if      (_index_ <=           0u) dAmp =  value(_index_+1u,_jndex_)   /*         NULL        */;
-    else if (_index_ >= tempXSize-1u) dAmp =  /*         NULL        */ - value(_index_-1u,_jndex_);
-    else                              dAmp =  value(_index_+1u,_jndex_) - value(_index_-1u,_jndex_);
-
+    Complex dAmp = value(_index_+1u,_jndex_, false) - value(_index_-1u,_jndex_, false);
+    
     dAmp.shrink(2.0f * dx);
-
     if (_isNormed_) dAmp.scale(ampFactor());
 
     return dAmp;
@@ -153,40 +148,30 @@ Complex WaveFunc2::ddx(uint32_t _index_, uint32_t _jndex_, bool _isNormed_) cons
 
 Complex WaveFunc2::ddy(uint32_t _index_, uint32_t _jndex_, bool _isNormed_) const
 {
-    uint32_t tempYSize =            ySize();
-    float    dy        = _toBasis->yDelta();
-    Complex  dAmp                          ;
+    float dy = _toBasis->yDelta();
 
-    if      (_jndex_ <=           0u) dAmp =  value(_index_,_jndex_+1u)   /*         NULL        */;
-    else if (_jndex_ >= tempYSize-1u) dAmp =  /*         NULL        */ - value(_index_,_jndex_-1u);
-    else                              dAmp =  value(_index_,_jndex_+1u) - value(_index_,_jndex_-1u);
-
+    Complex dAmp = value(_index_,_jndex_+1u, false) - value(_index_,_jndex_-1u, false);
+    
     dAmp.shrink(2.0f * dy);
-
     if (_isNormed_) dAmp.scale(ampFactor());
 
     return dAmp;
 }
 
-Complex WaveFunc2::grad(uint32_t _index_, uint32_t _jndex_, bool _isNormed_) const
+Complex WaveFunc2::div(uint32_t _index_, uint32_t _jndex_, bool _isNormed_) const
 {
     return ddx(_index_,_jndex_,_isNormed_) + ddy(_index_,_jndex_,_isNormed_);
 }
 
 Complex WaveFunc2::d2dx2(uint32_t _index_, uint32_t _jndex_, bool _isNormed_) const
 {
-    uint32_t tempXSize =                xSize();
-    float    dx2       =    _toBasis->xDelta2();
-    Complex  thisAmp   = value(_index_,_jndex_);
-    Complex  two       =                Real(2);
-    Complex  d2Amp                             ;
+    float   dx2     =    _toBasis->xDelta2();
+    Complex thisAmp = value(_index_,_jndex_);
+    Complex two     =             Real(2.0f);
 
-    if      (_index_ <=           0u) d2Amp = value(_index_+1u,_jndex_) - two * thisAmp   /*         NULL        */;
-    else if (_index_ >= tempXSize-1u) d2Amp = /*         NULL        */ - two * thisAmp + value(_index_-1u,_jndex_);
-    else                              d2Amp = value(_index_+1u,_jndex_) - two * thisAmp + value(_index_-1u,_jndex_);
+   Complex d2Amp = value(_index_+1u,_jndex_, false) - two * thisAmp + value(_index_-1u,_jndex_, false);
 
     d2Amp.shrink(dx2);
-
     if (_isNormed_) d2Amp.scale(ampFactor());
 
     return d2Amp;
@@ -194,18 +179,13 @@ Complex WaveFunc2::d2dx2(uint32_t _index_, uint32_t _jndex_, bool _isNormed_) co
 
 Complex WaveFunc2::d2dy2(uint32_t _index_, uint32_t _jndex_, bool _isNormed_) const
 {
-    uint32_t tempYSize =                xSize();
-    float    dy2       =    _toBasis->yDelta2();
-    Complex  thisAmp   = value(_index_,_jndex_);
-    Complex  two       =                Real(2);
-    Complex  d2Amp                             ;
+    float   dy2     =    _toBasis->yDelta2();
+    Complex thisAmp = value(_index_,_jndex_);
+    Complex two     =             Real(2.0f);
 
-    if      (_jndex_ <=           0u) d2Amp = value(_index_,_jndex_+1u) - two * thisAmp   /*         NULL        */;
-    else if (_jndex_ >= tempYSize-1u) d2Amp = /*         NULL        */ - two * thisAmp + value(_index_,_jndex_-1u);
-    else                              d2Amp = value(_index_,_jndex_+1u) - two * thisAmp + value(_index_,_jndex_-1u);
+   Complex d2Amp = value(_index_,_jndex_+1u, false) - two * thisAmp + value(_index_,_jndex_-1u, false);
 
     d2Amp.shrink(dy2);
-
     if (_isNormed_) d2Amp.scale(ampFactor());
 
     return d2Amp;

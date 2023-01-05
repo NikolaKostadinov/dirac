@@ -23,14 +23,14 @@ class Field2
         void     setValues(T*      _address_);
         void     setBasis (Basis2* _toBasis_);
 
-        uint32_t  size  ()                                             const;
-        uint32_t xSize  ()                                             const;
-        uint32_t ySize  ()                                             const;
-        Basis2*  toBasis()                                             const;
-        Basis2   basis  ()                                             const;
+        uint32_t  size  ()                                                                              const;
+        uint32_t xSize  ()                                                                              const;
+        uint32_t ySize  ()                                                                              const;
+        Basis2*  toBasis()                                                                              const;
+        Basis2   basis  ()                                                                              const;
         
-        T*       address(uint32_t _index_ = 0u, uint32_t _jndex_ = 0u) const;
-        T        value  (uint32_t _index_     , uint32_t _jndex_     ) const;
+        T*       address(uint32_t _index_ = 0u, uint32_t _jndex_ = 0u)                                  const;
+        T        value  (uint32_t _index_     , uint32_t _jndex_     , bool _isNull_ = DEFAULT_IS_NULL) const;
 
     protected:
 

@@ -29,7 +29,7 @@ class Field1
         Base     base  ()                                                    const;
 
         T*       address(uint32_t _index_ = 0u)                              const;
-        T        value  (uint32_t _index_, bool _is_null_ = DEFAULT_IS_NULL) const;
+        T        value  (uint32_t _index_, bool _isNull_ = DEFAULT_IS_NULL)  const;
 
     protected:
 

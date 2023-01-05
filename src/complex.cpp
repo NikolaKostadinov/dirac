@@ -192,8 +192,8 @@ std::string Complex::string()
     std::string realString = realStream.str();
     std::string imagString = imagStream.str();
 
-    if (_imag >= 0.0f) return realString + "+" + imagString;
-    else               return realString + "-" + imagString;
+    if (_imag >= 0.0f) return realString + "+" + imagString + "i";
+    else               return realString + "-" + imagString + "i";
 }
 
 Complex Real(float _real_)

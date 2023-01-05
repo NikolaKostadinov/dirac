@@ -77,9 +77,10 @@ T* Field1<T>::address(uint32_t _index_) const
 }
 
 template <class T>
-T Field1<T>::value(uint32_t _index_, bool _is_null_) const
+T Field1<T>::value(uint32_t _index_, bool _isNull_) const
 {
-    if (_is_null_)
+    if (_isNull_) return *address(_index_);
+    else 
     {
         T result;
         try
@@ -93,7 +94,6 @@ T Field1<T>::value(uint32_t _index_, bool _is_null_) const
 
         return result;
     }
-    else return *address(_index_);
 }
 
 template class Field1            <  signed       char   > ;

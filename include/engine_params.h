@@ -17,7 +17,7 @@
 #define FORBIDDEN_INDEX                 0xfffffffeu
 #define DEFAULT_INCLUDES_BOUNDS         true
 
-#define DEFAULT_IS_NULL                 false
+#define DEFAULT_IS_NULL                 true
 
 #define DEFAULT_REAL                    0.0f
 #define DEFAULT_IMAG                    0.0f

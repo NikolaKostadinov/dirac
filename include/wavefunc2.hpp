@@ -31,7 +31,7 @@ class WaveFunc2 : public Field2<Complex>, public WaveFunc
 
         Complex ddx    (uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED) const;
         Complex ddy    (uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED) const;
-        Complex grad   (uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED) const;
+        Complex div    (uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED) const;
         Complex d2dx2  (uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED) const;
         Complex d2dy2  (uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED) const;
         Complex laplace(uint32_t _index_, uint32_t _jndex_, bool _isNormed_ = DEFAULT_IS_NORMED) const;
