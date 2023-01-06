@@ -71,8 +71,8 @@ void WaveFunc2::evolve(float _dt_, Scalar2* _toPotential_)
         Complex   wingCoef = Imag(iwingCoef)           ;
         Complex   two      = Real(2.0f)                ;
 
-        for (uint32_t i = 0u; i < tempXSize; i++)
-            for (uint32_t j = 0u; j < tempYSize; j++)
+        for (uint32_t j = 0u; j < tempYSize; j++)
+            for (uint32_t i = 0u; i < tempXSize; i++)
             {
                 if (i == 0u)
                 {

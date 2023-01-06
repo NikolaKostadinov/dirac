@@ -5,7 +5,7 @@
 
 #define B   2.0f
 #define N   4u
-#define T   160
+#define T   1
 #define DT  0.1f
 
 int main()
