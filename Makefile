@@ -10,13 +10,12 @@ DLL       := bin/dirac.dll                                              # dynimi
 EXE_MAIN  := bin/main                                                   # executable file
 DONE      := DONE
 
-dirac:
-	$(CC) --shared -o $(DLL)      $(SRC_DIRAC)
+dirac-dynamic:
+	$(CC) --shared -o $(DLL) $(SRC_DIRAC)
+
+dirac-static:
+	$(CC) -o bin/dirac.o $(SRC_DIRAC)
+	ar rcs bin/dirac.a bin/dirac.o
 
 exe:
-	$(CC)          -o $(EXE_MAIN) $(SRC_MAIN)  $(DLL)
-
-echo:
-	echo $(DONE)
-
-all: dirac exe echo
+	$(CC) -o $(EXE_MAIN) $(SRC_MAIN) $(DLL)
