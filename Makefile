@@ -8,15 +8,11 @@ SRC_MAIN  := src/main.cpp                                               #       
 SRC_DIRAC := $(filter-out $(SRC_MAIN), $(SRC_ALL))                      # all dirac src files
 DLL       := bin/dirac.dll                                              # dynimic link library file
 EXE_MAIN  := bin/main                                                   # executable file
-DONE      := DONE
 
 dirac:
-	$(CC) --shared -o $(DLL)      $(SRC_DIRAC)
+	$(CC) --shared -o $(DLL) $(SRC_DIRAC)
 
 exe:
-	$(CC)          -o $(EXE_MAIN) $(SRC_MAIN)  $(DLL)
+	$(CC) -o $(EXE_MAIN) $(SRC_MAIN) $(DLL)
 
-echo:
-	echo $(DONE)
-
-all: dirac exe echo
+all: dirac exe
