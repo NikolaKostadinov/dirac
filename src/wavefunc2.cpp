@@ -67,6 +67,8 @@ void WaveFunc2::evolve(float _dt_, Scalar2* _toPotential_)
 
         Complex*  cache = new Complex[tempXSize];
 
+        float     newSum   = 0.0f                      ;
+        float     oldSum   = 0.0f                      ;
         float    iwingCoef = 0.5f * HBAR * _dt_ / _mass;
         Complex   wingCoef = Imag(iwingCoef)           ;
         Complex   two      = Real(2.0f)                ;
@@ -99,9 +101,16 @@ void WaveFunc2::evolve(float _dt_, Scalar2* _toPotential_)
                 *address(i, j) = wingCoef * laplAmp + coreCoef * thisAmp;
 
                 cache[i] = thisAmp;
+                
+                oldSum += thisAmp.conjSq();
+                newSum += address(i, j)->conjSq();
             }
 
         delete[] cache;
+
+        for (uint32_t i = 0u; i < tempXSize; i++)
+            for (uint32_t j = 0u; j < tempYSize; j++)
+                address(i, j)->scale(sqrt(oldSum / newSum));
     }
     else throw BASE_NOT_SAME;
 }

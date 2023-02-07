@@ -5,7 +5,7 @@
 
 #define B   2.0f
 #define N   4u
-#define T   1
+#define T   10000
 #define DT  0.1f
 
 int main()
@@ -24,7 +24,12 @@ int main()
             probAmps[i][j] = exp(-i*i-j*j);
 
     std::cout << psi.string() << std::endl;
-    for (int t = 0; t < T; t++) psi.evolve();
+    for (int t = 0; t < T; t++)
+    {
+        std::cout << t << ": ";
+        std::cout << psi.prob(false) << std::endl;
+        psi.evolve();
+    }
     std::cout << psi.string() << std::endl;
 
     std::cin.get();
